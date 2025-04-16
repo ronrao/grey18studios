@@ -1,6 +1,73 @@
 # Grey 18 Studio Website
 
-A professional website for Grey 18 Studio, showcasing audio and visual production services.
+Professional website for Grey 18 Studio, featuring audio and visual production services.
+
+## Overview
+
+This website showcases Grey 18 Studio's comprehensive audio and visual production services including:
+- Photography
+- Sound Recording
+- Dubbing
+- Audio Mixing & Mastering
+- Photo & Video Editing
+- Colour Grading
+
+## Portfolio Page
+
+The portfolio page has been specially designed to showcase the studio's work across different categories. It features:
+
+- A dedicated tab navigation system
+- Category-specific galleries
+- Independent styling to ensure consistent display
+- Responsive design for all screen sizes
+
+### Important Note on Portfolio Page
+
+The portfolio page uses dedicated CSS and JavaScript files to ensure it remains functional regardless of changes to other parts of the website:
+
+- `portfolio-dedicated.css`: Contains styles that override any conflicting styles
+- `portfolio-standalone.js`: Self-contained JavaScript that handles all portfolio functionality
+
+When making changes to the main website, care should be taken not to modify these files or introduce styles that might conflict with the portfolio display.
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- GSAP Animation Library
+- Font Awesome Icons
+- Google Fonts
+
+## Setup
+
+Simply clone the repository and open the HTML files in a browser. No build steps are required.
+
+```
+git clone https://github.com/your-username/grey-18-studio.git
+cd grey-18-studio
+```
+
+## File Structure
+
+- `index.html` - Main homepage
+- `portfolio.html` - Portfolio page
+- `about.html` - About page
+- `equipment.html` - Equipment page
+- `pricing.html` - Pricing page
+- `styles-updated.css` - Main stylesheet
+- `portfolio.css` - Portfolio base styles
+- `portfolio-dedicated.css` - Dedicated portfolio styles with !important rules
+- `script.js` - Main JavaScript file
+- `portfolio-standalone.js` - Isolated portfolio JavaScript
+
+## License
+
+All rights reserved. This project is proprietary and confidential.
+
+## Contact
+
+For inquiries, please contact info@grey18studio.com
 
 ## Deployment Guide
 
