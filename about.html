@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Grey 18 Studio</title>
-    <link rel="stylesheet" href="styles-updated.css">
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Page specific CSS -->
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
+    <!-- Include script -->
+    <script src="include.js"></script>
     <style>
         /* Theme-specific styles */
         :root {
@@ -120,25 +124,8 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <h1>GREY <span>18</span> STUDIO</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
+    <!-- Header Container -->
+    <div id="header-container"></div>
 
     <section class="about-hero">
         <div class="about-hero-content">
@@ -198,36 +185,66 @@
                     <div class="member-info">
                         <h3>David Mitchell</h3>
                         <p class="position">Founder & Creative Director</p>
-                        <p class="description">With over 15 years of experience in audio and visual production, David founded Grey 18 Studio to create a space where technical excellence meets creative vision. His background in cinematography and sound engineering has helped shape the studio's comprehensive approach to media production.</p>
+                        <p class="description">With over 15 years of experience in photography and film production, David leads our creative team with a passion for visual storytelling.</p>
                         <div class="social-links">
-                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="https://source.unsplash.com/random/400x500/?portrait-woman" alt="Creative Partner & Brand Strategist">
+                        <img src="https://source.unsplash.com/random/400x500/?portrait-woman" alt="Audio Engineer">
                     </div>
                     <div class="member-info">
-                        <h3>Sophia Reynolds</h3>
-                        <p class="position">Creative Partner & Brand Strategist</p>
-                        <p class="description">Sophia joined Grey 18 Studio as a creative partner, bringing her expertise in brand strategy and marketing. With a background in visual arts and digital marketing, she helps clients develop cohesive brand identities across multiple media channels while overseeing the studio's marketing initiatives.</p>
+                        <h3>Sarah Johnson</h3>
+                        <p class="position">Lead Audio Engineer</p>
+                        <p class="description">Sarah is our sound wizard with a background in music production and a ear for perfection. She oversees all audio recording and mixing projects.</p>
                         <div class="social-links">
-                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://source.unsplash.com/random/400x500/?portrait-man-2" alt="Post-Production Specialist">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michael Chen</h3>
+                        <p class="position">Post-Production Specialist</p>
+                        <p class="description">Michael's attention to detail and technical expertise in video editing and color grading brings our visual projects to the next level.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://source.unsplash.com/random/400x500/?portrait-woman-2" alt="Voice-Over Artist">
+                    </div>
+                    <div class="member-info">
+                        <h3>Emily Rodriguez</h3>
+                        <p class="position">Voice-Over Director</p>
+                        <p class="description">Emily leads our dubbing and voice-over department with her multilingual skills and extensive experience in voice acting and direction.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="team-cta">
-                <h3>Want to work with our team?</h3>
-                <p>We're always looking to collaborate with talented individuals and brands</p>
-                <a href="index.html#contact" class="btn primary">Get In Touch</a>
+                <a href="contact.html" class="btn primary">Join Our Team</a>
             </div>
         </div>
     </section>
@@ -235,8 +252,8 @@
     <section class="values-section">
         <div class="container">
             <div class="section-header">
-                <h2>Our Core Values</h2>
-                <p>The principles that guide our work and relationships</p>
+                <h2>Our Values</h2>
+                <p>The principles that guide our work and creativity</p>
             </div>
             
             <div class="values-grid">
@@ -245,7 +262,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Excellence</h3>
-                    <p>We are committed to delivering the highest quality in every aspect of our work.</p>
+                    <p>We strive for excellence in every project, no matter how big or small. Quality is at the heart of everything we do.</p>
                 </div>
                 
                 <div class="value-card">
@@ -253,7 +270,7 @@
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3>Creativity</h3>
-                    <p>We approach each project with innovative thinking and creative solutions.</p>
+                    <p>We bring fresh ideas and innovative approaches to every project, pushing the boundaries of what's possible.</p>
                 </div>
                 
                 <div class="value-card">
@@ -261,154 +278,25 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Collaboration</h3>
-                    <p>We believe in working closely with our clients to achieve shared goals.</p>
+                    <p>We believe in the power of collaboration – both within our team and with our clients – to create the best possible results.</p>
                 </div>
                 
                 <div class="value-card">
                     <div class="value-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Timeliness</h3>
-                    <p>We respect deadlines and ensure projects are completed on schedule.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Integrity</h3>
-                    <p>We operate with honesty, transparency, and ethical business practices.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Continuous Learning</h3>
-                    <p>We are dedicated to staying current with industry trends and technologies.</p>
+                    <h3>Reliability</h3>
+                    <p>We honor our commitments, meet our deadlines, and deliver what we promise, every time.</p>
                 </div>
             </div>
         </div>
     </section>
+    
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>GREY <span>18</span> STUDIO</h2>
-                <p>Bringing your creative vision to life with technical precision</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="equipment.html">Equipment</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="index.html#services">Photography</a></li>
-                        <li><a href="index.html#services">Sound Recording</a></li>
-                        <li><a href="index.html#services">Dubbing</a></li>
-                        <li><a href="index.html#services">Audio Mixing & Mastering</a></li>
-                        <li><a href="index.html#services">Photo & Video Editing</a></li>
-                        <li><a href="index.html#services">Colour Grading</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Grey 18 Studio. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <!-- Main Scripts -->
     <script src="script.js"></script>
-    <script>
-        // Remove all animations and ensure content is visible
-        document.addEventListener('DOMContentLoaded', function() {
-            // Make all elements immediately visible
-            document.querySelectorAll('.team-section, .team-grid, .team-member, .about-hero-content h1, .about-hero-content p, .about-stats, .stat, .value-card, .story-content').forEach(element => {
-                element.style.opacity = '1';
-                element.style.visibility = 'visible';
-                element.style.display = element.tagName === 'DIV' ? 'block' : '';
-                element.style.transform = 'none';
-            });
-            
-            // Force team section visibility
-            const teamSection = document.querySelector('.team-section');
-            if (teamSection) {
-                teamSection.style.display = 'block';
-                teamSection.style.visibility = 'visible';
-                teamSection.style.opacity = '1';
-            }
-            
-            // Force team grid visibility
-            const teamGrid = document.querySelector('.team-grid');
-            if (teamGrid) {
-                teamGrid.style.display = 'grid';
-                teamGrid.style.visibility = 'visible';
-                teamGrid.style.opacity = '1';
-            }
-            
-            // Show counters with final values
-            document.querySelectorAll('.count').forEach(counter => {
-                const finalValue = counter.textContent;
-                counter.textContent = finalValue;
-            });
-            
-            // Disable all CSS animations and transitions
-            const styleEl = document.createElement('style');
-            styleEl.innerHTML = `
-                * {
-                    animation: none !important;
-                    transition: none !important;
-                    transform: none !important;
-                    animation-delay: 0s !important;
-                    animation-duration: 0s !important;
-                    transition-delay: 0s !important;
-                    transition-duration: 0s !important;
-                }
-                
-                .team-section {
-                    display: block !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    position: relative !important;
-                    z-index: 10 !important;
-                }
-                
-                .team-grid {
-                    display: grid !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                }
-                
-                .team-member {
-                    display: block !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                }
-                
-                .container, section, div {
-                    overflow: visible !important;
-                }
-            `;
-            document.head.appendChild(styleEl);
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html> 

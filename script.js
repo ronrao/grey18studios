@@ -849,3 +849,315 @@ function initHeaderScroll() {
         lastScrollTop = scrollTop;
     });
 }
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize service expanded views
+    initServiceExpandedViews();
+    
+    // Initialize testimonial slider
+    initTestimonialSlider();
+    
+    // Initialize video testimonial slider
+    initVideoTestimonialSlider();
+    
+    // Initialize testimonial tabs
+    initTestimonialTabs();
+    
+    // Initialize portfolio filter
+    initPortfolioFilter();
+    
+    // Add counter animation
+    initCounterAnimation();
+    
+    // Add page transition
+    initPageTransition();
+});
+
+// Handle service expanded views
+function initServiceExpandedViews() {
+    const expandButtons = document.querySelectorAll('.service-expand-btn');
+    const closeButtons = document.querySelectorAll('.expanded-close');
+    
+    // Open expanded view when clicking on "Learn More" button
+    expandButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const serviceType = this.parentElement.getAttribute('data-service');
+            const expandedView = document.getElementById(`${serviceType}-expanded`);
+            
+            if (expandedView) {
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                expandedView.style.display = 'block';
+                
+                // Add fade in animation
+                setTimeout(() => {
+                    expandedView.style.opacity = '1';
+                }, 10);
+            }
+        });
+    });
+    
+    // Close expanded view when clicking on close button
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const expandedView = this.closest('.service-expanded-view');
+            
+            expandedView.style.opacity = '0';
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                expandedView.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }, 300);
+        });
+    });
+    
+    // Close expanded view when clicking outside content
+    document.querySelectorAll('.service-expanded-view').forEach(view => {
+        view.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.opacity = '0';
+                setTimeout(() => {
+                    this.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        });
+    });
+}
+
+// Handle testimonial slider
+function initTestimonialSlider() {
+    const testimonials = document.querySelectorAll('#text-testimonials .testimonial');
+    const dots = document.querySelectorAll('#text-testimonials .dot');
+    const prevBtn = document.querySelector('#text-testimonials .prev-btn');
+    const nextBtn = document.querySelector('#text-testimonials .next-btn');
+    let currentIndex = 0;
+    
+    if (!testimonials.length) return;
+    
+    // Function to show specific testimonial
+    function showTestimonial(index) {
+        testimonials.forEach(testimonial => {
+            testimonial.style.display = 'none';
+        });
+        
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        testimonials[index].style.display = 'block';
+        dots[index].classList.add('active');
+    }
+    
+    // Initialize
+    showTestimonial(currentIndex);
+    
+    // Previous button click
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentIndex);
+        });
+    }
+    
+    // Next button click
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        });
+    }
+    
+    // Dot clicks
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            currentIndex = index;
+            showTestimonial(currentIndex);
+        });
+    });
+    
+    // Auto slide
+    setInterval(function() {
+        currentIndex = (currentIndex + 1) % testimonials.length;
+        showTestimonial(currentIndex);
+    }, 5000);
+}
+
+// Handle video testimonial slider
+function initVideoTestimonialSlider() {
+    const videoTestimonials = document.querySelectorAll('#video-testimonials .video-testimonial');
+    const dots = document.querySelectorAll('#video-testimonials .video-dot');
+    const prevBtn = document.querySelector('#video-testimonials .video-prev-btn');
+    const nextBtn = document.querySelector('#video-testimonials .video-next-btn');
+    let currentIndex = 0;
+    
+    if (!videoTestimonials.length) return;
+    
+    // Function to show specific video testimonial
+    function showVideoTestimonial(index) {
+        videoTestimonials.forEach(testimonial => {
+            testimonial.style.display = 'none';
+        });
+        
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        videoTestimonials[index].style.display = 'block';
+        dots[index].classList.add('active');
+    }
+    
+    // Initialize
+    showVideoTestimonial(currentIndex);
+    
+    // Previous button click
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + videoTestimonials.length) % videoTestimonials.length;
+            showVideoTestimonial(currentIndex);
+        });
+    }
+    
+    // Next button click
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % videoTestimonials.length;
+            showVideoTestimonial(currentIndex);
+        });
+    }
+    
+    // Dot clicks
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            currentIndex = index;
+            showVideoTestimonial(currentIndex);
+        });
+    });
+}
+
+// Handle testimonial tabs
+function initTestimonialTabs() {
+    const tabButtons = document.querySelectorAll('.testimonials-tabs .tab-btn');
+    const tabContents = document.querySelectorAll('.testimonials-content .tab-content');
+    
+    if (!tabButtons.length) return;
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and tabs
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to current button and tab
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+}
+
+// Handle portfolio filter
+function initPortfolioFilter() {
+    const filterButtons = document.querySelectorAll('.portfolio-filter .filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-grid .portfolio-item');
+    
+    if (!filterButtons.length) return;
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to current button
+            this.classList.add('active');
+            
+            // Filter items
+            portfolioItems.forEach(item => {
+                if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// Counter animation
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.count');
+    
+    if (!counters.length) return;
+    
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target') || +counter.innerText.replace(/\D/g, '');
+        const duration = 2000; // 2 seconds
+        const step = Math.ceil(target / (duration / 16)); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += step;
+            if (current >= target) {
+                counter.innerText = target + '+';
+            } else {
+                counter.innerText = current + '+';
+                requestAnimationFrame(updateCounter);
+            }
+        };
+        
+        // Start counter animation when element is in viewport
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(counter);
+    });
+}
+
+// Page transition
+function initPageTransition() {
+    const overlay = document.querySelector('.page-transition-overlay');
+    const loader = document.querySelector('.loading');
+    
+    if (!overlay || !loader) return;
+    
+    // Page load animation
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        }, 1000);
+    });
+    
+    // Page transition when clicking on links
+    document.querySelectorAll('a').forEach(link => {
+        // Only handle links to other pages in the site
+        if (link.getAttribute('href') && 
+            link.getAttribute('href').charAt(0) !== '#' && 
+            link.getAttribute('href').indexOf('://') === -1) {
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                overlay.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500);
+            });
+        }
+    });
+}
