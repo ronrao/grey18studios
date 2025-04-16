@@ -1,0 +1,34 @@
+/* Camera cursor styles */
+body, html {
+    cursor: none;
+}
+
+/* Hide cursor on all interactive elements */
+a, button, input, select, textarea, .service-card, .btn, .logo, .menu-toggle, 
+.expanded-close, .dot, .tab-btn {
+    cursor: none !important;
+}
+
+/* Custom camera cursor */
+.cursor {
+    position: fixed;
+    width: 32px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%234ecdc4" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%234ecdc4" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="5" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="2" stroke="%234ecdc4" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%234ecdc4" stroke="none"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+}
+
+/* Cursor states */
+.cursor.active {
+    transform: scale(0.9);
+}
+
+.cursor.hover {
+    filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.8));
+} 

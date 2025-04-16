@@ -1,0 +1,39 @@
+/**
+ * Grey 18 Studio - Camera Cursor
+ * This is a properly aligned camera cursor that overlaps exactly with the default cursor
+ * Works globally across all pages on the site
+ */
+
+/* Hide the default cursor on all elements */
+* {
+  cursor: none !important;
+}
+
+/* Camera Cursor Styles */
+.camera-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-image: url('assets/images/camera-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    filter: invert(1); /* Makes the cursor white to stand out against dark backgrounds */
+}
+
+.camera-cursor.active {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.camera-cursor.hover {
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .camera-cursor {
+        display: none;
+    }
+} 

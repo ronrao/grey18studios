@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grey 18 Studio - Navigation</title>
+    <!-- Camera Cursor Implementation -->
+    <link rel="stylesheet" href="style-camera-cursor.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #333333;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #4d4d4d;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        h1 span {
+            color: #4ecdc4;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .nav-link {
+            display: block;
+            background-color: #333333;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: #4ecdc4;
+            color: #333333;
+            transform: translateY(-3px);
+        }
+        .description {
+            margin-top: 30px;
+            color: #a2a2a2;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Camera cursor element -->
+    <div class="camera-cursor"></div>
+    
+    <div class="container">
+        <h1>GREY <span>18</span> STUDIO</h1>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home Page</a>
+            <a href="portfolio.html" class="nav-link">Portfolio Page</a>
+            <a href="about.html" class="nav-link">About Page</a>
+            <a href="equipment.html" class="nav-link">Equipment Page</a>
+            <a href="pricing.html" class="nav-link">Pricing Page</a>
+            <a href="contact.html" class="nav-link">Contact Page</a>
+        </div>
+        <div class="description">
+            <p>This is a simple navigation page to help you access all the pages in the Grey 18 Studio website. Click on any of the links above to navigate to the respective page.</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="camera-cursor.js"></script>
+</body>
+</html> 

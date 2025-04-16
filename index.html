@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grey 18 Studio | Audio & Visual Production</title>
+    <link rel="stylesheet" href="styles-updated.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <!-- Camera Cursor Implementation -->
+    <link rel="stylesheet" href="style-camera-cursor.css">
+</head>
+<body>
+    <!-- Page Transition Overlay -->
+    <div class="page-transition-overlay"></div>
+    
+    <!-- Loading Animation -->
+    <div class="loading">
+        <div class="loader"></div>
+        <div class="loader-text">Grey 18 Studio</div>
+    </div>
+    
+    <!-- Camera cursor element -->
+    <div class="camera-cursor"></div>
+
+    <header>
+        <div class="logo">
+            <h1>GREY <span>18</span> STUDIO</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Creating Exceptional Audio & Visual Experiences</h1>
+            <p>Professional photography, sound recording, dubbing, and post-production services</p>
+            <div class="cta-buttons">
+                <a href="#services" class="btn primary">Our Services</a>
+                <a href="#contact" class="btn secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive audio and visual solutions for all your creative needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-service="photography">
+                <div class="service-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Photography</h3>
+                <p>Professional photography for events, portraits, products, and commercial use</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+            <div class="service-card" data-service="sound-recording">
+                <div class="service-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <h3>Sound Recording</h3>
+                <p>State-of-the-art recording facilities for vocals, instruments, and full bands</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+            <div class="service-card" data-service="dubbing">
+                <div class="service-icon">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <h3>Dubbing</h3>
+                <p>Professional voice-over and dubbing services for multiple languages</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+            <div class="service-card" data-service="mixing">
+                <div class="service-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3>Audio Mixing & Mastering</h3>
+                <p>Expert mixing and mastering to give your audio the professional finish it deserves</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+            <div class="service-card" data-service="editing">
+                <div class="service-icon">
+                    <i class="fas fa-photo-video"></i>
+                </div>
+                <h3>Photo & Video Editing</h3>
+                <p>Creative editing services to enhance and transform your visual content</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+            <div class="service-card" data-service="grading">
+                <div class="service-icon">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <h3>Colour Grading</h3>
+                <p>Professional colour correction and grading for films, videos, and photos</p>
+                <button class="service-expand-btn">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Expanded Views -->
+    <div class="service-expanded-view" id="photography-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Photography Services</h2>
+            <p class="expanded-description">Our professional photography services cover a wide range of needs, from portrait sessions to commercial product shoots and event coverage.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Photography Work</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder images - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?portrait" alt="Portrait Photography">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Portrait Session</h4>
+                            <p>Professional studio portraits</p>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?event" alt="Event Photography">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Corporate Event</h4>
+                            <p>Professional event coverage</p>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?product" alt="Product Photography">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Product Showcase</h4>
+                            <p>Commercial product photography</p>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?wedding" alt="Wedding Photography">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Wedding Collection</h4>
+                            <p>Wedding day coverage</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#photography" class="btn primary view-all-btn">View All Photography Work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="sound-recording-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Sound Recording Services</h2>
+            <p class="expanded-description">Our state-of-the-art recording studio provides the perfect environment for capturing vocals, instruments, and full bands with exceptional clarity and precision.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Recording Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder content - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?recording-studio" alt="Vocal Recording">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Vocal Sessions</h4>
+                            <p>Professional vocal recording</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?band" alt="Band Recording">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Band Recording</h4>
+                            <p>Full band studio sessions</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?podcast" alt="Podcast Recording">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Podcast Production</h4>
+                            <p>Professional podcast recording</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?orchestra" alt="Orchestral Recording">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Orchestral Session</h4>
+                            <p>Orchestral recording project</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#sound-recording" class="btn primary view-all-btn">View All Recording Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="dubbing-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Dubbing Services</h2>
+            <p class="expanded-description">Our professional voice-over and dubbing services provide high-quality audio in multiple languages for films, commercials, animations, and more.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Dubbing Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder content - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?voice-actor" alt="Commercial Dubbing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Voice-Over</h4>
+                            <p>Multi-language commercial dubbing</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?animation" alt="Animation Dubbing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Animation Project</h4>
+                            <p>Character voice acting</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?documentary" alt="Documentary Narration">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Documentary Narration</h4>
+                            <p>Professional narration services</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?film" alt="Film Dubbing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Film Dubbing</h4>
+                            <p>International film adaptation</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#dubbing" class="btn primary view-all-btn">View All Dubbing Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="mixing-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Audio Mixing & Mastering Services</h2>
+            <p class="expanded-description">Our expert mixing and mastering services ensure your audio projects sound professional, balanced, and ready for distribution on any platform.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Mixing & Mastering Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder content - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?mixing-desk" alt="Album Mixing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Album Production</h4>
+                            <p>Full album mixing and mastering</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?soundtrack" alt="Film Soundtrack">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Film Soundtrack</h4>
+                            <p>Cinematic audio production</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?ep" alt="EP Production">
+                        <div class="expanded-portfolio-caption">
+                            <h4>EP Production</h4>
+                            <p>Independent artist EP project</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?audio-post" alt="Post Production">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Audio Post-Production</h4>
+                            <p>TV show audio post-production</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#mixing" class="btn primary view-all-btn">View All Mixing & Mastering Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="editing-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Photo & Video Editing Services</h2>
+            <p class="expanded-description">Our creative editing services enhance and transform your visual content, whether it's photo retouching or comprehensive video post-production.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Editing Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder content - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?retouching" alt="Photo Retouching">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Retouching</h4>
+                            <p>Professional photo retouching</p>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?video-editing" alt="Video Editing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Edit</h4>
+                            <p>TV commercial post-production</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?wedding-video" alt="Wedding Video">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Wedding Highlight</h4>
+                            <p>Cinematic wedding video edit</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?composite" alt="Photo Composite">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Creative Composite</h4>
+                            <p>Advanced photo manipulation</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#editing" class="btn primary view-all-btn">View All Editing Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="grading-expanded">
+        <div class="expanded-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="expanded-content">
+            <h2>Colour Grading Services</h2>
+            <p class="expanded-description">Our professional colour correction and grading services bring cinematic quality to your films, videos, and photos, enhancing mood and visual impact.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Colour Grading Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Placeholder content - will be replaced with actual content -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?film-grading" alt="Film Grading">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Short Film</h4>
+                            <p>Cinematic colour treatment</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?music-video" alt="Music Video">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Music Video</h4>
+                            <p>Stylized colour grading</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?commercial" alt="Commercial">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Luxury Brand Campaign</h4>
+                            <p>Commercial colour treatment</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?photo-color" alt="Photo Grading">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Photo Series</h4>
+                            <p>Consistent colour treatment</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#grading" class="btn primary view-all-btn">View All Colour Grading Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2>About Grey 18 Studio</h2>
+            <p>Where creativity meets technical excellence</p>
+        </div>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://source.unsplash.com/random/800x600/?studio" alt="Grey 18 Studio">
+            </div>
+            <div class="about-text">
+                <h3>Our Story</h3>
+                <p>Grey 18 Studio was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
+                <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
+                <h3>Our Approach</h3>
+                <p>At Grey 18, we take a collaborative approach to every project. We work closely with our clients to understand their vision and bring it to life with our expertise and state-of-the-art equipment.</p>
+                <p>Whether you're looking for photography, audio recording, dubbing, or post-production services, we have the skills and facilities to make your project shine.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="count">350+</span>
+                        <span class="label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="count">120+</span>
+                        <span class="label">Happy Clients</span>
+                    </div>
+                    <div class="stat">
+                        <span class="count">15+</span>
+                        <span class="label">Industry Awards</span>
+                    </div>
+                </div>
+                <div class="about-cta">
+                    <a href="about.html" class="btn primary">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <h2>Client Testimonials</h2>
+            <p>What our clients say about working with us</p>
+        </div>
+        
+        <div class="testimonials-tabs">
+            <button class="tab-btn active" data-tab="text-testimonials">Text Testimonials</button>
+            <button class="tab-btn" data-tab="video-testimonials">Video Testimonials</button>
+        </div>
+        
+        <div class="testimonials-content">
+            <div class="tab-content active" id="text-testimonials">
+                <div class="testimonial-slider">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Grey 18 Studio transformed our vision into reality. Their photography services were exceptional, and the team was professional throughout the project."</p>
+                            <div class="client-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Marketing Director, Elevate Brands</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"The audio mixing and mastering services at Grey 18 Studio are world-class. They brought a new dimension to our latest album that exceeded our expectations."</p>
+                            <div class="client-info">
+                                <h4>Michael Rodriguez</h4>
+                                <p>Lead Vocalist, Cosmic Wave</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"Working with the team at Grey 18 for our commercial video was seamless. Their attention to detail in colour grading and editing made all the difference."</p>
+                            <div class="client-info">
+                                <h4>Emma Thompson</h4>
+                                <p>Creative Director, Vision Media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="testimonial-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="video-testimonials">
+                <div class="video-testimonial-slider">
+                    <div class="video-testimonial">
+                        <div class="video-thumbnail">
+                            <img src="https://source.unsplash.com/random/600x400/?interview" alt="Client Video Testimonial">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>David Mitchell</h4>
+                            <p>Film Director</p>
+                        </div>
+                    </div>
+                    <div class="video-testimonial" style="display:none;">
+                        <div class="video-thumbnail">
+                            <img src="https://source.unsplash.com/random/600x400/?testimonial" alt="Client Video Testimonial">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Jessica Lee</h4>
+                            <p>Fashion Photographer</p>
+                        </div>
+                    </div>
+                    <div class="video-testimonial" style="display:none;">
+                        <div class="video-thumbnail">
+                            <img src="https://source.unsplash.com/random/600x400/?speaking" alt="Client Video Testimonial">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Robert Chen</h4>
+                            <p>Music Producer</p>
+                        </div>
+                    </div>
+                    <div class="video-testimonial" style="display:none;">
+                        <div class="video-thumbnail">
+                            <img src="https://source.unsplash.com/random/600x400/?interview-2" alt="Client Video Testimonial">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Amanda Wilson</h4>
+                            <p>Creative Agency Founder</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-testimonial-controls">
+                    <button class="video-prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="video-testimonial-dots">
+                        <span class="video-dot active"></span>
+                        <span class="video-dot"></span>
+                        <span class="video-dot"></span>
+                        <span class="video-dot"></span>
+                    </div>
+                    <button class="video-next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Ready to start your project? Contact us today</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Visit Us</h3>
+                        <p>123 Creative Avenue, Studio City, CA 91604</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        <p>info@grey18studio.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Working Hours</h3>
+                        <p>Monday - Friday: 9am - 6pm</p>
+                        <p>Saturday: 10am - 4pm</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <select id="service" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option value="photography">Photography</option>
+                            <option value="recording">Sound Recording</option>
+                            <option value="dubbing">Dubbing</option>
+                            <option value="mixing">Audio Mixing & Mastering</option>
+                            <option value="editing">Photo & Video Editing</option>
+                            <option value="grading">Colour Grading</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>GREY <span>18</span> STUDIO</h2>
+                <p>Bringing your creative vision to life with technical precision</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Photography</a></li>
+                        <li><a href="#services">Sound Recording</a></li>
+                        <li><a href="#services">Dubbing</a></li>
+                        <li><a href="#services">Audio Mixing & Mastering</a></li>
+                        <li><a href="#services">Photo & Video Editing</a></li>
+                        <li><a href="#services">Colour Grading</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span data-current-year>2023</span> Grey 18 Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="camera-cursor.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Dynamic update current year
+      const currentYear = new Date().getFullYear();
+      const currentYearElements = document.querySelectorAll('[data-current-year]');
+      currentYearElements.forEach(currentYearElement => {
+        currentYearElement.textContent = currentYear;
+      });
+    });
+    </script>
+</body>
+</html> 

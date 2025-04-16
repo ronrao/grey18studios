@@ -1,0 +1,349 @@
+/* Warm, Rich Color Theme */
+:root {
+    /* Color scheme */
+    --primary-dark: #5b3a29;     /* Deep rich brown */
+    --secondary-dark: #8d5b4c;    /* Medium brown */
+    --accent-amber: #ffbd59;     /* Amber gold */
+    --accent-orange: #ff7e5f;    /* Warm orange */
+    --accent-wine: #c1272d;      /* Wine red */
+    --light-grey: #f5f1e9;       /* Warm off-white */
+    --medium-grey: #c7bab0;      /* Warm medium grey */
+    --dark-grey: #4a4038;        /* Warm dark grey */
+    --white: #ffffff;
+    --black: #2a231f;            /* Soft black */
+    --overlay-gradient: linear-gradient(to top, rgba(91, 58, 41, 0.8), rgba(91, 58, 41, 0.4), transparent);
+    --transition: all 0.3s ease;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --page-gradient: linear-gradient(to bottom, #5b3a29, #6b463c, #7c534e, #8d5b4c);
+    
+    /* Font families */
+    --heading-font: 'Comfortaa', cursive;
+    --body-font: 'Quicksand', sans-serif;
+}
+
+/* Cursor customization */
+.cursor {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%23ffbd59" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%23ffbd59" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%23ffbd59" fill="none"/><circle cx="16" cy="14" r="5" stroke="%23ffbd59" fill="none"/><circle cx="16" cy="14" r="2" stroke="%23ffbd59" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%23ffbd59" stroke="none"/></svg>');
+}
+
+/* Theme-specific overrides */
+body {
+    color: var(--light-grey);
+    background: var(--page-gradient);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--light-grey);
+}
+
+p {
+    color: var(--light-grey);
+}
+
+a {
+    color: var(--light-grey);
+}
+
+a:hover {
+    color: var(--accent-amber);
+}
+
+.section-header h2 {
+    color: var(--light-grey);
+}
+
+.section-header h2::after {
+    background-color: var(--accent-amber);
+}
+
+/* Button styles */
+.btn.primary {
+    background-color: var(--accent-amber);
+    color: var(--black);
+}
+
+.btn.primary:hover {
+    background-color: var(--accent-orange);
+    color: var(--black);
+}
+
+.btn.secondary {
+    color: var(--light-grey);
+    border: 2px solid var(--light-grey);
+}
+
+.btn.secondary:hover {
+    background-color: var(--light-grey);
+    color: var(--primary-dark);
+}
+
+/* Header */
+header {
+    background-color: rgba(91, 58, 41, 0.9);
+}
+
+header.sticky {
+    background-color: rgba(91, 58, 41, 0.95);
+}
+
+.logo h1 {
+    color: var(--light-grey);
+}
+
+.logo h1 span {
+    color: var(--accent-amber);
+}
+
+nav ul li a {
+    color: var(--light-grey);
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(rgba(91, 58, 41, 0.8), rgba(91, 58, 41, 0.6)), url('https://source.unsplash.com/random/1920x1080/?studio') no-repeat center center/cover;
+    color: var(--light-grey);
+}
+
+/* Service cards */
+.service-card {
+    background-color: rgba(255, 241, 233, 0.1);
+    color: var(--light-grey);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.service-card h3 {
+    color: var(--accent-amber);
+}
+
+.service-icon i {
+    color: var(--accent-amber);
+}
+
+.service-expand-btn {
+    background-color: var(--accent-amber);
+    color: var(--black);
+}
+
+/* Expanded views */
+.service-expanded-view {
+    background-color: rgba(42, 35, 31, 0.95);
+    border: 1px solid var(--accent-amber);
+}
+
+.expanded-content h2, 
+.expanded-content h3,
+.expanded-content h4 {
+    color: var(--accent-amber);
+}
+
+.expanded-content p {
+    color: var(--light-grey);
+}
+
+.expanded-portfolio-caption {
+    background: var(--overlay-gradient);
+}
+
+/* Testimonials */
+.testimonials {
+    background: transparent;
+}
+
+.testimonial-content {
+    background-color: rgba(42, 35, 31, 0.7);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.testimonial-content p,
+.client-info p {
+    color: var(--light-grey);
+}
+
+.client-info h4 {
+    color: var(--accent-amber);
+}
+
+.tab-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--light-grey);
+}
+
+.tab-btn.active, 
+.tab-btn:hover {
+    background-color: var(--accent-amber);
+    color: var(--black) !important;
+}
+
+.dot.active,
+.video-dot.active {
+    background-color: var(--accent-amber);
+}
+
+/* About section */
+.about {
+    background: transparent;
+}
+
+.about-text h3 {
+    color: var(--accent-amber);
+}
+
+.count {
+    color: var(--accent-amber);
+}
+
+/* Team section */
+.team-member {
+    background-color: rgba(42, 35, 31, 0.7);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.member-info h3 {
+    color: var(--accent-amber);
+}
+
+.position, .description {
+    color: var(--light-grey);
+}
+
+/* Value cards */
+.value-card {
+    background-color: rgba(42, 35, 31, 0.7);
+    color: var(--light-grey);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.value-card .value-icon {
+    color: var(--accent-amber);
+    background-color: rgba(255, 189, 89, 0.1);
+}
+
+.value-card .value-icon i {
+    color: var(--accent-amber);
+}
+
+.value-card h3 {
+    color: var(--accent-amber);
+}
+
+/* Contact section */
+.contact {
+    background: transparent;
+}
+
+.contact-item i {
+    color: var(--black);
+    background-color: var(--accent-amber);
+}
+
+.contact-item h3 {
+    color: var(--accent-amber);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: rgba(42, 35, 31, 0.7);
+    color: var(--light-grey);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.social-icon {
+    background-color: var(--accent-amber);
+    color: var(--black);
+}
+
+.social-icon:hover {
+    background-color: var(--accent-orange);
+    color: var(--black);
+}
+
+/* Footer */
+footer {
+    background-color: rgba(42, 35, 31, 0.9);
+    color: var(--light-grey);
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Portfolio page */
+.portfolio-hero, 
+.portfolio-categories {
+    background: transparent;
+}
+
+.portfolio-nav-item {
+    color: var(--light-grey);
+}
+
+.portfolio-nav-item.active,
+.portfolio-nav-item:hover {
+    color: var(--accent-amber);
+}
+
+.genre-card {
+    background-color: rgba(42, 35, 31, 0.7);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.genre-overlay {
+    background-color: rgba(91, 58, 41, 0.85);
+}
+
+.genre-overlay h3 {
+    color: var(--accent-amber);
+}
+
+/* Equipment page */
+.equipment-card {
+    background-color: rgba(42, 35, 31, 0.7);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.equipment-info h3 {
+    color: var(--accent-amber);
+}
+
+.equipment-specs li i {
+    color: var(--accent-amber);
+}
+
+/* Pricing page */
+.pricing-card {
+    background-color: rgba(42, 35, 31, 0.7);
+    color: var(--light-grey);
+    border: 1px solid rgba(255, 241, 233, 0.1);
+}
+
+.pricing-type {
+    color: var(--accent-amber);
+}
+
+.pricing-price {
+    color: var(--accent-amber);
+}
+
+.pricing-features li i {
+    color: var(--accent-amber);
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--accent-amber);
+}
+
+.pricing-card.featured .popular-badge {
+    background-color: var(--accent-amber);
+    color: var(--black);
+}
+
+.toggle-option {
+    color: var(--light-grey);
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--accent-amber);
+} 

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <style>
+    .logo-text { 
+      font-family: 'Comfortaa', cursive; 
+      font-weight: 700; 
+      font-size: 28px;
+    }
+    .number { 
+      fill: #4ecdc4; 
+    }
+    .main-text { 
+      fill: #ffffff; 
+    }
+  </style>
+  <text x="10" y="40" class="logo-text main-text">GREY</text>
+  <text x="90" y="40" class="logo-text number">18</text>
+  <text x="120" y="40" class="logo-text main-text">STUDIO</text>
+</svg> 
