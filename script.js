@@ -335,30 +335,61 @@ document.querySelectorAll('footer a[href]').forEach(link => {
   });
 });
 
-// General page initialization
+// Initialize website
 function initializeWebsite() {
-  console.log('Website initialized');
-  
-  // Initialize all sections
-  document.addEventListener('DOMContentLoaded', () => {
-    // Fix page transitions
+    console.log('Initializing website components...');
+    
+    // Enable all links to work properly
+    enableAllLinks();
+    
+    // Fix navigation links
     fixPageNavigation();
     
-    // Fix service cards
+    // Initialize cursor
+    initCursor();
+    
+    // Initialize page transitions
+    initPageTransitions();
+    
+    // Initialize hero animations
+    initHeroAnimations();
+    
+    // Initialize scroll animations
+    initScrollAnimations();
+    
+    // Initialize service cards
     initServiceCards();
     
-    // Enable testimonial functionality
+    // Initialize testimonial sliders
     initTestimonialSliders();
     
-    // Initialize Portfolio Category Navigation
+    // Initialize equipment animations
+    initEquipmentAnimations();
+    
+    // Initialize pricing animations
+    initPricingAnimations();
+    
+    // Initialize portfolio categories
     initPortfolioCategories();
     
-    // Initialize Pricing Toggle
+    // Initialize pricing toggle
     initPricingToggle();
     
     // Initialize FAQ items
     initFaqItems();
-  });
+    
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Initialize header scroll effects
+    initHeaderScroll();
+    
+    // Add additional direct initialization for portfolio page
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded, reinitializing portfolio categories...');
+        // Ensure portfolio categories are initialized after DOM is fully loaded
+        initPortfolioCategories();
+    });
 }
 
 // Function to ensure all links work
@@ -1767,17 +1798,107 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Debug function to help with portfolio visibility - can be called from console
+function debugPortfolio() {
+  console.log('Debug Portfolio Function Called');
+  
+  // Check all portfolio categories
+  const categories = document.querySelectorAll('.portfolio-category');
+  console.log(`Found ${categories.length} portfolio categories:`);
+  
+  categories.forEach((category, index) => {
+    const isActive = category.classList.contains('active');
+    const id = category.id;
+    const display = window.getComputedStyle(category).display;
+    const opacity = window.getComputedStyle(category).opacity;
+    console.log(`Category ${index}: id=${id}, active=${isActive}, display=${display}, opacity=${opacity}`);
+    
+    // Check genre cards in this category
+    const genreCards = category.querySelectorAll('.genre-card');
+    console.log(`  - Found ${genreCards.length} genre cards in ${id}`);
+    
+    if (genreCards.length === 0) {
+      console.log(`  - No genre cards found in ${id}`);
+    }
+    
+    // Force visibility on active category
+    if (isActive) {
+      category.style.display = 'block';
+      category.style.opacity = '1';
+      category.style.visibility = 'visible';
+      
+      // Force genre cards visibility
+      genreCards.forEach(card => {
+        card.style.display = 'block';
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+      });
+    }
+  });
+  
+  // Check portfolio nav items
+  const navItems = document.querySelectorAll('.portfolio-nav-item');
+  console.log(`Found ${navItems.length} portfolio nav items`);
+  
+  // Try to force active category to show
+  const activeCategory = document.querySelector('.portfolio-category.active');
+  if (activeCategory) {
+    console.log(`Forcing active category ${activeCategory.id} to be visible`);
+    activeCategory.style.display = 'block';
+    activeCategory.style.opacity = '1';
+    activeCategory.style.visibility = 'visible';
+    
+    // Force all genre cards in active category to be visible
+    const genreCards = activeCategory.querySelectorAll('.genre-card');
+    genreCards.forEach(card => {
+      card.style.display = 'block';
+      card.style.opacity = '1';
+      card.style.visibility = 'visible';
+    });
+  } else {
+    console.log('No active category found');
+    // If no active category, make the first one active
+    if (categories.length > 0) {
+      categories[0].classList.add('active');
+      categories[0].style.display = 'block';
+      categories[0].style.opacity = '1';
+      categories[0].style.visibility = 'visible';
+    }
+  }
+  
+  return 'Debug complete - check console for details';
+}
+
 // Function to initialize portfolio categories
 function initPortfolioCategories() {
+  // Skip this function on portfolio.html page since it has dedicated script
+  if (document.querySelector('script[src="portfolio-standalone.js"]')) {
+    console.log('Portfolio page detected with standalone script - skipping main script initialization');
+    return;
+  }
+  
+  const portfolioNavItems = document.querySelectorAll('.portfolio-nav-item');
+  const portfolioCategories = document.querySelectorAll('.portfolio-category');
+  
   if (portfolioNavItems.length > 0 && portfolioCategories.length > 0) {
-    console.log('Initializing portfolio categories...');
+    console.log('Initializing portfolio categories from main script...');
     
     // Make all categories initially hidden except the first one
     portfolioCategories.forEach((category, index) => {
+      console.log('Category:', category.id);
       if (index === 0) {
         category.classList.add('active');
         category.style.display = 'block';
         category.style.opacity = '1';
+        category.style.visibility = 'visible';
+        
+        // Also force genre cards visibility
+        const genreCards = category.querySelectorAll('.genre-card');
+        genreCards.forEach(card => {
+          card.style.display = 'block';
+          card.style.opacity = '1';
+          card.style.visibility = 'visible';
+        });
       } else {
         category.classList.remove('active');
         category.style.display = 'none';
@@ -1790,6 +1911,10 @@ function initPortfolioCategories() {
       item.addEventListener('click', function(e) {
         e.preventDefault();
         
+        const categoryId = this.getAttribute('href').substring(1);
+        const categoryName = this.getAttribute('data-category');
+        console.log('Portfolio nav item clicked:', categoryId, categoryName);
+        
         // Remove active class from all nav items
         portfolioNavItems.forEach(navItem => {
           navItem.classList.remove('active');
@@ -1799,10 +1924,11 @@ function initPortfolioCategories() {
         this.classList.add('active');
         
         // Get target category ID
-        const targetId = this.getAttribute('href').substring(1);
-        const targetCategory = document.getElementById(targetId);
+        const targetCategory = document.getElementById(categoryId);
         
         if (targetCategory) {
+          console.log('Target category found:', categoryId);
+          
           // Hide all categories
           portfolioCategories.forEach(category => {
             category.classList.remove('active');
@@ -1810,15 +1936,26 @@ function initPortfolioCategories() {
             category.style.opacity = '0';
           });
           
-          // Show target category
-          targetCategory.classList.add('active');
+          // Show target category - Explicitly set styles
           targetCategory.style.display = 'block';
+          targetCategory.style.visibility = 'visible';
+          targetCategory.classList.add('active');
+          
+          // Force all genre cards to be visible
+          const genreCards = targetCategory.querySelectorAll('.genre-card');
+          genreCards.forEach(card => {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.visibility = 'visible';
+          });
+          
+          // Use a small timeout to ensure the display property has been applied
           setTimeout(() => {
             targetCategory.style.opacity = '1';
           }, 10);
           
-          // Update URL hash
-          window.location.hash = targetId;
+        } else {
+          console.error('Target category not found:', categoryId);
         }
       });
     });
@@ -1829,9 +1966,18 @@ function initPortfolioCategories() {
       const targetId = hash.substring(1);
       const targetNav = document.querySelector(`.portfolio-nav-item[href="#${targetId}"]`);
       if (targetNav) {
+        console.log('Initial hash found, clicking:', targetId);
         targetNav.click();
       }
     }
+    
+    // Run debug after initialization
+    setTimeout(debugPortfolio, 500);
+  } else {
+    console.log('Portfolio elements not found:', { 
+      navItems: portfolioNavItems.length, 
+      categories: portfolioCategories.length 
+    });
   }
 }
 

@@ -6,6 +6,7 @@
     <title>Portfolio | Grey 18 Studio</title>
     <link rel="stylesheet" href="styles-updated.css">
     <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="portfolio-dedicated.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -13,157 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
-    <!-- Camera Cursor Implementation -->
-    <link rel="stylesheet" href="style-camera-cursor.css">
-    <link rel="stylesheet" href="style-theme-warm.css">
-    <style>
-        /* Override existing styles to ensure consistent black text on teal buttons */
-        .btn.primary {
-            color: var(--black);
-        }
-        
-        /* Ensure transparent backgrounds */
-        .portfolio-hero, .portfolio-categories {
-            background: transparent;
-        }
-        
-        /* Fix for portfolio categories */
-        .portfolio-category {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .portfolio-category.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        /* Improve text visibility */
-        .portfolio-hero-content p,
-        .category-header p,
-        .genre-overlay p {
-            color: var(--white);
-        }
-        
-        /* For proper layout in certain areas, we need to maintain left alignment */
-        .footer-column ul li {
-            text-align: left;
-        }
-        
-        /* Ensure no default cursor appears anywhere */
-        * {
-            cursor: none !important;
-        }
-
-        /* Fix for genre cards display issue */
-        .genre-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-        }
-
-        .genre-card {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            background-color: var(--secondary-dark);
-            height: 300px;
-            display: block;
-            opacity: 1;
-            position: relative;
-        }
-
-        .genre-image {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .genre-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-
-        .genre-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px 20px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
-            color: var(--white);
-            transform: translateY(70px);
-            transition: all 0.3s ease;
-        }
-
-        .genre-card:hover .genre-overlay {
-            transform: translateY(0);
-        }
-
-        /* Additional container styles */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Category header styles */
-        .category-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .category-header h2 {
-            font-size: 2.5rem;
-            color: var(--white);
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .category-header p {
-            color: var(--light-grey);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Portfolio navigation styles */
-        .portfolio-nav {
-            margin-bottom: 40px;
-        }
-
-        .portfolio-nav-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .portfolio-nav-item {
-            padding: 8px 20px;
-            border-radius: 50px;
-            color: var(--light-grey);
-            background-color: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-nav-item:hover,
-        .portfolio-nav-item.active {
-            background-color: var(--accent-teal);
-            color: var(--black);
-            transform: translateY(-3px);
-        }
-    </style>
 </head>
 <body>
-    <!-- Camera cursor element -->
-    <div class="camera-cursor"></div>
     <header>
         <div class="logo">
             <h1>GREY <span>18</span> STUDIO</h1>
@@ -196,12 +48,12 @@
             <div class="portfolio-nav">
                 <p>Browse our work by category:</p>
                 <div class="portfolio-nav-items">
-                    <a href="#photography" class="portfolio-nav-item active">Photography</a>
-                    <a href="#sound-recording" class="portfolio-nav-item">Sound Recording</a>
-                    <a href="#dubbing" class="portfolio-nav-item">Dubbing</a>
-                    <a href="#mixing" class="portfolio-nav-item">Audio Mixing</a>
-                    <a href="#editing" class="portfolio-nav-item">Photo & Video Editing</a>
-                    <a href="#grading" class="portfolio-nav-item">Colour Grading</a>
+                    <a href="#photography" class="portfolio-nav-item active" data-category="photography">Photography</a>
+                    <a href="#sound-recording" class="portfolio-nav-item" data-category="sound-recording">Sound Recording</a>
+                    <a href="#dubbing" class="portfolio-nav-item" data-category="dubbing">Dubbing</a>
+                    <a href="#mixing" class="portfolio-nav-item" data-category="mixing">Audio Mixing</a>
+                    <a href="#editing" class="portfolio-nav-item" data-category="editing">Photo & Video Editing</a>
+                    <a href="#grading" class="portfolio-nav-item" data-category="grading">Colour Grading</a>
                 </div>
             </div>
 
@@ -582,11 +434,71 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 Grey 18 Studio. All rights reserved.</p>
+            <p>&copy; <span data-current-year>2023</span> Grey 18 Studio. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
-    <script src="camera-cursor.js"></script>
+    <script src="portfolio-standalone.js"></script>
+    
+    <!-- Force visibility of portfolio items -->
+    <style id="force-portfolio-visibility">
+        /* Force portfolio categories to be visible when active */
+        .portfolio-category.active {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Force genre grid to always be displayed as a grid */
+        .genre-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+            gap: 30px !important;
+            width: 100% !important;
+            visibility: visible !important;
+        }
+        
+        /* Force genre cards to be visible */
+        .genre-card {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: 300px !important;
+            position: relative !important;
+            overflow: hidden !important;
+            border-radius: 15px !important;
+        }
+        
+        /* Force genre images to be visible */
+        .genre-image {
+            display: block !important;
+            visibility: visible !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        
+        /* Force images inside genre cards to be visible */
+        .genre-image img {
+            display: block !important;
+            visibility: visible !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        
+        /* Force overlay to be visible on hover */
+        .genre-card:hover .genre-overlay {
+            transform: translateY(0) !important;
+            visibility: visible !important;
+        }
+    </style>
+    
+    <!-- Success message for portfolio page finalization -->
+    <script>
+        console.log('Portfolio page finalized and isolated from other website changes.');
+    </script>
 </body>
 </html> 
