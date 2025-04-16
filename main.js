@@ -5,11 +5,6 @@
 
 // Import styles
 import './style.css';
-import './style-theme-warm.css';
-import './cursor.css';
-
-// Load custom cursor implementation
-import './cursor.js';
 
 // Initialize when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-updated.css">
-    <!-- Camera Cursor Implementation -->
-    <link rel="stylesheet" href="style-camera-cursor.css">
     
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -20,7 +18,11 @@
     <script src="https://unpkg.com/split-type"></script>
     
     <style>
-        /* Fix visibility issues without changing color scheme */
+        /* Fix visibility issues while matching home page color scheme */
+        
+        body {
+            background: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
+        }
         
         .pricing-hero {
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
@@ -29,6 +31,17 @@
             background-position: center;
             padding: 180px 0 100px;
             text-align: center;
+            color: white;
+        }
+        
+        .pricing-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .pricing-hero p {
+            font-size: 1.2rem;
             color: white;
         }
         
@@ -331,14 +344,11 @@
         
         /* Ensure no default cursor appears anywhere */
         * {
-            cursor: none !important;
+            cursor: auto;
         }
     </style>
 </head>
 <body>
-    <!-- Camera cursor element -->
-    <div class="camera-cursor"></div>
-    
     <!-- Header -->
     <header>
         <div class="logo">
@@ -677,7 +687,7 @@
     </footer>
     
     <!-- Scripts -->
-    <script src="camera-cursor.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
+

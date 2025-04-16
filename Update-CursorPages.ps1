@@ -1,7 +1,7 @@
-# Grey 18 Studio - Update Camera Cursor Implementation
-# This PowerShell script updates all HTML files to include the camera cursor implementation
+# Grey 18 Studio - Update HTML Files
+# This PowerShell script updates all HTML files to remove the camera cursor implementation
 
-Write-Host "Grey 18 Studio - Updating all HTML files with camera cursor..."
+Write-Host "Grey 18 Studio - Removing camera cursor from all HTML files..."
 
 # Get all HTML files in the current directory
 $htmlFiles = Get-ChildItem -Path . -Filter *.html
@@ -17,75 +17,86 @@ foreach ($file in $htmlFiles) {
     # Read the file content
     $fileContent = Get-Content -Path $file.FullName -Raw
     
-    # Check if the file already includes our camera cursor files
-    $hasCameraCursorCSS = $fileContent -match "style-camera-cursor.css"
-    $hasCameraCursorJS = $fileContent -match "camera-cursor.js"
-    
     $changes = @()
     $modified = $false
     
-    # Update the <head> to include our CSS file if not already included
-    if (-not $hasCameraCursorCSS) {
-        $headEndPosition = $fileContent.IndexOf("</head>")
-        if ($headEndPosition -ne -1) {
-            $cssLink = "    <!-- Camera Cursor Implementation -->`n    <link rel=`"stylesheet`" href=`"style-camera-cursor.css`">`n"
-            $fileContent = $fileContent.Substring(0, $headEndPosition) + $cssLink + $fileContent.Substring($headEndPosition)
-            $changes += "Added camera cursor CSS"
-            $modified = $true
-        }
-    }
-    
-    # Update cursor div element (replace old with new or add if missing)
-    if ($fileContent -match '<div class="cursor"></div>') {
-        $fileContent = $fileContent -replace '<div class="cursor"></div>', '<div class="camera-cursor"></div>'
-        $changes += "Replaced cursor div with camera-cursor div"
+    # Remove camera cursor CSS link
+    if ($fileContent -match 'style-camera-cursor.css') {
+        $fileContent = $fileContent -replace '\s*<!-- Camera Cursor Implementation -->\s*\r?\n\s*<link rel="stylesheet" href="style-camera-cursor\.css">\s*', ''
+        $changes += "Removed camera cursor CSS link"
         $modified = $true
-    } elseif (-not ($fileContent -match 'camera-cursor')) {
-        # If no cursor div exists, add it after the loading animation
-        $loadingEndPosition = $fileContent.IndexOf("</div>", $fileContent.IndexOf("loading"))
-        if ($loadingEndPosition -ne -1) {
-            $cursorDiv = "`n    <!-- Camera cursor element -->`n    <div class=`"camera-cursor`"></div>`n"
-            $fileContent = $fileContent.Substring(0, $loadingEndPosition + 6) + $cursorDiv + $fileContent.Substring($loadingEndPosition + 6)
-            $changes += "Added camera-cursor div after loading animation"
-            $modified = $true
-        }
     }
     
-    # Remove old cursor script tags if present
-    if ($fileContent -match '<script>\s*document\.addEventListener\(''DOMContentLoaded'', function\(\) {') {
-        $scriptStartPos = $fileContent.IndexOf('<script>', $fileContent.IndexOf("document.addEventListener('DOMContentLoaded'"))
-        if ($scriptStartPos -ne -1) {
-            $scriptEndPos = $fileContent.IndexOf('</script>', $scriptStartPos) + 9
-            $fileContent = $fileContent.Substring(0, $scriptStartPos) + $fileContent.Substring($scriptEndPos)
-            $changes += "Removed old cursor script"
-            $modified = $true
-        }
+    # Remove camera cursor div
+    if ($fileContent -match '<div class="camera-cursor"></div>') {
+        $fileContent = $fileContent -replace '\s*<!-- Camera cursor element -->\s*\r?\n\s*<div class="camera-cursor"></div>\s*', ''
+        $changes += "Removed camera cursor div"
+        $modified = $true
     }
     
-    # Add our JS file if not already included
-    if (-not $hasCameraCursorJS) {
-        $bodyEndPosition = $fileContent.IndexOf("</body>")
-        if ($bodyEndPosition -ne -1) {
-            # Find the position of the last script tag before </body>
-            $lastScriptPos = $fileContent.LastIndexOf("<script", $bodyEndPosition)
-            $lastScriptEndPos = $fileContent.IndexOf('</script>', $lastScriptPos) + 9
-            
-            $jsScript = "    <script src=`"camera-cursor.js`"></script>`n"
-            $fileContent = $fileContent.Substring(0, $lastScriptEndPos) + "`n" + $jsScript + $fileContent.Substring($lastScriptEndPos)
-            $changes += "Added camera cursor JS"
-            $modified = $true
-        }
+    # Remove camera cursor JavaScript
+    if ($fileContent -match '<script src="camera-cursor.js"></script>') {
+        $fileContent = $fileContent -replace '\s*<script src="camera-cursor\.js"></script>\s*', ''
+        $changes += "Removed camera cursor script"
+        $modified = $true
+    }
+    
+    # Remove cursor:none styles from inline styles
+    if ($fileContent -match 'cursor: none !important;') {
+        $fileContent = $fileContent -replace 'cursor: none !important;', 'cursor: auto;'
+        $changes += "Reset cursor styles"
+        $modified = $true
     }
     
     # Write back the updated content if modified
     if ($modified) {
         Set-Content -Path $file.FullName -Value $fileContent
-        Write-Host "✅ Updated $($file.Name) with changes: $($changes -join ', ')"
+        Write-Host "✅ Updated $($file.Name) with changes: $($changes -join ', ')" -ForegroundColor Green
     } else {
-        Write-Host "⏩ No changes needed for $($file.Name)"
+        Write-Host "⏩ No changes needed for $($file.Name)" -ForegroundColor Yellow
     }
 }
 
 Write-Host "------------------------------"
-Write-Host "Update complete! All HTML files now have consistent camera cursor implementation."
-Write-Host "Remember to test all pages to ensure the cursor works correctly." 
+Write-Host "Update complete! All HTML files now have standard cursor behavior."
+
+# Add a function to standardize theme across pages
+function Standardize-Theme {
+    $pagesWithTheme = @(
+        "about.html",
+        "portfolio.html",
+        "equipment.html",
+        "pricing.html",
+        "contact.html"
+    )
+    
+    foreach ($page in $pagesWithTheme) {
+        if (Test-Path $page) {
+            Write-Host "Standardizing theme for $page..."
+            
+            $content = Get-Content -Path $page -Raw
+            
+            # Remove theme CSS links
+            $content = $content -replace '<link\s+rel="stylesheet"\s+href="style-theme-[^"]+\.css">', ''
+            
+            # Ensure the page uses the main CSS
+            if (-not ($content -match 'href="styles-updated.css"')) {
+                $headEndPos = $content.IndexOf('</head>')
+                if ($headEndPos -gt 0) {
+                    $content = $content.Substring(0, $headEndPos) + 
+                        "`n    <link rel=`"stylesheet`" href=`"styles-updated.css`">`n" + 
+                        $content.Substring($headEndPos)
+                }
+            }
+            
+            Set-Content -Path $page -Value $content
+            Write-Host "Theme standardized for $page" -ForegroundColor Green
+        } else {
+            Write-Host "File not found: $page" -ForegroundColor Yellow
+        }
+    }
+}
+
+# Call the function at the end of your script
+Write-Host "`nStandardizing theme across all pages..." -ForegroundColor Cyan
+Standardize-Theme 

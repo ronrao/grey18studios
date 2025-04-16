@@ -1,3 +1,81 @@
+/* ===== ANIMATION OVERRIDE - DISABLE ALL ANIMATIONS ===== */
+* {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+}
+
+/* Override scroll behavior */
+html {
+    scroll-behavior: auto !important;
+}
+
+/* Force visibility for all sections and content */
+.animate-on-scroll, 
+.fade-in, 
+.fade-up, 
+.fade-down, 
+.zoom-in,
+.team-section,
+.team-grid,
+.team-member,
+.service-expanded-view.active,
+.service-card,
+.testimonial,
+.expanded-content,
+.expanded-portfolio-item,
+.hero-content h1,
+.hero-content p,
+.cta-buttons,
+.about-hero-content h1,
+.about-hero-content p,
+section.about-story,
+.story-content,
+.about-stats,
+.stat,
+.value-card,
+.section-header {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Disable all hover effects */
+a:hover, button:hover, .btn:hover, .service-card:hover, .testimonial-content:hover,
+.social-icon:hover, .expanded-portfolio-item:hover, .value-card:hover,
+.stat:hover, .team-member:hover, .play-overlay:hover, .pricing-card:hover {
+    transform: none !important;
+    scale: 1 !important;
+    box-shadow: var(--box-shadow) !important;
+    transition: none !important;
+}
+
+/* Hide loading and transition elements */
+.loading {
+    display: none !important;
+}
+
+.page-transition-overlay {
+    display: none !important;
+}
+
+.cursor {
+    display: none !important;
+}
+
+/* Override all GSAP and animation classes */
+[class*="gsap-"], [class*="scroll-trigger"], .has-scroll-smooth, .animating,
+.animated, .appear, .tilt, .parallax, .reveal, .fade, .slide {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+}
+
 /* ===== GENERAL STYLES ===== */
 :root {
     /* New color scheme complementing grey */
@@ -12,7 +90,7 @@
     --white: #ffffff;
     --black: #000000;
     --overlay-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
-    --transition: all 0.3s ease;
+    --transition: none !important; /* Remove all transitions */
     --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     --page-gradient: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
@@ -22,102 +100,32 @@
     --body-font: 'Quicksand', sans-serif;
 }
 
-/* Properly aligned camera cursor */
-.cursor {
-    position: fixed;
-    width: 32px;
-    height: 24px;
-    pointer-events: none;
-    z-index: 100000;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%234ecdc4" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%234ecdc4" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="5" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="2" stroke="%234ecdc4" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%234ecdc4" stroke="none"/></svg>');
-    background-repeat: no-repeat;
-    background-size: contain;
-    transition: box-shadow 0.2s ease; /* For click effect */
-}
-
-/* Hide default cursor on all elements */
+/* Reset cursor settings */
 * {
-    cursor: none !important;
+    cursor: auto;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Fix cursor issues by completely hiding the default cursor */
 html, body {
-    cursor: none !important;
+    cursor: auto;
 }
 
-/* Target all elements to ensure default cursor is never shown */
+/* Reset all elements to use default cursor */
 a, button, input, select, textarea, div, span, p, h1, h2, h3, h4, h5, h6, 
 li, ul, ol, img, svg, i, label, header, footer, main, section, article, aside,
 .service-card, .btn, .logo, .menu-toggle, .social-icon, .expanded-portfolio-item,
 .testimonial, .portfolio-item, .video-thumbnail, .dot, .tab-btn, .contact-item,
 .expanded-close, .service-expand-btn, .video-dot {
-    cursor: none !important;
+    cursor: auto;
 }
 
-/* Complete cursor overhaul to ensure it replaces the default cursor */
-html, body, * {
-    cursor: none !important;
-}
-
-/* Properly aligned camera cursor */
-.cursor {
-    position: fixed;
-    width: 32px;
-    height: 24px;
-    pointer-events: none;
-    z-index: 100000;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%234ecdc4" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%234ecdc4" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="5" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="2" stroke="%234ecdc4" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%234ecdc4" stroke="none"/></svg>');
-    background-repeat: no-repeat;
-    transform: translate(0, 0); /* No transform needed, we'll position it exactly */
-}
-
-/* Hide default cursor */
-html, body, a, button, input, select, textarea, div, span, p, h1, h2, h3, h4, h5, h6, 
-li, ul, ol, img, svg, i, label, header, footer, main, section, article, aside,
-.service-card, .btn, .logo, .menu-toggle, .social-icon, .expanded-portfolio-item,
-.testimonial, .portfolio-item, .video-thumbnail, .dot, .tab-btn, .contact-item,
-.expanded-close, .service-expand-btn, .video-dot {
-    cursor: none !important;
-}
-
-/* Ultra simple cursor approach */
-.cursor {
-    position: fixed;
-    width: 32px;
-    height: 24px;
-    pointer-events: none;
-    z-index: 100000;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%234ecdc4" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%234ecdc4" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="5" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="2" stroke="%234ecdc4" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%234ecdc4" stroke="none"/></svg>');
-    background-repeat: no-repeat;
-    background-position: -16px -12px; /* Center the hotspot */
-    margin: 0;
-    padding: 0;
-    border: none;
-    will-change: left, top;
-    transition: opacity 0.1s ease;
-}
-
-/* Hover state */
-.cursor.hovered {
-    filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.7));
-}
-
-/* Click state */
-.cursor.clicked {
-    transform: scale(0.9);
-}
-
-/* Hide default cursor on all elements */
-html, body, a, button, input, select, textarea {
-    cursor: none !important;
-}
-
-/* Ensure interactive elements have correct hover style */
-a:hover, button:hover, .btn:hover, .service-card:hover {
-    cursor: none !important;
+/* Reset interactive elements to use pointer cursor */
+a, button, .logo, .service-card, .portfolio-item, .social-icon, 
+.expanded-portfolio-item, .video-thumbnail, input[type="checkbox"], 
+.toggle-switch, .pricing-card, .equipment-card, .btn {
+    cursor: pointer;
 }
 
 html {
@@ -132,21 +140,6 @@ body {
     background: var(--page-gradient);
     cursor: none; /* Hide the default cursor */
     text-align: left;
-}
-
-.cursor {
-    width: 32px;
-    height: 24px;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="%234ecdc4" stroke-width="1.5"><path d="M2 6h28v16H2z" stroke="%234ecdc4" fill="none"/><path d="M9 2h14l2 4H7l2-4z" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="5" stroke="%234ecdc4" fill="none"/><circle cx="16" cy="14" r="2" stroke="%234ecdc4" fill="none"/><rect x="24" y="8" width="4" height="2" fill="%234ecdc4" stroke="none"/></svg>');
-    background-repeat: no-repeat;
-    transition: transform 0.1s ease, opacity 0.1s ease;
-    will-change: transform, opacity, left, top;
-    backface-visibility: hidden;
-    opacity: 1;
 }
 
 .custom-cursor {
@@ -1662,5 +1655,10 @@ a:active, button:active, .btn:active {
     color: var(--white) !important;
     background-color: var(--primary-dark) !important;
     padding: 10px !important;
+    font-size: 1rem !important;
+}
+
+.any-additional-styles {
+    /* Any future styles can go here */
     font-size: 1rem !important;
 } 

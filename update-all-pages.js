@@ -1,6 +1,6 @@
 /**
- * Grey 18 Studio - Update Camera Cursor Implementation
- * This script updates all HTML files to include the camera cursor implementation
+ * Grey 18 Studio - Update HTML Files
+ * This script updates all HTML files to remove the camera cursor implementation
  * 
  * Usage: node update-all-pages.js
  */
@@ -22,62 +22,38 @@ htmlFiles.forEach(fileName => {
     // Read the file content
     let fileContent = fs.readFileSync(fileName, 'utf8');
     
-    // Check if the file already includes our camera cursor files
-    const hasCameraCursorCSS = fileContent.includes('style-camera-cursor.css');
-    const hasCameraCursorJS = fileContent.includes('camera-cursor.js');
-    
     let changes = [];
     let modified = false;
     
-    // Update the <head> to include our CSS file if not already included
-    if (!hasCameraCursorCSS) {
-        const headEndPosition = fileContent.indexOf('</head>');
-        if (headEndPosition !== -1) {
-            const cssLink = '    <!-- Camera Cursor Implementation -->\n    <link rel="stylesheet" href="style-camera-cursor.css">\n';
-            fileContent = fileContent.slice(0, headEndPosition) + cssLink + fileContent.slice(headEndPosition);
-            changes.push('Added camera cursor CSS');
-            modified = true;
-        }
-    }
-    
-    // Update cursor div element (replace old with new or add if missing)
-    if (fileContent.includes('<div class="cursor"></div>')) {
-        fileContent = fileContent.replace('<div class="cursor"></div>', '<div class="camera-cursor"></div>');
-        changes.push('Replaced cursor div with camera-cursor div');
-        modified = true;
-    } else if (!fileContent.includes('camera-cursor')) {
-        // If no cursor div exists, add it after the loading animation
-        const loadingEndPosition = fileContent.indexOf('</div>', fileContent.indexOf('loading'));
-        if (loadingEndPosition !== -1) {
-            const cursorDiv = '\n    <!-- Camera cursor element -->\n    <div class="camera-cursor"></div>\n';
-            fileContent = fileContent.slice(0, loadingEndPosition + 6) + cursorDiv + fileContent.slice(loadingEndPosition + 6);
-            changes.push('Added camera-cursor div after loading animation');
-            modified = true;
-        }
-    }
-    
-    // Remove old cursor script tags if present
-    if (fileContent.includes('<script>\n    document.addEventListener(\'DOMContentLoaded\', function() {')) {
-        const scriptStartPos = fileContent.indexOf('<script>\n    document.addEventListener(\'DOMContentLoaded\', function() {');
-        const scriptEndPos = fileContent.indexOf('</script>', scriptStartPos) + 9;
-        fileContent = fileContent.slice(0, scriptStartPos) + fileContent.slice(scriptEndPos);
-        changes.push('Removed old cursor script');
+    // Remove camera cursor CSS link
+    if (fileContent.includes('style-camera-cursor.css')) {
+        const cssLinkRegex = /\s*<!-- Camera Cursor Implementation -->\s*\n\s*<link rel="stylesheet" href="style-camera-cursor\.css">\s*/g;
+        fileContent = fileContent.replace(cssLinkRegex, '');
+        changes.push('Removed camera cursor CSS link');
         modified = true;
     }
     
-    // Add our JS file if not already included
-    if (!hasCameraCursorJS) {
-        const bodyEndPosition = fileContent.indexOf('</body>');
-        if (bodyEndPosition !== -1) {
-            // Find the position of the last script tag before </body>
-            const lastScriptPos = fileContent.lastIndexOf('<script', bodyEndPosition);
-            const lastScriptEndPos = fileContent.indexOf('</script>', lastScriptPos) + 9;
-            
-            const jsScript = '    <script src="camera-cursor.js"></script>\n';
-            fileContent = fileContent.slice(0, lastScriptEndPos) + '\n' + jsScript + fileContent.slice(lastScriptEndPos);
-            changes.push('Added camera cursor JS');
-            modified = true;
-        }
+    // Remove camera cursor div
+    if (fileContent.includes('<div class="camera-cursor"></div>')) {
+        const cursorDivRegex = /\s*<!-- Camera cursor element -->\s*\n\s*<div class="camera-cursor"><\/div>\s*/g;
+        fileContent = fileContent.replace(cursorDivRegex, '');
+        changes.push('Removed camera cursor div');
+        modified = true;
+    }
+    
+    // Remove camera cursor JavaScript
+    if (fileContent.includes('<script src="camera-cursor.js"></script>')) {
+        const scriptRegex = /\s*<script src="camera-cursor\.js"><\/script>\s*/g;
+        fileContent = fileContent.replace(scriptRegex, '');
+        changes.push('Removed camera cursor script');
+        modified = true;
+    }
+    
+    // Remove cursor:none styles from inline styles
+    if (fileContent.includes('cursor: none !important;')) {
+        fileContent = fileContent.replace(/cursor: none !important;/g, 'cursor: auto;');
+        changes.push('Reset cursor styles');
+        modified = true;
     }
     
     // Write back the updated content if modified
@@ -91,4 +67,42 @@ htmlFiles.forEach(fileName => {
 
 console.log('------------------------------');
 console.log('Update complete! All HTML files now have consistent camera cursor implementation.');
-console.log('Remember to test all pages to ensure the cursor works correctly.'); 
+console.log('Remember to test all pages to ensure the cursor works correctly.');
+
+/**
+ * Standardize theme to black and grey across all pages
+ */
+function standardizeTheme() {
+    const pagesWithTheme = [
+        'about.html',
+        'portfolio.html',
+        'equipment.html',
+        'pricing.html',
+        'contact.html'
+    ];
+    
+    pagesWithTheme.forEach(page => {
+        try {
+            let content = fs.readFileSync(page, 'utf8');
+            
+            // Remove any theme CSS links
+            content = content.replace(/<link\s+rel="stylesheet"\s+href="style-theme-[^"]+\.css">/g, '');
+            
+            // Ensure the page is using the main CSS
+            if (!content.includes('href="styles-updated.css"')) {
+                const headEndPos = content.indexOf('</head>');
+                content = content.slice(0, headEndPos) + 
+                    '\n    <link rel="stylesheet" href="styles-updated.css">\n' + 
+                    content.slice(headEndPos);
+            }
+            
+            fs.writeFileSync(page, content, 'utf8');
+            console.log(`Standardized theme for ${page}`);
+        } catch (error) {
+            console.error(`Error standardizing theme for ${page}:`, error);
+        }
+    });
+}
+
+console.log('Standardizing theme across all pages...');
+standardizeTheme(); 
