@@ -138,6 +138,294 @@
             color: #b91421; /* Brand primary color */
         }
         
+        /* Footer Contact Form Styles */
+        .footer-contact-form {
+            padding: 60px 0;
+            background-color: rgba(35, 35, 35, 0.8);
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .footer-contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1920x600/?studio') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        /* Container styling */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        .footer-contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .footer-contact-header h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact-header p {
+            color: var(--light-grey);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-form-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+        
+        .contact-form-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .contact-item {
+            background: rgba(40, 40, 40, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(185, 20, 33, 0.3);
+        }
+        
+        .contact-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            background: #b91421;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);
+        }
+        
+        .contact-icon-wrapper i {
+            color: var(--white);
+            font-size: 20px;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        
+        .contact-details p {
+            color: var(--light-grey);
+            font-size: 1rem;
+        }
+        
+        .contact-form {
+            background: rgba(40, 40, 40, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b91421;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .input-wrapper textarea ~ .input-icon {
+            top: 25px;
+            transform: none;
+        }
+        
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(30, 30, 30, 0.5);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #b91421;
+            box-shadow: 0 0 0 3px rgba(185, 20, 33, 0.15);
+            background: rgba(40, 40, 40, 0.8);
+        }
+        
+        .form-group input:focus ~ .input-icon,
+        .form-group textarea:focus ~ .input-icon,
+        .form-group select:focus ~ .input-icon {
+            color: #b91421;
+            opacity: 1;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #b91421, #d61a2b);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(185, 20, 33, 0.3);
+        }
+        
+        .submit-btn .btn-icon {
+            opacity: 0;
+            transform: translateX(-15px);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover .btn-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .submit-btn .btn-text {
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover .btn-text {
+            transform: translateX(-5px);
+        }
+        
+        .submit-btn .sending-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #b91421, #d61a2b);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn.sending .btn-text,
+        .submit-btn.sending .btn-icon {
+            opacity: 0;
+        }
+        
+        .submit-btn.sending .sending-indicator {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .form-status {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .success-message,
+        .error-message {
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            color: #28a745;
+        }
+        
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.5);
+            color: #dc3545;
+        }
+        
+        .success-message.visible,
+        .error-message.visible {
+            display: block;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @media screen and (max-width: 992px) {
+            .contact-form-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
         @media screen and (max-width: 768px) {
             footer {
                 padding: 50px 0 20px;
@@ -150,77 +438,256 @@
             .footer-gallery {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-contact-form {
+                padding: 40px 0;
+            }
+            
+            .footer-contact-header h2 {
+                font-size: 2rem;
+            }
         }
     </style>
+    <!-- Add font awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add EmailJS script -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>About Us</h3>
-                    <p>Grey 18 Studio provides comprehensive audio and visual production services, delivering exceptional quality and creative solutions to clients worldwide.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+    <footer id="page-footer" style="display: block !important; visibility: visible !important; opacity: 1 !important; background-color: #1a1a1a; color: #cccccc; padding: 60px 0 20px; position: relative;">
+        <!-- Gradient bar at top of footer -->
+        <div style="content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #b91421, #091458);"></div>
+        
+        <!-- Contact section -->
+        <div id="footer-contact" style="padding: 60px 0; background-color: rgba(35, 35, 35, 0.8); margin-bottom: 60px; position: relative; display: block !important; visibility: visible !important;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://source.unsplash.com/random/1920x600/?studio') center/cover no-repeat; opacity: 0.15; z-index: -1;"></div>
+            
+            <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+                <!-- Contact header -->
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 15px;">Get In Touch</h2>
+                    <p style="color: #cccccc; max-width: 700px; margin: 0 auto;">Contact us to discuss your project or book a session with our experts</p>
+                </div>
+                
+                <!-- Contact content - 2 column grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start;">
+                    <!-- Contact details column -->
+                    <div style="display: flex; flex-direction: column; gap: 25px;">
+                        <!-- Contact item - Location -->
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                                <i class="fas fa-map-marker-alt" style="color: #ffffff; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Visit Us</h3>
+                                <p style="color: #cccccc; font-size: 1rem;">123 Studio Street, City, Country</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact item - Phone -->
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                                <i class="fas fa-phone-alt" style="color: #ffffff; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Call Us</h3>
+                                <p style="color: #cccccc; font-size: 1rem;">Main: +123 456 7890</p>
+                                <p style="color: #cccccc; font-size: 1rem;">Booking: +123 987 6543</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact item - Email -->
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                                <i class="fas fa-envelope" style="color: #ffffff; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Email Us</h3>
+                                <p style="color: #cccccc; font-size: 1rem;">info@grey18studio.com</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact item - Hours -->
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                                <i class="fas fa-clock" style="color: #ffffff; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Working Hours</h3>
+                                <p style="color: #cccccc; font-size: 1rem;">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact form column -->
+                    <div style="background: rgba(40, 40, 40, 0.7); padding: 30px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);">
+                        <form id="contact-form" onsubmit="return handleFormSubmit(event)">
+                            <!-- Name and Email row -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div style="margin-bottom: 15px;">
+                                    <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                        <i class="fas fa-user" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b91421; opacity: 0.8;"></i>
+                                        <input type="text" id="from_name" name="from_name" placeholder="Your Name" required style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;">
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                        <i class="fas fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b91421; opacity: 0.8;"></i>
+                                        <input type="email" id="reply_to" name="reply_to" placeholder="Your Email" required style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Subject and Phone row -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div style="margin-bottom: 15px;">
+                                    <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                        <i class="fas fa-heading" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b91421; opacity: 0.8;"></i>
+                                        <input type="text" id="subject" name="subject" placeholder="Subject" required style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;">
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                        <i class="fas fa-phone" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b91421; opacity: 0.8;"></i>
+                                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Service dropdown -->
+                            <div style="margin-bottom: 15px;">
+                                <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                    <i class="fas fa-tag" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b91421; opacity: 0.8;"></i>
+                                    <select id="service" name="service" required style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;">
+                                        <option value="" disabled selected>Select Service</option>
+                                        <option value="Photography">Photography</option>
+                                        <option value="Sound Recording">Sound Recording</option>
+                                        <option value="Dubbing">Dubbing</option>
+                                        <option value="Audio Mixing & Mastering">Audio Mixing & Mastering</option>
+                                        <option value="Photo & Video Editing">Photo & Video Editing</option>
+                                        <option value="Colour Grading">Colour Grading</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Message textarea -->
+                            <div style="margin-bottom: 15px;">
+                                <div style="position: relative; width: 100%; margin-bottom: 20px;">
+                                    <i class="fas fa-comment" style="position: absolute; left: 15px; top: 25px; color: #b91421; opacity: 0.8;"></i>
+                                    <textarea id="message" name="message" placeholder="Your Message" rows="6" required style="width: 100%; padding: 15px 15px 15px 45px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(30, 30, 30, 0.5); color: #ffffff; font-family: inherit; font-size: 1rem;"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Form status messages -->
+                            <div style="margin-top: 15px; text-align: center;">
+                                <div id="success-message" style="padding: 10px; border-radius: 5px; display: none; background: rgba(40, 167, 69, 0.2); border: 1px solid rgba(40, 167, 69, 0.5); color: #28a745;">Thank you! Your message has been sent successfully.</div>
+                                <div id="error-message" style="padding: 10px; border-radius: 5px; display: none; background: rgba(220, 53, 69, 0.2); border: 1px solid rgba(220, 53, 69, 0.5); color: #dc3545;">Oops! Something went wrong. Please try again.</div>
+                            </div>
+                            
+                            <!-- Submit button -->
+                            <button type="submit" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #b91421, #d61a2b); color: #ffffff; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 10px; position: relative; overflow: hidden;">
+                                <span id="btn-text">Send Message</span>
+                                <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer content -->
+        <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+            <!-- Footer columns -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <!-- About column -->
+                <div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: #ffffff; position: relative; padding-bottom: 10px;">About Us</h3>
+                    <div style="content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #b91421;"></div>
+                    <p style="margin-bottom: 20px;">Grey 18 Studio provides comprehensive audio and visual production services, delivering exceptional quality and creative solutions to clients worldwide.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="equipment.html">Equipment</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                <!-- Services column -->
+                <div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: #ffffff; position: relative; padding-bottom: 10px;">Services</h3>
+                    <div style="content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #b91421;"></div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Photography</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Sound Recording</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Dubbing</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Audio Mixing & Mastering</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Photo & Video Editing</a></li>
+                        <li style="margin-bottom: 12px;"><a href="index.html#services" style="color: #cccccc; text-decoration: none; display: block;">Colour Grading</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-contact">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Studio Street, City, Country</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+123 456 7890</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>info@grey18studio.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
-                        </li>
+                <!-- Quick Links column -->
+                <div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: #ffffff; position: relative; padding-bottom: 10px;">Quick Links</h3>
+                    <div style="content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #b91421;"></div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="index.html" style="color: #cccccc; text-decoration: none; display: block;">Home</a></li>
+                        <li style="margin-bottom: 12px;"><a href="about.html" style="color: #cccccc; text-decoration: none; display: block;">About Us</a></li>
+                        <li style="margin-bottom: 12px;"><a href="services.html" style="color: #cccccc; text-decoration: none; display: block;">Services</a></li>
+                        <li style="margin-bottom: 12px;"><a href="portfolio.html" style="color: #cccccc; text-decoration: none; display: block;">Portfolio</a></li>
+                        <li style="margin-bottom: 12px;"><a href="blog.html" style="color: #cccccc; text-decoration: none; display: block;">Blog</a></li>
+                        <li style="margin-bottom: 12px;"><a href="contact.html" style="color: #cccccc; text-decoration: none; display: block;">Contact</a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Instagram</h3>
-                    <div class="footer-gallery">
-                        <img src="https://source.unsplash.com/random/100x100/?studio" alt="Instagram Image">
-                        <img src="https://source.unsplash.com/random/100x100/?photography" alt="Instagram Image">
-                        <img src="https://source.unsplash.com/random/100x100/?recording" alt="Instagram Image">
-                        <img src="https://source.unsplash.com/random/100x100/?audio" alt="Instagram Image">
-                        <img src="https://source.unsplash.com/random/100x100/?camera" alt="Instagram Image">
-                        <img src="https://source.unsplash.com/random/100x100/?film" alt="Instagram Image">
-                    </div>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; <span class="current-year">2023</span> Grey 18 Studio. All Rights Reserved. | Designed by <a href="#">Your Name</a></p>
+            <!-- Footer bottom -->
+            <div style="padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+                <p style="font-size: 0.9rem; color: #cccccc;">&copy; <span id="current-year">2023</span> Grey 18 Studio. All Rights Reserved. | Designed by <a href="#" style="color: #b91421; text-decoration: none;">Grey 18 Studio</a></p>
             </div>
         </div>
     </footer>
+
+    <!-- Super minimal JavaScript for form submission - no dependencies -->
+    <script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Form submission handler
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        // Get form elements
+        const form = event.target;
+        const btnText = document.getElementById('btn-text');
+        const successMsg = document.getElementById('success-message');
+        const errorMsg = document.getElementById('error-message');
+        
+        // Show sending state
+        btnText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        successMsg.style.display = 'none';
+        errorMsg.style.display = 'none';
+        
+        // Simulate form submission (2 second delay)
+        setTimeout(function() {
+            // Show success message
+            btnText.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+            successMsg.style.display = 'block';
+            form.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(function() {
+                successMsg.style.display = 'none';
+            }, 5000);
+        }, 2000);
+        
+        return false;
+    }
+    </script>
 </body>
 </html> 
