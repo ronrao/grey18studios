@@ -1152,7 +1152,7 @@ function updateCopyrightYear() {
   yearElements.forEach(element => {
     element.textContent = currentYear;
   });
-}
+} 
 
 // Hero section animations
 function animateHero() {
@@ -1377,4 +1377,38 @@ function customCursor() {
       });
     });
   }
-} 
+}
+
+// Preloader
+window.addEventListener('load', function() {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        preloader.classList.add('preloader-finish');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 1000);
+    }
+    
+    // Initialize service icons - remove any existing pulse animations
+    const serviceIcons = document.querySelectorAll('.service-card .service-icon');
+    if (serviceIcons.length > 0) {
+        // Remove pulse class from all icons initially
+        serviceIcons.forEach(icon => {
+            icon.classList.remove('pulse');
+        });
+        
+        // Add pulse effect only on hover
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            const icon = card.querySelector('.service-icon');
+            
+            card.addEventListener('mouseenter', () => {
+                icon.classList.add('pulse');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                icon.classList.remove('pulse');
+            });
+        });
+    }
+}); 

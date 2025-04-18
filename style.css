@@ -244,9 +244,18 @@ section:first-of-type {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
 }
 
 .fade-in {
@@ -255,10 +264,6 @@ section:first-of-type {
 
 .slide-up {
     animation: slideUp 0.8s ease forwards;
-}
-
-.pulse {
-    animation: pulse 2s infinite;
 }
 
 /* New styles for contact section */
@@ -976,4 +981,45 @@ section:first-of-type {
         top: 10px;
         left: 10px;
     }
+}
+
+/* Add or modify the service icon styles */
+.service-card .service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: #fff;
+    font-size: 32px;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.service-card .service-icon i {
+    position: relative;
+    z-index: 2;
+}
+
+/* Make sure the pulse animation ONLY happens with the pulse class */
+.service-card .service-icon.pulse::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    z-index: 1;
+    animation: pulse 1.5s infinite;
+}
+
+/* Add hover effect for the service card */
+.service-card:hover .service-icon {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 } 

@@ -14,27 +14,219 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
+    <!-- Include script for header and footer -->
+    <script src="include.js"></script>
+    <style>
+        /* Add consistent variables */
+        :root {
+            --accent-primary: #b91421;
+            --accent-secondary: #091458;
+            --accent-gradient: linear-gradient(135deg, #b91421, #091458);
+            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
+            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
+            --card-border-radius: 10px;
+        }
+        
+        /* Match hero styling with index.html */
+        .portfolio-hero {
+            background: var(--grey-gradient-1) !important;
+            padding-top: 180px !important;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
+            animation: shimmer 15s infinite alternate;
+            pointer-events: none;
+        }
+        
+        .portfolio-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .portfolio-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--white), #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .portfolio-hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--light-grey);
+        }
+        
+        /* Consistent section styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
+            opacity: 0.3;
+        }
+        
+        /* Portfolio nav styling consistency */
+        .portfolio-nav-item {
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-nav-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: var(--accent-primary);
+        }
+        
+        .portfolio-nav-item.active {
+            background: var(--accent-gradient);
+            color: var(--white);
+        }
+        
+        /* Fix genre cards styling */
+        .genre-card {
+            transition: all 0.3s ease;
+            border-radius: var(--card-border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .genre-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Ensure buttons have consistent styling */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn.primary {
+            background: var(--accent-gradient);
+            color: var(--white);
+        }
+        
+        .btn.secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--accent-secondary);
+        }
+        
+        .btn.secondary:hover {
+            background-color: var(--accent-secondary);
+            color: var(--white);
+        }
+        
+        /* Category styling */
+        .portfolio-categories {
+            background: var(--grey-gradient-2);
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .category-header h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .category-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .category-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--light-grey);
+            text-align: center;
+        }
+        
+        /* Responsive fixes */
+        @media screen and (max-width: 768px) {
+            .portfolio-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .genre-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-nav-items {
+                flex-wrap: wrap;
+            }
+            
+            .portfolio-nav-item {
+                margin: 5px;
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <h1>GREY <span>18</span> STUDIO</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
+    <!-- Header Container -->
+    <div id="header-container"></div>
 
     <section class="portfolio-hero">
         <div class="portfolio-hero-content">
@@ -393,53 +585,12 @@
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>GREY <span>18</span> STUDIO</h2>
-                <p>Bringing your creative vision to life with technical precision</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="equipment.html">Equipment</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="index.html#services">Photography</a></li>
-                        <li><a href="index.html#services">Sound Recording</a></li>
-                        <li><a href="index.html#services">Dubbing</a></li>
-                        <li><a href="index.html#services">Audio Mixing & Mastering</a></li>
-                        <li><a href="index.html#services">Photo & Video Editing</a></li>
-                        <li><a href="index.html#services">Colour Grading</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span data-current-year>2023</span> Grey 18 Studio. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
 
     <script src="script.js"></script>
     <script src="portfolio-standalone.js"></script>
+    <script src="portfolio.js"></script>
     
     <!-- Force visibility of portfolio items -->
     <style id="force-portfolio-visibility">
@@ -456,7 +607,6 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
             gap: 30px !important;
             width: 100% !important;
-            visibility: visible !important;
         }
         
         /* Force genre cards to be visible */
