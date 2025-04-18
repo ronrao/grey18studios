@@ -1154,13 +1154,14 @@
                 gap: 30px;
             }
             
-            .stats {
+            /* Remove the conflicting stats styles */
+            /*.stats {
                 justify-content: center;
             }
             
             .stat {
                 flex: 0 0 calc(33.33% - 20px);
-            }
+            }*/
             
             .testimonial-item .testimonial-content {
                 padding: 20px;
@@ -1193,7 +1194,8 @@
                 margin-bottom: 20px;
             }
             
-            .stats {
+            /* Remove conflicting stats styles */
+            /*.stats {
                 flex-direction: column;
                 align-items: center;
                 gap: 20px;
@@ -1202,7 +1204,7 @@
             .stat {
                 flex: 0 0 100%;
                 max-width: 200px;
-            }
+            }*/
             
             .count {
                 font-size: 2.2rem;
@@ -1462,6 +1464,49 @@
             .nav-link, .expanded-close, .social-icon, .logo, 
             .scroll-down, .menu-toggle, input, select, textarea {
                 cursor: auto !important;
+            }
+        }
+
+        /* Media query for contact grid in footer.html */
+        @media (max-width: 768px) {
+            /* This targets the Contact content - 2 column grid in footer.html */
+            #footer-contact div[style*="display: grid; grid-template-columns: 1fr 1fr"] {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Stats section responsive behavior */
+        /* Row layout for tablet */
+        @media (min-width: 577px) and (max-width: 768px) {
+            .stats {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .stat {
+                flex: 1 1 33.33%;
+                max-width: calc(33.33% - 10px);
+                min-width: initial;
+            }
+        }
+        
+        /* Column layout for mobile */
+        @media (max-width: 576px) {
+            .stats {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .stat {
+                flex: 0 0 100%;
+                width: 100%;
+                max-width: 200px;
             }
         }
     </style>
