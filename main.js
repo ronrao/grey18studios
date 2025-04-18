@@ -3,9 +3,6 @@
  * Handles core functionality and imports
  */
 
-// Import styles
-import './style.css';
-
 // Initialize when the DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
   'use strict';

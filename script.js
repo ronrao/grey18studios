@@ -35,10 +35,15 @@ let lastMouseX = 0;
 let lastMouseY = 0;
 let lastScrollTop = 0;
 
-// Event Listeners
-window.addEventListener('scroll', handleScrollWithoutAnimation);
-window.addEventListener('load', initializeWebsiteWithoutAnimations);
-menuToggle.addEventListener('click', toggleMenu);
+// Event Listeners with null checks
+if (window) {
+  window.addEventListener('scroll', handleScrollWithoutAnimation);
+  window.addEventListener('load', initializeWebsiteWithoutAnimations);
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener('click', toggleMenu);
+}
 
 // Debug logging for navigation
 console.log('Initializing navigation links...');
@@ -69,32 +74,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Make sure all navigation links work properly
 document.addEventListener('DOMContentLoaded', function() {
-  // Fix navigation links
-  document.querySelectorAll('a[href], .btn, button').forEach(function(element) {
-    element.addEventListener('click', function(e) {
-      const href = element.getAttribute('href');
-      if (href && href.includes('.html')) {
-        window.location.href = href;
-      }
-      
-      // If it's in a link but doesn't have its own href
-      if (!href) {
-        const parentLink = element.closest('a[href]');
-        if (parentLink) {
-          const parentHref = parentLink.getAttribute('href');
-          if (parentHref && parentHref.includes('.html')) {
-            window.location.href = parentHref;
+  try {
+    // Fix navigation links
+    document.querySelectorAll('a[href], .btn, button').forEach(function(element) {
+      if (element) {
+        element.addEventListener('click', function(e) {
+          const href = element.getAttribute('href');
+          if (href && href.includes('.html')) {
+            window.location.href = href;
           }
-        }
+          
+          // If it's in a link but doesn't have its own href
+          if (!href) {
+            const parentLink = element.closest('a[href]');
+            if (parentLink) {
+              const parentHref = parentLink.getAttribute('href');
+              if (parentHref && parentHref.includes('.html')) {
+                window.location.href = parentHref;
+              }
+            }
+          }
+        });
       }
     });
-  });
+  } catch (error) {
+    console.error('Error in navigation setup:', error);
+  }
 });
 
 // Position the cursor exactly at the click point
 document.addEventListener('DOMContentLoaded', function() {
   const cursor = document.querySelector('.cursor');
-  if (!cursor) return;
+  if (!cursor) {
+    console.log('Custom cursor element not found');
+    return;
+  }
   
   // Set cursor position to match where the user is clicking
   document.addEventListener('mousemove', function(e) {
@@ -351,10 +365,12 @@ function initializeWebsiteWithoutAnimations() {
 // Simplified scroll handler without animations
 function handleScrollWithoutAnimation() {
   // Sticky header functionality without animations
-  if (window.scrollY > 50) {
-    header.classList.add('sticky');
-  } else {
-    header.classList.remove('sticky');
+  if (header) {
+    if (window.scrollY > 50) {
+      header.classList.add('sticky');
+    } else {
+      header.classList.remove('sticky');
+    }
   }
 }
 
