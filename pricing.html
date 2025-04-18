@@ -17,35 +17,92 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
     
+    <!-- Include script for header and footer -->
+    <script src="include.js"></script>
+    
     <style>
-        /* Fix visibility issues while matching home page color scheme */
+        /* Add consistent variables */
+        :root {
+            --accent-primary: #b91421;
+            --accent-secondary: #091458;
+            --accent-gradient: linear-gradient(135deg, #b91421, #091458);
+            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
+            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
+            --card-border-radius: 10px;
+        }
         
+        /* Fix visibility issues while matching home page color scheme */
         body {
             background: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
         }
         
         .pricing-hero {
-            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
-                url('assets/images/pricing-hero.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 180px 0 100px;
+            background: var(--grey-gradient-1);
+            padding-top: 180px !important;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            color: white;
+            position: relative;
         }
         
-        .pricing-hero h1 {
+        .pricing-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
+            animation: shimmer 15s infinite alternate;
+            pointer-events: none;
+        }
+        
+        .pricing-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .pricing-hero-content h1 {
             font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--white), #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .pricing-hero p {
+        .pricing-hero-content p {
             font-size: 1.2rem;
-            color: white;
+            margin-bottom: 2rem;
+            color: var(--light-grey);
+        }
+        
+        /* Consistent section styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
+            opacity: 0.3;
         }
         
         .pricing-section {
+            background: var(--grey-gradient-2);
             padding: 80px 0;
         }
         
@@ -66,7 +123,7 @@
         }
         
         .pricing-toggle-text.active {
-            color: #4ecdc4;
+            color: var(--accent-primary);
         }
         
         .toggle-switch {
@@ -107,7 +164,7 @@
         }
         
         input:checked + .slider {
-            background-color: #4ecdc4;
+            background: var(--accent-gradient);
         }
         
         input:checked + .slider:before {
@@ -123,30 +180,31 @@
         }
         
         .pricing-card {
-            background-color: rgba(51, 51, 51, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(37, 37, 37, 0.7);
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             color: #f5f5f5;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid var(--accent-primary);
         }
         
         .pricing-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         
         .pricing-header {
-            background-color: #444444;
+            background-color: rgba(37, 37, 37, 0.9);
             color: #f5f5f5;
             padding: 25px 20px;
             text-align: center;
         }
         
         .popular .pricing-header {
-            background-color: #4ecdc4;
-            color: #333333;
+            background-color: var(--accent-primary);
+            color: var(--white);
         }
         
         .pricing-tier {
@@ -162,7 +220,7 @@
         }
         
         .popular .pricing-amount {
-            color: #333333;
+            color: var(--white);
         }
         
         .pricing-period {
@@ -193,129 +251,93 @@
         }
         
         .feature-list i {
-            color: #4ecdc4;
+            color: var(--accent-primary);
             margin-right: 10px;
         }
         
-        .pricing-cta {
-            text-align: center;
-            padding: 0 20px 30px;
-        }
-        
-        .pricing-cta .btn {
-            background-color: #4ecdc4;
-            color: #333333;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
+        /* Ensure buttons have consistent styling */
+        .btn {
             display: inline-block;
-            width: 100%;
-        }
-        
-        .pricing-cta .btn:hover {
-            opacity: 0.9;
-        }
-        
-        .popular {
-            position: relative;
-            overflow: visible;
-        }
-        
-        .popular-badge {
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            background-color: #ff6b6b;
-            color: #f5f5f5;
-            transform: rotate(45deg);
-            padding: 5px 40px;
-            font-size: 0.9rem;
+            padding: 12px 30px;
+            border-radius: 50px;
             font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-        
-        /* Fix FAQ section visibility */
-        .custom-quote {
-            background-color: rgba(51, 51, 51, 0.7);
-            padding: 60px 0;
-            text-align: center;
-            margin-top: 80px;
-            color: #f5f5f5;
-        }
-        
-        .custom-quote h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #f5f5f5;
-        }
-        
-        .custom-quote p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: #f5f5f5;
-        }
-        
-        .faq-section {
-            padding: 80px 0;
-            background-color: transparent;
-        }
-        
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             cursor: pointer;
-        }
-        
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            padding: 10px 0;
-            color: #f5f5f5;
-        }
-        
-        .faq-question i {
-            transition: transform 0.3s;
-            color: #4ecdc4;
-        }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            height: 0;
+            border: none;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            transition: height 0.3s;
-            color: #f5f5f5;
         }
         
-        .faq-item.active .faq-answer {
-            height: auto;
-            padding-top: 10px;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .section-header h2, 
+        .btn.primary {
+            background-color: var(--accent-primary);
+            color: var(--white);
+        }
+        
+        .btn.secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--accent-secondary);
+        }
+        
+        .btn.secondary:hover {
+            background-color: var(--accent-secondary);
+            color: var(--white);
+        }
+        
+        /* Section header styling consistent with index.html */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
         .section-header p {
-            color: #f5f5f5;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--light-grey);
+            text-align: center;
         }
         
-        @media (max-width: 768px) {
-            .pricing-grid, .faq-grid {
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .pricing-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .pricing-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -323,60 +345,17 @@
                 flex-direction: column;
                 gap: 15px;
             }
-            
-            .pricing-hero {
-                padding: 150px 0 70px;
-            }
-            
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Fix for pricing plans display */
-        .pricing-plans {
-            padding: 10px;
-        }
-        
-        .pricing-plans.monthly-retainer {
-            display: none;
-        }
-        
-        /* Ensure no default cursor appears anywhere */
-        * {
-            cursor: auto;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <h1>GREY <span>18</span> STUDIO</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="pricing.html" class="active">Pricing</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
     <section class="pricing-hero">
-        <div class="container">
-            <div class="pricing-hero-content">
-                <h1>Clear & Flexible Pricing</h1>
-                <p>Choose the pricing plan that works best for your project or ongoing needs</p>
-            </div>
+        <div class="pricing-hero-content">
+            <h1>Our Pricing Plans</h1>
+            <p>Flexible options to meet your audio & visual production needs</p>
         </div>
     </section>
     
@@ -640,53 +619,9 @@
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>GREY <span>18</span> STUDIO</h2>
-                <p>Bringing your creative vision to life with technical precision</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="equipment.html">Equipment</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="index.html#services">Photography</a></li>
-                        <li><a href="index.html#services">Sound Recording</a></li>
-                        <li><a href="index.html#services">Dubbing</a></li>
-                        <li><a href="index.html#services">Audio Mixing & Mastering</a></li>
-                        <li><a href="index.html#services">Photo & Video Editing</a></li>
-                        <li><a href="index.html#services">Colour Grading</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Grey 18 Studio. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <!-- Scripts -->
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
     <script src="script.js"></script>
 </body>
 </html> 

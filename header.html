@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Header specific styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 100px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background-color: rgba(51, 51, 51, 0.95); /* Grey background with transparency */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #b91421; /* Brand primary color */
+        }
+
+        header.sticky {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 15px 100px;
+            background-color: rgba(51, 51, 51, 0.98); /* Slightly more opaque when sticky */
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .logo h1 span {
+            color: #b91421; /* Brand primary color */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #b91421; /* Brand primary color */
+            bottom: -5px;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #b91421; /* Brand primary color */
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: #b91421; /* Brand primary color */
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 991px) {
+            header {
+                padding: 20px 50px;
+            }
+            
+            header.sticky {
+                padding: 15px 50px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background-color: rgba(40, 40, 40, 0.95);
+                padding-top: 80px;
+                transition: all 0.3s ease;
+                z-index: 999;
+                backdrop-filter: blur(10px);
+                border-left: 2px solid #b91421; /* Brand primary color */
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                z-index: 1000;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            header {
+                padding: 15px 30px;
+            }
+            
+            header.sticky {
+                padding: 10px 30px;
+            }
+            
+            .logo h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>GREY <span>18</span> STUDIO</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="index.html#services" id="nav-services">Services</a></li>
+                <li><a href="portfolio.html" id="nav-portfolio">Portfolio</a></li>
+                <li><a href="about.html" id="nav-about">About</a></li>
+                <li><a href="equipment.html" id="nav-equipment">Equipment</a></li>
+                <li><a href="pricing.html" id="nav-pricing">Pricing</a></li>
+                <li><a href="#footer-contact" id="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <script>
+        // Add active class to current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            let currentNavItem;
+            
+            switch(currentPage) {
+                case 'index.html':
+                    currentNavItem = document.getElementById('nav-home');
+                    break;
+                case 'portfolio.html':
+                    currentNavItem = document.getElementById('nav-portfolio');
+                    break;
+                case 'about.html':
+                    currentNavItem = document.getElementById('nav-about');
+                    break;
+                case 'equipment.html':
+                    currentNavItem = document.getElementById('nav-equipment');
+                    break;
+                case 'pricing.html':
+                    currentNavItem = document.getElementById('nav-pricing');
+                    break;
+                case 'contact.html':
+                    currentNavItem = document.getElementById('nav-contact');
+                    break;
+                default:
+                    if (currentPage === '' || currentPage === '/') {
+                        currentNavItem = document.getElementById('nav-home');
+                    }
+            }
+            
+            if (currentNavItem) {
+                currentNavItem.classList.add('active');
+            }
+            
+            // Toggle menu for mobile
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+            });
+            
+            // Add sticky header on scroll
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                header.classList.toggle('sticky', window.scrollY > 100);
+            });
+        });
+    </script>
+</body>
+</html> 
