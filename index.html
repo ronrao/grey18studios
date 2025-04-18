@@ -39,23 +39,107 @@
         /* Custom cursor with camera icon */
         .custom-cursor {
             position: fixed;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--accent-primary);
+            width: 36px;
+            height: 28px;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            background-image: linear-gradient(to bottom, #666, #444);
             pointer-events: none;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            opacity: 0.7;
+            opacity: 1;
             transform: translate(-50%, -50%);
             display: none;
+            border: 2px solid #888;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
         }
         
         .custom-cursor i {
-            color: #000000;
-            font-size: 16px;
+            color: #ff5252;
+            font-size: 12px;
+            margin-top: -2px;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+        }
+
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            width: 14px;
+            height: 6px;
+            background-color: #555;
+            border-radius: 4px 4px 0 0;
+            border-top: 1px solid #999;
+            border-left: 1px solid #888;
+            border-right: 1px solid #888;
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            background-color: #ff3333;
+            box-shadow: 0 0 3px #ff6666;
+            border-radius: 50%;
+            animation: blink 4s infinite;
+        }
+
+        /* Lens element */
+        .custom-cursor .lens {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #444 0%, #666 40%, #444 100%);
+            border: 1px solid #777;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.5), 0 0 2px rgba(255,255,255,0.3);
+        }
+
+        /* Shutter button */
+        .custom-cursor .shutter {
+            position: absolute;
+            top: -4px;
+            right: 8px;
+            width: 8px;
+            height: 4px;
+            background-color: #aaa;
+            border-radius: 2px;
+            border: 1px solid #bbb;
+        }
+        
+        /* Camera flash animation on cursor only */
+        .cursor-flash {
+            filter: brightness(4) contrast(1.5);
+        }
+        
+        /* Hide default cursor everywhere */
+        html, body, a, button, .btn, .service-card, .portfolio-item, 
+        .nav-link, .expanded-close, .social-icon, .logo, 
+        .scroll-down, .menu-toggle, input, select, textarea {
+            cursor: none !important;
+        }
+
+        /* Remove full-screen camera flash */
+        .camera-flash {
+            display: none;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            5% { opacity: 1; }
+            10% { opacity: 0.3; }
+            95% { opacity: 0.3; }
+            100% { opacity: 0.3; }
         }
         
         @media (min-width: 992px) {
@@ -102,6 +186,7 @@
             position: relative;
             z-index: 2;
             max-width: 1000px;
+            width: 90%;
             text-align: center;
             padding: 0 20px;
             margin: 0 auto;
@@ -194,18 +279,30 @@
             overflow: visible;
             margin-bottom: 30px;
             line-height: 1.3;
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: #fff;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             display: inline-block;
+            max-width: 100%;
+            width: 100%;
+        }
+        
+        .animated-heading br {
+            display: block;
+            content: "";
+            margin: 10px 0;
         }
         
         .animated-heading .word {
             display: inline-block;
             opacity: 1;
             transform: translateY(0) rotate(0);
-            margin-right: 8px;
+            margin-right: 10px;
             white-space: nowrap;
+        }
+        
+        .animated-heading .word:last-child {
+            margin-right: 0;
         }
         
         .animated-text {
@@ -224,7 +321,7 @@
             perspective: 1000px;
             transform-style: preserve-3d;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -289,8 +386,8 @@
         /* Updated hero buttons with animation */
         .hero .cta-buttons {
             display: flex;
-            gap: 20px;
-            margin-top: 0;
+            gap: 30px;
+            margin-top: 20px;
             justify-content: center;
             opacity: 1;
             transform: translateY(0);
@@ -300,7 +397,7 @@
         .hero .btn {
             position: relative;
             overflow: hidden;
-            padding: 18px 38px;
+            padding: 20px 42px;
             border-radius: 50px;
             font-weight: 700;
             letter-spacing: 1.5px;
@@ -312,6 +409,7 @@
             justify-content: center;
             gap: 10px;
             transform: translateZ(20px);
+            min-width: 200px;
         }
         
         .hero .btn-icon {
@@ -649,11 +747,11 @@
         .about-video {
             flex: 1 1 45%;
             min-width: 300px;
+            max-width: 600px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
-            background-color: #000;
         }
         
         .about-video .video-container {
@@ -682,18 +780,33 @@
         .about-text {
             flex: 1 1 45%;
             min-width: 300px;
+            max-width: 600px;
         }
         
-        @media (max-width: 992px) {
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .about-video, .about-text {
-                flex: 1 1 100%;
-                max-width: 650px;
-                margin: 0 auto;
-            }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .stat {
+            flex: 1 1 auto;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .count {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 5px;
+        }
+        
+        .label {
+            font-size: 0.9rem;
+            color: var(--light-grey);
         }
         
         /* Styles for video fallback and play button */
@@ -734,9 +847,9 @@
         
         /* Additional testimonial fixes - Specific to this section only */
         .testimonial-item .testimonial-content {
-            height: 380px;
+            height: auto;
             min-height: 380px;
-            max-height: 380px;
+            max-height: none;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -780,13 +893,394 @@
             font-size: 0.9rem;
             opacity: 0.8;
         }
+
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-video, .about-text {
+                flex: 1 1 100%;
+                max-width: 650px;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .hero .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .animated-text {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Container responsive adjustments */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+        }
+        
+        /* About section improvements */
+        .about-preview {
+            background-color: var(--primary-dark);
+            padding: 80px 0;
+            color: var(--white);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-video {
+            flex: 1 1 45%;
+            min-width: 300px;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .about-text {
+            flex: 1 1 45%;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .stat {
+            flex: 1 1 auto;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .count {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 5px;
+        }
+        
+        .label {
+            font-size: 0.9rem;
+            color: var(--light-grey);
+        }
+        
+        /* Testimonials section improvements */
+        .testimonials {
+            background-color: var(--primary-dark);
+            padding: 80px 0;
+            color: var(--white);
+        }
+        
+        .unified-testimonial-slider {
+            position: relative;
+            min-height: 450px;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 15px;
+        }
+        
+        .testimonial-item .testimonial-content {
+            height: auto;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+        }
+        
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        /* Additional responsive styles for key sections */
+        @media (max-width: 1200px) {
+            .animated-heading {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .animated-heading {
+                font-size: 3.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-video, .about-text {
+                flex: 1 1 100%;
+                max-width: 650px;
+                margin: 0 auto;
+            }
+            
+            .testimonial-item .testimonial-content {
+                min-height: 420px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .animated-heading {
+                font-size: 2.8rem;
+                line-height: 1.25;
+            }
+            
+            .hero-content {
+                width: 95%;
+            }
+            
+            .about-content {
+                gap: 30px;
+            }
+            
+            .stats {
+                justify-content: center;
+            }
+            
+            .stat {
+                flex: 0 0 calc(33.33% - 20px);
+            }
+            
+            .testimonial-item .testimonial-content {
+                padding: 20px;
+                min-height: 450px;
+            }
+            
+            .testimonial-text p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .animated-heading {
+                font-size: 2.5rem;
+            }
+            
+            .hero .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .hero .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .animated-text {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .stat {
+                flex: 0 0 100%;
+                max-width: 200px;
+            }
+            
+            .count {
+                font-size: 2.2rem;
+            }
+            
+            .unified-testimonial-slider {
+                padding: 0 5px;
+            }
+            
+            .testimonial-item .testimonial-content {
+                min-height: 480px;
+                padding: 15px;
+            }
+            
+            .testimonial-controls {
+                gap: 10px;
+            }
+            
+            .testimonial-text p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Footer and Contact Form Responsive Styles */
+        #footer-contact {
+            padding: 50px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1 1 300px;
+            max-width: 350px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            flex: 2 1 600px;
+        }
+        
+        .footer-column {
+            flex: 1 1 200px;
+            min-width: 200px;
+        }
+        
+        .contact-form {
+            flex: 1 1 400px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            flex: 1 1 400px;
+            max-width: 500px;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-teal);
+            background-color: rgba(40, 40, 40, 0.5);
+            color: var(--white);
+            font-family: var(--body-font);
+        }
+        
+        @media (max-width: 992px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                margin-bottom: 20px;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-info, .contact-form {
+                max-width: 650px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .footer-column {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .contact-item i {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 10px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Custom cursor with camera icon -->
     <div class="custom-cursor">
+        <div class="lens"></div>
+        <div class="shutter"></div>
         <i class="fas fa-camera"></i>
     </div>
+    
+    <!-- Camera flash effect -->
+    <div class="camera-flash"></div>
     
     <!-- Page Transition Overlay -->
     <div class="page-transition-overlay"></div>
@@ -814,6 +1308,7 @@
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0s;">Creating</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.15s;">Exceptional</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.3s;">Audio</span>
+                        <br>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.45s;">&</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.6s;">Visual</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.75s;">Experiences</span>
@@ -832,10 +1327,6 @@
                         <a href="#footer-contact" class="btn secondary">
                             <span class="btn-text">Get In Touch</span>
                             <span class="btn-icon"><i class="fas fa-envelope"></i></span>
-                        </a>
-                        <a href="portfolio.html" class="btn secondary">
-                            <span class="btn-text">View Portfolio</span>
-                            <span class="btn-icon"><i class="fas fa-images"></i></span>
                         </a>
                     </div>
                 </div>
@@ -1516,12 +2007,21 @@
     <!-- Main Scripts -->
     <script src="script.js" defer></script>
     <script src="main.js" defer></script>
+    <script src="assets/audio/camera-shutter.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Custom cursor functionality
             const cursor = document.querySelector('.custom-cursor');
+            const cameraFlash = document.querySelector('.camera-flash');
             
             if (cursor) {
+                // Force cursor visibility immediately
+                cursor.style.display = 'flex';
+                
+                // Set initial position (center of screen)
+                cursor.style.left = window.innerWidth / 2 + 'px';
+                cursor.style.top = window.innerHeight / 2 + 'px';
+                
                 document.addEventListener('mousemove', function(e) {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
@@ -1534,6 +2034,32 @@
                 
                 document.addEventListener('mouseover', function() {
                     cursor.style.display = 'flex';
+                });
+                
+                // Ensure cursor is visible on touch devices where possible
+                document.addEventListener('touchstart', function() {
+                    // Force the cursor to be visible on touch start
+                    cursor.style.display = 'flex';
+                });
+                
+                // Camera click effect
+                document.addEventListener('click', function() {
+                    // Camera shutter animation - make cursor smaller with a slight rotation
+                    cursor.style.transform = 'translate(-50%, -50%) scale(0.85) rotate(-3deg)';
+                    
+                    // Play camera shutter sound
+                    if (window.cameraShutterSound) {
+                        window.cameraShutterSound.play();
+                    }
+                    
+                    // Flash effect on cursor only - with enhanced brightness
+                    cursor.classList.add('cursor-flash');
+                    
+                    // Reset cursor after animation
+                    setTimeout(() => {
+                        cursor.style.transform = 'translate(-50%, -50%)';
+                        cursor.classList.remove('cursor-flash');
+                    }, 200);
                 });
             }
             
