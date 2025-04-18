@@ -45,13 +45,12 @@
             background-color: #3a3a3a;
             background-image: linear-gradient(to bottom, #666, #444);
             pointer-events: none;
-            display: flex;
+            display: none; /* Hidden by default */
             align-items: center;
             justify-content: center;
             z-index: 9999;
             opacity: 1;
             transform: translate(-50%, -50%);
-            display: none;
             border: 2px solid #888;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
             transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
@@ -120,13 +119,23 @@
         /* Camera flash animation on cursor only */
         .cursor-flash {
             filter: brightness(4) contrast(1.5);
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+            animation: cursorFlash 0.2s ease forwards;
         }
         
-        /* Hide default cursor everywhere */
-        html, body, a, button, .btn, .service-card, .portfolio-item, 
-        .nav-link, .expanded-close, .social-icon, .logo, 
-        .scroll-down, .menu-toggle, input, select, textarea {
-            cursor: none !important;
+        @keyframes cursorFlash {
+            0% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(1) contrast(1); }
+            50% { transform: translate(-50%, -50%) scale(0.95); filter: brightness(5) contrast(1.7); box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.9), 0 0 40px 15px rgba(255, 255, 255, 0.7); }
+            100% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(4) contrast(1.5); }
+        }
+        
+        /* Hide default cursor on desktop only */
+        @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
         }
 
         /* Remove full-screen camera flash */
@@ -142,9 +151,25 @@
             100% { opacity: 0.3; }
         }
         
+        /* Only show cursor on larger screens, not on touch devices */
         @media (min-width: 992px) {
             .custom-cursor {
                 display: flex;
+            }
+            
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
+        }
+        
+        /* For touch devices, use normal cursor */
+        @media (max-width: 991px) {
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: auto !important;
             }
         }
         
@@ -158,6 +183,68 @@
             justify-content: center;
             background-color: #111111;
             overflow: hidden;
+        }
+        
+        /* Mobile adjustments for hero section - start lower */
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 60px; /* Adds space at the top on mobile */
+            }
+            
+            /* Make h1 tag wider */
+            .animated-heading {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 15px;
+            }
+            
+            /* Fix scroll down overlapping issue */
+            .scroll-down {
+                bottom: 80px !important; /* Move up to avoid overlapping buttons */
+            }
+            
+            /* Center align the about section button */
+            .about-text .btn {
+                display: block;
+                margin: 0 auto;
+                max-width: 200px;
+                text-align: center;
+            }
+        }
+        
+        /* Mobile header improvements */
+        @media (max-width: 768px) {
+            header .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+            
+            header nav ul {
+                display: flex;
+                align-items: center;
+            }
+            
+            /* Ensure logo and nav items stay on the same line */
+            header .logo {
+                margin-right: auto;
+            }
+            
+            header .menu-toggle {
+                margin-left: auto;
+            }
+        }
+        
+        /* Contact form adjustment for mobile */
+        @media (max-width: 768px) {
+            #footer-contact .contact-content {
+                flex-direction: column;
+            }
+            
+            .contact-form, .contact-info {
+                width: 100%;
+                max-width: 100%;
+            }
         }
         
         .hero-bg-video {
@@ -1269,6 +1356,114 @@
                 gap: 10px;
             }
         }
+
+        /* Additional Mobile & Tablet Responsive Fixes */
+        /* These styles will apply to header which is loaded via include.js */
+        
+        /* Header styles for mobile */
+        @media (max-width: 768px) {
+            header {
+                width: 100%;
+                padding: 15px 0;
+            }
+            
+            header .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 15px !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            header .logo {
+                margin-right: 0;
+            }
+            
+            header .logo img {
+                max-height: 50px;
+            }
+            
+            header nav {
+                display: flex;
+                align-items: center;
+            }
+            
+            header .nav-links {
+                display: none;
+            }
+            
+            header .menu-toggle {
+                display: block;
+                margin-left: 0;
+            }
+            
+            /* Make Get In Touch links and contact form stack on mobile */
+            #footer-contact .contact-content {
+                flex-direction: column !important;
+            }
+            
+            .contact-form, .contact-info {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Tablet specific styles */
+        @media (min-width: 769px) and (max-width: 991px) {
+            header .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 20px;
+            }
+            
+            .about-text .btn {
+                margin: 0 auto;
+                display: block;
+                max-width: 200px;
+            }
+            
+            /* Adjust hero content for tablets */
+            .hero {
+                padding-top: 30px;
+            }
+            
+            .animated-heading {
+                font-size: 3.2rem;
+            }
+            
+            .scroll-down {
+                bottom: 50px;
+            }
+        }
+        
+        /* Cursor visibility controls */
+        /* Only show cursor on larger screens with mouse input, not on touch devices */
+        @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+            .custom-cursor {
+                display: flex !important;
+            }
+            
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
+        }
+        
+        /* For touch devices and smaller screens, use normal cursor */
+        @media (max-width: 991px), (hover: none) {
+            .custom-cursor {
+                display: none !important;
+            }
+            
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2014,14 +2209,19 @@
             const cursor = document.querySelector('.custom-cursor');
             const cameraFlash = document.querySelector('.camera-flash');
             
-            if (cursor) {
-                // Force cursor visibility immediately
-                cursor.style.display = 'flex';
-                
+            // Check if device is touch-enabled
+            const isTouchDevice = ('ontouchstart' in window) || 
+                                  (navigator.maxTouchPoints > 0) || 
+                                  (navigator.msMaxTouchPoints > 0) ||
+                                  window.matchMedia("(hover: none)").matches;
+            
+            // Only use custom camera cursor on desktop (non-touch devices)
+            if (cursor && !isTouchDevice && window.innerWidth >= 992) {
                 // Set initial position (center of screen)
                 cursor.style.left = window.innerWidth / 2 + 'px';
                 cursor.style.top = window.innerHeight / 2 + 'px';
                 
+                // Custom cursor functionality for desktop only
                 document.addEventListener('mousemove', function(e) {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
@@ -2036,31 +2236,30 @@
                     cursor.style.display = 'flex';
                 });
                 
-                // Ensure cursor is visible on touch devices where possible
-                document.addEventListener('touchstart', function() {
-                    // Force the cursor to be visible on touch start
-                    cursor.style.display = 'flex';
-                });
-                
-                // Camera click effect
-                document.addEventListener('click', function() {
-                    // Camera shutter animation - make cursor smaller with a slight rotation
-                    cursor.style.transform = 'translate(-50%, -50%) scale(0.85) rotate(-3deg)';
+                // Enhanced camera click effect on desktop only
+                document.addEventListener('click', function(e) {
+                    // Reset any ongoing animation
+                    cursor.classList.remove('cursor-flash');
                     
-                    // Play camera shutter sound
+                    // Force a reflow to restart animation
+                    void cursor.offsetWidth;
+                    
+                    // Apply the animation class for camera flash effect
+                    cursor.classList.add('cursor-flash');
+                    
+                    // Play camera shutter sound if available
                     if (window.cameraShutterSound) {
                         window.cameraShutterSound.play();
                     }
                     
-                    // Flash effect on cursor only - with enhanced brightness
-                    cursor.classList.add('cursor-flash');
-                    
-                    // Reset cursor after animation
+                    // Remove the animation class after it completes
                     setTimeout(() => {
-                        cursor.style.transform = 'translate(-50%, -50%)';
                         cursor.classList.remove('cursor-flash');
                     }, 200);
                 });
+            } else if (cursor) {
+                // Make sure cursor is hidden on mobile/touch devices
+                cursor.style.display = 'none';
             }
             
             // Add animation delay to each word in hero title
@@ -2086,11 +2285,11 @@
                 });
             }
             
-            // Add 3D tilt effect to hero content
+            // Add 3D tilt effect to hero content - only on non-touch devices
             const tiltBox = document.querySelector('.tilt-box');
             const hero = document.querySelector('.hero');
             
-            if (tiltBox && hero && window.innerWidth > 768) {
+            if (tiltBox && hero && window.innerWidth > 768 && !isTouchDevice) {
                 hero.addEventListener('mousemove', function(e) {
                     const xPos = (e.clientX / window.innerWidth - 0.5) * 20;
                     const yPos = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -2178,24 +2377,65 @@
                 });
             }
             
-            // Add parallax effect to hero shapes
+            // Add parallax effect to hero shapes - only on non-touch devices
             const heroShapes = document.querySelectorAll('.shape');
-            window.addEventListener('mousemove', function(e) {
-                const x = e.clientX / window.innerWidth;
-                const y = e.clientY / window.innerHeight;
-                
-                heroShapes.forEach(shape => {
-                    const speed = shape.classList.contains('shape-1') ? 20 : 
-                                shape.classList.contains('shape-2') ? 40 : 
-                                shape.classList.contains('shape-3') ? 30 :
-                                shape.classList.contains('shape-4') ? 25 : 35;
+            if (!isTouchDevice) {
+                window.addEventListener('mousemove', function(e) {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
                     
-                    const xOffset = (x - 0.5) * speed;
-                    const yOffset = (y - 0.5) * speed;
-                    
-                    shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                    heroShapes.forEach(shape => {
+                        const speed = shape.classList.contains('shape-1') ? 20 : 
+                                    shape.classList.contains('shape-2') ? 40 : 
+                                    shape.classList.contains('shape-3') ? 30 :
+                                    shape.classList.contains('shape-4') ? 25 : 35;
+                        
+                        const xOffset = (x - 0.5) * speed;
+                        const yOffset = (y - 0.5) * speed;
+                        
+                        shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                    });
                 });
-            });
+            }
+            
+            // Mobile-specific adjustments
+            if (window.innerWidth <= 768) {
+                // Center-align About Us button
+                const aboutBtn = document.querySelector('.about-text .btn');
+                if (aboutBtn) {
+                    aboutBtn.style.margin = '0 auto';
+                    aboutBtn.style.display = 'block';
+                    aboutBtn.style.textAlign = 'center';
+                }
+                
+                // Adjust scroll down button position to avoid overlap
+                if (scrollDownBtn) {
+                    scrollDownBtn.style.bottom = '80px';
+                }
+                
+                // Enhance heading width
+                const heading = document.querySelector('.animated-heading');
+                if (heading) {
+                    heading.style.width = '100%';
+                    heading.style.maxWidth = '100%';
+                    heading.style.padding = '0 15px';
+                }
+                
+                // Contact form layout adjustment
+                const contactContent = document.querySelector('#footer-contact .contact-content');
+                if (contactContent) {
+                    contactContent.style.flexDirection = 'column';
+                }
+                
+                const contactForm = document.querySelector('.contact-form');
+                const contactInfo = document.querySelector('.contact-info');
+                if (contactForm && contactInfo) {
+                    contactForm.style.width = '100%';
+                    contactForm.style.maxWidth = '100%';
+                    contactInfo.style.width = '100%';
+                    contactInfo.style.maxWidth = '100%';
+                }
+            }
         });
     </script>
 </body>
