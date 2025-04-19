@@ -53,47 +53,118 @@
                     <!-- Contact details column -->
                     <div style="display: flex; flex-direction: column; gap: 25px;">
                         <!-- Contact item - Location -->
-                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 6px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;" 
+                            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.2)';" 
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #b91421, #d61a2b); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3); transition: transform 0.3s ease;" 
+                                onmouseover="this.style.transform='rotate(10deg)';" 
+                                onmouseout="this.style.transform='rotate(0deg)';">
                                 <i class="fas fa-map-marker-alt" style="color: #ffffff; font-size: 20px;"></i>
                             </div>
-                            <div>
-                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Visit Us</h3>
-                                <p style="color: #cccccc; font-size: 1rem;">123 Studio Street, City, Country</p>
+                            <div style="flex-grow: 1;">
+                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center;">
+                                    <span>Visit Us</span>
+                                    <span style="display: inline-block; margin-left: 10px; width: 30px; height: 2px; background: linear-gradient(to right, #b91421, transparent);"></span>
+                                </h3>
+                                <a href="https://maps.app.goo.gl/krFhLnDZemJoPNu37" target="_blank" 
+                                    style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 10px 20px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 10px; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                    onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                    onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='translateX(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';">
+                                    <i class="fas fa-map-marker-alt" style="margin-right: 8px; color: #b91421;"></i>
+                                    Grey18 Audio & Visual Studio<br>
+                                    <span style="margin-left: 25px; font-size: 0.9em;">19th main, 3rd Cross Rd, BTM 2nd Stage,</span><br>
+                                    <span style="margin-left: 25px; font-size: 0.9em;">BTM Layout, Bengaluru, Karnataka 560076</span>
+                                </a>
+                                <div style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 5px;">
+                                    <i class="fas fa-clock" style="margin-right: 8px; color: #b91421;"></i>
+                                    Monday - Friday: 9:00 AM - 6:00 PM
+                                </div>
                             </div>
                         </div>
                         
                         <!-- Contact item - Phone -->
-                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 6px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;" 
+                            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.2)';" 
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #b91421, #d61a2b); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3); transition: transform 0.3s ease;" 
+                                onmouseover="this.style.transform='rotate(10deg)';" 
+                                onmouseout="this.style.transform='rotate(0deg)';">
                                 <i class="fas fa-phone-alt" style="color: #ffffff; font-size: 20px;"></i>
                             </div>
-                            <div>
-                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Call Us</h3>
-                                <p style="color: #cccccc; font-size: 1rem;">Main: +123 456 7890</p>
-                                <p style="color: #cccccc; font-size: 1rem;">Booking: +123 987 6543</p>
+                            <div style="flex-grow: 1;">
+                                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="font-size: 1.2rem; color: #ffffff; margin: 0; display: flex; align-items: center;">
+                                        <span>Call Us</span>
+                                        <span style="display: inline-block; margin-left: 10px; width: 30px; height: 2px; background: linear-gradient(to right, #b91421, transparent);"></span>
+                                    </h3>
+                                </div>
+                                
+                                <div style="margin-bottom: 10px; display: flex; align-items: center; flex-wrap: wrap;">
+                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">Main Line:</div> -->
+                                    <a href="tel:+919845031965" 
+                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
+                                        <i class="fas fa-phone-alt" style="margin-right: 8px; color: #b91421;"></i>
+                                        +91 9845031965
+                                    </a>
+                                </div>
+                                
+                                <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">Bookings:</div> -->
+                                    <a href="tel:+919845017930" 
+                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
+                                        <i class="fas fa-phone-alt" style="margin-right: 8px; color: #b91421;"></i>
+                                        +91 9845017930
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         
                         <!-- Contact item - Email -->
-                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
+                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 6px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;" 
+                            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.2)';" 
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #b91421, #d61a2b); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3); transition: transform 0.3s ease;" 
+                                onmouseover="this.style.transform='rotate(10deg)';" 
+                                onmouseout="this.style.transform='rotate(0deg)';">
                                 <i class="fas fa-envelope" style="color: #ffffff; font-size: 20px;"></i>
                             </div>
-                            <div>
-                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Email Us</h3>
-                                <p style="color: #cccccc; font-size: 1rem;">info@grey18studio.com</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Contact item - Hours -->
-                        <div style="background: rgba(40, 40, 40, 0.7); padding: 25px; border-radius: 10px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div style="width: 50px; height: 50px; background: #b91421; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);">
-                                <i class="fas fa-clock" style="color: #ffffff; font-size: 20px;"></i>
-                            </div>
-                            <div>
-                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 10px;">Working Hours</h3>
-                                <p style="color: #cccccc; font-size: 1rem;">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <div style="flex-grow: 1;">
+                                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="font-size: 1.2rem; color: #ffffff; margin: 0; display: flex; align-items: center;">
+                                        <span>Email Us</span>
+                                        <span style="display: inline-block; margin-left: 10px; width: 30px; height: 2px; background: linear-gradient(to right, #b91421, transparent);"></span>
+                                    </h3>
+                                </div>
+                                
+                                <div style="margin-bottom: 10px; display: flex; align-items: center; flex-wrap: wrap;">
+                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">General:</div> -->
+                                    <a href="mailto:grey18studios@gmail.com" 
+                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
+                                        <i class="fas fa-envelope" style="margin-right: 8px; color: #b91421;"></i>
+                                        grey18studios@gmail.com
+                                    </a>
+                                </div>
+                                
+                                <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">Info:</div> -->
+                                    <a href="mailto:info@grey18studios.in" 
+                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
+                                        <i class="fas fa-envelope" style="margin-right: 8px; color: #b91421;"></i>
+                                        info@grey18studios.in
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,6 +180,37 @@
                             const successMsg = document.getElementById('success-message');
                             const errorMsg = document.getElementById('error-message');
                             
+                            // Validate form fields
+                            const name = form.name ? form.name.value.trim() : '';
+                            const email = form.email ? form.email.value.trim() : '';
+                            const service = form.service ? form.service.value.trim() : '';
+                            const message = form.message ? form.message.value.trim() : '';
+                            
+                            // Check for empty required fields
+                            if (!name || !email || !service || !message) {
+                                if (errorMsg) {
+                                    errorMsg.textContent = 'Please fill in all required fields.';
+                                    errorMsg.style.display = 'block';
+                                }
+                                if (successMsg) {
+                                    successMsg.style.display = 'none';
+                                }
+                                return false;
+                            }
+                            
+                            // Email validation
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(email)) {
+                                if (errorMsg) {
+                                    errorMsg.textContent = 'Please enter a valid email address.';
+                                    errorMsg.style.display = 'block';
+                                }
+                                if (successMsg) {
+                                    successMsg.style.display = 'none';
+                                }
+                                return false;
+                            }
+                            
                             // Show sending state
                             if (btnText) {
                                 btnText.innerHTML = '<i class=\'fas fa-spinner fa-spin\'></i> Sending...';
@@ -122,11 +224,11 @@
                             
                             // Get form data
                             const formData = {
-                                name: form.name ? form.name.value : '',
-                                email: form.email ? form.email.value : '',
-                                mobile: form.mobile ? form.mobile.value : '',
-                                service: form.service ? form.service.value : '',
-                                message: form.message ? form.message.value : ''
+                                name: name,
+                                email: email,
+                                mobile: form.mobile ? form.mobile.value.trim() : '',
+                                service: service,
+                                message: message
                             };
                             
                             console.log('Sending email with EmailJS');
@@ -160,6 +262,7 @@
                                             btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
                                         }
                                         if (errorMsg) {
+                                            errorMsg.textContent = 'Oops! Something went wrong. Please try again or contact us directly.';
                                             errorMsg.style.display = 'block';
                                         }
                                         
@@ -287,34 +390,24 @@
     // Set current year
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Test EmailJS connection
-    (function testEmailJSConnection() {
-        console.log("Testing EmailJS connection...");
+    // Initialize EmailJS without test sending
+    (function() {
+        console.log("Initializing EmailJS...");
         
         if (typeof emailjs === 'undefined') {
             console.error("EmailJS SDK not loaded");
             return;
         }
         
-        const testParams = {
-            test_param: "Connection Test"
-        };
-        
-        // Check if we can connect to the EmailJS service
-        emailjs.send('service_6ixt3mz', 'template_pfju2vd', testParams)
-            .then(
-                function(response) {
-                    console.log("EmailJS TEST CONNECTION SUCCESSFUL", response);
-                    console.log("Your EmailJS credentials are working correctly");
-                },
-                function(error) {
-                    console.error("EmailJS TEST CONNECTION FAILED", error);
-                    console.error("There might be an issue with your EmailJS credentials");
-                    console.error("Service ID: service_6ixt3mz");
-                    console.error("Template ID: template_pfju2vd");
-                    console.error("User ID: 1C70BfGW-WtXy38dl");
-                }
-            );
+        try {
+            // Just log the initialization without sending test emails
+            console.log("EmailJS configured with:");
+            console.log("Service ID: service_6ixt3mz");
+            console.log("Template ID: template_pfju2vd");
+            console.log("User ID: 1C70BfGW-WtXy38dl");
+        } catch (error) {
+            console.error("Error with EmailJS:", error);
+        }
     })();
     </script>
 </body>
