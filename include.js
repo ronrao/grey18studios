@@ -41,6 +41,29 @@ async function includeHTML(elementId, filePath) {
             const footerContent = tempContainer.querySelector('footer');
             if (footerContent) {
                 document.getElementById(elementId).innerHTML = footerContent.outerHTML;
+                
+                // After footer is loaded, check if we need to scroll to footer-contact
+                setTimeout(() => {
+                    // Check for hash in URL to handle direct links
+                    if (window.location.hash === '#footer-contact') {
+                        const footerContact = document.querySelector('#footer-contact');
+                        if (footerContact) {
+                            footerContact.scrollIntoView({behavior: 'smooth'});
+                        }
+                    }
+                    
+                    // Update all footer-contact links to use smooth scrolling
+                    const footerContactLinks = document.querySelectorAll('a[href="#footer-contact"]');
+                    footerContactLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const footerContact = document.querySelector('#footer-contact');
+                            if (footerContact) {
+                                footerContact.scrollIntoView({behavior: 'smooth'});
+                            }
+                        });
+                    });
+                }, 100);
             }
         }
     } catch (error) {

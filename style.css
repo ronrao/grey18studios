@@ -992,16 +992,18 @@ section:first-of-type {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--accent-gradient);
+    background: var(--accent-primary);
     color: #fff;
     font-size: 32px;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 }
 
 .service-card .service-icon i {
     position: relative;
     z-index: 2;
+    color: var(--white);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
 }
 
 /* Make sure the pulse animation ONLY happens with the pulse class */
@@ -1013,13 +1015,29 @@ section:first-of-type {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: var(--accent-gradient);
+    background: var(--accent-primary);
     z-index: 1;
     animation: pulse 1.5s infinite;
 }
 
 /* Add hover effect for the service card */
 .service-card:hover .service-icon {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px) scale(1.1);
+    box-shadow: 0 15px 25px rgba(185, 20, 33, 0.3);
+    background: var(--accent-secondary);
+}
+
+.service-card:hover .service-icon i {
+    transform: rotateY(180deg);
+    color: var(--white);
+}
+
+/* Make sure the footer-contact element has proper scroll positioning */
+#footer-contact {
+    scroll-margin-top: 80px;
+}
+
+/* Enhance scroll behavior site-wide */
+html {
+    scroll-behavior: smooth;
 } 
