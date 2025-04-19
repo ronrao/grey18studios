@@ -47,11 +47,13 @@
         .team-section {
             padding: 80px 0;
             background-color: transparent;
+            position: relative;
+            overflow: hidden;
         }
         
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-top: 40px;
         }
@@ -63,16 +65,33 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             border-left: 3px solid var(--accent-primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
         
         .team-member:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
+
+        .team-member:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member:hover:after {
+            opacity: 1;
+        }
         
         .member-info {
             padding: 20px;
             color: var(--white);
+            position: relative;
+            z-index: 2;
         }
         
         /* Increase text visibility */
@@ -88,16 +107,43 @@
             color: var(--white);
         }
         
+        .social-links {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 15px;
+        }
+        
         .social-links a {
             color: var(--white);
-            margin-right: 10px;
+            margin-right: 15px;
             font-size: 18px;
             transition: transform 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.2);
         }
         
         .social-links a:hover {
-            color: var(--accent-primary);
-            transform: translateY(-3px);
+            color: var(--white);
+            transform: translateY(-3px) scale(1.1);
+            background-color: var(--accent-primary);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(185, 20, 33, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(185, 20, 33, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(185, 20, 33, 0);
+            }
         }
         
         /* For proper layout in certain areas, we need to maintain left alignment */
@@ -121,6 +167,7 @@
             background-color: rgba(37, 37, 37, 0.7);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             border-bottom: 3px solid var(--accent-primary);
+            transform: translateY(0);
         }
 
         .value-card:hover {
@@ -131,6 +178,8 @@
         /* Fix for any remaining color issues */
         .about-story, .values-section {
             background: var(--grey-gradient-2) !important;
+            position: relative;
+            overflow: hidden;
         }
         
         .value-icon {
@@ -144,10 +193,37 @@
             justify-content: center;
             border-radius: 50%;
             font-size: 28px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .value-icon:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            z-index: -1;
+            animation: spin 10s linear infinite;
+            border-radius: 40%;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
         
         .value-card h3, .value-card p {
             color: var(--white);
+            position: relative;
+            z-index: 1;
         }
         
         /* Force team section visibility */
@@ -169,18 +245,89 @@
             justify-content: center;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
-        
-        .about-hero::before {
-            content: '';
+
+        /* Hero background shapes */
+        .hero-shapes {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
-            animation: shimmer 15s infinite alternate;
+            z-index: 1;
+            overflow: hidden;
             pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            opacity: 0.15;
+            filter: blur(30px);
+            animation: floatAnimation 8s infinite alternate ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -150px;
+            background: var(--accent-primary);
+            animation-duration: 10s;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -80px;
+            right: -100px;
+            background: #4e42d4;
+            animation-duration: 8s;
+            animation-delay: 1s;
+        }
+        
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: 15%;
+            background: #e83c3c;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+        
+        .shape-4 {
+            width: 180px;
+            height: 180px;
+            bottom: 30%;
+            left: 10%;
+            background: #2c92d5;
+            animation-duration: 15s;
+            animation-delay: 0.5s;
+        }
+        
+        .shape-5 {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 20%;
+            background: #ffac33;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+        
+        @keyframes floatAnimation {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(20px, 20px) scale(1.1);
+            }
+            100% {
+                transform: translate(-20px, -10px) scale(0.9);
+            }
         }
         
         .about-hero-content {
@@ -199,12 +346,38 @@
             background: linear-gradient(to right, var(--white), #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .about-hero-content p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             color: var(--light-grey);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Animated heading with words */
+        .animated-heading {
+            position: relative;
+            overflow: visible;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-size: 3.8rem;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .animated-heading .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) rotate(0);
+            margin-right: 10px;
+            white-space: nowrap;
         }
         
         /* Consistent section styling */
@@ -277,6 +450,8 @@
             padding: 20px;
             border-radius: var(--card-border-radius);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateY(30px);
+            opacity: 0;
         }
         
         .stat:hover {
@@ -297,7 +472,301 @@
             font-size: 0.9rem;
             color: var(--light-grey);
         }
-        
+
+        /* Animation classes */
+        .animate-on-scroll {
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .animate-on-scroll.fade-in {
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        .animate-on-scroll.fade-in.animated {
+            animation: fadeIn 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+
+        .animate-on-scroll.fade-up {
+            transform: translate3d(0, 30px, 0);
+        }
+
+        .animate-on-scroll.fade-up.animated {
+            animation: fadeInUp 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+
+        .animate-on-scroll.fade-down {
+            transform: translate3d(0, -30px, 0);
+        }
+
+        .animate-on-scroll.fade-down.animated {
+            animation: fadeInDown 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+
+        .animate-on-scroll.zoom-in {
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+
+        .animate-on-scroll.zoom-in.animated {
+            animation: zoomIn 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 30px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -30px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale3d(0.8, 0.8, 0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        /* Story section animation */
+        .story-image, .story-text {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .story-content {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .story-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            height: 500px;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.2);
+        }
+
+        .parallax-wrapper {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .parallax-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-image: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04');
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(185, 20, 33, 0.3), rgba(9, 20, 88, 0.3));
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        /* Scroll animation for horizontal section switching */
+        .story-sections {
+            position: relative;
+            width: 100%;
+            overflow: visible;
+            min-height: 300px;
+            margin-bottom: 20px;
+            transition: height 0.3s ease;
+        }
+
+        .story-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .story-section.active {
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .story-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .story-section.active p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-section.active p:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .story-section.active p:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .story-section.active p:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        /* Add some space below section indicator to prevent content jump when switching */
+        .section-indicator {
+            display: flex;
+            justify-content: flex-start;
+            margin: 20px 0 30px;
+            gap: 10px;
+        }
+
+        .section-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-dot.active {
+            background-color: var(--accent-primary);
+            transform: scale(1.3);
+        }
+
+        .section-dot:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .section-dot:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .section-dot:hover:before {
+            opacity: 1;
+        }
+
+        .section-dot .ripple {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 1s ease-out;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .story-section h2 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .story-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transition: width 0.8s ease;
+        }
+
+        .story-section.active h2::after {
+            width: 100%;
+        }
+
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             .about-hero-content h1 {
@@ -324,6 +793,28 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-cta {
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
     </style>
 </head>
 <body>
@@ -331,30 +822,60 @@
     <div id="header-container"></div>
 
     <section class="about-hero">
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
         <div class="about-hero-content">
-            <h1>About Grey 18 Studio</h1>
+            <h1 class="animated-heading">
+                <span class="word">About</span>
+                <span class="word">Grey</span>
+                <span class="word">18</span>
+                <span class="word">Studio</span>
+            </h1>
             <p>Meet the team behind our creative audio & visual production</p>
         </div>
     </section>
 
-    <section class="about-story">
+    <section class="about-story animate-on-scroll">
         <div class="container">
+            <div class="section-header animate-on-scroll fade-up">
+                <h2>Our Journey</h2>
+                <p>Discover how we've evolved into a premier audio & visual studio</p>
+            </div>
             <div class="story-content">
-                <div class="story-image">
-                    <img src="https://source.unsplash.com/random/800x600/?studio" alt="Grey 18 Studio">
+                <div class="story-image animate-on-scroll fade-right">
+                    <div class="parallax-wrapper">
+                        <div class="parallax-image"></div>
+                        <div class="image-overlay"></div>
+                    </div>
                 </div>
-                <div class="story-text">
-                    <h2>Our Story</h2>
-                    <p>Grey 18 Studio was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
-                    <p>The name "Grey 18" represents our philosophy of finding the perfect balance between technical precision and creative expression. Grey symbolizes the neutral middle ground where art and technology meet, while 18 represents the studio's founding principle of achieving excellence in all aspects of production.</p>
-                    <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
+                <div class="story-text animate-on-scroll fade-left">
+                    <div class="story-sections">
+                        <div class="section-indicator">
+                            <div class="section-dot active" data-section="story"></div>
+                            <div class="section-dot" data-section="approach"></div>
+                        </div>
+                        
+                        <div class="story-section active" id="section-story">
+                            <h2>Our Story</h2>
+                            <p>Grey 18 Studio was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
+                            <p>The name "Grey 18" represents our philosophy of finding the perfect balance between technical precision and creative expression. Grey symbolizes the neutral middle ground where art and technology meet, while 18 represents the studio's founding principle of achieving excellence in all aspects of production.</p>
+                            <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
+                        </div>
+                        
+                        <div class="story-section" id="section-approach">
+                            <h2>Our Approach</h2>
+                            <p>At Grey 18, we take a collaborative approach to every project. We work closely with our clients to understand their vision and bring it to life with our expertise and state-of-the-art equipment.</p>
+                            <p>Whether you're looking for photography, audio recording, dubbing, or post-production services, we have the skills and facilities to make your project shine. Our team is committed to delivering the highest quality results on time and within budget.</p>
+                            <p>Our process begins with a detailed consultation to understand your needs, followed by meticulous planning and execution. Throughout the project, we maintain open communication and provide regular updates to ensure your vision is being realized.</p>
+                        </div>
+                    </div>
                     
-                    <h2>Our Approach</h2>
-                    <p>At Grey 18, we take a collaborative approach to every project. We work closely with our clients to understand their vision and bring it to life with our expertise and state-of-the-art equipment.</p>
-                    <p>Whether you're looking for photography, audio recording, dubbing, or post-production services, we have the skills and facilities to make your project shine. Our team is committed to delivering the highest quality results on time and within budget.</p>
-                    <p>Our process begins with a detailed consultation to understand your needs, followed by meticulous planning and execution. Throughout the project, we maintain open communication and provide regular updates to ensure your vision is being realized.</p>
-                    
-                    <div class="about-stats">
+                    <div class="about-stats" style="margin-top: 40px;">
                         <div class="stat">
                             <span class="count">350+</span>
                             <span class="label">Projects Completed</span>
@@ -374,93 +895,72 @@
     </section>
 
     <section class="team-section">
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-on-scroll fade-up">
                 <h2>Meet Our Team</h2>
                 <p>The creative minds behind Grey 18 Studio</p>
             </div>
             
             <div class="team-grid">
-                <div class="team-member">
+                <div class="team-member animate-on-scroll fade-up">
                     <div class="member-image">
-                        <img src="https://source.unsplash.com/random/400x500/?portrait-man" alt="Founder & Creative Director">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Founder & Creative Director">
                     </div>
                     <div class="member-info">
                         <h3>David Mitchell</h3>
                         <p class="position">Founder & Creative Director</p>
                         <p class="description">With over 15 years of experience in photography and film production, David leads our creative team with a passion for visual storytelling.</p>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="team-member">
+                <div class="team-member animate-on-scroll fade-up" data-delay="200">
                     <div class="member-image">
-                        <img src="https://source.unsplash.com/random/400x500/?portrait-woman" alt="Audio Engineer">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Audio Engineer">
                     </div>
                     <div class="member-info">
                         <h3>Sarah Johnson</h3>
                         <p class="position">Lead Audio Engineer</p>
                         <p class="description">Sarah is our sound wizard with a background in music production and a ear for perfection. She oversees all audio recording and mixing projects.</p>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://source.unsplash.com/random/400x500/?portrait-man-2" alt="Post-Production Specialist">
-                    </div>
-                    <div class="member-info">
-                        <h3>Michael Chen</h3>
-                        <p class="position">Post-Production Specialist</p>
-                        <p class="description">Michael's attention to detail and technical expertise in video editing and color grading brings our visual projects to the next level.</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://source.unsplash.com/random/400x500/?portrait-woman-2" alt="Voice-Over Artist">
-                    </div>
-                    <div class="member-info">
-                        <h3>Emily Rodriguez</h3>
-                        <p class="position">Voice-Over Director</p>
-                        <p class="description">Emily leads our dubbing and voice-over department with her multilingual skills and extensive experience in voice acting and direction.</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="team-cta">
+            <div class="team-cta animate-on-scroll fade-up">
                 <a href="contact.html" class="btn primary">Join Our Team</a>
             </div>
         </div>
     </section>
 
     <section class="values-section">
+        <div class="hero-shapes">
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-on-scroll fade-up">
                 <h2>Our Values</h2>
                 <p>The principles that guide our work and creativity</p>
             </div>
             
             <div class="values-grid">
-                <div class="value-card">
+                <div class="value-card animate-on-scroll fade-up">
                     <div class="value-icon">
                         <i class="fas fa-star"></i>
                     </div>
@@ -468,7 +968,7 @@
                     <p>We strive for excellence in every project, no matter how big or small. Quality is at the heart of everything we do.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card animate-on-scroll fade-up" data-delay="100">
                     <div class="value-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
@@ -476,7 +976,7 @@
                     <p>We bring fresh ideas and innovative approaches to every project, pushing the boundaries of what's possible.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card animate-on-scroll fade-up" data-delay="200">
                     <div class="value-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -484,7 +984,7 @@
                     <p>We believe in the power of collaboration – both within our team and with our clients – to create the best possible results.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card animate-on-scroll fade-up" data-delay="300">
                     <div class="value-icon">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -501,5 +1001,440 @@
     <!-- Main Scripts -->
     <script src="script.js"></script>
     <script src="main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero animation
+            const heroWords = document.querySelectorAll('.animated-heading .word');
+            const heroContent = document.querySelector('.about-hero-content p');
+            
+            gsap.set(heroWords, { opacity: 0, y: 30 });
+            gsap.set(heroContent, { opacity: 0, y: 30 });
+            
+            const heroTl = gsap.timeline({ delay: 0.5 });
+            
+            heroTl.to(heroWords, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                stagger: 0.15,
+                ease: "power3.out"
+            }).to(heroContent, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power3.out"
+            }, "-=0.4");
+            
+            // Initialize animations for elements with data-animation
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            function checkAnimation() {
+                animatedElements.forEach(element => {
+                    const delay = parseInt(element.dataset.delay) || 0;
+                    
+                    if (isElementInViewport(element)) {
+                        setTimeout(() => {
+                            if (element.classList.contains('fade-up')) {
+                                gsap.to(element, {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.7,
+                                    ease: "power3.out"
+                                });
+                            } else if (element.classList.contains('fade-right')) {
+                                gsap.to(element, {
+                                    opacity: 1,
+                                    x: 0,
+                                    duration: 0.7,
+                                    ease: "power3.out"
+                                });
+                            } else if (element.classList.contains('fade-left')) {
+                                gsap.to(element, {
+                                    opacity: 1,
+                                    x: 0,
+                                    duration: 0.7,
+                                    ease: "power3.out"
+                                });
+                            } else {
+                                gsap.to(element, {
+                                    opacity: 1,
+                                    duration: 0.7,
+                                    ease: "power3.out"
+                                });
+                            }
+                        }, delay);
+                    }
+                });
+            }
+            
+            // Initialize GSAP ScrollTrigger for section headers
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Parallax effect for the story image
+            const parallaxImage = document.querySelector('.parallax-image');
+            if (parallaxImage) {
+                gsap.to(parallaxImage, {
+                    yPercent: -20,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".story-image",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            }
+            
+            // Section switching in the story section
+            const sectionDots = document.querySelectorAll('.section-dot');
+            const storySections = document.querySelectorAll('.story-section');
+            const sectionsContainer = document.querySelector('.story-sections');
+            
+            // Set height of sections container based on active section
+            function updateSectionsContainerHeight() {
+                const activeSection = document.querySelector('.story-section.active');
+                if (activeSection && sectionsContainer) {
+                    // Add a small buffer to prevent text cutting off
+                    const height = activeSection.offsetHeight + 20;
+                    sectionsContainer.style.height = height + 'px';
+                    
+                    // Force a reflow to ensure the height is applied
+                    void sectionsContainer.offsetHeight;
+                }
+            }
+            
+            // Initialize the container height
+            setTimeout(() => {
+                updateSectionsContainerHeight();
+                
+                // Animate the initial active section
+                const initialActiveSection = document.querySelector('.story-section.active');
+                if (initialActiveSection) {
+                    gsap.fromTo(initialActiveSection,
+                        { opacity: 0, y: 20 },
+                        { 
+                            opacity: 1, 
+                            y: 0, 
+                            duration: 0.6,
+                            ease: "power2.out",
+                            onComplete: () => {
+                                animateSectionParagraphs(initialActiveSection);
+                            }
+                        }
+                    );
+                }
+            }, 100);
+            
+            // Update height on window resize
+            window.addEventListener('resize', updateSectionsContainerHeight);
+            
+            // Function to animate paragraphs when section becomes active
+            function animateSectionParagraphs(section) {
+                const paragraphs = section.querySelectorAll('p');
+                gsap.fromTo(paragraphs, 
+                    { opacity: 0, y: 15 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.5,
+                        stagger: 0.1,
+                        ease: "power2.out",
+                        onComplete: updateSectionsContainerHeight
+                    }
+                );
+            }
+            
+            sectionDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    const targetSection = document.getElementById(`section-${sectionId}`);
+                    
+                    if (!targetSection) return;
+                    
+                    // Don't do anything if clicking on already active section
+                    if (targetSection.classList.contains('active')) return;
+                    
+                    // Remove active class from all dots
+                    sectionDots.forEach(d => d.classList.remove('active'));
+                    
+                    // Add active class to the clicked dot
+                    this.classList.add('active');
+                    
+                    // Create a ripple effect on the dot
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    this.appendChild(ripple);
+                    
+                    // Remove the ripple element after animation completes
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                    
+                    // Fade out current active section
+                    const currentActiveSection = document.querySelector('.story-section.active');
+                    
+                    if (currentActiveSection) {
+                        gsap.to(currentActiveSection, {
+                            opacity: 0,
+                            y: -20,
+                            duration: 0.3,
+                            ease: "power2.in",
+                            onComplete: () => {
+                                currentActiveSection.classList.remove('active');
+                                currentActiveSection.style.visibility = 'hidden';
+                                
+                                // Fade in new section
+                                targetSection.classList.add('active');
+                                targetSection.style.visibility = 'visible';
+                                
+                                gsap.fromTo(targetSection, 
+                                    { opacity: 0, y: 20 },
+                                    { 
+                                        opacity: 1, 
+                                        y: 0, 
+                                        duration: 0.4,
+                                        ease: "power2.out",
+                                        onComplete: () => {
+                                            animateSectionParagraphs(targetSection);
+                                            updateSectionsContainerHeight();
+                                        }
+                                    }
+                                );
+                            }
+                        });
+                    } else {
+                        // If no active section, just show the target
+                        targetSection.classList.add('active');
+                        targetSection.style.visibility = 'visible';
+                        
+                        gsap.fromTo(targetSection, 
+                            { opacity: 0, y: 20 },
+                            { 
+                                opacity: 1, 
+                                y: 0, 
+                                duration: 0.4,
+                                ease: "power2.out",
+                                onComplete: () => {
+                                    animateSectionParagraphs(targetSection);
+                                    updateSectionsContainerHeight();
+                                }
+                            }
+                        );
+                    }
+                });
+            });
+            
+            // Auto switch between sections every 8 seconds
+            let currentSectionIndex = 0;
+            let sectionInterval;
+            
+            function switchSection() {
+                currentSectionIndex = (currentSectionIndex + 1) % sectionDots.length;
+                sectionDots[currentSectionIndex].click();
+            }
+            
+            // Start auto switching after 5 seconds
+            const autoSwitchTimer = setTimeout(() => {
+                sectionInterval = setInterval(switchSection, 8000);
+                
+                // Clear interval when user interacts with section dots
+                sectionDots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        clearInterval(sectionInterval);
+                        
+                        // Update current index based on which dot was clicked
+                        sectionDots.forEach((d, index) => {
+                            if (d === dot) currentSectionIndex = index;
+                        });
+                        
+                        // Restart interval after user interaction
+                        sectionInterval = setInterval(switchSection, 8000);
+                    });
+                });
+            }, 5000);
+            
+            // Make sure to update sections container height when window loads
+            window.addEventListener('load', () => {
+                updateSectionsContainerHeight();
+                
+                // Also update when fonts have loaded
+                if (document.fonts) {
+                    document.fonts.ready.then(updateSectionsContainerHeight);
+                }
+            });
+            
+            // Animate stats section
+            const stats = document.querySelectorAll('.stat');
+            const statsTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.about-stats',
+                    start: 'top 75%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            statsTimeline.to(stats, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+            
+            // Animate the stat numbers
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.innerHTML = Math.floor(progress * (end - start) + start) + (element.innerText.includes('+') ? '+' : '');
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+            
+            const statCounts = document.querySelectorAll('.count');
+            
+            statCounts.forEach((statCount) => {
+                const endValue = parseInt(statCount.textContent);
+                statCount.textContent = '0';
+                
+                ScrollTrigger.create({
+                    trigger: statCount,
+                    start: 'top 80%',
+                    onEnter: () => animateValue(statCount, 0, endValue, 2000),
+                    once: true
+                });
+            });
+            
+            // Animate social media icons on hover
+            const socialIcons = document.querySelectorAll('.social-icon');
+            
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    gsap.to(icon, {
+                        y: -5,
+                        scale: 1.1,
+                        duration: 0.2,
+                        ease: "power2.out"
+                    });
+                });
+                
+                icon.addEventListener('mouseleave', () => {
+                    gsap.to(icon, {
+                        y: 0,
+                        scale: 1,
+                        duration: 0.2,
+                        ease: "power2.out"
+                    });
+                });
+            });
+            
+            // Add mouse movement parallax effect to story image
+            const storyImage = document.querySelector('.story-image');
+            if (storyImage) {
+                storyImage.addEventListener('mousemove', function(e) {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    
+                    const parallaxEl = this.querySelector('.parallax-image');
+                    if (parallaxEl) {
+                        gsap.to(parallaxEl, {
+                            x: xAxis,
+                            y: yAxis,
+                            duration: 1,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+                
+                storyImage.addEventListener('mouseleave', function() {
+                    const parallaxEl = this.querySelector('.parallax-image');
+                    if (parallaxEl) {
+                        gsap.to(parallaxEl, {
+                            x: 0,
+                            y: 0,
+                            duration: 1,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+            }
+            
+            // Check for animations on scroll
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation(); // Check on page load
+
+            // Add scroll trigger animations for story section
+            ScrollTrigger.create({
+                trigger: '.story-image',
+                start: 'top 80%',
+                onEnter: () => {
+                    gsap.to('.story-image', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                    
+                    // Add subtle parallax effect to the image on scroll
+                    gsap.to('.parallax-image', {
+                        yPercent: -20,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: ".story-image",
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 1
+                        }
+                    });
+                },
+                once: true
+            });
+            
+            // Add some subtle scroll effects for the story content
+            gsap.to('.story-content', {
+                scrollTrigger: {
+                    trigger: '.story-content',
+                    start: 'top 70%',
+                    end: 'bottom 20%',
+                    scrub: 1
+                },
+                backgroundPosition: "center 30%",
+                ease: "none"
+            });
+            
+            // Add animated highlights to key text elements
+            const highlightElements = document.querySelectorAll('.story-section h2');
+            highlightElements.forEach(element => {
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: 'top 80%',
+                    onEnter: () => {
+                        gsap.fromTo(element,
+                            { backgroundSize: '0% 100%', backgroundPosition: 'left' },
+                            { 
+                                backgroundSize: '100% 100%',
+                                duration: 1,
+                                ease: "power2.out"
+                            }
+                        );
+                    },
+                    once: true
+                });
+            });
+        });
+    </script>
 </body>
 </html> 
