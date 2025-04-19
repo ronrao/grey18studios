@@ -269,16 +269,6 @@
             z-index: 1;
         }
         
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1000px;
-            width: 90%;
-            text-align: center;
-            padding: 0 20px;
-            margin: 0 auto;
-        }
-        
         /* Hero shapes */
         .hero-shapes {
             position: absolute;
@@ -288,6 +278,19 @@
             height: 100%;
             z-index: 1;
             overflow: hidden;
+            pointer-events: none; /* Add this to prevent interaction blocking */
+        }
+        
+        /* Hero content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            width: 90%;
+            text-align: center;
+            padding: 0 20px;
+            margin: 0 auto;
+            pointer-events: auto; /* Ensure content receives pointer events */
         }
         
         .shape {
@@ -425,7 +428,7 @@
         .scroll-down {
             position: absolute;
             bottom: 30px;
-            left: 50%;
+            left: calc(50% - 42px);
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
@@ -1509,6 +1512,180 @@
                 max-width: 200px;
             }
         }
+        
+        /* Custom cursor with camera icon */
+        .custom-cursor {
+            position: fixed;
+            width: 36px;
+            height: 28px;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            background-image: linear-gradient(to bottom, #666, #444);
+            pointer-events: none;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            border: 2px solid #888;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+        
+        /* Service expanded view enhancements */
+        .service-expanded-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 9000;
+            display: none;
+            opacity: 0;
+            overflow-y: hidden; /* Changed from auto to hidden to prevent double scroll */
+            padding: 0; /* Removed padding */
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .service-expanded-view.active {
+            opacity: 1;
+        }
+        
+        .expanded-content {
+            max-width: 1100px;
+            margin: 30px auto 40px;
+            padding: 40px;
+            border-radius: 15px;
+            background-color: rgba(30, 30, 30, 0.7);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            position: relative;
+            overflow-y: auto; /* Only this element should scroll */
+            max-height: calc(100vh - 80px); /* Set max height to enable scrolling */
+        }
+        
+        .service-expanded-view.active .expanded-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .expanded-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(185, 20, 33, 0.2);
+            color: white;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .expanded-close i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .expanded-close:hover {
+            background-color: rgba(185, 20, 33, 0.6);
+            transform: scale(1.1);
+        }
+        
+        .expanded-close:hover i {
+            transform: rotate(90deg);
+        }
+        
+        .expanded-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .expanded-portfolio-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .expanded-portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .expanded-portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .expanded-portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .expanded-portfolio-caption {
+            padding: 15px;
+            background-color: rgba(20, 20, 20, 0.9);
+        }
+        
+        .expanded-portfolio-caption h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .expanded-portfolio-caption p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .view-all-btn {
+            margin-top: 35px;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .expanded-content {
+                padding: 30px 20px;
+                margin: 70px auto 30px;
+            }
+            
+            .expanded-portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .expanded-close {
+                top: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .expanded-content {
+                padding: 25px 15px;
+            }
+            
+            .expanded-portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1560,11 +1737,11 @@
                     </div>
                     
                     <div class="cta-buttons" style="opacity: 1; transform: translateY(0);">
-                        <a href="#services" class="btn primary">
+                        <a href="#services" class="btn primary services-btn">
                             <span class="btn-text">Our Services</span>
                             <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                         </a>
-                        <a href="#footer-contact" class="btn secondary">
+                        <a href="#footer-contact" class="btn secondary contact-btn">
                             <span class="btn-text">Get In Touch</span>
                             <span class="btn-icon"><i class="fas fa-envelope"></i></span>
                         </a>
@@ -1659,40 +1836,40 @@
 
     <!-- Service Expanded Views -->
     <div class="service-expanded-view" id="photography-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Photography Services</h2>
             <p class="expanded-description">Our professional photography services cover a wide range of needs, from portrait sessions to commercial product shoots and event coverage.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Photography Work</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder images - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?portrait" alt="Portrait Photography">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Portrait Photography">
                         <div class="expanded-portfolio-caption">
                             <h4>Portrait Session</h4>
                             <p>Professional studio portraits</p>
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?event" alt="Event Photography">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Event Photography">
                         <div class="expanded-portfolio-caption">
                             <h4>Corporate Event</h4>
                             <p>Professional event coverage</p>
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?product" alt="Product Photography">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Product Photography">
                         <div class="expanded-portfolio-caption">
                             <h4>Product Showcase</h4>
                             <p>Commercial product photography</p>
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?wedding" alt="Wedding Photography">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Wedding Photography">
                         <div class="expanded-portfolio-caption">
                             <h4>Wedding Collection</h4>
                             <p>Wedding day coverage</p>
@@ -1705,19 +1882,19 @@
     </div>
 
     <div class="service-expanded-view" id="sound-recording-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Sound Recording Services</h2>
             <p class="expanded-description">Our state-of-the-art recording studio provides the perfect environment for capturing vocals, instruments, and full bands with exceptional clarity and precision.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Recording Projects</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder content - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?recording-studio" alt="Vocal Recording">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Vocal Recording">
                         <div class="expanded-portfolio-caption">
                             <h4>Vocal Sessions</h4>
                             <p>Professional vocal recording</p>
@@ -1725,7 +1902,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?band" alt="Band Recording">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Band Recording">
                         <div class="expanded-portfolio-caption">
                             <h4>Band Recording</h4>
                             <p>Full band studio sessions</p>
@@ -1733,7 +1910,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?podcast" alt="Podcast Recording">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Podcast Recording">
                         <div class="expanded-portfolio-caption">
                             <h4>Podcast Production</h4>
                             <p>Professional podcast recording</p>
@@ -1741,7 +1918,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?orchestra" alt="Orchestral Recording">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Orchestral Recording">
                         <div class="expanded-portfolio-caption">
                             <h4>Orchestral Session</h4>
                             <p>Orchestral recording project</p>
@@ -1755,19 +1932,19 @@
     </div>
 
     <div class="service-expanded-view" id="dubbing-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Dubbing Services</h2>
             <p class="expanded-description">Our professional voice-over and dubbing services provide high-quality audio in multiple languages for films, commercials, animations, and more.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Dubbing Projects</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder content - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?voice-actor" alt="Commercial Dubbing">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Commercial Dubbing">
                         <div class="expanded-portfolio-caption">
                             <h4>Commercial Voice-Over</h4>
                             <p>Multi-language commercial dubbing</p>
@@ -1775,7 +1952,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?animation" alt="Animation Dubbing">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Animation Dubbing">
                         <div class="expanded-portfolio-caption">
                             <h4>Animation Project</h4>
                             <p>Character voice acting</p>
@@ -1783,7 +1960,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?documentary" alt="Documentary Narration">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Documentary Narration">
                         <div class="expanded-portfolio-caption">
                             <h4>Documentary Narration</h4>
                             <p>Professional narration services</p>
@@ -1791,7 +1968,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?film" alt="Film Dubbing">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Dubbing">
                         <div class="expanded-portfolio-caption">
                             <h4>Film Dubbing</h4>
                             <p>International film adaptation</p>
@@ -1805,19 +1982,19 @@
     </div>
 
     <div class="service-expanded-view" id="mixing-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Audio Mixing & Mastering Services</h2>
             <p class="expanded-description">Our expert mixing and mastering services ensure your audio projects sound professional, balanced, and ready for distribution on any platform.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Mixing & Mastering Projects</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder content - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?mixing-desk" alt="Album Mixing">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Album Mixing">
                         <div class="expanded-portfolio-caption">
                             <h4>Album Production</h4>
                             <p>Full album mixing and mastering</p>
@@ -1825,7 +2002,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?soundtrack" alt="Film Soundtrack">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Soundtrack">
                         <div class="expanded-portfolio-caption">
                             <h4>Film Soundtrack</h4>
                             <p>Cinematic audio production</p>
@@ -1833,7 +2010,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?ep" alt="EP Production">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="EP Production">
                         <div class="expanded-portfolio-caption">
                             <h4>EP Production</h4>
                             <p>Independent artist EP project</p>
@@ -1841,7 +2018,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?audio-post" alt="Post Production">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Post Production">
                         <div class="expanded-portfolio-caption">
                             <h4>Audio Post-Production</h4>
                             <p>TV show audio post-production</p>
@@ -1855,26 +2032,26 @@
     </div>
 
     <div class="service-expanded-view" id="editing-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Photo & Video Editing Services</h2>
             <p class="expanded-description">Our creative editing services enhance and transform your visual content, whether it's photo retouching or comprehensive video post-production.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Editing Projects</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder content - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?retouching" alt="Photo Retouching">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Retouching">
                         <div class="expanded-portfolio-caption">
                             <h4>Commercial Retouching</h4>
                             <p>Professional photo retouching</p>
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?video-editing" alt="Video Editing">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Video Editing">
                         <div class="expanded-portfolio-caption">
                             <h4>Commercial Edit</h4>
                             <p>TV commercial post-production</p>
@@ -1882,7 +2059,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?wedding-video" alt="Wedding Video">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Wedding Video">
                         <div class="expanded-portfolio-caption">
                             <h4>Wedding Highlight</h4>
                             <p>Cinematic wedding video edit</p>
@@ -1890,7 +2067,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?composite" alt="Photo Composite">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Composite">
                         <div class="expanded-portfolio-caption">
                             <h4>Creative Composite</h4>
                             <p>Advanced photo manipulation</p>
@@ -1903,19 +2080,19 @@
     </div>
 
     <div class="service-expanded-view" id="grading-expanded">
-        <div class="expanded-close">
-            <i class="fas fa-times"></i>
-        </div>
         <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
             <h2>Colour Grading Services</h2>
             <p class="expanded-description">Our professional colour correction and grading services bring cinematic quality to your films, videos, and photos, enhancing mood and visual impact.</p>
             
             <div class="expanded-portfolio">
                 <h3>Featured Colour Grading Projects</h3>
                 <div class="expanded-portfolio-grid">
-                    <!-- Placeholder content - will be replaced with actual content -->
+                    <!-- Updated image source -->
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?film-grading" alt="Film Grading">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Grading">
                         <div class="expanded-portfolio-caption">
                             <h4>Short Film</h4>
                             <p>Cinematic colour treatment</p>
@@ -1923,7 +2100,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?music-video" alt="Music Video">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Music Video">
                         <div class="expanded-portfolio-caption">
                             <h4>Music Video</h4>
                             <p>Stylized colour grading</p>
@@ -1931,7 +2108,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?commercial" alt="Commercial">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Commercial">
                         <div class="expanded-portfolio-caption">
                             <h4>Luxury Brand Campaign</h4>
                             <p>Commercial colour treatment</p>
@@ -1939,7 +2116,7 @@
                         </div>
                     </div>
                     <div class="expanded-portfolio-item">
-                        <img src="https://source.unsplash.com/random/600x400/?photo-color" alt="Photo Grading">
+                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Grading">
                         <div class="expanded-portfolio-caption">
                             <h4>Photo Series</h4>
                             <p>Consistent colour treatment</p>
@@ -2250,6 +2427,30 @@
     <script src="assets/audio/camera-shutter.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for hero buttons
+            const servicesBtn = document.querySelector('.services-btn');
+            const contactBtn = document.querySelector('.contact-btn');
+            
+            if (servicesBtn) {
+                servicesBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                        servicesSection.scrollIntoView({behavior: 'smooth'});
+                    }
+                });
+            }
+            
+            if (contactBtn) {
+                contactBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const contactSection = document.getElementById('footer-contact');
+                    if (contactSection) {
+                        contactSection.scrollIntoView({behavior: 'smooth'});
+                    }
+                });
+            }
+            
             // Custom cursor functionality
             const cursor = document.querySelector('.custom-cursor');
             const cameraFlash = document.querySelector('.camera-flash');
@@ -2480,6 +2681,94 @@
                     contactInfo.style.width = '100%';
                     contactInfo.style.maxWidth = '100%';
                 }
+            }
+        });
+    </script>
+    <!-- Add improved service expanded view handler script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Service expanded view handlers
+            const serviceCards = document.querySelectorAll('.service-card');
+            const expandedViews = document.querySelectorAll('.service-expanded-view');
+            const closeButtons = document.querySelectorAll('.expanded-close');
+            let scrollPosition = 0;
+            
+            // Open expanded view
+            serviceCards.forEach(card => {
+                const expandBtn = card.querySelector('.service-expand-btn');
+                if (expandBtn) {
+                    expandBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const serviceType = card.getAttribute('data-service');
+                        const expandedView = document.getElementById(`${serviceType}-expanded`);
+                        
+                        if (expandedView) {
+                            // Store current scroll position
+                            scrollPosition = window.scrollY;
+                            
+                            // Disable body scroll to prevent double scrolling
+                            document.body.style.overflow = 'hidden';
+                            document.body.style.position = 'fixed';
+                            document.body.style.width = '100%';
+                            document.body.style.top = `-${scrollPosition}px`;
+                            
+                            // Remove scroll from all expanded views to prevent double scrolling
+                            expandedViews.forEach(view => {
+                                view.style.overflowY = 'hidden';
+                            });
+                            
+                            // Enable scroll only on the specific expanded view
+                            expandedView.style.overflowY = 'auto';
+                            
+                            // Show expanded view with smooth fade-in
+                            expandedView.style.display = 'block';
+                            setTimeout(() => {
+                                expandedView.classList.add('active');
+                            }, 10);
+                        }
+                    });
+                }
+            });
+            
+            // Close expanded view
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closeExpandedView);
+            });
+            
+            // Close on click outside content
+            expandedViews.forEach(view => {
+                view.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeExpandedView();
+                    }
+                });
+            });
+            
+            // Close on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeExpandedView();
+                }
+            });
+            
+            // Function to close expanded views
+            function closeExpandedView() {
+                expandedViews.forEach(view => {
+                    view.classList.remove('active');
+                    
+                    // After animation, hide the view
+                    setTimeout(() => {
+                        view.style.display = 'none';
+                        view.style.overflowY = 'hidden';
+                        
+                        // Re-enable scrolling and restore position
+                        document.body.style.overflow = '';
+                        document.body.style.position = '';
+                        document.body.style.width = '';
+                        document.body.style.top = '';
+                        window.scrollTo(0, scrollPosition);
+                    }, 300);
+                });
             }
         });
     </script>
