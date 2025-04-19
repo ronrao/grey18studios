@@ -2444,9 +2444,12 @@
             if (contactBtn) {
                 contactBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const contactSection = document.getElementById('footer-contact');
+                    const contactSection = document.querySelector('#footer-contact');
                     if (contactSection) {
                         contactSection.scrollIntoView({behavior: 'smooth'});
+                    } else {
+                        // Fallback - navigate directly to the footer-contact if selector doesn't work
+                        window.location.href = '#footer-contact';
                     }
                 });
             }

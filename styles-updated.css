@@ -530,19 +530,59 @@ nav ul li a.active::after {
 }
 
 .service-icon {
-    margin-bottom: 20px;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    color: var(--white);
     position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .service-icon i {
     font-size: 2.5rem;
-    color: var(--accent-teal);
+    color: var(--white);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
+}
+
+.service-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--accent-primary);
+    animation: pulseRing 2s infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-10px);
+    background: var(--accent-secondary);
+    box-shadow: 0 10px 25px rgba(9, 20, 88, 0.3);
+}
+
+.service-card:hover .service-icon i {
+    transform: rotateY(180deg);
 }
 
 .service-card h3 {
@@ -556,14 +596,14 @@ nav ul li a.active::after {
 
 .service-expand-btn {
     margin-top: 20px;
-    background-color: var(--accent-teal);
-    color: var(--black);
+    background-color: var(--accent-primary);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     border-radius: 50px;
     font-weight: 500;
     cursor: none;
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
 }
@@ -573,23 +613,21 @@ nav ul li a.active::after {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+    background: var(--accent-primary);
+    transition: all 0.3s ease;
+    z-index: -1;
 }
 
 .service-expand-btn:hover::before {
-    transform: scaleX(1);
+    width: 100%;
 }
 
 .service-expand-btn:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(185, 20, 33, 0.2);
 }
 
 .service-expanded-view {
@@ -2285,10 +2323,10 @@ section::after {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(185, 20, 33, 0.1), rgba(9, 20, 88, 0.1));
+    background: var(--accent-primary);
     margin-bottom: 25px;
     font-size: 2.2rem;
-    color: var(--accent-primary);
+    color: var(--white);
     position: relative;
     transition: all 0.4s ease;
 }
@@ -2319,9 +2357,13 @@ section::after {
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1) rotate(10deg);
-    background: linear-gradient(135deg, rgba(185, 20, 33, 0.2), rgba(9, 20, 88, 0.2));
-    box-shadow: 0 10px 25px rgba(185, 20, 33, 0.2);
+    transform: scale(1.1) translateY(-10px);
+    background: var(--accent-secondary);
+    box-shadow: 0 10px 25px rgba(9, 20, 88, 0.3);
+}
+
+.service-card:hover .service-icon i {
+    transform: rotateY(180deg);
 }
 
 .service-card h3 {
@@ -2406,4 +2448,31 @@ section::after {
 .scroll-animation.animated {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Add smooth scrolling behavior for navigation links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Adjust spacing for the footer-contact section to ensure proper scroll position */
+#footer-contact {
+    scroll-margin-top: 80px;
+}
+
+/* Enhance the contact button animation */
+.hero .btn.secondary.contact-btn:hover {
+    transform: translateY(-5px) translateZ(30px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(9, 20, 88, 0.4);
+}
+
+/* Add a subtle pulse animation to draw attention to the contact button */
+@keyframes subtle-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(9, 20, 88, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(9, 20, 88, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(9, 20, 88, 0); }
+}
+
+.hero .btn.secondary.contact-btn {
+    animation: subtle-pulse 2s infinite;
 } 
