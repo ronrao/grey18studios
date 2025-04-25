@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Grey 18 Studio</title>
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Page specific CSS -->
     <link rel="stylesheet" href="styles-updated.css">
     <link rel="stylesheet" href="portfolio.css">
-    <link rel="stylesheet" href="portfolio-dedicated.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -17,210 +19,489 @@
     <!-- Include script for header and footer -->
     <script src="include.js"></script>
     <style>
-        /* Add consistent variables */
+        /* CSS Variables */
         :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #262626;
+            --medium-grey: #333333;
+            --light-grey: #cccccc; 
+            --white: #ffffff;
             --accent-primary: #b91421;
             --accent-secondary: #091458;
             --accent-gradient: linear-gradient(135deg, #b91421, #091458);
-            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
-            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
-            --card-border-radius: 10px;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+            --text-color: #f5f5f5;
         }
         
-        /* Match hero styling with index.html */
-        .portfolio-hero {
-            background: var(--grey-gradient-1) !important;
-            padding-top: 180px !important;
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-        
-        .portfolio-hero::before {
-            content: '';
+        /* Loading overlay styles */
+        .loading-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
-            animation: shimmer 15s infinite alternate;
-            pointer-events: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
         
-        .portfolio-hero-content {
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Gallery item styles */
+        .gallery-item {
             position: relative;
-            z-index: 2;
-            max-width: 850px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 0 20px;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .portfolio-hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, var(--white), #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .portfolio-hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--light-grey);
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        /* Consistent section styling */
-        section {
-            padding: 100px 0;
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Gallery modal styles */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 30px;
+            backdrop-filter: blur(8px);
+        }
+        
+        .gallery-modal-content {
+            position: relative;
+            background-color: var(--primary-dark);
+            border-radius: 15px;
+            padding: 50px;
+            width: 92%;
+            max-width: 1300px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .gallery-modal-content {
+                padding: 30px;
+            }
+            
+            .gallery-item img {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-modal-content {
+                padding: 25px 15px;
+                width: 95%;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-modal-content {
+                padding: 20px 10px;
+            }
+            
+            .gallery-item img {
+                height: 180px;
+            }
+        }
+        
+        /* Portfolio navigation - completely reworked */
+        .portfolio-nav {
+            /* background-color: var(--secondary-dark); */
+            padding: 25px;
+            /* border-radius: 15px; */
+            margin-bottom: 60px;
+            /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); */
+            /* border: 1px solid rgba(255, 255, 255, 0.05); */
             position: relative;
             overflow: hidden;
         }
         
-        section::after {
+        .portfolio-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gradient);
+        }
+        
+        .portfolio-nav p {
+            margin: 0 0 15px 0;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 15px 10px;
+            overflow: hidden;
+        }
+        
+        .portfolio-nav p::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
-            opacity: 0.3;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
         
-        /* Portfolio nav styling consistency */
+        .portfolio-nav p.animate::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .portfolio-nav p .highlight {
+            color: var(--accent-primary);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .portfolio-nav p .char {
+            display: inline-block;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .portfolio-nav-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        
         .portfolio-nav-item {
-            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: var(--light-grey);
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--medium-grey);
+            text-decoration: none;
+        }
+        
+        .portfolio-nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            z-index: -1;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .portfolio-nav-item:hover::before,
+        .portfolio-nav-item.active::before {
+            opacity: 1;
+            transform: scale(1);
         }
         
         .portfolio-nav-item:hover {
+            color: var(--white);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            color: var(--accent-primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: transparent;
         }
         
         .portfolio-nav-item.active {
-            background: var(--accent-gradient);
             color: var(--white);
-        }
-        
-        /* Fix genre cards styling */
-        .genre-card {
-            transition: all 0.3s ease;
-            border-radius: var(--card-border-radius);
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .genre-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Ensure buttons have consistent styling */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 7px 20px rgba(185, 20, 33, 0.25);
+            border-color: transparent;
         }
         
-        .btn.primary {
-            background: var(--accent-gradient);
-            color: var(--white);
+        /* Portfolio category - completely redesigned */
+        .portfolio-category {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            visibility: hidden;
         }
         
-        .btn.secondary {
-            background-color: transparent;
-            color: var(--white);
-            border: 2px solid var(--accent-secondary);
+        .portfolio-category.active {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            animation: fadeScale 0.6s ease-out;
         }
         
-        .btn.secondary:hover {
-            background-color: var(--accent-secondary);
-            color: var(--white);
-        }
-        
-        /* Category styling */
-        .portfolio-categories {
-            background: var(--grey-gradient-2);
+        @keyframes fadeScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         
         .category-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gradient);
         }
         
         .category-header h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 15px;
             position: relative;
             display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-        
-        .category-header h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
         
         .category-header p {
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
             color: var(--light-grey);
-            text-align: center;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
         
-        /* Responsive fixes */
-        @media screen and (max-width: 768px) {
-            .portfolio-hero-content h1 {
-                font-size: 2.5rem;
+        /* Genre grid - improved layout */
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+        
+        .genre-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 300px;
+            background-color: var(--secondary-dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-origin: center;
+        }
+        
+        .genre-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(185, 20, 33, 0.3);
+        }
+        
+        .genre-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .genre-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .genre-card:hover .genre-image img {
+            transform: scale(1.1);
+        }
+        
+        .genre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 25px;
+            color: var(--white);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(3px);
+        }
+        
+        .genre-card:hover .genre-overlay {
+            transform: translateY(0);
+        }
+        
+        .genre-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--white);
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s;
+        }
+        
+        .genre-overlay p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
+        }
+        
+        .genre-card:hover .genre-overlay h3,
+        .genre-card:hover .genre-overlay p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 30px;
             }
-            
-            .portfolio-hero-content p {
-                font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
             }
-            
+        }
+        
+        @media (max-width: 480px) {
             .genre-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
-            
-            .portfolio-nav-items {
-                flex-wrap: wrap;
-            }
-            
-            .portfolio-nav-item {
-                margin: 5px;
-                font-size: 0.9rem;
-                padding: 8px 15px;
-            }
+        }
+        
+        /* Improved button styles */
+        .btn.primary {
+            display: inline-block;
+            padding: 12px 26px;
+            background: var(--accent-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(185, 20, 33, 0.3);
+        }
+        
+        .btn.primary:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(185, 20, 33, 0.4);
+        }
+        
+        .btn.primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+        
+        .btn.primary:hover::before {
+            left: 100%;
+        }
+        
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Ensure visibility of elements */
+        .genre-card, .genre-image, .genre-image img {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .genre-image img {
+            display: block !important;
         }
     </style>
 </head>
@@ -238,7 +519,7 @@
     <section class="portfolio-categories">
         <div class="container">
             <div class="portfolio-nav">
-                <p>Browse our work by category:</p>
+                <p class="category-title"><span class="highlight">Browse</span> our work by category:</p>
                 <div class="portfolio-nav-items">
                     <a href="#photography" class="portfolio-nav-item active" data-category="photography">Photography</a>
                     <a href="#sound-recording" class="portfolio-nav-item" data-category="sound-recording">Sound Recording</a>
@@ -257,7 +538,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?portrait" alt="Portrait Photography">
+                            <img src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Portrait Photography">
                             <div class="genre-overlay">
                                 <h3>Portrait</h3>
                                 <p>Professional studio and environmental portraits</p>
@@ -267,7 +548,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?product-photography" alt="Product Photography">
+                            <img src="https://images.unsplash.com/photo-1525562723836-dca67a71d5f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Product Photography">
                             <div class="genre-overlay">
                                 <h3>Product</h3>
                                 <p>Commercial product photography for brands</p>
@@ -277,7 +558,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?corporate-event" alt="Corporate Photography">
+                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Corporate Photography">
                             <div class="genre-overlay">
                                 <h3>Corporate</h3>
                                 <p>Corporate events and team photography</p>
@@ -287,30 +568,10 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?architecture" alt="Architecture Photography">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Architecture Photography">
                             <div class="genre-overlay">
                                 <h3>Architecture</h3>
                                 <p>Interior and exterior architectural photography</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?fashion" alt="Fashion Photography">
-                            <div class="genre-overlay">
-                                <h3>Fashion</h3>
-                                <p>Editorial and commercial fashion photography</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?event" alt="Event Photography">
-                            <div class="genre-overlay">
-                                <h3>Events</h3>
-                                <p>Weddings, parties, and special events</p>
                                 <a href="#" class="btn primary">View Gallery</a>
                             </div>
                         </div>
@@ -326,7 +587,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?recording-studio" alt="Music Recording">
+                            <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Recording">
                             <div class="genre-overlay">
                                 <h3>Music Production</h3>
                                 <p>Full-service music recording and production</p>
@@ -336,7 +597,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?podcast" alt="Podcast Recording">
+                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Recording">
                             <div class="genre-overlay">
                                 <h3>Podcast</h3>
                                 <p>Professional podcast recording and production</p>
@@ -346,7 +607,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?voice-over" alt="Voice Over Recording">
+                            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Voice Over Recording">
                             <div class="genre-overlay">
                                 <h3>Voice Over</h3>
                                 <p>Professional voice over recording for commercials</p>
@@ -356,30 +617,10 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?sound-design" alt="Sound Design">
+                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Sound Design">
                             <div class="genre-overlay">
                                 <h3>Sound Design</h3>
                                 <p>Custom sound design for films and media</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?foley" alt="Foley Recording">
-                            <div class="genre-overlay">
-                                <h3>Foley</h3>
-                                <p>Custom foley recording for film and television</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?field-recording" alt="Field Recording">
-                            <div class="genre-overlay">
-                                <h3>Field Recording</h3>
-                                <p>Professional on-location audio capture</p>
                                 <a href="#" class="btn primary">Listen to Samples</a>
                             </div>
                         </div>
@@ -395,7 +636,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-dubbing" alt="Film Dubbing">
+                            <img src="https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Dubbing">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Multi-language film dubbing services</p>
@@ -405,7 +646,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?animation-dubbing" alt="Animation Dubbing">
+                            <img src="https://images.unsplash.com/photo-1578022761797-b8636ac1773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Animation Dubbing">
                             <div class="genre-overlay">
                                 <h3>Animation</h3>
                                 <p>Character voice acting for animation</p>
@@ -415,7 +656,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-dubbing" alt="Commercial Dubbing">
+                            <img src="https://images.unsplash.com/photo-1522869635100-187f6605042a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Dubbing">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Multi-language commercial voice-overs</p>
@@ -425,7 +666,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?documentary-dubbing" alt="Documentary Dubbing">
+                            <img src="https://images.unsplash.com/photo-1523297467724-f6758d7124c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Documentary Dubbing">
                             <div class="genre-overlay">
                                 <h3>Documentary</h3>
                                 <p>Professional narration and dubbing services</p>
@@ -444,7 +685,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?music-mixing" alt="Music Mixing">
+                            <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Mixing">
                             <div class="genre-overlay">
                                 <h3>Music</h3>
                                 <p>Professional mixing and mastering for music</p>
@@ -454,7 +695,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-mixing" alt="Film Mixing">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Mixing">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Audio post-production for film</p>
@@ -464,7 +705,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?podcast-mixing" alt="Podcast Mixing">
+                            <img src="https://images.unsplash.com/photo-1593698054598-5e81bd0d4b81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Mixing">
                             <div class="genre-overlay">
                                 <h3>Podcast</h3>
                                 <p>Professional podcast mixing and mastering</p>
@@ -474,7 +715,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-mixing" alt="Commercial Mixing">
+                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Mixing">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Audio post-production for commercials</p>
@@ -493,7 +734,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-retouching" alt="Photo Retouching">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Retouching">
                             <div class="genre-overlay">
                                 <h3>Photo Retouching</h3>
                                 <p>Professional photo retouching services</p>
@@ -503,7 +744,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-manipulation" alt="Photo Manipulation">
+                            <img src="https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Manipulation">
                             <div class="genre-overlay">
                                 <h3>Photo Manipulation</h3>
                                 <p>Creative compositing and manipulation</p>
@@ -513,7 +754,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?video-editing" alt="Video Editing">
+                            <img src="https://images.unsplash.com/photo-1574717024453-354899f042e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Video Editing">
                             <div class="genre-overlay">
                                 <h3>Video Editing</h3>
                                 <p>Professional video post-production</p>
@@ -523,7 +764,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?motion-graphics" alt="Motion Graphics">
+                            <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Motion Graphics">
                             <div class="genre-overlay">
                                 <h3>Motion Graphics</h3>
                                 <p>Custom motion graphics and animation</p>
@@ -542,7 +783,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-grading" alt="Film Grading">
+                            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Grading">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Cinematic colour grading for films</p>
@@ -552,7 +793,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-grading" alt="Commercial Grading">
+                            <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Grading">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Colour grading for commercials and ads</p>
@@ -562,7 +803,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?music-video-grading" alt="Music Video Grading">
+                            <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Video Grading">
                             <div class="genre-overlay">
                                 <h3>Music Video</h3>
                                 <p>Creative colour grading for music videos</p>
@@ -572,7 +813,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-grading" alt="Photo Grading">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Grading">
                             <div class="genre-overlay">
                                 <h3>Photo</h3>
                                 <p>Professional colour grading for photography</p>
@@ -585,70 +826,325 @@
         </div>
     </section>
 
+    <!-- Gallery Modal -->
+    <div class="gallery-modal">
+        <div class="gallery-modal-content">
+            <div class="gallery-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2 class="gallery-title">Gallery Title</h2>
+            <div class="gallery-description">Gallery description text goes here</div>
+            <div class="gallery-grid">
+                <!-- Gallery images will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
     <script src="script.js"></script>
-    <script src="portfolio-standalone.js"></script>
-    <script src="portfolio.js"></script>
-    
-    <!-- Force visibility of portfolio items -->
-    <style id="force-portfolio-visibility">
-        /* Force portfolio categories to be visible when active */
-        .portfolio-category.active {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        
-        /* Force genre grid to always be displayed as a grid */
-        .genre-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-            gap: 30px !important;
-            width: 100% !important;
-        }
-        
-        /* Force genre cards to be visible */
-        .genre-card {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            height: 300px !important;
-            position: relative !important;
-            overflow: hidden !important;
-            border-radius: 15px !important;
-        }
-        
-        /* Force genre images to be visible */
-        .genre-image {
-            display: block !important;
-            visibility: visible !important;
-            width: 100% !important;
-            height: 100% !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-        
-        /* Force images inside genre cards to be visible */
-        .genre-image img {
-            display: block !important;
-            visibility: visible !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-        }
-        
-        /* Force overlay to be visible on hover */
-        .genre-card:hover .genre-overlay {
-            transform: translateY(0) !important;
-            visibility: visible !important;
-        }
-    </style>
-    
-    <!-- Success message for portfolio page finalization -->
     <script>
-        console.log('Portfolio page finalized and isolated from other website changes.');
+        // Update current year in footer
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+        
+        // Portfolio navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force all genre overlays to have initial state
+            const allGenreOverlays = document.querySelectorAll('.genre-overlay');
+            allGenreOverlays.forEach(overlay => {
+                overlay.style.transform = 'translateY(100%)';
+            });
+            
+            const navItems = document.querySelectorAll('.portfolio-nav-item');
+            const portfolioCategories = document.querySelectorAll('.portfolio-category');
+            
+            // Preload gallery images
+            const preloadImages = (images) => {
+                images.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            };
+            
+            // Enhanced gallery data with more categories
+            const galleryData = {
+                'portrait': {
+                    title: 'Portrait Photography',
+                    description: 'Professional studio and environmental portrait photography showcasing our best work.',
+                    images: [
+                        'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1520975661595-6453be3f7070?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'product': {
+                    title: 'Product Photography',
+                    description: 'High-quality product photography for brands and e-commerce.',
+                    images: [
+                        'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1531325082793-ca7c9db6a4c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1585565804112-f201f68c48b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'corporate': {
+                    title: 'Corporate Photography',
+                    description: 'Professional corporate event and team photography services.',
+                    images: [
+                        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1521791136064-38f8d8a0c4fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1521791136064-38f8d8a0c4fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'architecture': {
+                    title: 'Architecture Photography',
+                    description: 'Stunning interior and exterior architectural photography.',
+                    images: [
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'default': {
+                    title: 'Our Gallery',
+                    description: 'A collection of our best work showcasing our professional skills and creativity.',
+                    images: [
+                        'https://images.unsplash.com/photo-1544549281-5a229cb9110b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1490971588422-52f6262a237a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1517697471339-4aa32003c11a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                }
+            };
+            
+            // Preload all gallery images
+            Object.values(galleryData).forEach(category => {
+                preloadImages(category.images);
+            });
+            
+            // Gallery Modal Functionality
+            const galleryBtns = document.querySelectorAll('.btn.primary');
+            const galleryModal = document.querySelector('.gallery-modal');
+            const galleryClose = document.querySelector('.gallery-close');
+            const galleryTitle = document.querySelector('.gallery-title');
+            const galleryDescription = document.querySelector('.gallery-description');
+            const galleryGrid = document.querySelector('.gallery-grid');
+            
+            // Keyboard navigation for gallery modal
+            document.addEventListener('keydown', function(e) {
+                if (galleryModal.style.display === 'flex') {
+                    if (e.key === 'Escape') {
+                        closeGalleryModal();
+                    }
+                }
+            });
+            
+            // Enhanced close gallery modal function
+            function closeGalleryModal() {
+                gsap.to(galleryModal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        galleryModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            // Open gallery modal when gallery buttons are clicked
+            galleryBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the gallery type from parent card if available
+                    const card = this.closest('.genre-card');
+                    const cardTitle = card ? card.querySelector('h3').textContent.trim().toLowerCase() : 'default';
+                    
+                    // Set gallery content based on card type or use default
+                    let galleryType = 'default';
+                    if (galleryData[cardTitle]) {
+                        galleryType = cardTitle;
+                    }
+                    
+                    // Update gallery modal content
+                    galleryTitle.textContent = galleryData[galleryType].title;
+                    galleryDescription.textContent = galleryData[galleryType].description;
+                    
+                    // Clear existing gallery
+                    galleryGrid.innerHTML = '';
+                    
+                    // Add gallery images with enhanced loading
+                    galleryData[galleryType].images.forEach((imgSrc, index) => {
+                        const imgContainer = document.createElement('div');
+                        imgContainer.className = 'gallery-item';
+                        imgContainer.setAttribute('data-index', index);
+                        
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `${galleryData[galleryType].title} - Image ${index + 1}`;
+                        img.loading = 'lazy';
+                        
+                        // Add loading animation
+                        const loadingOverlay = document.createElement('div');
+                        loadingOverlay.className = 'loading-overlay';
+                        loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
+                        
+                        imgContainer.appendChild(loadingOverlay);
+                        imgContainer.appendChild(img);
+                        galleryGrid.appendChild(imgContainer);
+                        
+                        // Remove loading overlay when image is loaded
+                        img.onload = () => {
+                            loadingOverlay.style.opacity = '0';
+                            setTimeout(() => loadingOverlay.remove(), 300);
+                        };
+                    });
+                    
+                    // Show gallery modal with animation
+                    galleryModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    gsap.fromTo(galleryModal, 
+                        {opacity: 0},
+                        {opacity: 1, duration: 0.3, ease: "power2.out"}
+                    );
+                    
+                    gsap.fromTo('.gallery-modal-content', 
+                        {y: 50, opacity: 0},
+                        {y: 0, opacity: 1, duration: 0.5, delay: 0.1, ease: "back.out(1.7)"}
+                    );
+                    
+                    // Animation for gallery items with staggered delay
+                    gsap.fromTo('.gallery-item', 
+                        {scale: 0.8, opacity: 0},
+                        {
+                            scale: 1, 
+                            opacity: 1, 
+                            duration: 0.5, 
+                            stagger: 0.1, 
+                            delay: 0.3, 
+                            ease: "back.out(1.2)",
+                            onComplete: () => {
+                                // Add click handler for gallery items after animation
+                                document.querySelectorAll('.gallery-item').forEach(item => {
+                                    item.addEventListener('click', function() {
+                                        const index = this.getAttribute('data-index');
+                                        // Add your image viewer logic here
+                                    });
+                                });
+                            }
+                        }
+                    );
+                });
+            });
+            
+            // Close gallery modal
+            galleryClose.addEventListener('click', closeGalleryModal);
+            
+            // Close modal when clicking outside content
+            galleryModal.addEventListener('click', function(e) {
+                if (e.target === galleryModal) {
+                    closeGalleryModal();
+                }
+            });
+            
+            // Initialize animations for the page
+            initPortfolioAnimations();
+            
+            // Split text for animation
+            const categoryTitle = document.querySelector('.category-title');
+            if (categoryTitle) {
+                const splitText = new SplitType(categoryTitle, { types: 'chars' });
+                
+                // Animate each character
+                gsap.to(splitText.chars, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.03,
+                    ease: "back.out(1.7)",
+                    onComplete: () => {
+                        categoryTitle.classList.add('animate');
+                    }
+                });
+            }
+        });
+        
+        function initPortfolioAnimations() {
+            // Hero section animations
+            gsap.from(".portfolio-hero-content h1", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.2,
+                ease: "power2.out"
+            });
+            
+            gsap.from(".portfolio-hero-content p", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.4,
+                ease: "power2.out"
+            });
+            
+            // Portfolio nav animations
+            gsap.from(".portfolio-nav", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.6,
+                ease: "power2.out"
+            });
+            
+            // Initialize ScrollTrigger for scroll animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate the active category
+            const activeCategory = document.querySelector('.portfolio-category.active');
+            if (activeCategory) {
+                const categoryHeader = activeCategory.querySelector('.category-header');
+                const genreCards = activeCategory.querySelectorAll('.genre-card');
+                
+                gsap.from(categoryHeader, {
+                    scrollTrigger: {
+                        trigger: categoryHeader,
+                        start: "top 80%"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+                
+                gsap.from(genreCards, {
+                    scrollTrigger: {
+                        trigger: activeCategory,
+                        start: "top 70%"
+                    },
+                    y: 70,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                });
+            }
+        }
     </script>
 </body>
 </html> 
