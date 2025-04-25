@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160">
+  <!-- Gradients -->
+  <linearGradient id="slateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#444"/>
+    <stop offset="100%" stop-color="#111"/>
+  </linearGradient>
+  <linearGradient id="boardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#333"/>
+    <stop offset="100%" stop-color="#000"/>
+  </linearGradient>
+  <linearGradient id="barGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#b91421"/>
+    <stop offset="100%" stop-color="#7a0d18"/>
+  </linearGradient>
+  
+  <!-- Main Board - Curvy Shape -->
+  <path d="M20,30 
+           C15,30 10,35 10,40 
+           L10,130 
+           C10,135 15,140 20,140 
+           L180,140 
+           C185,140 190,135 190,130 
+           L190,40 
+           C190,35 185,30 180,30 
+           Z" 
+        fill="url(#slateGrad)" stroke="#444" stroke-width="1"/>
+  
+  <!-- Top Clapper Bar - Curvy Shape -->
+  <path d="M20,30 
+           C15,30 10,35 10,40 
+           L10,55 
+           C10,60 15,65 20,65 
+           L180,65 
+           C185,65 190,60 190,55 
+           L190,40 
+           C190,35 185,30 180,30 
+           Z" 
+        fill="#222" stroke="#444" stroke-width="0.7"/>
+  
+  <!-- Clapper Stick - Curvy Shape -->
+  <path d="M20,20 
+           C15,20 10,22 10,25 
+           L10,35 
+           C10,38 15,40 20,40 
+           L180,40 
+           C185,40 190,38 190,35 
+           L190,25 
+           C190,22 185,20 180,20 
+           Z" 
+        fill="#333" stroke="#555" stroke-width="0.7"/>
+  
+  <!-- Clapper Bars -->
+  <path d="M40,20 L40,65" stroke="#fff" stroke-width="1"/>
+  <path d="M70,20 L70,65" stroke="#fff" stroke-width="1"/>
+  <path d="M100,20 L100,65" stroke="#fff" stroke-width="1"/>
+  <path d="M130,20 L130,65" stroke="#fff" stroke-width="1"/>
+  <path d="M160,20 L160,65" stroke="#fff" stroke-width="1"/>
+  
+  <!-- Colorful Bar -->
+  <rect x="20" y="75" width="160" height="15" rx="3" fill="url(#barGrad)" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Slate Details -->
+  <rect x="20" y="95" width="75" height="15" rx="1" fill="#222" stroke="#444" stroke-width="0.3"/>
+  <rect x="105" y="95" width="75" height="15" rx="1" fill="#222" stroke="#444" stroke-width="0.3"/>
+  
+  <rect x="20" y="115" width="75" height="15" rx="1" fill="#222" stroke="#444" stroke-width="0.3"/>
+  <rect x="105" y="115" width="75" height="15" rx="1" fill="#222" stroke="#444" stroke-width="0.3"/>
+  
+  <!-- Text -->
+  <text x="100" y="52" font-family="Arial" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">SCENE 42</text>
+  <text x="57" y="106" font-family="Arial" font-size="9" fill="#fff" text-anchor="middle">DIRECTOR</text>
+  <text x="142" y="106" font-family="Arial" font-size="9" fill="#fff" text-anchor="middle">GREY18</text>
+  <text x="57" y="126" font-family="Arial" font-size="9" fill="#fff" text-anchor="middle">TAKE</text>
+  <text x="142" y="126" font-family="Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">18</text>
+  
+  <!-- Slate Glow and Highlights -->
+  <rect x="20" y="75" width="160" height="15" rx="3" fill="#b91421" opacity="0.1"/>
+  <path d="M30,30 L170,30" stroke="#fff" stroke-width="0.5" opacity="0.1"/>
+  <path d="M30,25 L170,25" stroke="#fff" stroke-width="0.5" opacity="0.2"/>
+</svg> 

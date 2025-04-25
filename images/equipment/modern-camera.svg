@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <!-- Camera Body -->
+  <rect x="40" y="30" width="120" height="60" rx="10" fill="#1a1a1a" stroke="none"/>
+  <rect x="40" y="30" width="120" height="60" rx="10" fill="url(#cameraBrush)" stroke="none"/>
+  
+  <!-- Lens -->
+  <linearGradient id="lensBrush" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#333"/>
+    <stop offset="100%" stop-color="#111"/>
+  </linearGradient>
+  <linearGradient id="cameraBrush" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#222"/>
+    <stop offset="100%" stop-color="#111"/>
+  </linearGradient>
+  <linearGradient id="lensReflection" x1="30%" y1="30%" x2="70%" y2="70%">
+    <stop offset="0%" stop-color="#666" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#111" stop-opacity="0"/>
+  </linearGradient>
+  
+  <!-- Lens Housing -->
+  <circle cx="65" cy="60" r="25" fill="url(#lensBrush)"/>
+  <circle cx="65" cy="60" r="20" fill="#0c0c0c" stroke="#333" stroke-width="1"/>
+  <circle cx="65" cy="60" r="17" fill="#080808" stroke="#222" stroke-width="0.5"/>
+  <circle cx="65" cy="60" r="14" fill="#050505" stroke="#1a1a1a" stroke-width="0.5"/>
+  <circle cx="65" cy="60" r="10" fill="#000" stroke="#111" stroke-width="0.3"/>
+  <circle cx="65" cy="60" r="8" fill="url(#lensReflection)"/>
+  
+  <!-- Camera Body Details -->
+  <rect x="110" y="30" width="40" height="10" rx="2" fill="#111"/>
+  <rect x="115" y="33" width="30" height="4" rx="1" fill="#222"/>
+  
+  <!-- Viewfinder -->
+  <rect x="140" y="40" width="15" height="15" rx="2" fill="#111" stroke="#333" stroke-width="0.5"/>
+  <rect x="142" y="42" width="11" height="11" rx="1" fill="#000"/>
+  
+  <!-- Flash -->
+  <rect x="110" y="40" width="20" height="10" rx="2" fill="#222"/>
+  <rect x="115" y="42" width="10" height="6" rx="1" fill="#333"/>
+  
+  <!-- Red Accent -->
+  <circle cx="125" cy="60" r="5" fill="#b91421"/>
+  <circle cx="125" cy="60" r="3" fill="#e01b2b"/>
+  
+  <!-- Controls -->
+  <circle cx="140" cy="65" r="4" fill="#222" stroke="#333" stroke-width="0.5"/>
+  <circle cx="150" cy="65" r="4" fill="#222" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Camera Strap Mount -->
+  <rect x="40" y="35" width="3" height="5" rx="1" fill="#333"/>
+  <rect x="157" y="35" width="3" height="5" rx="1" fill="#333"/>
+  
+  <!-- Bottom Detail -->
+  <rect x="70" y="90" width="60" height="3" rx="1" fill="#222"/>
+  
+  <!-- Subtle Reflections -->
+  <path d="M40,40 L160,40" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
+  <path d="M65,35 A25,25 0 0,1 90,60" stroke="#fff" stroke-width="0.5" opacity="0.1"/>
+  
+  <!-- Camera Logo -->
+  <text x="100" y="75" font-family="Arial" font-size="4" fill="#ccc" text-anchor="middle">GREY18 PRO</text>
+</svg> 

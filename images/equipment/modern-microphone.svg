@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160">
+  <!-- Gradients -->
+  <linearGradient id="micBodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#333"/>
+    <stop offset="100%" stop-color="#111"/>
+  </linearGradient>
+  <linearGradient id="micHeadGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#444"/>
+    <stop offset="100%" stop-color="#222"/>
+  </linearGradient>
+  <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#666"/>
+    <stop offset="100%" stop-color="#333"/>
+  </linearGradient>
+  
+  <!-- Microphone Stand Base -->
+  <ellipse cx="50" cy="150" rx="25" ry="5" fill="#222" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Stand Column -->
+  <rect x="48" y="60" width="4" height="90" fill="url(#metalGradient)"/>
+  
+  <!-- Stand Joints -->
+  <circle cx="50" cy="65" r="5" fill="#222" stroke="#333" stroke-width="0.5"/>
+  <circle cx="50" cy="65" r="3" fill="#111"/>
+  <circle cx="50" cy="65" r="1.5" fill="#222"/>
+  
+  <!-- Boom Arm -->
+  <rect x="50" y="65" width="40" height="3" rx="1" fill="url(#metalGradient)" transform="rotate(-30 50 65)"/>
+  
+  <!-- Shock Mount -->
+  <circle cx="80" cy="48" r="12" fill="none" stroke="#444" stroke-width="1"/>
+  <circle cx="80" cy="48" r="8" fill="none" stroke="#444" stroke-width="1"/>
+  <line x1="68" y1="48" x2="72" y2="48" stroke="#444" stroke-width="1"/>
+  <line x1="88" y1="48" x2="92" y2="48" stroke="#444" stroke-width="1"/>
+  <line x1="80" y1="36" x2="80" y2="40" stroke="#444" stroke-width="1"/>
+  <line x1="80" y1="56" x2="80" y2="60" stroke="#444" stroke-width="1"/>
+  
+  <!-- Microphone Body -->
+  <rect x="74" y="32" width="12" height="32" rx="6" fill="url(#micBodyGradient)" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Microphone Head -->
+  <ellipse cx="80" cy="24" rx="10" ry="8" fill="url(#micHeadGradient)" stroke="#555" stroke-width="0.5"/>
+  
+  <!-- Microphone Mesh -->
+  <ellipse cx="80" cy="24" rx="8" ry="6" fill="#111" stroke="#333" stroke-width="0.3"/>
+  <ellipse cx="80" cy="24" rx="7" ry="5" fill="#000" stroke="#222" stroke-width="0.3"/>
+  
+  <!-- Mesh Pattern -->
+  <path d="M73,24 H87" stroke="#222" stroke-width="0.3" stroke-dasharray="1,1"/>
+  <path d="M73,22 H87" stroke="#222" stroke-width="0.3" stroke-dasharray="1,1"/>
+  <path d="M73,26 H87" stroke="#222" stroke-width="0.3" stroke-dasharray="1,1"/>
+  <path d="M73,20 H87" stroke="#222" stroke-width="0.3" stroke-dasharray="1,1"/>
+  <path d="M73,28 H87" stroke="#222" stroke-width="0.3" stroke-dasharray="1,1"/>
+  
+  <!-- XLR Connection -->
+  <rect x="78" y="64" width="4" height="6" rx="1" fill="#222"/>
+  
+  <!-- Cable -->
+  <path d="M80,70 C85,75 90,100 90,120" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Microphone Switch -->
+  <rect x="76" y="55" width="8" height="3" rx="1" fill="#222" stroke="#333" stroke-width="0.3"/>
+  <rect x="78" y="55" width="4" height="3" rx="1" fill="#b91421"/>
+  
+  <!-- Highlighting -->
+  <path d="M74,24 A8,6 0 0,1 86,24" stroke="#fff" stroke-width="0.3" opacity="0.2" fill="none"/>
+  <path d="M76,40 A6,6 0 0,1 84,40" stroke="#fff" stroke-width="0.3" opacity="0.1" fill="none"/>
+  
+  <!-- Model Number -->
+  <text x="80" y="45" font-family="Arial" font-size="2" fill="#ccc" text-anchor="middle">PRO 18</text>
+</svg> 

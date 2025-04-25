@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Definitions for gradients and filters -->
+  <defs>
+    <linearGradient id="cameraBodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="50%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222"/>
+      <stop offset="50%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#999"/>
+      <stop offset="50%" stop-color="#777"/>
+      <stop offset="100%" stop-color="#555"/>
+    </linearGradient>
+    <filter id="cameraShadow" x="-0.2" y="-0.2" width="1.4" height="1.4">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glassReflection">
+      <feSpecularLighting result="specOut" specularExponent="20" lighting-color="white">
+        <fePointLight x="100" y="100" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+
+  <!-- Shadow underneath camera -->
+  <ellipse cx="100" cy="185" rx="65" ry="10" fill="#000" opacity="0.3"/>
+
+  <!-- Main camera body -->
+  <rect x="40" y="60" width="120" height="80" rx="5" ry="5" fill="url(#cameraBodyGradient)" stroke="#222" stroke-width="1"/>
+  
+  <!-- Top plate -->
+  <rect x="35" y="50" width="130" height="15" rx="3" ry="3" fill="url(#metalGradient)" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Film advance knob -->
+  <circle cx="155" cy="55" r="10" fill="url(#metalGradient)" stroke="#222" stroke-width="0.5"/>
+  <circle cx="155" cy="55" r="7" fill="#333" stroke="#222" stroke-width="0.5"/>
+  <circle cx="155" cy="55" r="2" fill="#222"/>
+  <line x1="155" y1="55" x2="160" y2="50" stroke="#222" stroke-width="1"/>
+  
+  <!-- Shutter button -->
+  <circle cx="135" cy="55" r="5" fill="#cc0000" stroke="#880000" stroke-width="0.5"/>
+  
+  <!-- Lens barrel -->
+  <g>
+    <!-- Lens mount -->
+    <circle cx="100" cy="100" r="30" fill="url(#metalGradient)" stroke="#333" stroke-width="1"/>
+    
+    <!-- Lens barrel -->
+    <circle cx="100" cy="100" r="25" fill="#222" stroke="#333" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="22" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="18" fill="url(#lensGradient)" stroke="#000" stroke-width="0.5"/>
+    
+    <!-- Lens glass -->
+    <circle cx="100" cy="100" r="15" fill="#000" stroke="#111" stroke-width="0.5" filter="url(#glassReflection)"/>
+    
+    <!-- Lens focus rings -->
+    <circle cx="100" cy="100" r="25" fill="none" stroke="#444" stroke-width="1" stroke-dasharray="3,3"/>
+    <circle cx="100" cy="100" r="21" fill="none" stroke="#444" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Focus markers -->
+    <line x1="100" y1="75" x2="100" y2="77" stroke="#fff" stroke-width="0.5"/>
+    <line x1="125" y1="100" x2="123" y2="100" stroke="#fff" stroke-width="0.5"/>
+    <line x1="100" y1="125" x2="100" y2="123" stroke="#fff" stroke-width="0.5"/>
+    <line x1="75" y1="100" x2="77" y2="100" stroke="#fff" stroke-width="0.5"/>
+    
+    <!-- Aperture numbers -->
+    <text x="110" y="85" font-family="Arial" font-size="3" fill="#ccc">f/2.8</text>
+    <text x="110" y="90" font-family="Arial" font-size="3" fill="#ccc">f/4</text>
+    <text x="110" y="95" font-family="Arial" font-size="3" fill="#ccc">f/5.6</text>
+    <text x="110" y="100" font-family="Arial" font-size="3" fill="#ccc">f/8</text>
+    <text x="110" y="105" font-family="Arial" font-size="3" fill="#ccc">f/11</text>
+    <text x="110" y="110" font-family="Arial" font-size="3" fill="#ccc">f/16</text>
+  </g>
+  
+  <!-- Viewfinder -->
+  <rect x="60" y="45" width="25" height="15" rx="2" ry="2" fill="#222" stroke="#111" stroke-width="0.5"/>
+  <circle cx="72" cy="50" r="6" fill="#111" stroke="#222" stroke-width="0.5"/>
+  <circle cx="72" cy="50" r="4" fill="#000" stroke="#111" stroke-width="0.5"/>
+  
+  <!-- Light meter -->
+  <circle cx="45" cy="55" r="5" fill="#333" stroke="#222" stroke-width="0.5"/>
+  <circle cx="45" cy="55" r="3" fill="#222" stroke="#111" stroke-width="0.5"/>
+  
+  <!-- Camera strap attachments -->
+  <rect x="35" y="60" width="5" height="10" rx="1" ry="1" fill="#555" stroke="#333" stroke-width="0.5"/>
+  <rect x="160" y="60" width="5" height="10" rx="1" ry="1" fill="#555" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Front panel details -->
+  <rect x="55" y="80" width="15" height="8" rx="1" ry="1" fill="#222" stroke="#333" stroke-width="0.5"/>
+  <rect x="130" y="80" width="15" height="8" rx="1" ry="1" fill="#222" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Bottom plate -->
+  <rect x="40" y="140" width="120" height="10" rx="2" ry="2" fill="url(#metalGradient)" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Tripod mount -->
+  <circle cx="100" cy="145" r="3" fill="#222" stroke="#111" stroke-width="0.5"/>
+  <circle cx="100" cy="145" r="1.5" fill="#111"/>
+  
+  <!-- Film rewind crank -->
+  <circle cx="45" cy="55" r="6" fill="url(#metalGradient)" stroke="#333" stroke-width="0.5"/>
+  <path d="M45,51 L48,48 L50,50 L47,53 Z" fill="#333" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Flash hot shoe -->
+  <rect x="90" y="47" width="20" height="5" rx="1" ry="1" fill="#555" stroke="#333" stroke-width="0.5"/>
+  <rect x="95" y="45" width="10" height="2" rx="1" ry="1" fill="#555" stroke="#333" stroke-width="0.5"/>
+  <circle cx="100" cy="48" r="1" fill="#999"/>
+  
+  <!-- Model name plate -->
+  <rect x="60" y="125" width="80" height="10" rx="1" ry="1" fill="#222" stroke="#333" stroke-width="0.5"/>
+  <text x="100" y="132" font-family="Arial" font-size="6" font-weight="bold" fill="#ccc" text-anchor="middle">GREY18 PRO</text>
+  
+  <!-- Front decorative line -->
+  <line x1="45" y1="110" x2="155" y2="110" stroke="#444" stroke-width="0.5" stroke-dasharray="3,1"/>
+  
+  <!-- Film window -->
+  <rect x="140" y="70" width="15" height="10" rx="1" ry="1" fill="#222" stroke="#111" stroke-width="0.5"/>
+  <rect x="142" y="72" width="11" height="6" rx="1" ry="1" fill="#111" stroke="#000" stroke-width="0.5"/>
+  
+  <!-- Leather texture -->
+  <rect x="45" y="65" width="110" height="70" rx="2" ry="2" fill="#222" opacity="0.3"/>
+  
+  <!-- Gloss/reflection -->
+  <ellipse cx="80" cy="70" rx="30" ry="10" fill="#fff" opacity="0.05"/>
+</svg> 
