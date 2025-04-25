@@ -36,6 +36,19 @@
             --text-color: #f5f5f5;
         }
         
+        body, html {
+            cursor: auto;
+        }
+        
+        /* Hide default cursor on desktop only when custom cursor is active */
+        @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+            body, html, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
+        }
+        
         /* Custom cursor with camera icon */
         .custom-cursor {
             position: fixed;
@@ -53,7 +66,7 @@
             transform: translate(-50%, -50%);
             border: 2px solid #888;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
-            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+            will-change: transform, filter, box-shadow;
         }
         
         .custom-cursor i {
@@ -102,6 +115,19 @@
             top: 50%;
             transform: translate(-50%, -50%);
             box-shadow: inset 0 0 3px rgba(0,0,0,0.5), 0 0 2px rgba(255,255,255,0.3);
+            transition: transform 0.15s ease-out;
+        }
+
+        /* Lens animation when flashing */
+        .custom-cursor.cursor-flash .lens {
+            animation: lensContract 0.3s ease-out forwards !important;
+        }
+
+        @keyframes lensContract {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            20% { transform: translate(-50%, -50%) scale(0.4); }
+            60% { transform: translate(-50%, -50%) scale(0.7); }
+            100% { transform: translate(-50%, -50%) scale(1); }
         }
 
         /* Shutter button */
@@ -114,19 +140,59 @@
             background-color: #aaa;
             border-radius: 2px;
             border: 1px solid #bbb;
+            transition: transform 0.1s ease, background-color 0.1s ease;
+        }
+
+        /* Shutter button animation when clicked */
+        .custom-cursor.cursor-flash .shutter {
+            animation: shutterPress 0.3s ease-out forwards !important;
+        }
+
+        @keyframes shutterPress {
+            0% { transform: translateY(0); background-color: #aaa; }
+            20% { transform: translateY(2px); background-color: #ff3333; }
+            60% { transform: translateY(1px); background-color: #ff5555; }
+            100% { transform: translateY(0); background-color: #aaa; }
         }
         
-        /* Camera flash animation on cursor only */
-        .cursor-flash {
-            filter: brightness(4) contrast(1.5);
-            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8), 0 0 30px 10px rgba(255, 255, 255, 0.5);
-            animation: cursorFlash 0.2s ease forwards;
+        /* Camera flash animation on cursor only - with !important to override any other styles */
+        .custom-cursor.cursor-flash {
+            filter: brightness(20) contrast(3) !important;
+            box-shadow: 0 0 60px 30px rgba(255, 255, 255, 1), 0 0 100px 50px rgba(255, 255, 255, 0.9) !important;
+            transform: translate(-50%, -50%) scale(1.1) !important;
+            opacity: 1 !important;
+            z-index: 10000 !important;
+            animation: none !important; /* First disable any animations */
+        }
+        
+        /* Camera flash icon style during flash */
+        .custom-cursor.cursor-flash i {
+            color: #ffffff !important;
+            filter: brightness(2) !important;
+        }
+        
+        /* Add the animation in a separate rule to avoid conflicts */
+        .custom-cursor.cursor-flash {
+            animation: cursorFlash 0.3s ease-out forwards !important;
         }
         
         @keyframes cursorFlash {
-            0% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(1) contrast(1); }
-            50% { transform: translate(-50%, -50%) scale(0.95); filter: brightness(5) contrast(1.7); box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.9), 0 0 40px 15px rgba(255, 255, 255, 0.7); }
-            100% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(4) contrast(1.5); }
+            0% { 
+                filter: brightness(1) contrast(1); 
+                box-shadow: none; 
+            }
+            20% { 
+                filter: brightness(15) contrast(3); 
+                box-shadow: 0 0 50px 25px rgba(255, 255, 255, 1), 0 0 80px 40px rgba(255, 255, 255, 1); 
+            }
+            40% { 
+                filter: brightness(10) contrast(2.5); 
+                box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.95), 0 0 60px 30px rgba(255, 255, 255, 0.8); 
+            }
+            100% { 
+                filter: brightness(1) contrast(1); 
+                box-shadow: none; 
+            }
         }
         
         /* Hide default cursor on desktop only */
@@ -773,7 +839,7 @@
         .unified-testimonial-slider {
             position: relative;
             min-height: 450px;
-            margin: 0 auto;
+            margin: 0 auto !important;
             max-width: 800px;
             padding: 0 15px;
         }
@@ -1094,7 +1160,7 @@
         .unified-testimonial-slider {
             position: relative;
             min-height: 450px;
-            margin: 0 auto;
+            margin: 0 auto !important;
             max-width: 800px;
             padding: 0 15px;
         }
@@ -1686,18 +1752,323 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* Simple standalone custom camera cursor */
+        .camera-cursor {
+            position: fixed;
+            width: 36px;
+            height: 28px;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            background-image: linear-gradient(to bottom, #666, #444);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            border: 2px solid #888;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
+        }
+        
+        /* Camera icon inside cursor */
+        .camera-cursor i {
+            color: #ff5252;
+            font-size: 12px;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+        }
+        
+        /* Camera lens */
+        .camera-cursor .lens {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #444 0%, #666 40%, #444 100%);
+            border: 1px solid #777;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.5), 0 0 2px rgba(255,255,255,0.3);
+        }
+        
+        /* Camera shutter button */
+        .camera-cursor .shutter {
+            position: absolute;
+            top: -4px;
+            right: 8px;
+            width: 8px;
+            height: 4px;
+            background-color: #aaa;
+            border-radius: 2px;
+            border: 1px solid #bbb;
+        }
+        
+        /* Record light */
+        .camera-cursor::after {
+            content: '';
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            background-color: #ff3333;
+            box-shadow: 0 0 3px #ff6666;
+            border-radius: 50%;
+            animation: blink 4s infinite;
+        }
+        
+        /* Top handle */
+        .camera-cursor::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            width: 14px;
+            height: 6px;
+            background-color: #555;
+            border-radius: 4px 4px 0 0;
+            border-top: 1px solid #999;
+            border-left: 1px solid #888;
+            border-right: 1px solid #888;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            5% { opacity: 1; }
+            10% { opacity: 0.3; }
+            95% { opacity: 0.3; }
+            100% { opacity: 0.3; }
+        }
+        
+        /* Flash animation styles */
+        .camera-flash {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 99998;
+        }
+        
+        /* Camera cursor flash animation */
+        .camera-cursor.flashing {
+            filter: brightness(10) contrast(2);
+            box-shadow: 0 0 50px 20px rgba(255, 255, 255, 1);
+        }
+        
+        .camera-cursor.flashing .lens {
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        
+        .camera-cursor.flashing .shutter {
+            background-color: #ff3333;
+            transform: translateY(2px);
+        }
+        
+        .camera-cursor.flashing i {
+            color: white;
+            filter: brightness(2);
+        }
+        
+        /* Hide default cursor on desktop */
+        @media (min-width: 992px) {
+            html, body, a, button, .btn, .service-card, .portfolio-item,
+            .nav-link, .expanded-close, .social-icon, .logo,
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
+        }
     </style>
-</head>
-<body>
-    <!-- Custom cursor with camera icon -->
-    <div class="custom-cursor">
+    
+    <!-- Add standalone camera cursor elements -->
+    <div class="camera-cursor" style="display: none;">
         <div class="lens"></div>
         <div class="shutter"></div>
         <i class="fas fa-camera"></i>
     </div>
-    
-    <!-- Camera flash effect -->
     <div class="camera-flash"></div>
+    
+    <!-- Fix any old cursor implementations script -->
+    <script>
+        // This script runs immediately to remove any old cursor elements
+        (function() {
+            // Find and remove old cursor elements
+            const oldCursors = document.querySelectorAll('.custom-cursor, .camera-cursor');
+            oldCursors.forEach(cursor => {
+                if (cursor && cursor.parentNode) {
+                    cursor.parentNode.removeChild(cursor);
+                }
+            });
+            
+            // Remove any old flash elements
+            const oldFlashes = document.querySelectorAll('.camera-flash');
+            oldFlashes.forEach(flash => {
+                if (flash && flash.parentNode) {
+                    flash.parentNode.removeChild(flash);
+                }
+            });
+            
+            // Also disable the cursor in script.js
+            window.disableOldCursor = true;
+        })();
+    </script>
+    
+    <!-- Standalone camera cursor script (no dependencies) -->
+    <script>
+        // Create a simplified camera cursor that will work across all pages
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create camera cursor element
+            const cursor = document.createElement('div');
+            cursor.id = 'camera-cursor';
+            cursor.style.cssText = `
+                position: fixed;
+                width: 40px;
+                height: 32px;
+                background: #333;
+                border-radius: 5px;
+                border: 2px solid #888;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                z-index: 999999;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+                display: none;
+            `;
+            
+            // Create camera icon using HTML, not depending on Font Awesome
+            const cameraIcon = document.createElement('div');
+            cameraIcon.style.cssText = `
+                width: 24px;
+                height: 16px;
+                border: 2px solid #ff5252;
+                border-radius: 2px;
+                position: relative;
+            `;
+            
+            // Create lens
+            const lens = document.createElement('div');
+            lens.style.cssText = `
+                width: 12px;
+                height: 12px;
+                background: radial-gradient(circle at center, #444 0%, #666 40%, #444 100%);
+                border: 1px solid #ff5252;
+                border-radius: 50%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            `;
+            
+            // Create red dot
+            const redDot = document.createElement('div');
+            redDot.style.cssText = `
+                width: 6px;
+                height: 6px;
+                background-color: #ff3333;
+                border-radius: 50%;
+                position: absolute;
+                top: -4px;
+                right: -4px;
+            `;
+            
+            // Assemble cursor
+            cameraIcon.appendChild(lens);
+            cameraIcon.appendChild(redDot);
+            cursor.appendChild(cameraIcon);
+            document.body.appendChild(cursor);
+            
+            // Create flash element
+            const flash = document.createElement('div');
+            flash.id = 'camera-flash';
+            flash.style.cssText = `
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                background: white;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 999998;
+            `;
+            document.body.appendChild(flash);
+            
+            // Check if device should have cursor
+            const isTouchDevice = ('ontouchstart' in window) || 
+                                  (navigator.maxTouchPoints > 0) || 
+                                  window.matchMedia("(hover: none)").matches;
+            
+            // Only show on desktop
+            if (!isTouchDevice && window.innerWidth >= 992) {
+                // Hide default cursor
+                document.body.style.cursor = 'none';
+                
+                // Make all interactive elements have no cursor
+                const elements = document.querySelectorAll('a, button, .btn, .service-card, input, select, textarea');
+                elements.forEach(el => {
+                    el.style.cursor = 'none';
+                });
+                
+                // Show cursor
+                cursor.style.display = 'flex';
+                
+                // Update cursor position
+                document.addEventListener('mousemove', function(e) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                });
+                
+                // Handle flash effect
+                document.addEventListener('mousedown', function() {
+                    // Flash cursor
+                    cursor.style.transform = 'translate(-50%, -50%) scale(0.9)';
+                    lens.style.transform = 'translate(-50%, -50%) scale(0.7)';
+                    cursor.style.filter = 'brightness(3)';
+                    cursor.style.boxShadow = '0 0 30px 10px rgba(255,255,255,0.8)';
+                    
+                    // Screen flash
+                    flash.style.opacity = '0.3';
+                    
+                    // Play sound
+                    try {
+                        const sound = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3');
+                        sound.volume = 0.4;
+                        sound.play().catch(() => {});
+                    } catch (e) {}
+                    
+                    // Reset
+                    setTimeout(function() {
+                        cursor.style.transform = 'translate(-50%, -50%)';
+                        lens.style.transform = 'translate(-50%, -50%)';
+                        cursor.style.filter = 'none';
+                        cursor.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+                        flash.style.opacity = '0';
+                    }, 150);
+                });
+                
+                // Hide when cursor leaves window
+                document.addEventListener('mouseout', function(e) {
+                    if (!e.relatedTarget) cursor.style.display = 'none';
+                });
+                
+                // Show when cursor enters
+                document.addEventListener('mouseover', function() {
+                    cursor.style.display = 'flex';
+                });
+            }
+        });
+    </script>
+    <!-- Camera cursor standalone script -->
+    <script src="camera-cursor.js"></script>
+</head>
+<body>
+    <!-- Custom cursor implementation is now handled by the standalone script in camera-cursor.js -->
     
     <!-- Page Transition Overlay -->
     <div class="page-transition-overlay"></div>
@@ -2421,7 +2792,7 @@
             /* Unified Testimonials Styling */
             .unified-testimonial-slider {
                 position: relative;
-                margin: 40px 0;
+                margin: 40px auto !important;
                 overflow: hidden;
             }
             
@@ -2585,6 +2956,19 @@
     <script src="assets/audio/camera-shutter.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize camera shutter sound
+            window.cameraShutterSound = new Audio();
+            window.cameraShutterSound.src = 'https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3';
+            window.cameraShutterSound.volume = 0.4; // Set volume to 40%
+            window.cameraShutterSound.preload = 'auto'; // Preload sound
+
+            // Preload the sound
+            try {
+                window.cameraShutterSound.load();
+            } catch (err) {
+                console.log('Audio preload failed:', err);
+            }
+            
             // Add event listeners for hero buttons
             const servicesBtn = document.querySelector('.services-btn');
             const contactBtn = document.querySelector('.contact-btn');
@@ -2624,45 +3008,65 @@
             
             // Only use custom camera cursor on desktop (non-touch devices)
             if (cursor && !isTouchDevice && window.innerWidth >= 992) {
+                // Show the cursor immediately
+                cursor.style.display = 'flex';
+                
                 // Set initial position (center of screen)
                 cursor.style.left = window.innerWidth / 2 + 'px';
                 cursor.style.top = window.innerHeight / 2 + 'px';
                 
                 // Custom cursor functionality for desktop only
                 document.addEventListener('mousemove', function(e) {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
+                    // Position cursor at exact mouse position
+                    requestAnimationFrame(() => {
+                        cursor.style.left = `${e.clientX}px`;
+                        cursor.style.top = `${e.clientY}px`;
+                    });
                 });
                 
                 // Hide cursor when leaving window
-                document.addEventListener('mouseout', function() {
-                    cursor.style.display = 'none';
+                document.addEventListener('mouseout', function(e) {
+                    if (!e.relatedTarget) {
+                        cursor.style.display = 'none';
+                    }
                 });
                 
                 document.addEventListener('mouseover', function() {
                     cursor.style.display = 'flex';
                 });
                 
+                // Force cursor to show on page load
+                setTimeout(() => {
+                    cursor.style.display = 'flex';
+                }, 500);
+                
                 // Enhanced camera click effect on desktop only
-                document.addEventListener('click', function(e) {
-                    // Reset any ongoing animation
+                document.addEventListener('mousedown', function(e) {
+                    if (!cursor) return;
+                    
+                    console.log('Mouse down detected - triggering camera flash');
+                    
+                    // First cancel any existing animation by clearing the class
                     cursor.classList.remove('cursor-flash');
                     
-                    // Force a reflow to restart animation
+                    // Force a layout recalculation to restart animation
                     void cursor.offsetWidth;
                     
-                    // Apply the animation class for camera flash effect
-                    cursor.classList.add('cursor-flash');
-                    
-                    // Play camera shutter sound if available
-                    if (window.cameraShutterSound) {
-                        window.cameraShutterSound.play();
-                    }
-                    
-                    // Remove the animation class after it completes
-                    setTimeout(() => {
-                        cursor.classList.remove('cursor-flash');
-                    }, 200);
+                    // Now apply flash effect
+                    requestAnimationFrame(() => {
+                        cursor.classList.add('cursor-flash');
+                        
+                        // Play camera shutter sound if available
+                        if (window.cameraShutterSound) {
+                            window.cameraShutterSound.currentTime = 0;
+                            window.cameraShutterSound.play().catch(err => console.log('Audio play failed:', err));
+                        }
+                        
+                        // Remove flash class after animation completes
+                        setTimeout(() => {
+                            cursor.classList.remove('cursor-flash');
+                        }, 300);
+                    });
                 });
             } else if (cursor) {
                 // Make sure cursor is hidden on mobile/touch devices

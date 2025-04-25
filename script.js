@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
+  /* 
+  // Custom cursor initialization code commented out
   // Set cursor position to match where the user is clicking
   document.addEventListener('mousemove', function(e) {
     // Position the cursor at the exact x,y coordinates of the mouse pointer
@@ -136,6 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
       cursor.style.boxShadow = 'none';
     }, 200);
   });
+  */
+  
+  console.log('Custom cursor initialization skipped');
 });
 
 // Make sure all links actually work by adding direct click handlers
@@ -1194,7 +1199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) {
+        if (nav && menuToggle && !nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) {
             nav.classList.remove('active');
             menuToggle.classList.remove('active');
         }
