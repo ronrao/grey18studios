@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Grey 18 Studio</title>
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Page specific CSS -->
     <link rel="stylesheet" href="styles-updated.css">
     <link rel="stylesheet" href="portfolio.css">
-    <link rel="stylesheet" href="portfolio-dedicated.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -17,26 +19,36 @@
     <!-- Include script for header and footer -->
     <script src="include.js"></script>
     <style>
-        /* Add consistent variables */
+        /* CSS Variables */
         :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #262626;
+            --medium-grey: #333333;
+            --light-grey: #cccccc; 
+            --white: #ffffff;
             --accent-primary: #b91421;
             --accent-secondary: #091458;
             --accent-gradient: linear-gradient(135deg, #b91421, #091458);
-            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
-            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
-            --card-border-radius: 10px;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+            --text-color: #f5f5f5;
         }
         
-        /* Match hero styling with index.html */
+        /* Enhanced Portfolio Hero Section - Fixed alignment */
         .portfolio-hero {
-            background: var(--grey-gradient-1) !important;
-            padding-top: 180px !important;
-            height: 60vh;
+            position: relative;
+            height: 100vh; /* Full viewport height */
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a, #050505);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            position: relative;
+            padding: 150px 0px 80px 0 !important; /* Remove padding */
+            margin: 0 !important; /* Remove margin to fix gap */
+            border-bottom: 5px solid; /* Add border instead of margin */
+            border-image: var(--accent-gradient) 1;
         }
         
         .portfolio-hero::before {
@@ -46,181 +58,799 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
-            animation: shimmer 15s infinite alternate;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(185, 20, 33, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 80% 70%, rgba(9, 20, 88, 0.15) 0%, transparent 35%);
+            animation: pulsate 15s infinite alternate;
+            pointer-events: none;
+        }
+        
+        .portfolio-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-gradient);
+            opacity: 0.9;
+            z-index: 3;
+        }
+        
+        @keyframes pulsate {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            opacity: 0.3;
             pointer-events: none;
         }
         
         .portfolio-hero-content {
             position: relative;
             z-index: 2;
-            max-width: 850px;
-            margin: 0 auto;
+            max-width: 1000px;
             text-align: center;
             padding: 0 20px;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .portfolio-hero-content h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--white);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            line-height: 1.1;
+        }
+        
+        .portfolio-hero-content h1 .highlight {
+            color: var(--accent-primary);
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .portfolio-hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .portfolio-hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: var(--light-grey);
+            line-height: 1.5;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+        
+        .portfolio-hero-stats {
+            display: flex;
+            justify-content: center;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+            gap: 70px; /* Increase gap for better spacing */
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0;
+            position: relative;
+        }
+        
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -35px; /* Move divider further */
+            transform: translateY(-50%);
+            width: 1px;
+            height: 70px; /* Taller divider */
+            background: rgba(255,255,255,0.15); /* More subtle divider */
+        }
+        
+        .stat-number {
             font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, var(--white), #e0e0e0);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--white), var(--light-grey));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .portfolio-hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--light-grey);
-        }
-        
-        /* Consistent section styling */
-        section {
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
-            opacity: 0.3;
-        }
-        
-        /* Portfolio nav styling consistency */
-        .portfolio-nav-item {
-            transition: all 0.3s ease;
-        }
-        
-        .portfolio-nav-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            color: var(--accent-primary);
-        }
-        
-        .portfolio-nav-item.active {
-            background: var(--accent-gradient);
-            color: var(--white);
-        }
-        
-        /* Fix genre cards styling */
-        .genre-card {
-            transition: all 0.3s ease;
-            border-radius: var(--card-border-radius);
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .genre-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Ensure buttons have consistent styling */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn.primary {
-            background: var(--accent-gradient);
-            color: var(--white);
-        }
-        
-        .btn.secondary {
-            background-color: transparent;
-            color: var(--white);
-            border: 2px solid var(--accent-secondary);
-        }
-        
-        .btn.secondary:hover {
-            background-color: var(--accent-secondary);
-            color: var(--white);
-        }
-        
-        /* Category styling */
-        .portfolio-categories {
-            background: var(--grey-gradient-2);
-        }
-        
-        .category-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .category-header h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-        
-        .category-header h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        .category-header p {
-            max-width: 600px;
-            margin: 0 auto;
+        .stat-text {
             font-size: 1.1rem;
             color: var(--light-grey);
-            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
         }
         
-        /* Responsive fixes */
-        @media screen and (max-width: 768px) {
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* More space between buttons */
+            margin-top: 3.5rem; /* More space above buttons */
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .hero-buttons .btn {
+            min-width: 200px; /* Wider buttons */
+            text-align: center;
+            padding: 16px 30px !important; /* Larger padding */
+            font-size: 1rem; /* Larger text */
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive styles for hero section */
+        @media (max-width: 992px) {
             .portfolio-hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .portfolio-hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .stat-number {
                 font-size: 2.5rem;
+            }
+            
+            .stat-item {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-hero {
+                height: auto;
+                padding: 120px 0 60px;
+            }
+            
+            .portfolio-hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .portfolio-hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .portfolio-hero-stats {
+                gap: 40px;
+            }
+            
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+            
+            .portfolio-nav-items {
+                gap: 15px;
+            }
+            
+            .portfolio-nav-item {
+                padding: 10px 18px;
+                font-size: 1rem;
+            }
+            
+            .portfolio-nav {
+                padding: 25px 15px;
+                margin: 40px auto 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-hero-content h1 {
+                font-size: 2.2rem;
             }
             
             .portfolio-hero-content p {
                 font-size: 1rem;
             }
             
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+            
+            .portfolio-hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+        }
+        
+        /* Loading overlay styles */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Gallery item styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Gallery modal styles - improved */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-modal-content {
+            position: relative;
+            background-color: rgba(25, 25, 25, 0.95);
+            border-radius: 20px;
+            padding: 60px;
+            width: 92%;
+            max-width: 1300px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gallery-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(185, 20, 33, 0.8);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .gallery-close:hover {
+            transform: rotate(90deg);
+            background-color: rgba(185, 20, 33, 1);
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gallery-description {
+            color: var(--light-grey);
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        /* Enhanced category header */
+        .category-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            padding-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .category-header.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .category-header h2 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .category-header p {
+            color: var(--light-grey);
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Improved Genre Grid & Cards - Fixed for better responsiveness */
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+        
+        .genre-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 350px;
+            background-color: var(--secondary-dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform-origin: center;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        /* Fix for animation not working */
+        @keyframes navItemFadeIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .portfolio-nav-item.animate-in {
+            animation: navItemFadeIn 0.5s forwards;
+        }
+        
+        /* Enhanced animation for card appearance */
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .genre-card.animate-in {
+            animation: cardFadeIn 0.8s forwards;
+        }
+        
+        /* Container styles to ensure proper spacing and alignment */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Portfolio categories section spacing */
+        .portfolio-categories {
+            padding: 60px 0 100px;
+            background: #0a0a0a; /* Match the hero background */
+            position: relative;
+            margin-top: 0; /* Remove any margin */
+            border-top: none; /* Remove any border */
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 992px) {
+            .portfolio-hero-content h1 {
+                font-size: 4rem;
+            }
+            
+            .category-header h2 {
+                font-size: 3rem;
+            }
+            
+            .gallery-modal-content {
+                padding: 40px 30px;
+            }
+            
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 30px;
+            }
+            
+            .container {
+                padding: 0 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-hero {
+                height: auto;
+                min-height: auto;
+                padding: 120px 0 80px;
+            }
+            
+            .portfolio-hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .portfolio-hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .portfolio-hero-stats {
+                gap: 20px;
+                margin: 2.5rem 0;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .category-header h2 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-modal-content {
+                padding: 30px 20px;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+            
+            .genre-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-nav p {
+                font-size: 1.3rem;
+            }
+            
+            .category-header h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery-modal-content {
+                padding: 25px 15px;
+            }
+            
             .genre-grid {
                 grid-template-columns: 1fr;
             }
             
-            .portfolio-nav-items {
-                flex-wrap: wrap;
+            .container {
+                padding: 0 15px;
             }
-            
-            .portfolio-nav-item {
-                margin: 5px;
-                font-size: 0.9rem;
-                padding: 8px 15px;
-            }
+        }
+        
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Ensure visibility of elements */
+        .genre-card, .genre-image, .genre-image img {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .genre-image img {
+            display: block !important;
+        }
+        
+        /* Ensure portfolio categories are visible when active */
+        .portfolio-category {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            display: none;
+            position: relative;
+        }
+        
+        .portfolio-category.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        /* Fix for nav item animations */
+        .portfolio-nav-item {
+            color: var(--light-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 22px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background-color: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(80, 80, 80, 0.2);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .portfolio-nav-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: transparent;
+        }
+        
+        .portfolio-nav-item:hover {
+            background: var(--accent-gradient);
+            border-color: transparent;
+            transform: translateY(-3px);
+            color: var(--white);
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(185, 20, 33, 0.2);
+        }
+        
+        .portfolio-nav-item.active {
+            background: var(--accent-gradient);
+            color: var(--white);
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(185, 20, 33, 0.2);
+        }
+        
+        .portfolio-nav-item.animate-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Fix for genre card animations */
+        .genre-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .genre-card.animate-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Fix for category header animations */
+        .category-header {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .category-header.animate-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Additional fixes for genre cards */
+        .genre-card:hover {
+            transform: translateY(-15px) scale(1.03) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border-color: rgba(185, 20, 33, 0.3);
+            z-index: 1;
+        }
+        
+        .genre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 35px 25px;
+            color: var(--white);
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.95) 0%, 
+                rgba(0, 0, 0, 0.8) 40%, 
+                rgba(0, 0, 0, 0.5) 70%, 
+                transparent 100%);
+            transform: translateY(calc(100% - 130px));
+            transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+            z-index: 2;
+            backdrop-filter: blur(2px);
+        }
+        
+        .genre-card:hover .genre-overlay {
+            transform: translateY(0) !important;
+        }
+        
+        /* Navigation section fixes */
+        .portfolio-nav {
+            padding: 35px 25px;
+            margin: 60px auto 80px; /* Adjusted margin for better spacing */
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background-color: rgba(18, 18, 18, 0.7); /* Darker background */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+            transform: translateY(0);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            max-width: 1200px; /* Limit width for better alignment */
+        }
+        
+        /* Ensure no margin/padding issues for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .portfolio-nav-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .portfolio-nav p.category-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 0 0 15px;
+            font-weight: 600;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .portfolio-nav p.category-title .highlight {
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        /* Make sure there's no unwanted gap or separator between sections */
+        section {
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -229,16 +859,37 @@
     <div id="header-container"></div>
 
     <section class="portfolio-hero">
+        <div class="particles-container" id="particles-container"></div>
         <div class="portfolio-hero-content">
-            <h1>Our Portfolio</h1>
-            <p>Explore our diverse collection of creative work across multiple disciplines</p>
+            <h1><span class="highlight">Creative</span> Portfolio</h1>
+            <p>Explore our diverse collection of professional work across multiple creative disciplines, showcasing technical excellence and artistic vision</p>
+            
+            <div class="portfolio-hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="projects-counter">250+</div>
+                    <div class="stat-text">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="clients-counter">120+</div>
+                    <div class="stat-text">Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="years-counter">15+</div>
+                    <div class="stat-text">Years Experience</div>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#photography" class="btn primary">Explore Gallery</a>
+                <a href="contact.html" class="btn secondary">Contact Us</a>
+            </div>
         </div>
     </section>
 
     <section class="portfolio-categories">
         <div class="container">
             <div class="portfolio-nav">
-                <p>Browse our work by category:</p>
+                <p class="category-title"><span class="highlight">Browse</span> our work by category</p>
                 <div class="portfolio-nav-items">
                     <a href="#photography" class="portfolio-nav-item active" data-category="photography">Photography</a>
                     <a href="#sound-recording" class="portfolio-nav-item" data-category="sound-recording">Sound Recording</a>
@@ -257,7 +908,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?portrait" alt="Portrait Photography">
+                            <img src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Portrait Photography">
                             <div class="genre-overlay">
                                 <h3>Portrait</h3>
                                 <p>Professional studio and environmental portraits</p>
@@ -267,7 +918,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?product-photography" alt="Product Photography">
+                            <img src="https://images.unsplash.com/photo-1525562723836-dca67a71d5f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Product Photography">
                             <div class="genre-overlay">
                                 <h3>Product</h3>
                                 <p>Commercial product photography for brands</p>
@@ -277,7 +928,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?corporate-event" alt="Corporate Photography">
+                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Corporate Photography">
                             <div class="genre-overlay">
                                 <h3>Corporate</h3>
                                 <p>Corporate events and team photography</p>
@@ -287,30 +938,10 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?architecture" alt="Architecture Photography">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Architecture Photography">
                             <div class="genre-overlay">
                                 <h3>Architecture</h3>
                                 <p>Interior and exterior architectural photography</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?fashion" alt="Fashion Photography">
-                            <div class="genre-overlay">
-                                <h3>Fashion</h3>
-                                <p>Editorial and commercial fashion photography</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?event" alt="Event Photography">
-                            <div class="genre-overlay">
-                                <h3>Events</h3>
-                                <p>Weddings, parties, and special events</p>
                                 <a href="#" class="btn primary">View Gallery</a>
                             </div>
                         </div>
@@ -326,7 +957,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?recording-studio" alt="Music Recording">
+                            <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Recording">
                             <div class="genre-overlay">
                                 <h3>Music Production</h3>
                                 <p>Full-service music recording and production</p>
@@ -336,7 +967,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?podcast" alt="Podcast Recording">
+                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Recording">
                             <div class="genre-overlay">
                                 <h3>Podcast</h3>
                                 <p>Professional podcast recording and production</p>
@@ -346,7 +977,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?voice-over" alt="Voice Over Recording">
+                            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Voice Over Recording">
                             <div class="genre-overlay">
                                 <h3>Voice Over</h3>
                                 <p>Professional voice over recording for commercials</p>
@@ -356,30 +987,10 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?sound-design" alt="Sound Design">
+                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Sound Design">
                             <div class="genre-overlay">
                                 <h3>Sound Design</h3>
                                 <p>Custom sound design for films and media</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?foley" alt="Foley Recording">
-                            <div class="genre-overlay">
-                                <h3>Foley</h3>
-                                <p>Custom foley recording for film and television</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?field-recording" alt="Field Recording">
-                            <div class="genre-overlay">
-                                <h3>Field Recording</h3>
-                                <p>Professional on-location audio capture</p>
                                 <a href="#" class="btn primary">Listen to Samples</a>
                             </div>
                         </div>
@@ -395,7 +1006,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-dubbing" alt="Film Dubbing">
+                            <img src="https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Dubbing">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Multi-language film dubbing services</p>
@@ -405,7 +1016,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?animation-dubbing" alt="Animation Dubbing">
+                            <img src="https://images.unsplash.com/photo-1578022761797-b8636ac1773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Animation Dubbing">
                             <div class="genre-overlay">
                                 <h3>Animation</h3>
                                 <p>Character voice acting for animation</p>
@@ -415,7 +1026,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-dubbing" alt="Commercial Dubbing">
+                            <img src="https://images.unsplash.com/photo-1522869635100-187f6605042a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Dubbing">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Multi-language commercial voice-overs</p>
@@ -425,7 +1036,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?documentary-dubbing" alt="Documentary Dubbing">
+                            <img src="https://images.unsplash.com/photo-1523297467724-f6758d7124c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Documentary Dubbing">
                             <div class="genre-overlay">
                                 <h3>Documentary</h3>
                                 <p>Professional narration and dubbing services</p>
@@ -444,7 +1055,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?music-mixing" alt="Music Mixing">
+                            <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Mixing">
                             <div class="genre-overlay">
                                 <h3>Music</h3>
                                 <p>Professional mixing and mastering for music</p>
@@ -454,7 +1065,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-mixing" alt="Film Mixing">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Mixing">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Audio post-production for film</p>
@@ -464,7 +1075,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?podcast-mixing" alt="Podcast Mixing">
+                            <img src="https://images.unsplash.com/photo-1593698054598-5e81bd0d4b81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Mixing">
                             <div class="genre-overlay">
                                 <h3>Podcast</h3>
                                 <p>Professional podcast mixing and mastering</p>
@@ -474,7 +1085,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-mixing" alt="Commercial Mixing">
+                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Mixing">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Audio post-production for commercials</p>
@@ -493,7 +1104,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-retouching" alt="Photo Retouching">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Retouching">
                             <div class="genre-overlay">
                                 <h3>Photo Retouching</h3>
                                 <p>Professional photo retouching services</p>
@@ -503,7 +1114,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-manipulation" alt="Photo Manipulation">
+                            <img src="https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Manipulation">
                             <div class="genre-overlay">
                                 <h3>Photo Manipulation</h3>
                                 <p>Creative compositing and manipulation</p>
@@ -513,7 +1124,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?video-editing" alt="Video Editing">
+                            <img src="https://images.unsplash.com/photo-1574717024453-354899f042e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Video Editing">
                             <div class="genre-overlay">
                                 <h3>Video Editing</h3>
                                 <p>Professional video post-production</p>
@@ -523,7 +1134,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?motion-graphics" alt="Motion Graphics">
+                            <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Motion Graphics">
                             <div class="genre-overlay">
                                 <h3>Motion Graphics</h3>
                                 <p>Custom motion graphics and animation</p>
@@ -542,7 +1153,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?film-grading" alt="Film Grading">
+                            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Grading">
                             <div class="genre-overlay">
                                 <h3>Film</h3>
                                 <p>Cinematic colour grading for films</p>
@@ -552,7 +1163,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?commercial-grading" alt="Commercial Grading">
+                            <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Grading">
                             <div class="genre-overlay">
                                 <h3>Commercial</h3>
                                 <p>Colour grading for commercials and ads</p>
@@ -562,7 +1173,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?music-video-grading" alt="Music Video Grading">
+                            <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Video Grading">
                             <div class="genre-overlay">
                                 <h3>Music Video</h3>
                                 <p>Creative colour grading for music videos</p>
@@ -572,7 +1183,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="https://source.unsplash.com/random/600x400/?photo-grading" alt="Photo Grading">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Grading">
                             <div class="genre-overlay">
                                 <h3>Photo</h3>
                                 <p>Professional colour grading for photography</p>
@@ -585,70 +1196,514 @@
         </div>
     </section>
 
+    <!-- Gallery Modal -->
+    <div class="gallery-modal">
+        <div class="gallery-modal-content">
+            <div class="gallery-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2 class="gallery-title">Gallery Title</h2>
+            <div class="gallery-description">Gallery description text goes here</div>
+            <div class="gallery-grid">
+                <!-- Gallery images will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
     <script src="script.js"></script>
-    <script src="portfolio-standalone.js"></script>
-    <script src="portfolio.js"></script>
-    
-    <!-- Force visibility of portfolio items -->
-    <style id="force-portfolio-visibility">
-        /* Force portfolio categories to be visible when active */
-        .portfolio-category.active {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        
-        /* Force genre grid to always be displayed as a grid */
-        .genre-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-            gap: 30px !important;
-            width: 100% !important;
-        }
-        
-        /* Force genre cards to be visible */
-        .genre-card {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            height: 300px !important;
-            position: relative !important;
-            overflow: hidden !important;
-            border-radius: 15px !important;
-        }
-        
-        /* Force genre images to be visible */
-        .genre-image {
-            display: block !important;
-            visibility: visible !important;
-            width: 100% !important;
-            height: 100% !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-        
-        /* Force images inside genre cards to be visible */
-        .genre-image img {
-            display: block !important;
-            visibility: visible !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-        }
-        
-        /* Force overlay to be visible on hover */
-        .genre-card:hover .genre-overlay {
-            transform: translateY(0) !important;
-            visibility: visible !important;
-        }
-    </style>
-    
-    <!-- Success message for portfolio page finalization -->
     <script>
-        console.log('Portfolio page finalized and isolated from other website changes.');
+        // Update current year in footer
+        document.getElementById('current-year') && (document.getElementById('current-year').innerText = new Date().getFullYear());
+        
+        // Enhanced Portfolio Page Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles in the hero section
+            createParticles();
+            
+            // Initialize counters in the hero section
+            initCounters();
+            
+            // Force all genre overlays to have initial state
+            const allGenreOverlays = document.querySelectorAll('.genre-overlay');
+            allGenreOverlays.forEach(overlay => {
+                overlay.style.transform = 'translateY(calc(100% - 130px))';
+            });
+            
+            const navItems = document.querySelectorAll('.portfolio-nav-item');
+            const portfolioCategories = document.querySelectorAll('.portfolio-category');
+            
+            // Make sure portfolio categories are properly set up
+            portfolioCategories.forEach(category => {
+                if (category.classList.contains('active')) {
+                    category.style.display = 'block';
+                    category.style.visibility = 'visible';
+                    category.style.opacity = '1';
+                    category.style.transform = 'translateY(0)';
+                } else {
+                    category.style.display = 'none';
+                    category.style.visibility = 'hidden';
+                    category.style.opacity = '0';
+                    category.style.transform = 'translateY(30px)';
+                }
+            });
+            
+            // Animate the nav items with staggered delay
+            navItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animate-in');
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+            
+            // Add click event to nav items
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all nav items
+                    navItems.forEach(navItem => navItem.classList.remove('active'));
+                    
+                    // Add active class to clicked nav item
+                    this.classList.add('active');
+                    
+                    // Get category ID
+                    const categoryId = this.getAttribute('data-category');
+                    
+                    // Hide all categories
+                    portfolioCategories.forEach(category => {
+                        category.classList.remove('active');
+                        category.style.display = 'none';
+                        category.style.visibility = 'hidden';
+                        category.style.opacity = '0';
+                        category.style.transform = 'translateY(30px)';
+                    });
+                    
+                    // Show selected category
+                    const selectedCategory = document.getElementById(categoryId);
+                    selectedCategory.classList.add('active');
+                    selectedCategory.style.display = 'block';
+                    selectedCategory.style.visibility = 'visible';
+                    selectedCategory.style.opacity = '1';
+                    selectedCategory.style.transform = 'translateY(0)';
+                    
+                    // Animate the category header
+                    const categoryHeader = selectedCategory.querySelector('.category-header');
+                    categoryHeader.classList.add('animate-in');
+                    
+                    // Animate the genre cards with staggered delay
+                    const genreCards = selectedCategory.querySelectorAll('.genre-card');
+                    genreCards.forEach((card, index) => {
+                        card.classList.remove('animate-in');
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(50px)';
+                        
+                        setTimeout(() => {
+                            card.classList.add('animate-in');
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 200 + (index * 100));
+                    });
+                    
+                    // Smooth scroll to the category section
+                    const offset = 100; // Offset from the top
+                    const targetPosition = selectedCategory.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Preload gallery images
+            const preloadImages = (images) => {
+                images.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            };
+            
+            // Enhanced gallery data with more categories
+            const galleryData = {
+                'portrait': {
+                    title: 'Portrait Photography',
+                    description: 'Professional studio and environmental portrait photography showcasing our best work.',
+                    images: [
+                        'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1520975661595-6453be3f7070?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'product': {
+                    title: 'Product Photography',
+                    description: 'High-quality product photography for brands and e-commerce.',
+                    images: [
+                        'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1531325082793-ca7c9db6a4c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1585565804112-f201f68c48b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'corporate': {
+                    title: 'Corporate Photography',
+                    description: 'Professional corporate event and team photography services.',
+                    images: [
+                        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1521791136064-38f8d8a0c4fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1521791136064-38f8d8a0c4fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'architecture': {
+                    title: 'Architecture Photography',
+                    description: 'Stunning interior and exterior architectural photography.',
+                    images: [
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                },
+                'default': {
+                    title: 'Our Gallery',
+                    description: 'A collection of our best work showcasing our professional skills and creativity.',
+                    images: [
+                        'https://images.unsplash.com/photo-1544549281-5a229cb9110b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1490971588422-52f6262a237a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1517697471339-4aa32003c11a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                    ]
+                }
+            };
+            
+            // Preload all gallery images
+            Object.values(galleryData).forEach(category => {
+                preloadImages(category.images);
+            });
+            
+            // Gallery Modal Functionality
+            const galleryBtns = document.querySelectorAll('.btn.primary');
+            const galleryModal = document.querySelector('.gallery-modal');
+            const galleryClose = document.querySelector('.gallery-close');
+            const galleryTitle = document.querySelector('.gallery-title');
+            const galleryDescription = document.querySelector('.gallery-description');
+            const galleryGrid = document.querySelector('.gallery-grid');
+            
+            // Keyboard navigation for gallery modal
+            document.addEventListener('keydown', function(e) {
+                if (galleryModal.style.display === 'flex') {
+                    if (e.key === 'Escape') {
+                        closeGalleryModal();
+                    }
+                }
+            });
+            
+            // Enhanced close gallery modal function
+            function closeGalleryModal() {
+                gsap.to(galleryModal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        galleryModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+            
+            // Open gallery modal when gallery buttons are clicked
+            galleryBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the gallery type from parent card if available
+                    const card = this.closest('.genre-card');
+                    const cardTitle = card ? card.querySelector('h3').textContent.trim().toLowerCase() : 'default';
+                    
+                    // Set gallery content based on card type or use default
+                    let galleryType = 'default';
+                    if (galleryData[cardTitle]) {
+                        galleryType = cardTitle;
+                    }
+                    
+                    // Update gallery modal content
+                    galleryTitle.textContent = galleryData[galleryType].title;
+                    galleryDescription.textContent = galleryData[galleryType].description;
+                    
+                    // Clear existing gallery
+                    galleryGrid.innerHTML = '';
+                    
+                    // Add gallery images with enhanced loading
+                    galleryData[galleryType].images.forEach((imgSrc, index) => {
+                        const imgContainer = document.createElement('div');
+                        imgContainer.className = 'gallery-item';
+                        imgContainer.setAttribute('data-index', index);
+                        
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `${galleryData[galleryType].title} - Image ${index + 1}`;
+                        img.loading = 'lazy';
+                        
+                        // Add loading animation
+                        const loadingOverlay = document.createElement('div');
+                        loadingOverlay.className = 'loading-overlay';
+                        loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
+                        
+                        imgContainer.appendChild(loadingOverlay);
+                        imgContainer.appendChild(img);
+                        galleryGrid.appendChild(imgContainer);
+                        
+                        // Remove loading overlay when image is loaded
+                        img.onload = () => {
+                            loadingOverlay.style.opacity = '0';
+                            setTimeout(() => loadingOverlay.remove(), 300);
+                        };
+                    });
+                    
+                    // Show gallery modal with animation
+                    galleryModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    gsap.fromTo(galleryModal, 
+                        {opacity: 0},
+                        {opacity: 1, duration: 0.3, ease: "power2.out"}
+                    );
+                    
+                    gsap.fromTo('.gallery-modal-content', 
+                        {y: 50, opacity: 0},
+                        {y: 0, opacity: 1, duration: 0.5, delay: 0.1, ease: "back.out(1.7)"}
+                    );
+                    
+                    // Animation for gallery items with staggered delay
+                    gsap.fromTo('.gallery-item', 
+                        {scale: 0.8, opacity: 0},
+                        {
+                            scale: 1, 
+                            opacity: 1, 
+                            duration: 0.5, 
+                            stagger: 0.1, 
+                            delay: 0.3, 
+                            ease: "back.out(1.2)"
+                        }
+                    );
+                });
+            });
+            
+            // Close gallery modal
+            if (galleryClose) {
+                galleryClose.addEventListener('click', closeGalleryModal);
+            }
+            
+            // Close modal when clicking outside content
+            if (galleryModal) {
+                galleryModal.addEventListener('click', function(e) {
+                    if (e.target === galleryModal) {
+                        closeGalleryModal();
+                    }
+                });
+            }
+            
+            // Initialize animations for the page
+            initPortfolioAnimations();
+            
+            // Split text for animation if SplitType is available
+            if (typeof SplitType !== 'undefined') {
+                const categoryTitle = document.querySelector('.category-title');
+                if (categoryTitle) {
+                    const splitText = new SplitType(categoryTitle, { types: 'chars' });
+                    
+                    // Animate each character
+                    gsap.to(splitText.chars, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.5,
+                        stagger: 0.03,
+                        ease: "back.out(1.7)",
+                        onComplete: () => {
+                            categoryTitle.classList.add('animate');
+                        }
+                    });
+                }
+            }
+            
+            // Animate the initial active category on page load
+            const activeCategory = document.querySelector('.portfolio-category.active');
+            if (activeCategory) {
+                const categoryHeader = activeCategory.querySelector('.category-header');
+                if (categoryHeader) categoryHeader.classList.add('animate-in');
+                
+                // Animate the genre cards with staggered delay
+                const genreCards = activeCategory.querySelectorAll('.genre-card');
+                genreCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, 300 + (index * 100));
+                });
+            }
+        });
+        
+        // Initialize particles in the hero section
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+            
+            const particlesCount = window.innerWidth < 768 ? 30 : 50;
+            
+            for (let i = 0; i < particlesCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = posX + '%';
+                particle.style.top = posY + '%';
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                particle.style.animationDelay = delay + 's';
+                
+                // Random animation duration between 15s and 30s
+                const duration = Math.random() * 15 + 15;
+                
+                // Apply the floating animation with GSAP
+                container.appendChild(particle);
+                
+                gsap.to(particle, {
+                    x: Math.random() * 100 - 50,
+                    y: Math.random() * 100 - 50,
+                    duration: duration,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: delay
+                });
+            }
+        }
+        
+        // Initialize counters in the hero section
+        function initCounters() {
+            const projectsCounter = document.getElementById('projects-counter');
+            const clientsCounter = document.getElementById('clients-counter');
+            const yearsCounter = document.getElementById('years-counter');
+            
+            if (projectsCounter) animateCounter(projectsCounter, 0, 250, 2000);
+            if (clientsCounter) animateCounter(clientsCounter, 0, 120, 2000);
+            if (yearsCounter) animateCounter(yearsCounter, 0, 15, 2000);
+        }
+        
+        // Counter animation
+        function animateCounter(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        function initPortfolioAnimations() {
+            // Initialize ScrollTrigger for scroll animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero section animations
+            const heroTitle = document.querySelector(".portfolio-hero-content h1");
+            const heroDescription = document.querySelector(".portfolio-hero-content p");
+            const heroStats = document.querySelector(".portfolio-hero-stats");
+            const heroButtons = document.querySelector(".hero-buttons");
+            
+            if (heroTitle) {
+                gsap.from(heroTitle, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.2,
+                    ease: "power3.out"
+                });
+            }
+            
+            if (heroDescription) {
+                gsap.from(heroDescription, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.4,
+                    ease: "power3.out"
+                });
+            }
+            
+            if (heroStats) {
+                gsap.from(heroStats, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.6,
+                    ease: "power3.out"
+                });
+            }
+            
+            if (heroButtons) {
+                gsap.from(heroButtons, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.8,
+                    ease: "power3.out"
+                });
+            }
+            
+            // Portfolio nav animations
+            gsap.from(".portfolio-nav", {
+                scrollTrigger: {
+                    trigger: ".portfolio-nav",
+                    start: "top 90%"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+            
+            // Add scroll animations to all sections and elements
+            document.querySelectorAll('section').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        once: true
+                    },
+                    y: 30,
+                    opacity: 0.8,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+        }
     </script>
 </body>
 </html> 

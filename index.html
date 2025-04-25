@@ -2416,6 +2416,164 @@
                 }, 100); // Small delay to ensure everything is loaded
             });
         </script>
+        
+        <style>
+            /* Unified Testimonials Styling */
+            .unified-testimonial-slider {
+                position: relative;
+                margin: 40px 0;
+                overflow: hidden;
+            }
+            
+            .testimonial-item {
+                display: none;
+                animation: fadeIn 0.5s ease forwards;
+            }
+            
+            .testimonial-content {
+                background: var(--secondary-dark);
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+            
+            .testimonial-content::before {
+                content: "";
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 120px;
+                line-height: 1;
+                font-family: serif;
+                color: rgba(185, 20, 33, 0.1);
+                z-index: 0;
+            }
+            
+            .testimonial-content p {
+                position: relative;
+                font-size: 1.1rem;
+                line-height: 1.8;
+                z-index: 1;
+                margin-bottom: 25px;
+            }
+            
+            .client-info {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                position: relative;
+                z-index: 1;
+            }
+            
+            .client-info h4 {
+                margin-bottom: 5px;
+                font-size: 1.2rem;
+            }
+            
+            .video-container {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                height: 0;
+                overflow: hidden;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                margin-bottom: 20px;
+            }
+            
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            
+            .video-info {
+                background: var(--secondary-dark);
+                padding: 25px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            
+            .video-info h4 {
+                margin-bottom: 5px;
+                font-size: 1.2rem;
+            }
+            
+            .testimonial-controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+            }
+            
+            .prev-btn,
+            .next-btn {
+                background: rgba(40, 40, 40, 0.7);
+                color: var(--white);
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                margin: 0 10px;
+                transition: all 0.3s ease;
+            }
+            
+            .prev-btn:hover,
+            .next-btn:hover {
+                background-color: var(--accent-primary);
+                transform: scale(1.1);
+            }
+            
+            .testimonial-dots {
+                display: flex;
+                gap: 8px;
+            }
+            
+            .dot {
+                width: 12px;
+                height: 12px;
+                background-color: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .dot.active {
+                background-color: var(--accent-primary);
+                transform: scale(1.2);
+            }
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Media queries for better responsiveness */
+            @media (max-width: 768px) {
+                .testimonial-content {
+                    padding: 30px;
+                }
+                
+                .testimonial-content p {
+                    font-size: 1rem;
+                }
+            }
+        </style>
     </section>
 
     <!-- Footer Container -->

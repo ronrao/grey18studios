@@ -1177,3 +1177,74 @@ function initPageTransition() {
         }
     });
 }
+
+// Common site JavaScript
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
+    
+    // Update footer year
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Skip for portfolio category navigation which has its own handler
+            if (document.querySelector('.portfolio-nav-item') && this.classList.contains('portfolio-nav-item')) {
+                return;
+            }
+            
+            if (href !== '#') {
+                e.preventDefault();
+                
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                }
+            }
+        });
+    });
+    
+    // Sticky header on scroll
+    const header = document.querySelector('header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        });
+    }
+});
