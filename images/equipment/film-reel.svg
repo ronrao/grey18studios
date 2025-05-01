@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Gradients and Filters -->
+  <defs>
+    <linearGradient id="reelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="50%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <linearGradient id="centerHubGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#888"/>
+      <stop offset="50%" stop-color="#666"/>
+      <stop offset="100%" stop-color="#444"/>
+    </linearGradient>
+    <linearGradient id="filmGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#222"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="gloss">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="5" specularConstant="1" specularExponent="30" lighting-color="#white" result="spec">
+        <fePointLight x="100" y="60" z="150"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceGraphic" operator="in" result="specOut"/>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+
+  <!-- Shadow under reel -->
+  <ellipse cx="100" cy="185" rx="70" ry="10" opacity="0.3" fill="#000"/>
+
+  <!-- Main Reel Body -->
+  <circle cx="100" cy="100" r="75" fill="url(#reelGradient)" stroke="#444" stroke-width="1"/>
+  
+  <!-- Film Layer -->
+  <circle cx="100" cy="100" r="60" fill="url(#filmGradient)" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Center Hub with Cutout and Spindle Hole -->
+  <circle cx="100" cy="100" r="30" fill="url(#centerHubGradient)" stroke="#444" stroke-width="1"/>
+  <circle cx="100" cy="100" r="15" fill="#111" stroke="#222" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="8" fill="#000" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Sprocket Holes around outer edge -->
+  <g id="sprocketHoles">
+    <!-- Sprocket Holes -->
+    <circle cx="100" cy="25" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="146" cy="36" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="175" cy="75" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="175" cy="125" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="146" cy="164" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="100" cy="175" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="54" cy="164" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="25" cy="125" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="25" cy="75" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+    <circle cx="54" cy="36" r="5" fill="#111" stroke="#222" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Spoke Patterns from center to sprocket holes -->
+  <line x1="100" y1="100" x2="100" y2="25" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="146" y2="36" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="175" y2="75" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="175" y2="125" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="146" y2="164" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="100" y2="175" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="54" y2="164" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="25" y2="125" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="25" y2="75" stroke="#444" stroke-width="2"/>
+  <line x1="100" y1="100" x2="54" y2="36" stroke="#444" stroke-width="2"/>
+  
+  <!-- Inner Rim -->
+  <circle cx="100" cy="100" r="45" fill="none" stroke="#444" stroke-width="2"/>
+
+  <!-- Film Strip Winding -->
+  <g id="filmLayers" filter="url(#shadow)">
+    <path d="M100,40 A60,60 0 0,1 160,100" fill="none" stroke="#222" stroke-width="3" opacity="0.7"/>
+    <path d="M100,45 A55,55 0 0,1 155,100" fill="none" stroke="#222" stroke-width="3" opacity="0.75"/>
+    <path d="M100,50 A50,50 0 0,1 150,100" fill="none" stroke="#222" stroke-width="3" opacity="0.8"/>
+    <path d="M100,55 A45,45 0 0,1 145,100" fill="none" stroke="#222" stroke-width="3" opacity="0.85"/>
+    <path d="M100,60 A40,40 0 0,1 140,100" fill="none" stroke="#222" stroke-width="3" opacity="0.9"/>
+  </g>
+
+  <!-- Film Edge Pattern (sprocket holes) -->
+  <g id="filmEdge">
+    <rect x="145" y="85" width="2" height="4" fill="#000"/>
+    <rect x="145" y="95" width="2" height="4" fill="#000"/>
+    <rect x="145" y="105" width="2" height="4" fill="#000"/>
+    <rect x="145" y="115" width="2" height="4" fill="#000"/>
+    
+    <rect x="150" y="85" width="2" height="4" fill="#000"/>
+    <rect x="150" y="95" width="2" height="4" fill="#000"/>
+    <rect x="150" y="105" width="2" height="4" fill="#000"/>
+    <rect x="150" y="115" width="2" height="4" fill="#000"/>
+    
+    <rect x="155" y="90" width="2" height="4" fill="#000"/>
+    <rect x="155" y="100" width="2" height="4" fill="#000"/>
+    <rect x="155" y="110" width="2" height="4" fill="#000"/>
+  </g>
+
+  <!-- Gloss/reflection overlay -->
+  <ellipse cx="80" cy="70" rx="60" ry="30" fill="#fff" opacity="0.05" filter="url(#gloss)" transform="rotate(-10, 100, 100)"/>
+  
+  <!-- Film hanging out of reel -->
+  <path d="M160,100 
+           Q170,110 175,125 
+           Q180,140 170,150 
+           Q160,160 150,155" 
+        fill="none" stroke="#222" stroke-width="4"/>
+        
+  <!-- Film frames on hanging film -->
+  <rect x="172" y="125" width="6" height="8" fill="none" stroke="#000" stroke-width="0.5"/>
+  <rect x="172" y="135" width="6" height="8" fill="none" stroke="#000" stroke-width="0.5"/>
+  <rect x="172" y="145" width="6" height="8" fill="none" stroke="#000" stroke-width="0.5"/>
+  
+  <!-- Film edge holes -->
+  <rect x="170" y="127" width="2" height="2" fill="#000"/>
+  <rect x="170" y="137" width="2" height="2" fill="#000"/>
+  <rect x="170" y="147" width="2" height="2" fill="#000"/>
+  
+  <rect x="178" y="127" width="2" height="2" fill="#000"/>
+  <rect x="178" y="137" width="2" height="2" fill="#000"/>
+  <rect x="178" y="147" width="2" height="2" fill="#000"/>
+  
+  <!-- Logo plate -->
+  <g transform="translate(85, 95) rotate(-10)">
+    <rect x="0" y="0" width="30" height="10" rx="2" fill="#222" stroke="#444" stroke-width="0.5"/>
+    <text x="15" y="7" font-family="Arial" font-weight="bold" font-size="5" fill="#ccc" text-anchor="middle">GREY18</text>
+  </g>
+</svg> 

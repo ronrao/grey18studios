@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipment | Grey 18 Studio</title>
-    <link rel="stylesheet" href="styles-updated.css">
+    <title>Grey 18 | Equipment</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -36,58 +36,549 @@
             --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
             --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
             --card-border-radius: 10px;
+            /* Brand theme colors for icons */
+            --brand-orange: #F27D42;
+            --brand-blue: #3D85C6;
         }
         
         body {
             background: var(--page-gradient);
+            margin: 0;
+            overflow-x: hidden;
         }
         
-        /* Equipment Page Styles */
-        .equipment-hero {
-            background: var(--grey-gradient-1) !important;
-            padding-top: 180px !important;
-            height: 60vh;
-            display: flex;
+        /* Custom cursor with camera icon */
+        .custom-cursor {
+            position: fixed;
+            width: 36px;
+            height: 28px;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            background-image: linear-gradient(to bottom, #666, #444);
+            pointer-events: none;
+            display: none;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            position: relative;
+            z-index: 9999;
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            border: 2px solid #888;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
         }
         
-        .equipment-hero::before {
+        .custom-cursor i {
+            color: #ff5252;
+            font-size: 12px;
+            margin-top: -2px;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+        }
+
+        .custom-cursor::before {
             content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            width: 14px;
+            height: 6px;
+            background-color: #555;
+            border-radius: 4px 4px 0 0;
+            border-top: 1px solid #999;
+            border-left: 1px solid #888;
+            border-right: 1px solid #888;
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            background-color: #ff3333;
+            box-shadow: 0 0 3px #ff6666;
+            border-radius: 50%;
+            animation: blink 4s infinite;
+        }
+
+        /* Lens element */
+        .custom-cursor .lens {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #444 0%, #666 40%, #444 100%);
+            border: 1px solid #777;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.5), 0 0 2px rgba(255,255,255,0.3);
+        }
+
+        /* Shutter button */
+        .custom-cursor .shutter {
+            position: absolute;
+            top: -4px;
+            right: 8px;
+            width: 8px;
+            height: 4px;
+            background-color: #aaa;
+            border-radius: 2px;
+            border: 1px solid #bbb;
+        }
+        
+        /* Camera flash animation on cursor only */
+        .cursor-flash {
+            filter: brightness(4) contrast(1.5);
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+            animation: cursorFlash 0.2s ease forwards;
+        }
+        
+        @keyframes cursorFlash {
+            0% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(1) contrast(1); }
+            50% { transform: translate(-50%, -50%) scale(0.95); filter: brightness(5) contrast(1.7); box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.9), 0 0 40px 15px rgba(255, 255, 255, 0.7); }
+            100% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(4) contrast(1.5); }
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            5% { opacity: 1; }
+            10% { opacity: 0.3; }
+            95% { opacity: 0.3; }
+            100% { opacity: 0.3; }
+        }
+        
+        /* Only show cursor on larger screens, not on touch devices */
+        @media (min-width: 992px) {
+            .custom-cursor {
+                display: flex;
+            }
+            
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: none !important;
+            }
+        }
+        
+        /* For touch devices, use normal cursor */
+        @media (max-width: 991px) {
+            html, body, a, button, .btn, .service-card, .portfolio-item, 
+            .nav-link, .expanded-close, .social-icon, .logo, 
+            .scroll-down, .menu-toggle, input, select, textarea {
+                cursor: auto !important;
+            }
+        }
+        
+        /* Parallax Container Styles */
+        .parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background: url('images/equipment/storyboard-bg.svg') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .parallax-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
-            animation: shimmer 15s infinite alternate;
+            background-color: rgba(10, 10, 10, 0.7);
+            z-index: 0 !important;
+            transform-style: preserve-3d;
+        }
+        
+        /* Background Effects */
+        .light-beam {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg) scale(2);
+            transform-origin: center;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: moveBeam 15s infinite ease-in-out;
+        }
+        
+        #lightBeam1 {
+            left: 30%;
+            animation-delay: 0s;
+        }
+        
+        #lightBeam2 {
+            right: 20%;
+            animation-delay: 5s;
+        }
+        
+        .film-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 80px,
+                rgba(255, 255, 255, 0.1) 80px,
+                rgba(255, 255, 255, 0.1) 90px
+            );
+            opacity: 0.3;
             pointer-events: none;
         }
         
-        .equipment-hero-content {
+        .storyboard-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        /* Particles */
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        /* Improved floating element styles */
+        .floating-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 1 !important; /* Ensure they're always visible */
+            animation: simpleFloat 6s infinite ease-in-out;
+            will-change: transform;
+            transform-origin: center center;
+        }
+        
+        .floating-element img {
+            width: 100%;
+            height: auto;
+            max-width: 70px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+        
+        /* Fixed animation keyframes */
+        @keyframes simpleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Individual animation delays with fixed positions */
+        .clapperboard { animation-delay: 0s; left: 15%; top: 20%; }
+        .film-reel { animation-delay: 1s; left: 70%; top: 15%; }
+        .director-chair { animation-delay: 2s; left: 25%; top: 60%; }
+        .video-camera { animation-delay: 0.5s; left: 65%; top: 70%; }
+        .editing-screen { animation-delay: 1.5s; left: 85%; top: 40%; }
+        .headphones { animation-delay: 2.5s; left: 40%; top: 80%; }
+        .director-megaphone { animation-delay: 0.8s; left: 80%; top: 10%; }
+        .modern-camera { animation-delay: 1.2s; left: 20%; top: 15%; }
+        .modern-drone { animation-delay: 1.8s; left: 75%; top: 80%; }
+        .modern-lights { animation-delay: 0.3s; left: 10%; top: 30%; }
+        .modern-microphone { animation-delay: 2.2s; left: 30%; top: 75%; }
+        
+        /* Fixed particle styles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 3;
+        }
+        
+        /* Mouse hint styles */
+        .mouse-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            opacity: 0.8;
+            transition: opacity 1s ease;
+            z-index: 100;
+        }
+        
+        .mouse-icon {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 15px;
+            margin-bottom: 10px;
             position: relative;
-            z-index: 2;
-            max-width: 850px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 0 20px;
         }
         
-        .equipment-hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, var(--white), #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .mouse-icon:after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: scrollHint 2s infinite;
         }
         
-        .equipment-hero-content p {
-            font-size: 1.2rem;
+        @keyframes scrollHint {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+        
+        /* Title and Content */
+        .parallax-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            transform: translateZ(50px);
+            position: relative;
+            z-index: 20;
+        }
+        
+        .parallax-subtitle {
+            font-size: 1.5rem;
             margin-bottom: 2rem;
-            color: var(--light-grey);
+            max-width: 800px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            transform: translateZ(40px);
+            position: relative;
+            z-index: 20;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent-gradient);
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            transform: translateY(0);
+            cursor: pointer;
+            z-index: 25;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #c82333, #0d1a6d);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Animations */
+        @keyframes moveBeam {
+            0%, 100% { transform: rotate(45deg) translateX(-50%) scale(2); opacity: 0.3; }
+            50% { transform: rotate(45deg) translateX(50%) scale(2); opacity: 0.7; }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .parallax-title {
+                font-size: 2.5rem;
+            }
+            
+            .parallax-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .floating-element {
+                transform: scale(0.7);
+            }
+        }
+        
+        /* Studio Elements */
+        .studio-element {
+            position: absolute;
+            z-index: 10;
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
+        }
+        
+        .camera {
+            width: 200px;
+            height: 200px;
+            background: url('https://www.freepnglogos.com/uploads/camera-png/camera-png-professional-video-camera-png-transparent-14.png') no-repeat center center;
+            background-size: contain;
+            bottom: 15%;
+            right: 25%;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            z-index: 10;
+            opacity: 1;
+        }
+        
+        .light-stand {
+            width: 150px;
+            height: 300px;
+            background: url('https://www.pngall.com/wp-content/uploads/5/Photography-Light-PNG-Image.png') no-repeat center center;
+            background-size: contain;
+            top: 20%;
+            left: 15%;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            z-index: 9;
+            opacity: 1;
+        }
+        
+        .microphone {
+            width: 100px;
+            height: 250px;
+            background: url('https://www.pngkey.com/png/full/9-98915_png-microphone-studio-mic-transparent.png') no-repeat center center;
+            background-size: contain;
+            bottom: 15%;
+            left: 20%;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            z-index: 8;
+            opacity: 1;
+        }
+        
+        .monitor {
+            width: 300px;
+            height: 180px;
+            background: url('https://pngimg.com/d/monitor_PNG101711.png') no-repeat center center;
+            background-size: contain;
+            top: 25%;
+            right: 15%;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            z-index: 7;
+            opacity: 1;
+        }
+        
+        .lens {
+            width: 150px;
+            height: 150px;
+            background: url('https://www.pngkey.com/png/full/212-2125542_camera-lens-png-camera-lens-png-transparent.png') no-repeat center center;
+            background-size: contain;
+            top: 55%;
+            right: 40%;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            z-index: 11;
+            opacity: 1;
+        }
+        
+        .light-beam {
+            position: absolute;
+            width: 250px;
+            height: 400px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            transform: rotateZ(-30deg) scale(1);
+            top: 15%;
+            left: 20%;
+            z-index: 3;
+            opacity: 0.6;
+            filter: blur(10px);
+            pointer-events: none;
+        }
+        
+        .light-beam2 {
+            position: absolute;
+            width: 200px;
+            height: 350px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: rotateZ(20deg) scale(1);
+            top: 20%;
+            right: 25%;
+            z-index: 3;
+            opacity: 0.5;
+            filter: blur(8px);
+            pointer-events: none;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(30px);
+                opacity: 0;
+            }
         }
         
         /* Consistent section styling */
@@ -286,20 +777,321 @@
                 font-size: 2rem;
             }
         }
+
+        /* Remove any styles affecting header on scroll */
+        header {
+            z-index: 1000 !important; /* Ensure header stays above other elements */
+        }
+
+        /* Ensure header styling is isolated from parallax effects */
+        header * {
+            transition: none !important; /* Prevent transitions from parallax affecting header */
+        }
+
+        .modern-camera {
+            top: 15%;
+            right: 18%;
+            width: 120px;
+            animation: float 8s infinite ease-in-out;
+            animation-delay: 1.2s;
+        }
+
+        .modern-drone {
+            bottom: 20%;
+            right: 25%;
+            width: 110px;
+            animation: float 9s infinite ease-in-out;
+            animation-delay: 0.8s;
+        }
+
+        .modern-lights {
+            top: 30%;
+            left: 10%;
+            width: 90px;
+            animation: float 7.5s infinite ease-in-out;
+            animation-delay: 2.3s;
+        }
+
+        .modern-microphone {
+            bottom: 20%;
+            left: 18%;
+            width: 70px;
+            animation: float 8.2s infinite ease-in-out;
+            animation-delay: 1.7s;
+        }
+
+        /* Add CSS styles for brand colors */
+        .floating-element img.orange-filter {
+            filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%); /* Orange brand color */
+        }
+
+        .floating-element img.blue-filter {
+            filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%); /* Blue brand color */
+        }
     </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate particles
+            createParticles();
+            
+            // Add interaction hint
+            addInteractionHint();
+            
+            // Simplified parallax effect for mouse movement that preserves position
+            document.addEventListener('mousemove', function(e) {
+                const container = document.querySelector('.parallax-container');
+                if (!container) return;
+                
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                
+                // Apply parallax effect to title and subtitle
+                const title = document.querySelector('.parallax-title');
+                const subtitle = document.querySelector('.parallax-subtitle');
+                const ctaButton = document.querySelector('.cta-button');
+                
+                if (title) title.style.transform = `translateZ(50px) translate(${xAxis * 0.5}px, ${yAxis * 0.5}px)`;
+                if (subtitle) subtitle.style.transform = `translateZ(40px) translate(${xAxis * 0.3}px, ${yAxis * 0.3}px)`;
+                if (ctaButton) ctaButton.style.transform = `translateZ(30px) translate(${xAxis * 0.2}px, ${yAxis * 0.2}px)`;
+                
+                // Apply parallax to all floating elements - PRESERVE the basic animation
+                document.querySelectorAll('.floating-element').forEach(element => {
+                    const depth = parseFloat(element.getAttribute('data-depth') || 0.5);
+                    
+                    // Calculate the base animation offset (the up/down float)
+                    let baseY = 0;
+                    const animationPhase = (Date.now() % 6000) / 6000; // 6s animation cycle
+                    if (animationPhase <= 0.5) {
+                        baseY = -15 * (animationPhase * 2); // 0 to -15px
+                    } else {
+                        baseY = -15 * (1 - (animationPhase - 0.5) * 2); // -15px to 0
+                    }
+                    
+                    // Apply parallax offset on top of the animation's current position
+                    element.style.transform = `translateY(${baseY}px) translate(${xAxis * depth}px, ${yAxis * depth}px)`;
+                });
+                
+                // Dynamic light beam movement
+                const lightBeam1 = document.getElementById('lightBeam1');
+                const lightBeam2 = document.getElementById('lightBeam2');
+                
+                if (lightBeam1) {
+                    lightBeam1.style.transform = `rotate(${45 + yAxis}deg) translateX(${xAxis * 2}px) scale(${2 + Math.abs(xAxis) * 0.01})`;
+                    lightBeam1.style.opacity = `${0.5 + Math.abs(xAxis) * 0.005}`;
+                }
+                
+                if (lightBeam2) {
+                    lightBeam2.style.transform = `rotate(${-45 - yAxis}deg) translateX(${-xAxis * 2}px) scale(${2 + Math.abs(yAxis) * 0.01})`;
+                    lightBeam2.style.opacity = `${0.5 + Math.abs(yAxis) * 0.005}`;
+                }
+                
+                // Dynamic background movement
+                const parallaxBg = document.getElementById('parallaxBg');
+                if (parallaxBg) {
+                    parallaxBg.style.transform = `translate(${xAxis * 0.05}px, ${yAxis * 0.05}px)`;
+                }
+            });
+            
+            // Improved smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Improved touchpad handling with consistent positioning
+            let lastScrollTime = 0;
+            const scrollThrottle = 10; // ms between scroll events
+            
+            window.addEventListener('wheel', function(e) {
+                const now = Date.now();
+                
+                // Throttle scroll events for better performance
+                if (now - lastScrollTime < scrollThrottle) return;
+                lastScrollTime = now;
+                
+                // Only apply effects for small movements (like touchpad gestures)
+                if (Math.abs(e.deltaY) < 10) {
+                    // Apply parallax effects without scrolling the page
+                    const xAxis = e.deltaX / 10;
+                    const yAxis = e.deltaY / 10;
+                    
+                    document.querySelectorAll('.floating-element').forEach(element => {
+                        const depth = parseFloat(element.getAttribute('data-depth') || 0.5);
+                        
+                        // Calculate the base animation offset (same as in mousemove handler)
+                        let baseY = 0;
+                        const animationPhase = (Date.now() % 6000) / 6000; // 6s animation cycle
+                        if (animationPhase <= 0.5) {
+                            baseY = -15 * (animationPhase * 2); // 0 to -15px
+                        } else {
+                            baseY = -15 * (1 - (animationPhase - 0.5) * 2); // -15px to 0
+                        }
+                        
+                        // Apply the same transform calculation as in mousemove
+                        element.style.transform = `translateY(${baseY}px) translate(${xAxis * depth}px, ${yAxis * depth}px)`;
+                    });
+                }
+                // For larger movements, let default scrolling happen
+            }, { passive: true });
+            
+            // Custom cursor setup
+            const cursor = document.getElementById('custom-cursor');
+            if (cursor) {
+                document.addEventListener('mousemove', function(e) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    
+                    // Add slight lag for more organic feel
+                    setTimeout(() => {
+                        const lens = cursor.querySelector('.lens');
+                        if (lens) {
+                            lens.style.transform = `translate(${(Math.random() - 0.5) * 2}px, ${(Math.random() - 0.5) * 2}px)`;
+                        }
+                    }, 50);
+                });
+                
+                document.addEventListener('mousedown', function() {
+                    cursor.classList.add('cursor-flash');
+                    setTimeout(() => {
+                        cursor.classList.remove('cursor-flash');
+                    }, 200);
+                });
+            }
+            
+            // Set depth attributes for floating elements consistently
+            document.querySelectorAll('.floating-element').forEach((el, index) => {
+                // Use the data-depth already set in HTML
+                const depth = parseFloat(el.getAttribute('data-depth')) || (0.4 + (index % 6) * 0.1);
+                el.setAttribute('data-depth', depth);
+            });
+        });
+        
+        // Create particles for ambiance - simplified for better performance
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            // Clear existing particles
+            particlesContainer.innerHTML = '';
+            
+            // Create fewer particles for better performance
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random size - smaller for better performance
+                const size = 2 + Math.random() * 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Simple animation with css
+                const duration = 10 + Math.random() * 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.animation = `simpleFloat ${duration}s infinite ease-in-out ${delay}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Add interaction hint
+        function addInteractionHint() {
+            const container = document.querySelector('.parallax-container');
+            if (!container) return;
+            
+            const hint = document.createElement('div');
+            hint.className = 'mouse-hint';
+            hint.innerHTML = '<div class="mouse-icon"></div><span>Move mouse to explore</span>';
+            container.appendChild(hint);
+            
+            // Fade out after 5 seconds
+            setTimeout(() => {
+                hint.style.opacity = '0';
+                setTimeout(() => hint.remove(), 1000);
+            }, 5000);
+        }
+    </script>
 </head>
 <body>
+    <!-- Custom cursor -->
+    <div class="custom-cursor" id="custom-cursor">
+        <div class="lens"></div>
+        <div class="shutter"></div>
+        <i class="fas fa-circle"></i>
+    </div>
+
     <!-- Header Container -->
     <div id="header-container"></div>
     
-    <section class="equipment-hero">
-        <div class="equipment-hero-content">
-            <h1>Our Professional Equipment</h1>
-            <p>Explore the cutting-edge tools we use to deliver exceptional results</p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="parallax-container">
+            <div id="parallaxBg" class="parallax-bg">
+                <!-- Background effects -->
+                <div id="lightBeam1" class="light-beam"></div>
+                <div id="lightBeam2" class="light-beam"></div>
+                <div class="film-strip"></div>
+                <div class="storyboard-grid"></div>
+                
+                <!-- Particles container -->
+                <div id="particles"></div>
+                
+                <!-- Floating elements with brand-colored images - Fixed URLs and positioning -->
+                <div class="clapperboard floating-element" data-depth="0.8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1038/1038100.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Clapperboard">
+                </div>
+                <div class="film-reel floating-element" data-depth="0.6">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2886/2886314.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Film Reel">
+                </div>
+                <div class="director-chair floating-element" data-depth="0.7">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1974/1974855.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Director Chair">
+                </div>
+                <div class="video-camera floating-element" data-depth="0.5">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1781/1781735.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Video Camera">
+                </div>
+                <div class="editing-screen floating-element" data-depth="0.9">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7870/7870809.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Editing Screen">
+                </div>
+                <div class="headphones floating-element" data-depth="0.4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1062/1062688.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Headphones">
+                </div>
+                <div class="director-megaphone floating-element" data-depth="0.7">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2839/2839118.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Director Megaphone">
+                </div>
+                <!-- New Modern Equipment Elements with brand-colored images -->
+                <div class="modern-camera floating-element" data-depth="0.65">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4503/4503953.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Modern Camera">
+                </div>
+                <div class="modern-drone floating-element" data-depth="0.85">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3867/3867344.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Drone">
+                </div>
+                <div class="modern-lights floating-element" data-depth="0.55">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6108/6108212.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Studio Lights">
+                </div>
+                <div class="modern-microphone floating-element" data-depth="0.75">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3397/3397141.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Studio Microphone">
+                </div>
+            </div>
+            
+            <div id="parallaxTitle" class="parallax-title">Equipment</div>
+            <div id="parallaxSubtitle" class="parallax-subtitle">Professional film-making tools & technology</div>
+            <a id="ctaButton" href="#equipment-categories" class="cta-button">Explore Categories</a>
         </div>
-    </section>
+    </div>
 
-    <section class="equipment-categories">
+    <section class="equipment-categories" id="equipment-categories">
         <div class="container">
             <div class="section-header">
                 <h2>Professional Grade Equipment</h2>
@@ -410,5 +1202,318 @@
     <div id="footer-container"></div>
 
     <script src="script.js"></script>
+    <script>
+        // Parallax effect on mouse movement
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.parallax-container');
+            if (!container) return;
+            
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            // Apply parallax effect to title and subtitle with enhanced 3D
+            const title = document.querySelector('.parallax-title');
+            const subtitle = document.querySelector('.parallax-subtitle');
+            const ctaButton = document.querySelector('.cta-button');
+            
+            if (title) title.style.transform = `translateZ(50px) translate(${xAxis * 0.5}px, ${yAxis * 0.5}px)`;
+            if (subtitle) subtitle.style.transform = `translateZ(40px) translate(${xAxis * 0.3}px, ${yAxis * 0.3}px)`;
+            if (ctaButton) ctaButton.style.transform = `translateZ(30px) translate(${xAxis * 0.2}px, ${yAxis * 0.2}px)`;
+            
+            // Apply enhanced 3D parallax effect to floating elements
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach(element => {
+                const depth = parseFloat(element.getAttribute('data-depth') || 0.5);
+                const scale = parseFloat(element.getAttribute('data-scale') || 1);
+                
+                element.style.transform = `translate(${xAxis * depth}px, ${yAxis * depth}px) 
+                                          scale(${scale})`;
+            });
+            
+            // Dynamic light beam movement
+            const lightBeam1 = document.getElementById('lightBeam1');
+            const lightBeam2 = document.getElementById('lightBeam2');
+            
+            if (lightBeam1) {
+                lightBeam1.style.transform = `rotate(${45 + yAxis}deg) translateX(${xAxis * 2}px) scale(${2 + Math.abs(xAxis) * 0.01})`;
+                lightBeam1.style.opacity = `${0.5 + Math.abs(xAxis) * 0.005}`;
+            }
+            
+            if (lightBeam2) {
+                lightBeam2.style.transform = `rotate(${-45 - yAxis}deg) translateX(${-xAxis * 2}px) scale(${2 + Math.abs(yAxis) * 0.01})`;
+                lightBeam2.style.opacity = `${0.5 + Math.abs(yAxis) * 0.005}`;
+            }
+            
+            // Dynamic background movement
+            const parallaxBg = document.getElementById('parallaxBg');
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translate(${xAxis * 0.05}px, ${yAxis * 0.05}px)`;
+            }
+        });
+        
+        // Generate enhanced particles with depth and varied effects
+        function generateParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            // Clear existing particles
+            particlesContainer.innerHTML = '';
+            
+            const particleCount = 80; // Increased count for more immersive effect
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random depth (z-index and scale for 3D effect)
+                const depth = Math.random() * 5;
+                particle.style.zIndex = Math.floor(depth);
+                
+                // Random size with 3D perception (closer particles appear larger)
+                const size = (Math.random() * 4 + 1) * (depth / 2 + 1);
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Varied brightness based on depth (closer particles are brighter)
+                const opacity = 0.3 + (depth / 5) * 0.7;
+                particle.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
+                
+                // Add subtle glow effect to some particles
+                if (Math.random() > 0.7) {
+                    const glowSize = Math.random() * 5 + 2;
+                    const glowColor = Math.random() > 0.5 ? 'rgba(255, 255, 200, 0.3)' : 'rgba(200, 200, 255, 0.3)';
+                    particle.style.boxShadow = `0 0 ${glowSize}px ${glowSize / 2}px ${glowColor}`;
+                }
+                
+                // Random animation with variable speed based on depth
+                const delay = Math.random() * 20;
+                const duration = (Math.random() * 15 + 10) * (5 / (depth + 1)); // Closer particles move faster
+                
+                // Alternating animation patterns for more organic feel
+                const animationType = Math.floor(Math.random() * 3);
+                switch(animationType) {
+                    case 0:
+                        particle.style.animation = `floatParticle ${duration}s infinite linear`;
+                        break;
+                    case 1:
+                        particle.style.animation = `floatParticleAlt ${duration}s infinite ease-in-out`;
+                        break;
+                    case 2:
+                        particle.style.animation = `pulseParticle ${duration}s infinite ease-in-out`;
+                        break;
+                }
+                
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Add custom attributes for parallax effect
+                particle.setAttribute('data-depth', 0.2 + depth / 10);
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Setup floating elements - Remove rotation factors that cause shadowing
+        function setupFloatingElements() {
+            const elements = [
+                { selector: '.clapperboard', depth: 0.8, scale: 1.0 },
+                { selector: '.film-reel', depth: 0.6, scale: 1.1 },
+                { selector: '.director-chair', depth: 0.7, scale: 0.95 },
+                { selector: '.video-camera', depth: 0.5, scale: 1.05 },
+                { selector: '.editing-screen', depth: 0.9, scale: 1.0 },
+                { selector: '.headphones', depth: 0.4, scale: 0.9 },
+                { selector: '.director-megaphone', depth: 0.7, scale: 1.0 },
+                { selector: '.modern-camera', depth: 0.65, scale: 1.1 },
+                { selector: '.modern-drone', depth: 0.85, scale: 0.9 },
+                { selector: '.modern-lights', depth: 0.55, scale: 1.0 },
+                { selector: '.modern-microphone', depth: 0.75, scale: 0.95 }
+            ];
+            
+            elements.forEach(item => {
+                const el = document.querySelector(item.selector);
+                if (el) {
+                    el.setAttribute('data-depth', item.depth);
+                    el.setAttribute('data-scale', item.scale);
+                    el.style.transformOrigin = 'center center';
+                    
+                    // Don't modify existing animation here to prevent disruption
+                    // Animation will be applied by the setTimeout in DOMContentLoaded
+                }
+            });
+        }
+        
+        // Add interaction hint motion
+        function addInteractionHint() {
+            const container = document.querySelector('.parallax-container');
+            if (!container) return;
+            
+            const hint = document.createElement('div');
+            hint.className = 'mouse-hint';
+            hint.innerHTML = '<div class="mouse-icon"></div><span>Move mouse to explore</span>';
+            container.appendChild(hint);
+            
+            // Fade out after 5 seconds
+            setTimeout(() => {
+                hint.style.opacity = '0';
+                setTimeout(() => hint.remove(), 1000);
+            }, 5000);
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set fixed initial positions
+            setInitialFloatingElementsPositions();
+            
+            // Setup floating elements with proper animation that won't disappear
+            setupFloatingElements();
+            
+            // Generate particles
+            generateParticles();
+            
+            // Add interaction hint
+            addInteractionHint();
+            
+            // Fix animation persistence by adding a slight delay before initializing animations
+            setTimeout(() => {
+                // Apply persistent animations to all floating elements
+                document.querySelectorAll('.floating-element').forEach(el => {
+                    const duration = 6 + Math.random() * 4;
+                    const delay = Math.random() * 3;
+                    el.style.animation = `floatWithoutTilt ${duration}s infinite ease-in-out ${delay}s`;
+                    
+                    // Force a reflow to ensure animations are applied
+                    void el.offsetWidth;
+                });
+            }, 100);
+            
+            // Custom cursor setup with enhanced effects
+            const cursor = document.getElementById('custom-cursor');
+            if (cursor) {
+                document.addEventListener('mousemove', function(e) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    
+                    // Add slight lag for more organic feel
+                    setTimeout(() => {
+                        const lens = cursor.querySelector('.lens');
+                        if (lens) {
+                            lens.style.transform = `translate(${(Math.random() - 0.5) * 2}px, ${(Math.random() - 0.5) * 2}px)`;
+                        }
+                    }, 50);
+                });
+                
+                document.addEventListener('mousedown', function() {
+                    cursor.classList.add('cursor-flash');
+                    setTimeout(() => {
+                        cursor.classList.remove('cursor-flash');
+                    }, 200);
+                });
+            }
+        });
+
+        // Function to fix element positions so they don't overlap
+        function setInitialFloatingElementsPositions() {
+            // Set fixed positions for floating elements to avoid overlapping
+            const positions = [
+                { selector: '.clapperboard', left: '15%', top: '20%' },
+                { selector: '.film-reel', left: '70%', top: '15%' },
+                { selector: '.director-chair', left: '25%', top: '60%' },
+                { selector: '.video-camera', left: '65%', top: '70%' },
+                { selector: '.editing-screen', left: '85%', top: '40%' },
+                { selector: '.headphones', left: '40%', top: '80%' },
+                { selector: '.director-megaphone', left: '80%', top: '10%' },
+                { selector: '.modern-camera', left: '20%', top: '15%' },
+                { selector: '.modern-drone', left: '75%', top: '80%' },
+                { selector: '.modern-lights', left: '10%', top: '30%' },
+                { selector: '.modern-microphone', left: '30%', top: '75%' }
+            ];
+            
+            positions.forEach(pos => {
+                const el = document.querySelector(pos.selector);
+                if (el) {
+                    el.style.left = pos.left;
+                    el.style.top = pos.top;
+                }
+            });
+        }
+
+        // Update styles to ensure animations persist and add better positioning
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
+            /* Ensure floating elements have proper spacing and don't overlap */
+            .floating-element {
+                position: absolute;
+                width: 80px;
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                will-change: transform;
+            }
+            
+            /* Fade in animation for floating elements to ensure they appear properly */
+            .floating-element {
+                opacity: 0;
+                animation-name: fadeInAndFloat;
+                animation-duration: 8s;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes fadeInAndFloat {
+                0% { 
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                10% {
+                    opacity: 1;
+                }
+                50% { 
+                    transform: translateY(-15px);
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% { 
+                    transform: translateY(10px);
+                    opacity: 0;
+                }
+            }
+            
+            /* Make sure each floating element has unique animation timing */
+            .clapperboard { animation-delay: 0s; }
+            .film-reel { animation-delay: 1s; }
+            .director-chair { animation-delay: 2s; }
+            .video-camera { animation-delay: 0.5s; }
+            .editing-screen { animation-delay: 1.5s; }
+            .headphones { animation-delay: 2.5s; }
+            .director-megaphone { animation-delay: 0.8s; }
+            .modern-camera { animation-delay: 1.2s; }
+            .modern-drone { animation-delay: 1.8s; }
+            .modern-lights { animation-delay: 0.3s; }
+            .modern-microphone { animation-delay: 2.2s; }
+            
+            /* Enhanced image styling */
+            .floating-element img {
+                width: 100%;
+                height: auto;
+                max-width: 96px;
+                filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+                transition: filter 0.3s ease, transform 0.3s ease;
+            }
+            
+            .floating-element:hover img {
+                filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4)) brightness(1.2);
+                transform: scale(1.1);
+            }
+        `;
+        document.head.appendChild(additionalStyles);
+    </script>
 </body>
 </html> 

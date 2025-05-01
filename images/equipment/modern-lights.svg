@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+  <!-- Gradients -->
+  <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#444"/>
+    <stop offset="100%" stop-color="#222"/>
+  </linearGradient>
+  <radialGradient id="lightGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" stop-color="#fff" stop-opacity="0.7"/>
+    <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="reflectorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#555"/>
+    <stop offset="50%" stop-color="#eee"/>
+    <stop offset="100%" stop-color="#555"/>
+  </linearGradient>
+  
+  <!-- Light Stand -->
+  <rect x="70" y="120" width="10" height="30" fill="#333"/>
+  <rect x="67" y="115" width="16" height="5" rx="1" fill="#222"/>
+  <rect x="65" y="110" width="20" height="5" rx="1" fill="#333"/>
+  
+  <!-- Center Pole -->
+  <rect x="73" y="40" width="4" height="70" fill="url(#metalGradient)"/>
+  
+  <!-- Stand Base -->
+  <path d="M75,120 L50,140 L100,140 Z" fill="#222" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Light Housing -->
+  <ellipse cx="75" cy="40" rx="35" ry="30" fill="#222" stroke="#333" stroke-width="1"/>
+  <ellipse cx="75" cy="40" rx="30" ry="25" fill="#111" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Light Front/Reflector -->
+  <ellipse cx="75" cy="40" rx="25" ry="20" fill="url(#reflectorGradient)" stroke="#444" stroke-width="0.5"/>
+  <ellipse cx="75" cy="40" rx="20" ry="15" fill="#000" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Light Bulb -->
+  <circle cx="75" cy="40" r="10" fill="#111"/>
+  <circle cx="75" cy="40" r="5" fill="#fff" opacity="0.9"/>
+  <circle cx="75" cy="40" r="15" fill="url(#lightGlow)" opacity="0.5"/>
+  
+  <!-- Light Beam -->
+  <path d="M75,40 L30,80 L120,80 Z" fill="url(#lightGlow)" opacity="0.3"/>
+  
+  <!-- Support Arms -->
+  <rect x="40" y="35" width="5" height="3" rx="1" fill="#333"/>
+  <rect x="105" y="35" width="5" height="3" rx="1" fill="#333"/>
+  <rect x="40" y="45" width="5" height="3" rx="1" fill="#333"/>
+  <rect x="105" y="45" width="5" height="3" rx="1" fill="#333"/>
+  
+  <!-- Adjustable Knobs -->
+  <circle cx="45" cy="36.5" r="3" fill="#333" stroke="#444" stroke-width="0.5"/>
+  <circle cx="110" cy="36.5" r="3" fill="#333" stroke="#444" stroke-width="0.5"/>
+  <circle cx="45" cy="46.5" r="3" fill="#333" stroke="#444" stroke-width="0.5"/>
+  <circle cx="110" cy="46.5" r="3" fill="#333" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Handle -->
+  <rect x="72" y="15" width="6" height="10" rx="2" fill="#333" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Power Cable -->
+  <path d="M75,65 C65,70 55,90 55,110" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Highlighting and Detail -->
+  <path d="M60,25 A25,20 0 0,1 90,25" stroke="#fff" stroke-width="0.5" opacity="0.2" fill="none"/>
+  <circle cx="75" cy="40" r="2" fill="#fff" opacity="0.8"/>
+  
+  <!-- Model Number -->
+  <text x="75" y="110" font-family="Arial" font-size="3" fill="#ccc" text-anchor="middle">GREY18 SL-5000</text>
+</svg> 

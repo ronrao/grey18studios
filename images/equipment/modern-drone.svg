@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120">
+  <!-- Gradients -->
+  <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#333"/>
+    <stop offset="100%" stop-color="#111"/>
+  </linearGradient>
+  <linearGradient id="propellerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#222"/>
+    <stop offset="100%" stop-color="#000"/>
+  </linearGradient>
+  <radialGradient id="accentGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" stop-color="#b91421" stop-opacity="0.7"/>
+    <stop offset="100%" stop-color="#b91421" stop-opacity="0"/>
+  </radialGradient>
+  
+  <!-- Main Body -->
+  <circle cx="90" cy="60" r="20" fill="url(#bodyGradient)" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Detail Lines -->
+  <line x1="70" y1="60" x2="110" y2="60" stroke="#444" stroke-width="0.5"/>
+  <line x1="90" y1="40" x2="90" y2="80" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Arms -->
+  <line x1="90" y1="60" x2="40" y2="30" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="140" y2="30" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="40" y2="90" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="140" y2="90" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Arms Highlights -->
+  <line x1="90" y1="60" x2="40" y2="30" stroke="#444" stroke-width="1" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="140" y2="30" stroke="#444" stroke-width="1" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="40" y2="90" stroke="#444" stroke-width="1" stroke-linecap="round"/>
+  <line x1="90" y1="60" x2="140" y2="90" stroke="#444" stroke-width="1" stroke-linecap="round"/>
+  
+  <!-- Propellers -->
+  <circle cx="40" cy="30" r="12" fill="url(#propellerGradient)" stroke="#444" stroke-width="0.5"/>
+  <circle cx="140" cy="30" r="12" fill="url(#propellerGradient)" stroke="#444" stroke-width="0.5"/>
+  <circle cx="40" cy="90" r="12" fill="url(#propellerGradient)" stroke="#444" stroke-width="0.5"/>
+  <circle cx="140" cy="90" r="12" fill="url(#propellerGradient)" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Propeller Blurs (to simulate motion) -->
+  <circle cx="40" cy="30" r="16" fill="none" stroke="#555" stroke-width="0.2" opacity="0.3" stroke-dasharray="1,1"/>
+  <circle cx="140" cy="30" r="16" fill="none" stroke="#555" stroke-width="0.2" opacity="0.3" stroke-dasharray="1,1"/>
+  <circle cx="40" cy="90" r="16" fill="none" stroke="#555" stroke-width="0.2" opacity="0.3" stroke-dasharray="1,1"/>
+  <circle cx="140" cy="90" r="16" fill="none" stroke="#555" stroke-width="0.2" opacity="0.3" stroke-dasharray="1,1"/>
+  
+  <!-- Center Accent -->
+  <circle cx="90" cy="60" r="10" fill="#111" stroke="#444" stroke-width="0.5"/>
+  <circle cx="90" cy="60" r="5" fill="#b91421"/>
+  <circle cx="90" cy="60" r="8" fill="url(#accentGlow)" opacity="0.3"/>
+  
+  <!-- Camera/Gimbal -->
+  <rect x="82" y="75" width="16" height="8" rx="2" fill="#111" stroke="#444" stroke-width="0.5"/>
+  <circle cx="90" cy="79" r="4" fill="#080808" stroke="#444" stroke-width="0.3"/>
+  <circle cx="90" cy="79" r="2" fill="#000"/>
+  <circle cx="90" cy="79" r="1" fill="#222"/>
+  
+  <!-- Subtle Reflections -->
+  <path d="M85,45 A10,10 0 0,1 95,45" stroke="#fff" stroke-width="0.3" opacity="0.2"/>
+  
+  <!-- Drone ID -->
+  <text x="90" y="62" font-family="Arial" font-size="3" fill="#ccc" text-anchor="middle">G18</text>
+</svg> 
