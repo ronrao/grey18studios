@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice">
+    <!-- Gradient background -->
+    <defs>
+        <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#362108;stop-opacity:1" />
+            <stop offset="40%" style="stop-color:#9e5e17;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffb52e;stop-opacity:1" />
+        </linearGradient>
+        <radialGradient id="sunGlow" cx="50%" cy="30%" r="30%" fx="50%" fy="30%">
+            <stop offset="0%" style="stop-color:#fff5e0;stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#ffb52e;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff7b00;stop-opacity:1" />
+        </radialGradient>
+        <!-- Light rays filter -->
+        <filter id="lightRayBlur" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+        </filter>
+        <!-- Animation definitions -->
+        <style type="text/css">
+            .sun-rays { animation: sunGlow 10s infinite ease-in-out; transform-origin: 50% 30%; }
+            .light-ray { transform-origin: 800px 240px; }
+            .ray1 { animation: rayPulse 8s infinite ease-in-out; }
+            .ray2 { animation: rayPulse 8s infinite ease-in-out 1s; }
+            .ray3 { animation: rayPulse 8s infinite ease-in-out 2s; }
+            .ray4 { animation: rayPulse 8s infinite ease-in-out 3s; }
+            .ray5 { animation: rayPulse 12s infinite ease-in-out 1s; }
+            .ray6 { animation: rayPulse 12s infinite ease-in-out 2s; }
+            .film-hill { animation: slowFloat 15s infinite ease-in-out; }
+            .film-light { animation: lightPulse 8s infinite ease-in-out; transform-origin: 50% 50%; }
+            .film-camera { animation: smallShift 6s infinite ease-in-out; }
+            .film-person { animation: smallShift 9s infinite ease-in-out alternate; }
+            .film-director { animation: smallShift 7s infinite ease-in-out reverse; }
+            .crane { animation: craneMove 20s infinite ease-in-out; transform-origin: 1100px 520px; }
+            
+            @keyframes sunGlow {
+                0%, 100% { transform: scale(1); opacity: 0.8; }
+                50% { transform: scale(1.05); opacity: 1; }
+            }
+            
+            @keyframes rayPulse {
+                0%, 100% { opacity: 0.1; stroke-width: 3px; }
+                50% { opacity: 0.4; stroke-width: 6px; }
+            }
+            
+            @keyframes slowFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            
+            @keyframes lightPulse {
+                0%, 100% { opacity: 0.8; filter: blur(5px); }
+                50% { opacity: 1; filter: blur(8px); }
+            }
+            
+            @keyframes smallShift {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(3px); }
+            }
+            
+            @keyframes craneMove {
+                0%, 100% { transform: rotate(0deg); }
+                50% { transform: rotate(-2deg); }
+            }
+        </style>
+    </defs>
+    
+    <!-- Sky background -->
+    <rect width="100%" height="100%" fill="url(#skyGradient)" />
+    
+    <!-- Distant mountains -->
+    <path d="M0,300 Q400,200 800,280 T1600,250 L1600,800 L0,800 Z" fill="#1a1408" opacity="0.6" />
+    
+    <!-- Animated light rays from sun -->
+    <g class="sun-rays">
+        <!-- Main sun -->
+        <circle cx="800" cy="240" r="120" fill="url(#sunGlow)" />
+        <circle cx="800" cy="240" r="160" fill="url(#sunGlow)" opacity="0.5" />
+        <circle cx="800" cy="240" r="200" fill="url(#sunGlow)" opacity="0.3" />
+        
+        <!-- Light rays -->
+        <path class="light-ray ray1" d="M600,240 L1000,240" stroke="#fff5e0" stroke-width="5" opacity="0.3" filter="url(#lightRayBlur)" />
+        <path class="light-ray ray2" d="M800,100 L800,380" stroke="#fff5e0" stroke-width="5" opacity="0.3" filter="url(#lightRayBlur)" />
+        <path class="light-ray ray3" d="M650,120 L950,360" stroke="#fff5e0" stroke-width="5" opacity="0.3" filter="url(#lightRayBlur)" />
+        <path class="light-ray ray4" d="M650,360 L950,120" stroke="#fff5e0" stroke-width="5" opacity="0.3" filter="url(#lightRayBlur)" />
+        
+        <!-- Additional softer rays -->
+        <path class="light-ray ray5" d="M500,240 L1100,240" stroke="#fff5e0" stroke-width="10" opacity="0.1" filter="url(#lightRayBlur)" />
+        <path class="light-ray ray6" d="M800,50 L800,430" stroke="#fff5e0" stroke-width="10" opacity="0.1" filter="url(#lightRayBlur)" />
+    </g>
+    
+    <!-- Hills in the background -->
+    <g class="film-hill">
+        <path d="M0,450 Q400,350 800,450 T1600,420 L1600,800 L0,800 Z" fill="#221100" opacity="0.8" />
+        <path d="M0,500 Q500,400 1000,480 T1600,450 L1600,800 L0,800 Z" fill="#331100" opacity="0.7" />
+    </g>
+    
+    <!-- Film set -->
+    <g>
+        <!-- Camera crane -->
+        <g class="crane" transform="translate(1100, 520)">
+            <rect x="-10" y="-150" width="20" height="150" fill="black" />
+            <rect x="-40" y="-10" width="80" height="10" fill="black" />
+            <rect x="-150" y="-180" width="180" height="10" fill="black" />
+            <rect x="-150" y="-180" width="10" height="40" fill="black" />
+            <circle cx="-155" cy="-160" r="15" fill="black" />
+            <rect x="-160" y="-180" width="5" height="5" fill="black" />
+        </g>
+        
+        <!-- Camera on tripod right -->
+        <g class="film-camera" transform="translate(1020, 550)">
+            <rect x="-25" y="-70" width="50" height="50" fill="black" />
+            <rect x="-30" y="-80" width="60" height="15" fill="black" />
+            <path d="M-20,0 L-20,-60 M20,0 L20,-60 M0,0 L0,-70" stroke="black" stroke-width="6" />
+            <path d="M-40,0 L40,0" stroke="black" stroke-width="6" />
+        </g>
+        
+        <!-- Camera operator -->
+        <g class="film-person" transform="translate(1050, 550)">
+            <circle cx="0" cy="-70" r="15" fill="black" />
+            <rect x="-15" y="-55" width="30" height="40" fill="black" />
+            <path d="M-15,-15 L-20,0 M15,-15 L20,0" stroke="black" stroke-width="5" />
+            <path d="M0,-45 L-25,-30" stroke="black" stroke-width="5" />
+        </g>
+        
+        <!-- Director with chair left -->
+        <g class="film-director" transform="translate(350, 550)">
+            <rect x="-30" y="-25" width="60" height="25" fill="black" />
+            <path d="M-30,-25 L-40,-60 M30,-25 L40,-60" stroke="black" stroke-width="4" />
+            <circle cx="0" cy="-80" r="15" fill="black" />
+            <rect x="-15" y="-65" width="30" height="30" fill="black" />
+            <path d="M-15,-35 L-25,0 M15,-35 L25,0" stroke="black" stroke-width="4" />
+            <path d="M-5,-65 L-30,-45" stroke="black" stroke-width="4" />
+        </g>
+        
+        <!-- Set with actors silhouettes -->
+        <g transform="translate(700, 550)">
+            <!-- Actor 1 -->
+            <g class="film-person">
+                <circle cx="-80" cy="-70" r="15" fill="black" />
+                <rect x="-95" y="-55" width="30" height="40" fill="black" />
+                <path d="M-95,-15 L-100,0 M-65,-15 L-60,0" stroke="black" stroke-width="5" />
+            </g>
+            
+            <!-- Actor 2 -->
+            <g class="film-person">
+                <circle cx="0" cy="-70" r="15" fill="black" />
+                <rect x="-15" y="-55" width="30" height="40" fill="black" />
+                <path d="M-15,-15 L-20,0 M15,-15 L20,0" stroke="black" stroke-width="5" />
+            </g>
+            
+            <!-- Actor 3 -->
+            <g class="film-person">
+                <circle cx="80" cy="-70" r="15" fill="black" />
+                <rect x="65" y="-55" width="30" height="40" fill="black" />
+                <path d="M65,-15 L60,0 M95,-15 L100,0" stroke="black" stroke-width="5" />
+            </g>
+        </g>
+        
+        <!-- Lighting equipment left -->
+        <g transform="translate(200, 550)">
+            <rect x="-5" y="-100" width="10" height="100" fill="black" />
+            <path d="M-40,-100 L40,-100 L20,-120 L-20,-120 Z" fill="black" />
+            <circle class="film-light" cx="0" cy="-150" r="40" fill="#ffcc00" opacity="0.6" />
+        </g>
+        
+        <!-- Lighting equipment right -->
+        <g transform="translate(1300, 550)">
+            <rect x="-5" y="-100" width="10" height="100" fill="black" />
+            <path d="M-40,-100 L40,-100 L20,-120 L-20,-120 Z" fill="black" />
+            <circle class="film-light" cx="0" cy="-150" r="40" fill="#ffcc00" opacity="0.6" />
+        </g>
+        
+        <!-- Boom mic operator -->
+        <g class="film-person" transform="translate(500, 550)">
+            <circle cx="0" cy="-70" r="15" fill="black" />
+            <rect x="-15" y="-55" width="30" height="40" fill="black" />
+            <path d="M-15,-15 L-20,0 M15,-15 L20,0" stroke="black" stroke-width="5" />
+            <path d="M0,-55 L50,-100 L60,-95" stroke="black" stroke-width="5" />
+            <circle cx="65" cy="-92" r="7" fill="black" />
+        </g>
+        
+        <!-- Ground with markers -->
+        <rect x="0" y="550" width="1600" height="10" fill="black" opacity="0.7" />
+        <rect x="600" y="535" width="5" height="15" fill="white" opacity="0.5" />
+        <rect x="800" y="535" width="5" height="15" fill="white" opacity="0.5" />
+        <rect x="1000" y="535" width="5" height="15" fill="white" opacity="0.5" />
+        
+        <!-- Distant equipment silhouettes -->
+        <rect x="1400" y="500" width="40" height="50" fill="black" opacity="0.8" />
+        <rect x="1450" y="520" width="30" height="30" fill="black" opacity="0.8" />
+        <rect x="150" y="520" width="30" height="30" fill="black" opacity="0.8" />
+    </g>
+</svg> 

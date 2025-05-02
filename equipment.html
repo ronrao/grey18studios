@@ -17,32 +17,22 @@
     <style>
         /* Theme-specific styles */
         :root {
-            --primary-dark: #333333;
-            --secondary-dark: #4d4d4d;
-            --accent-teal: #4ecdc4;
-            --accent-purple: #6f42c1;
-            --accent-coral: #ff6b6b;
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #262626;
+            --medium-grey: #333333;
+            --light-grey: #cccccc; 
             --white: #ffffff;
-            --light-grey: #f5f5f5;
-            --dark-grey: #444444;
-            --black: #000000;
-            --transition: all 0.3s ease;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --page-gradient: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
-            /* Add consistent accent colors from index.html */
             --accent-primary: #b91421;
             --accent-secondary: #091458;
-            --accent-gradient: linear-gradient(135deg, #b91421, #091458);
-            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
-            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
-            --card-border-radius: 10px;
-            /* Brand theme colors for icons */
-            --brand-orange: #F27D42;
-            --brand-blue: #3D85C6;
+            --accent-gradient: linear-gradient(135deg, #b91421, #d61a2b);
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+            --text-color: #f5f5f5;
         }
         
         body {
-            background: var(--page-gradient);
+            background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark), #111111, #000000);
             margin: 0;
             overflow-x: hidden;
         }
@@ -181,8 +171,9 @@
             justify-content: center;
             color: white;
             text-align: center;
-            background: url('images/equipment/storyboard-bg.svg') no-repeat center center;
+            background: none; /* Remove the background image */
             background-size: cover;
+            perspective: 1000px; /* 3D perspective for parallax */
         }
         
         .parallax-bg {
@@ -191,12 +182,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(10, 10, 10, 0.7);
-            z-index: 0 !important;
+            background-color: rgba(10, 10, 10, 0.3); /* Make more transparent to show SVG */
+            z-index: 1 !important;
             transform-style: preserve-3d;
+            will-change: transform;
         }
         
-        /* Background Effects */
+        /* Background Effects - Remove vertical stripes */
         .light-beam {
             position: absolute;
             width: 50px;
@@ -219,23 +211,7 @@
             animation-delay: 5s;
         }
         
-        .film-strip {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 80px,
-                rgba(255, 255, 255, 0.1) 80px,
-                rgba(255, 255, 255, 0.1) 90px
-            );
-            opacity: 0.3;
-            pointer-events: none;
-        }
-        
+        /* Remove the film-strip */
         .storyboard-grid {
             position: absolute;
             top: 0;
@@ -250,6 +226,52 @@
             pointer-events: none;
         }
         
+        /* Film production SVG background styles */
+        .film-production-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background-color: rgba(25, 25, 25, 0.1); /* Semi-transparent dark background */
+        }
+        
+        .film-production-bg svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Make SVG elements white for visibility on dark background */
+        .film-production-bg svg line,
+        .film-production-bg svg rect,
+        .film-production-bg svg circle,
+        .film-production-bg svg path,
+        .film-production-bg svg text {
+            stroke: white;
+            stroke-width: 2;
+        }
+        
+        .film-production-bg svg text {
+            fill: white;
+            stroke-width: 0.5;
+        }
+        
+        /* Update SVG elements for parallax */
+        .film-production-bg #cinematographer,
+        .film-production-bg #lightStand1,
+        .film-production-bg #lightStand2,
+        .film-production-bg #actor1,
+        .film-production-bg #actor2,
+        .film-production-bg #directorsChair {
+            transition: transform 0.5s ease-out;
+        }
+        
         /* Particles */
         #particles {
             position: absolute;
@@ -258,7 +280,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
         }
         
         .particle {
@@ -269,35 +291,298 @@
             border-radius: 50%;
             opacity: 0.7;
             pointer-events: none;
+            animation-name: floatingParticle;
+            animation-duration: 8s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            will-change: transform;
         }
         
-        /* Improved floating element styles */
+        @keyframes floatingParticle {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 30px); }
+            50% { transform: translate(40px, 10px); }
+            75% { transform: translate(20px, -20px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        /* Updated floating element styles with corrected visibility and root variables */
         .floating-element {
             position: absolute;
-            width: 80px;
-            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
             z-index: 5;
-            opacity: 1 !important; /* Ensure they're always visible */
             animation: simpleFloat 6s infinite ease-in-out;
             will-change: transform;
             transform-origin: center center;
+            width: 120px;
+            height: 120px;
+            opacity: 1 !important; /* Ensure elements are visible */
         }
         
-        .floating-element img {
-            width: 100%;
-            height: auto;
-            max-width: 70px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        /* Icon glow effects for better visibility */
+        .floating-element i {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+            transition: var(--transition);
+            color: inherit; /* Ensure color is applied */
+            opacity: 1;
         }
         
-        /* Fixed animation keyframes */
+        /* Red brand color icons get red glow */
+        .floating-element[style*="b91421"] i {
+            filter: drop-shadow(0 0 8px rgba(185, 20, 33, 0.5)) drop-shadow(0 0 20px rgba(185, 20, 33, 0.3));
+            text-shadow: 0 0 15px rgba(185, 20, 33, 0.7);
+            color: var(--accent-primary);
+        }
+        
+        /* Blue brand color icons get blue glow */
+        .floating-element[style*="091458"] i {
+            filter: drop-shadow(0 0 8px rgba(9, 20, 88, 0.5)) drop-shadow(0 0 20px rgba(9, 20, 88, 0.3));
+            text-shadow: 0 0 15px rgba(9, 20, 88, 0.7);
+            color: var(--accent-secondary);
+        }
+        
+        /* Enhanced hover effect */
+        .floating-element:hover i {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        /* Improve animation for floating */
         @keyframes simpleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        /* Vary animation timing for more natural movement */
+        .floating-element:nth-child(odd) {
+            animation-duration: 8s;
+        }
+        
+        .floating-element:nth-child(3n) {
+            animation-duration: 7s;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3n+1) {
+            animation-duration: 9s;
+            animation-delay: 2s;
+        }
+        
+        /* Background effects updated with new root variables */
+        .light-beam {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg) scale(2);
+            transform-origin: center;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: moveBeam 15s infinite ease-in-out;
+        }
+        
+        /* Update page styling with new variables */
+        body {
+            background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark), #111111, #000000);
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        .equipment-categories {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--medium-grey));
+            padding: 80px 0;
+        }
+        
+        .equipment-card {
+            background-color: rgba(37, 37, 37, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            visibility: visible;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid var(--accent-primary);
+        }
+        
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .equipment-info p {
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+        
+        .equipment-specs li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: var(--light-grey);
+            text-align: left;
+        }
+        
+        .equipment-specs li i {
+            color: var(--accent-primary);
+            margin-right: 10px;
+        }
+        
+        /* Ensure buttons have consistent styling */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn.primary {
+            background: var(--accent-gradient);
+            color: var(--white);
+        }
+        
+        .btn.secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-secondary);
+            color: var(--white);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* For proper layout in certain areas, we need to maintain left alignment */
+        .footer-column ul li {
+            text-align: left;
+        }
+
+        /* Fix for section header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--light-grey);
+            text-align: center;
+        }
+
+        /* Ensure equipment cards display properly */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .equipment-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .equipment-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Remove any styles affecting header on scroll */
+        header {
+            z-index: 1000 !important; /* Ensure header stays above other elements */
+        }
+
+        /* Ensure header styling is isolated from parallax effects */
+        header * {
+            transition: none !important; /* Prevent transitions from parallax affecting header */
+        }
+
+        .modern-camera {
+            top: 15%;
+            right: 18%;
+            width: 120px;
+            animation: float 8s infinite ease-in-out;
+            animation-delay: 1.2s;
+        }
+
+        .modern-drone {
+            bottom: 20%;
+            right: 25%;
+            width: 110px;
+            animation: float 9s infinite ease-in-out;
+            animation-delay: 0.8s;
+        }
+
+        .modern-lights {
+            top: 30%;
+            left: 10%;
+            width: 90px;
+            animation: float 7.5s infinite ease-in-out;
+            animation-delay: 2.3s;
+        }
+
+        .modern-microphone {
+            bottom: 20%;
+            left: 18%;
+            width: 70px;
+            animation: float 8.2s infinite ease-in-out;
+            animation-delay: 1.7s;
+        }
+
+        /* Add CSS styles for brand colors */
+        .floating-element img.orange-filter {
+            filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%); /* Orange brand color */
+        }
+
+        .floating-element img.blue-filter {
+            filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%); /* Blue brand color */
         }
         
         /* Individual animation delays with fixed positions */
@@ -322,7 +607,7 @@
             z-index: 3;
         }
         
-        /* Mouse hint styles */
+        /* Mouse hint styles - enhanced visibility */
         .mouse-hint {
             position: absolute;
             bottom: 20px;
@@ -332,9 +617,10 @@
             flex-direction: column;
             align-items: center;
             color: white;
-            opacity: 0.8;
-            transition: opacity 1s ease;
+            opacity: 0.9; /* Increased opacity */
+            transition: opacity 1.5s ease; /* Slower fade */
             z-index: 100;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add text shadow for better visibility */
         }
         
         .mouse-icon {
@@ -344,6 +630,7 @@
             border-radius: 15px;
             margin-bottom: 10px;
             position: relative;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3); /* Add glow effect */
         }
         
         .mouse-icon:after {
@@ -357,6 +644,7 @@
             background: white;
             border-radius: 50%;
             animation: scrollHint 2s infinite;
+            box-shadow: 0 0 5px rgba(255,255,255,0.5); /* Add glow to the dot */
         }
         
         @keyframes scrollHint {
@@ -364,7 +652,7 @@
             100% { top: 30px; opacity: 0; }
         }
         
-        /* Title and Content */
+        /* Title and Content with scroll parallax effect */
         .parallax-title {
             font-size: 4rem;
             font-weight: 700;
@@ -373,6 +661,7 @@
             transform: translateZ(50px);
             position: relative;
             z-index: 20;
+            transition: transform 0.5s ease-out;
         }
         
         .parallax-subtitle {
@@ -383,6 +672,7 @@
             transform: translateZ(40px);
             position: relative;
             z-index: 20;
+            transition: transform 0.5s ease-out;
         }
         
         .cta-button {
@@ -599,35 +889,11 @@
             opacity: 0.3;
         }
         
-        .equipment-categories {
-            background: var(--grey-gradient-2);
-            padding: 80px 0;
-        }
-        
         .equipment-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 50px;
-        }
-        
-        .equipment-card {
-            background-color: rgba(37, 37, 37, 0.7);
-            border-radius: var(--card-border-radius);
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            opacity: 1;
-            visibility: visible;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 3px solid var(--accent-primary);
-        }
-        
-        .equipment-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         
         .equipment-image {
@@ -657,180 +923,168 @@
             color: var(--white);
         }
 
-        .equipment-info p {
-            color: var(--light-grey);
-            margin-bottom: 15px;
-        }
-
         .equipment-specs {
             list-style: none;
             margin-top: 15px;
         }
 
-        .equipment-specs li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            color: var(--light-grey);
-            text-align: left;
-        }
-
-        .equipment-specs li i {
-            color: var(--accent-primary);
-            margin-right: 10px;
-        }
-        
-        /* Ensure buttons have consistent styling */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn.primary {
-            background: var(--accent-gradient);
-            color: var(--white);
-        }
-        
-        .btn.secondary {
-            background-color: transparent;
-            border: 2px solid var(--accent-secondary);
-            color: var(--white);
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* For proper layout in certain areas, we need to maintain left alignment */
-        .footer-column ul li {
-            text-align: left;
-        }
-
-        /* Fix for section header */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-        
-        .section-header h2::after {
-            content: '';
+        /* Film production SVG background styles */
+        .film-production-bg {
             position: absolute;
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-primary);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .section-header p {
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            color: var(--light-grey);
-            text-align: center;
-        }
-
-        /* Ensure equipment cards display properly */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background-color: rgba(25, 25, 25, 0.1); /* Semi-transparent dark background */
         }
         
-        /* Responsive adjustments */
-        @media screen and (max-width: 768px) {
-            .equipment-hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .equipment-hero-content p {
-                font-size: 1rem;
-            }
-            
-            .equipment-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
-            }
+        .film-production-bg svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-
-        /* Remove any styles affecting header on scroll */
-        header {
-            z-index: 1000 !important; /* Ensure header stays above other elements */
+        
+        /* Make SVG elements white for visibility on dark background */
+        .film-production-bg svg line,
+        .film-production-bg svg rect,
+        .film-production-bg svg circle,
+        .film-production-bg svg path,
+        .film-production-bg svg text {
+            stroke: white;
+            stroke-width: 2;
         }
-
-        /* Ensure header styling is isolated from parallax effects */
-        header * {
-            transition: none !important; /* Prevent transitions from parallax affecting header */
+        
+        .film-production-bg svg text {
+            fill: white;
+            stroke-width: 0.5;
         }
-
-        .modern-camera {
-            top: 15%;
-            right: 18%;
-            width: 120px;
-            animation: float 8s infinite ease-in-out;
-            animation-delay: 1.2s;
+        
+        /* Update SVG elements for parallax */
+        .film-production-bg #cinematographer,
+        .film-production-bg #lightStand1,
+        .film-production-bg #lightStand2,
+        .film-production-bg #actor1,
+        .film-production-bg #actor2,
+        .film-production-bg #directorsChair {
+            transition: transform 0.5s ease-out;
         }
-
-        .modern-drone {
-            bottom: 20%;
-            right: 25%;
-            width: 110px;
-            animation: float 9s infinite ease-in-out;
-            animation-delay: 0.8s;
+        
+        .production-scene {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1a0f00, #3d2b09, #5c3f10);
         }
-
-        .modern-lights {
-            top: 30%;
-            left: 10%;
-            width: 90px;
-            animation: float 7.5s infinite ease-in-out;
-            animation-delay: 2.3s;
+        
+        .film-hill {
+            animation: slowFloat 15s infinite ease-in-out;
         }
-
-        .modern-microphone {
-            bottom: 20%;
-            left: 18%;
-            width: 70px;
-            animation: float 8.2s infinite ease-in-out;
-            animation-delay: 1.7s;
+        
+        .film-light {
+            animation: lightPulse 8s infinite ease-in-out;
+            transform-origin: 50% 50%;
+            filter: blur(5px);
         }
-
-        /* Add CSS styles for brand colors */
-        .floating-element img.orange-filter {
-            filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%); /* Orange brand color */
+        
+        .film-camera {
+            animation: smallShift 6s infinite ease-in-out;
         }
-
-        .floating-element img.blue-filter {
-            filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%); /* Blue brand color */
+        
+        .film-person {
+            animation: smallShift 9s infinite ease-in-out alternate;
+        }
+        
+        .film-director {
+            animation: smallShift 7s infinite ease-in-out reverse;
+        }
+        
+        .sun-rays {
+            animation: sunGlow 10s infinite ease-in-out;
+            transform-origin: 50% 50%;
+            filter: blur(2px);
+        }
+        
+        /* Light ray animations */
+        .light-ray {
+            transform-origin: 600px 200px;
+        }
+        
+        .ray1 {
+            animation: rayPulse 8s infinite ease-in-out;
+        }
+        
+        .ray2 {
+            animation: rayPulse 8s infinite ease-in-out 1s;
+        }
+        
+        .ray3 {
+            animation: rayPulse 8s infinite ease-in-out 2s;
+        }
+        
+        .ray4 {
+            animation: rayPulse 8s infinite ease-in-out 3s;
+        }
+        
+        .ray5 {
+            animation: rayPulse 12s infinite ease-in-out 1s;
+        }
+        
+        .ray6 {
+            animation: rayPulse 12s infinite ease-in-out 2s;
+        }
+        
+        @keyframes rayPulse {
+            0%, 100% { opacity: 0.1; stroke-width: 3px; }
+            50% { opacity: 0.4; stroke-width: 6px; }
+        }
+        
+        @keyframes slowFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes lightPulse {
+            0%, 100% { opacity: 0.8; filter: blur(10px); }
+            50% { opacity: 1; filter: blur(15px); }
+        }
+        
+        @keyframes smallShift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+        
+        @keyframes sunGlow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
     </style>
     
     <script>
+        // Store global variables for tracking mouse and scroll position
+        let mouseX = 0;
+        let mouseY = 0;
+        let scrollY = 0;
+        let isScrolling = false;
+        let scrollTimeout;
+        
+        // Ensure all SVG animations are synchronized on a 2.5-second loop
+        function synchronizeAnimations() {
+            // Get all SVG animation elements
+            const animateElements = document.querySelectorAll('animate, animateTransform');
+            
+            // Set all durations to exactly 2.5 seconds for perfect synchronization
+            animateElements.forEach(el => {
+                el.setAttribute('dur', '2.5s');
+                
+                // Reset animations to ensure they start together
+                el.beginElement();
+            });
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Generate particles
             createParticles();
@@ -838,142 +1092,190 @@
             // Add interaction hint
             addInteractionHint();
             
-            // Simplified parallax effect for mouse movement that preserves position
+            // Store initial SVG element transforms
+            const svgElements = [
+                'cinematographer', 
+                'lightStand1', 
+                'lightStand2', 
+                'actor1', 
+                'actor2', 
+                'directorsChair',
+                'clapper',
+                'clipboard',
+                'boomMic',
+                'coffeeCup',
+                'tapeMarks'
+            ];
+            svgElements.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const transform = el.getAttribute('transform');
+                    el.setAttribute('data-base-transform', transform);
+                }
+            });
+            
+            // Synchronize all SVG animations
+            setTimeout(synchronizeAnimations, 100);
+            
+            // Add scroll parallax effect with debouncing
+            window.addEventListener('scroll', function() {
+                // Update scroll position
+                scrollY = window.scrollY;
+                isScrolling = true;
+                
+                // Clear the timeout if it's already set
+                clearTimeout(scrollTimeout);
+                
+                // Set a timeout to indicate when scrolling has stopped
+                scrollTimeout = setTimeout(function() {
+                    isScrolling = false;
+                    updateParallaxEffects(); // Update effects when scrolling stops
+                }, 100);
+                
+                // Update all parallax effects
+                updateParallaxEffects();
+            });
+            
+            // Simplified parallax effect for mouse movement that coordinates with scrolling
             document.addEventListener('mousemove', function(e) {
-                const container = document.querySelector('.parallax-container');
-                if (!container) return;
-                
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                
-                // Apply parallax effect to title and subtitle
-                const title = document.querySelector('.parallax-title');
-                const subtitle = document.querySelector('.parallax-subtitle');
-                const ctaButton = document.querySelector('.cta-button');
-                
-                if (title) title.style.transform = `translateZ(50px) translate(${xAxis * 0.5}px, ${yAxis * 0.5}px)`;
-                if (subtitle) subtitle.style.transform = `translateZ(40px) translate(${xAxis * 0.3}px, ${yAxis * 0.3}px)`;
-                if (ctaButton) ctaButton.style.transform = `translateZ(30px) translate(${xAxis * 0.2}px, ${yAxis * 0.2}px)`;
-                
-                // Apply parallax to all floating elements - PRESERVE the basic animation
-                document.querySelectorAll('.floating-element').forEach(element => {
-                    const depth = parseFloat(element.getAttribute('data-depth') || 0.5);
+                // Only update mouse position if not actively scrolling
+                if (!isScrolling) {
+                    mouseX = e.pageX;
+                    mouseY = e.pageY;
                     
-                    // Calculate the base animation offset (the up/down float)
-                    let baseY = 0;
-                    const animationPhase = (Date.now() % 6000) / 6000; // 6s animation cycle
-                    if (animationPhase <= 0.5) {
-                        baseY = -15 * (animationPhase * 2); // 0 to -15px
-                    } else {
-                        baseY = -15 * (1 - (animationPhase - 0.5) * 2); // -15px to 0
-                    }
-                    
-                    // Apply parallax offset on top of the animation's current position
-                    element.style.transform = `translateY(${baseY}px) translate(${xAxis * depth}px, ${yAxis * depth}px)`;
-                });
-                
-                // Dynamic light beam movement
-                const lightBeam1 = document.getElementById('lightBeam1');
-                const lightBeam2 = document.getElementById('lightBeam2');
-                
-                if (lightBeam1) {
-                    lightBeam1.style.transform = `rotate(${45 + yAxis}deg) translateX(${xAxis * 2}px) scale(${2 + Math.abs(xAxis) * 0.01})`;
-                    lightBeam1.style.opacity = `${0.5 + Math.abs(xAxis) * 0.005}`;
-                }
-                
-                if (lightBeam2) {
-                    lightBeam2.style.transform = `rotate(${-45 - yAxis}deg) translateX(${-xAxis * 2}px) scale(${2 + Math.abs(yAxis) * 0.01})`;
-                    lightBeam2.style.opacity = `${0.5 + Math.abs(yAxis) * 0.005}`;
-                }
-                
-                // Dynamic background movement
-                const parallaxBg = document.getElementById('parallaxBg');
-                if (parallaxBg) {
-                    parallaxBg.style.transform = `translate(${xAxis * 0.05}px, ${yAxis * 0.05}px)`;
+                    // Delay the update slightly for performance
+                    requestAnimationFrame(updateParallaxEffects);
                 }
             });
             
-            // Improved smooth scroll behavior
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+            // Initial update
+            updateParallaxEffects();
+        });
+        
+        // Centralized function to apply all parallax effects
+        function updateParallaxEffects() {
+            const container = document.querySelector('.parallax-container');
+            if (!container) return;
             
-            // Improved touchpad handling with consistent positioning
-            let lastScrollTime = 0;
-            const scrollThrottle = 10; // ms between scroll events
+            // Only apply effects if section is in viewport
+            const containerRect = container.getBoundingClientRect();
+            if (containerRect.bottom < 0 || containerRect.top > window.innerHeight) return;
             
-            window.addEventListener('wheel', function(e) {
-                const now = Date.now();
-                
-                // Throttle scroll events for better performance
-                if (now - lastScrollTime < scrollThrottle) return;
-                lastScrollTime = now;
-                
-                // Only apply effects for small movements (like touchpad gestures)
-                if (Math.abs(e.deltaY) < 10) {
-                    // Apply parallax effects without scrolling the page
-                    const xAxis = e.deltaX / 10;
-                    const yAxis = e.deltaY / 10;
-                    
-                    document.querySelectorAll('.floating-element').forEach(element => {
-                        const depth = parseFloat(element.getAttribute('data-depth') || 0.5);
-                        
-                        // Calculate the base animation offset (same as in mousemove handler)
-                        let baseY = 0;
-                        const animationPhase = (Date.now() % 6000) / 6000; // 6s animation cycle
-                        if (animationPhase <= 0.5) {
-                            baseY = -15 * (animationPhase * 2); // 0 to -15px
-                        } else {
-                            baseY = -15 * (1 - (animationPhase - 0.5) * 2); // -15px to 0
-                        }
-                        
-                        // Apply the same transform calculation as in mousemove
-                        element.style.transform = `translateY(${baseY}px) translate(${xAxis * depth}px, ${yAxis * depth}px)`;
-                    });
-                }
-                // For larger movements, let default scrolling happen
-            }, { passive: true });
+            // Calculate mouse-based parallax factors
+            const xAxis = (window.innerWidth / 2 - mouseX) / 25;
+            const yAxis = (window.innerHeight / 2 - mouseY) / 25;
             
-            // Custom cursor setup
-            const cursor = document.getElementById('custom-cursor');
-            if (cursor) {
-                document.addEventListener('mousemove', function(e) {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                    
-                    // Add slight lag for more organic feel
-                    setTimeout(() => {
-                        const lens = cursor.querySelector('.lens');
-                        if (lens) {
-                            lens.style.transform = `translate(${(Math.random() - 0.5) * 2}px, ${(Math.random() - 0.5) * 2}px)`;
-                        }
-                    }, 50);
-                });
-                
-                document.addEventListener('mousedown', function() {
-                    cursor.classList.add('cursor-flash');
-                    setTimeout(() => {
-                        cursor.classList.remove('cursor-flash');
-                    }, 200);
-                });
+            // Apply combined effects to title, subtitle and button
+            const title = document.querySelector('.parallax-title');
+            const subtitle = document.querySelector('.parallax-subtitle');
+            const ctaButton = document.querySelector('.cta-button');
+            
+            // Calculate scroll offsets (diminishing as you scroll down)
+            const scrollFactor = Math.max(0, 1 - (scrollY / (container.offsetHeight * 0.8)));
+            const titleScrollY = scrollY * 0.2 * scrollFactor;
+            const subtitleScrollY = scrollY * 0.3 * scrollFactor;
+            const buttonScrollY = scrollY * 0.1 * scrollFactor;
+            
+            if (title) {
+                title.style.transform = `translateY(${titleScrollY}px) 
+                                       translateZ(50px) 
+                                       translate(${xAxis * 0.5 * scrollFactor}px, ${yAxis * 0.5 * scrollFactor}px)`;
             }
             
-            // Set depth attributes for floating elements consistently
+            if (subtitle) {
+                subtitle.style.transform = `translateY(${subtitleScrollY}px) 
+                                          translateZ(40px) 
+                                          translate(${xAxis * 0.3 * scrollFactor}px, ${yAxis * 0.3 * scrollFactor}px)`;
+            }
+            
+            if (ctaButton) {
+                ctaButton.style.transform = `translateY(${buttonScrollY}px) 
+                                           translateZ(30px) 
+                                           translate(${xAxis * 0.2 * scrollFactor}px, ${yAxis * 0.2 * scrollFactor}px)`;
+            }
+            
+            // Apply parallax effect to background with combined effects
+            const parallaxBg = document.getElementById('parallaxBg');
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrollY * 0.4}px) 
+                                            translate(${xAxis * 0.05 * scrollFactor}px, ${yAxis * 0.05 * scrollFactor}px)`;
+            }
+            
+            // Apply combined effects to floating elements
             document.querySelectorAll('.floating-element').forEach((el, index) => {
-                // Use the data-depth already set in HTML
-                const depth = parseFloat(el.getAttribute('data-depth')) || (0.4 + (index % 6) * 0.1);
-                el.setAttribute('data-depth', depth);
+                const depth = parseFloat(el.getAttribute('data-depth') || 0.5);
+                const speedFactor = 0.05 + (index % 5) * 0.03;
+                
+                // Calculate base animation position
+                let baseY = 0;
+                const animationPhase = (Date.now() % 6000) / 6000;
+                if (animationPhase <= 0.5) {
+                    baseY = -15 * (animationPhase * 2);
+                } else {
+                    baseY = -15 * (1 - (animationPhase - 0.5) * 2);
+                }
+                
+                // Apply combined transforms with priority to scroll effect
+                el.style.transform = `translateY(${baseY - scrollY * speedFactor}px) 
+                                      translate(${xAxis * depth * scrollFactor}px, ${yAxis * depth * scrollFactor}px)`;
             });
-        });
+            
+            // Apply parallax to SVG elements with different depths
+            const svgElements = {
+                'cinematographer': { depth: 0.8 },
+                'lightStand1': { depth: 0.5 },
+                'lightStand2': { depth: 0.5 },
+                'actor1': { depth: 0.65 },
+                'actor2': { depth: 0.65 }, 
+                'directorsChair': { depth: 0.75 },
+                'clapper': { depth: 0.9 },
+                'clipboard': { depth: 0.7 },
+                'boomMic': { depth: 0.6 },
+                'coffeeCup': { depth: 0.85 },
+                'tapeMarks': { depth: 0.3 }
+            };
+            
+            Object.entries(svgElements).forEach(([id, config]) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const baseTransform = el.getAttribute('data-base-transform') || el.getAttribute('transform');
+                    if (!el.getAttribute('data-base-transform')) {
+                        el.setAttribute('data-base-transform', baseTransform);
+                    }
+                    
+                    // Extract original translate values
+                    const match = baseTransform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+                    if (match) {
+                        const baseX = parseFloat(match[1]);
+                        const baseY = parseFloat(match[2]);
+                        
+                        // Apply parallax effect
+                        const offsetX = xAxis * config.depth * scrollFactor;
+                        const offsetY = yAxis * config.depth * scrollFactor - scrollY * 0.05;
+                        
+                        el.setAttribute('transform', `translate(${baseX + offsetX}, ${baseY + offsetY})`);
+                    }
+                }
+            });
+            
+            // Light beams with combined effects
+            const lightBeam1 = document.getElementById('lightBeam1');
+            const lightBeam2 = document.getElementById('lightBeam2');
+            
+            if (lightBeam1) {
+                lightBeam1.style.transform = `rotate(${45 - scrollY * 0.03 + yAxis * scrollFactor}deg) 
+                                            translateX(${-scrollY * 0.1 + xAxis * 2 * scrollFactor}px) 
+                                            scale(${2 + scrollY * 0.001 + Math.abs(xAxis) * 0.01 * scrollFactor})`;
+                lightBeam1.style.opacity = `${0.5 + Math.abs(xAxis) * 0.005 * scrollFactor}`;
+            }
+            
+            if (lightBeam2) {
+                lightBeam2.style.transform = `rotate(${-45 + scrollY * 0.02 - yAxis * scrollFactor}deg) 
+                                            translateX(${scrollY * 0.1 - xAxis * 2 * scrollFactor}px) 
+                                            scale(${2 + scrollY * 0.001 + Math.abs(yAxis) * 0.01 * scrollFactor})`;
+                lightBeam2.style.opacity = `${0.5 + Math.abs(yAxis) * 0.005 * scrollFactor}`;
+            }
+        }
         
         // Create particles for ambiance - simplified for better performance
         function createParticles() {
@@ -983,8 +1285,8 @@
             // Clear existing particles
             particlesContainer.innerHTML = '';
             
-            // Create fewer particles for better performance
-            for (let i = 0; i < 25; i++) {
+            // Create particles for better performance
+            for (let i = 0; i < 80; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
@@ -992,16 +1294,22 @@
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Random size - smaller for better performance
+                // Random size
                 const size = 2 + Math.random() * 3;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
-                // Simple animation with css
-                const duration = 10 + Math.random() * 10;
-                const delay = Math.random() * 5;
+                // Random animation duration and delay - faster animation
+                const duration = 6 + Math.random() * 10;
+                const delay = Math.random() * 8;
                 
-                particle.style.animation = `simpleFloat ${duration}s infinite ease-in-out ${delay}s`;
+                // Set animation properties individually for better browser compatibility
+                particle.style.animationName = 'floatingParticle';
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationTimingFunction = 'ease-in-out';
+                particle.style.animationIterationCount = 'infinite';
+                particle.style.animationDelay = `${delay}s`;
+                
                 particlesContainer.appendChild(particle);
             }
         }
@@ -1016,11 +1324,143 @@
             hint.innerHTML = '<div class="mouse-icon"></div><span>Move mouse to explore</span>';
             container.appendChild(hint);
             
-            // Fade out after 5 seconds
+            // Fade out after 10 seconds instead of 5
             setTimeout(() => {
                 hint.style.opacity = '0';
-                setTimeout(() => hint.remove(), 1000);
-            }, 5000);
+                setTimeout(() => hint.remove(), 1500); // Longer fade out animation (1.5s)
+            }, 10000); // Show for 10 seconds
+        }
+
+        // Generate enhanced particles with depth and varied effects
+        function generateParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            // Clear existing particles
+            particlesContainer.innerHTML = '';
+            
+            const particleCount = 100; // Increased count
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 4 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random opacity
+                const opacity = 0.3 + Math.random() * 0.7;
+                particle.style.opacity = opacity;
+                
+                // Faster animation with random duration and delay
+                const duration = 6 + Math.random() * 12;
+                const delay = Math.random() * 10;
+                
+                // Set animation properties individually for better browser compatibility
+                particle.style.animationName = 'floatingParticle';
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationTimingFunction = 'ease-in-out';
+                particle.style.animationIterationCount = 'infinite';
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Ensure particles continue to animate after page load
+        window.addEventListener('load', function() {
+            // Short delay to ensure everything is fully rendered
+            setTimeout(() => {
+                // Regenerate particles to ensure animation works
+                generateParticles();
+                
+                // Force reflow on all particles
+                document.querySelectorAll('.particle').forEach(particle => {
+                    // Trigger animation restart
+                    particle.style.animationName = 'none';
+                    void particle.offsetWidth; // Force reflow
+                    particle.style.animationName = 'floatingParticle';
+                });
+            }, 200);
+            
+            // Set up an interval to periodically check and restart animations
+            // This helps with Live Server or other tools that might interrupt animations
+            setInterval(() => {
+                const particles = document.querySelectorAll('.particle');
+                if (particles.length === 0) {
+                    // If particles are missing, regenerate them
+                    generateParticles();
+                } else {
+                    // Force animation refresh on existing particles
+                    particles.forEach(particle => {
+                        // Get current properties to maintain them
+                        const duration = particle.style.animationDuration || '15s';
+                        const delay = particle.style.animationDelay || '0s';
+                        
+                        // Restart animation
+                        particle.style.animationName = 'none';
+                        void particle.offsetWidth; // Force reflow
+                        
+                        // Restore animation with original parameters
+                        particle.style.animationName = 'floatingParticle';
+                        particle.style.animationDuration = duration;
+                        particle.style.animationDelay = delay;
+                    });
+                }
+            }, 3000); // Check every 3 seconds
+        });
+        
+        // Listen for potential Live Server reconnection events
+        window.addEventListener('message', function(event) {
+            // Check if this might be a Live Server message
+            if (event.data && typeof event.data === 'string' && 
+                (event.data.includes('connected') || event.data.includes('reload'))) {
+                // Delay to let any reload complete
+                setTimeout(() => {
+                    // Regenerate particles after potential Live Server event
+                    generateParticles();
+                    
+                    // Force reflow on all particles
+                    document.querySelectorAll('.particle').forEach(particle => {
+                        particle.style.animationName = 'none';
+                        void particle.offsetWidth; // Force reflow
+                        particle.style.animationName = 'floatingParticle';
+                    });
+                }, 200);
+            }
+        });
+        
+        // Also listen for focus events which might indicate the user returned to the tab
+        window.addEventListener('focus', function() {
+            // Short delay before reanimating
+            setTimeout(() => {
+                // Force reflow on all particles to ensure animations are running
+                document.querySelectorAll('.particle').forEach(particle => {
+                    particle.style.animationName = 'none';
+                    void particle.offsetWidth; // Force reflow
+                    particle.style.animationName = 'floatingParticle';
+                });
+            }, 100);
+        });
+
+        // Ensure all SVG animations are synchronized on a 2.5-second loop
+        function synchronizeAnimations() {
+            // Get all SVG animation elements
+            const animateElements = document.querySelectorAll('animate, animateTransform');
+            
+            // Set all durations to exactly 2.5 seconds for perfect synchronization
+            animateElements.forEach(el => {
+                el.setAttribute('dur', '2.5s');
+                
+                // Reset animations to ensure they start together
+                el.beginElement();
+            });
         }
     </script>
 </head>
@@ -1038,51 +1478,169 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="parallax-container">
+            <div class="film-production-bg">
+                <svg width="2000" height="800" viewBox="0 0 2000 800" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Cinematographer with Camera (Left Side) -->
+                  <g id="cinematographer" transform="translate(300, 400)">
+                    <!-- Stick Figure Body -->
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Arms -->
+                    <line x1="0" y1="30" x2="-20" y2="60" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="30" x2="20" y2="50" stroke="black" stroke-width="3"/>
+                    <!-- Legs -->
+                    <line x1="0" y1="100" x2="-20" y2="170" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="100" x2="20" y2="170" stroke="black" stroke-width="3"/>
+                    <!-- Head -->
+                    <circle cx="0" cy="-15" r="15" stroke="black" stroke-width="3" fill="none"/>
+                    
+                    <!-- Camera Tripod -->
+                    <line x1="60" y1="0" x2="40" y2="100" stroke="black" stroke-width="3"/>
+                    <line x1="60" y1="0" x2="80" y2="100" stroke="black" stroke-width="3"/>
+                    <line x1="60" y1="0" x2="60" y2="100" stroke="black" stroke-width="3"/>
+                    
+                    <!-- Camera Body -->
+                    <rect x="40" y="-30" width="40" height="30" stroke="black" stroke-width="3" fill="none"/>
+                    
+                    <!-- Camera Lens -->
+                    <rect x="80" y="-20" width="20" height="10" stroke="black" stroke-width="3" fill="none"/>
+                    
+                    <!-- Film Reels -->
+                    <circle cx="45" cy="-15" r="10" stroke="black" stroke-width="3" fill="none"/>
+                    <circle cx="75" cy="-15" r="10" stroke="black" stroke-width="3" fill="none">
+                      <!-- Rotating Animation for Film Reel -->
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 75 -15"
+                        to="360 75 -15"
+                        dur="5s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </g>
+                  
+                  <!-- Light Stands -->
+                  <g id="lightStand1" transform="translate(600, 400)">
+                    <!-- Stand -->
+                    <line x1="0" y1="-150" x2="0" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Base -->
+                    <line x1="-20" y1="100" x2="20" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Light Housing -->
+                    <rect x="-20" y="-170" width="40" height="20" stroke="black" stroke-width="3" fill="none">
+                      <!-- Blinking Animation -->
+                      <animate
+                        attributeName="stroke-width"
+                        values="3;5;3"
+                        dur="5s"
+                        repeatCount="indefinite"
+                      />
+                    </rect>
+                  </g>
+                  
+                  <g id="lightStand2" transform="translate(1400, 400)">
+                    <!-- Stand -->
+                    <line x1="0" y1="-150" x2="0" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Base -->
+                    <line x1="-20" y1="100" x2="20" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Light Housing -->
+                    <rect x="-20" y="-170" width="40" height="20" stroke="black" stroke-width="3" fill="none">
+                      <!-- Blinking Animation -->
+                      <animate
+                        attributeName="stroke-width"
+                        values="3;5;3"
+                        dur="5s"
+                        repeatCount="indefinite"
+                      />
+                    </rect>
+                  </g>
+                  
+                  <!-- Actor 1 (Waving) -->
+                  <g id="actor1" transform="translate(800, 400)">
+                    <!-- Stick Figure Body -->
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Static Arm -->
+                    <line x1="0" y1="30" x2="-20" y2="60" stroke="black" stroke-width="3"/>
+                    <!-- Waving Arm -->
+                    <line x1="0" y1="30" x2="40" y2="20" stroke="black" stroke-width="3">
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        values="0 0 30;15 0 30;0 0 30"
+                        dur="5s"
+                        repeatCount="indefinite"
+                      />
+                    </line>
+                    <!-- Legs -->
+                    <line x1="0" y1="100" x2="-20" y2="170" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="100" x2="20" y2="170" stroke="black" stroke-width="3"/>
+                    <!-- Head -->
+                    <circle cx="0" cy="-15" r="15" stroke="black" stroke-width="3" fill="none"/>
+                  </g>
+                  
+                  <!-- Actor 2 (Lifting Arm) -->
+                  <g id="actor2" transform="translate(1200, 400)">
+                    <!-- Stick Figure Body -->
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="black" stroke-width="3"/>
+                    <!-- Static Arm -->
+                    <line x1="0" y1="30" x2="20" y2="60" stroke="black" stroke-width="3"/>
+                    <!-- Lifting Arm -->
+                    <line x1="0" y1="30" x2="-40" y2="20" stroke="black" stroke-width="3">
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        values="0 0 30;-30 0 30;0 0 30"
+                        dur="5s"
+                        repeatCount="indefinite"
+                      />
+                    </line>
+                    <!-- Legs -->
+                    <line x1="0" y1="100" x2="-20" y2="170" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="100" x2="20" y2="170" stroke="black" stroke-width="3"/>
+                    <!-- Head -->
+                    <circle cx="0" cy="-15" r="15" stroke="black" stroke-width="3" fill="none"/>
+                  </g>
+                  
+                  <!-- Simple Floor Line -->
+                  <line x1="200" y1="570" x2="1800" y2="570" stroke="black" stroke-width="3"/>
+                  
+                  <!-- Director's Chair (Optional Extra Detail) -->
+                  <g id="directorsChair" transform="translate(1600, 450)">
+                    <!-- Chair Frame -->
+                    <line x1="0" y1="0" x2="50" y2="0" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="0" x2="0" y2="70" stroke="black" stroke-width="3"/>
+                    <line x1="50" y1="0" x2="50" y2="70" stroke="black" stroke-width="3"/>
+                    <!-- Chair Back -->
+                    <line x1="0" y1="0" x2="15" y2="-40" stroke="black" stroke-width="3"/>
+                    <line x1="50" y1="0" x2="35" y2="-40" stroke="black" stroke-width="3"/>
+                    <line x1="15" y1="-40" x2="35" y2="-40" stroke="black" stroke-width="3"/>
+                    <!-- Cross Braces -->
+                    <line x1="0" y1="20" x2="50" y2="50" stroke="black" stroke-width="3"/>
+                    <line x1="0" y1="50" x2="50" y2="20" stroke="black" stroke-width="3"/>
+                  </g>
+                </svg>
+            </div>
             <div id="parallaxBg" class="parallax-bg">
                 <!-- Background effects -->
                 <div id="lightBeam1" class="light-beam"></div>
                 <div id="lightBeam2" class="light-beam"></div>
-                <div class="film-strip"></div>
+                <!-- Removed film-strip div -->
                 <div class="storyboard-grid"></div>
                 
                 <!-- Particles container -->
                 <div id="particles"></div>
                 
-                <!-- Floating elements with brand-colored images - Fixed URLs and positioning -->
-                <div class="clapperboard floating-element" data-depth="0.8">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1038/1038100.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Clapperboard">
-                </div>
-                <div class="film-reel floating-element" data-depth="0.6">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2886/2886314.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Film Reel">
-                </div>
-                <div class="director-chair floating-element" data-depth="0.7">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1974/1974855.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Director Chair">
-                </div>
-                <div class="video-camera floating-element" data-depth="0.5">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1781/1781735.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Video Camera">
-                </div>
-                <div class="editing-screen floating-element" data-depth="0.9">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7870/7870809.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Editing Screen">
-                </div>
-                <div class="headphones floating-element" data-depth="0.4">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1062/1062688.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Headphones">
-                </div>
-                <div class="director-megaphone floating-element" data-depth="0.7">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2839/2839118.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Director Megaphone">
-                </div>
-                <!-- New Modern Equipment Elements with brand-colored images -->
-                <div class="modern-camera floating-element" data-depth="0.65">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4503/4503953.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Modern Camera">
-                </div>
-                <div class="modern-drone floating-element" data-depth="0.85">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3867/3867344.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Drone">
-                </div>
-                <div class="modern-lights floating-element" data-depth="0.55">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6108/6108212.png" style="filter: invert(41%) sepia(82%) saturate(789%) hue-rotate(174deg) brightness(88%) contrast(91%);" alt="Studio Lights">
-                </div>
-                <div class="modern-microphone floating-element" data-depth="0.75">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3397/3397141.png" style="filter: invert(41%) sepia(65%) saturate(2374%) hue-rotate(342deg) brightness(97%) contrast(87%);" alt="Studio Microphone">
-                </div>
+                <!-- Floating elements with larger FontAwesome icons and glow effects -->
+                <div class="floating-element" style="left: 15%; top: 20%; color: #b91421;"><i class="fas fa-video fa-3x"></i></div>
+                <div class="floating-element" style="left: 70%; top: 15%; color: #091458;"><i class="fas fa-microphone fa-3x"></i></div>
+                <div class="floating-element" style="left: 25%; top: 60%; color: #b91421;"><i class="fas fa-headphones fa-3x"></i></div>
+                <div class="floating-element" style="left: 65%; top: 70%; color: #091458;"><i class="fas fa-film fa-3x"></i></div>
+                <div class="floating-element" style="left: 85%; top: 40%; color: #b91421;"><i class="fas fa-lightbulb fa-3x"></i></div>
+                <div class="floating-element" style="left: 40%; top: 80%; color: #091458;"><i class="fas fa-camera fa-3x"></i></div>
+                <div class="floating-element" style="left: 80%; top: 10%; color: #b91421;"><i class="fas fa-bullhorn fa-3x"></i></div>
+                <div class="floating-element" style="left: 20%; top: 15%; color: #091458;"><i class="fas fa-laptop fa-3x"></i></div>
+                <div class="floating-element" style="left: 75%; top: 80%; color: #b91421;"><i class="fas fa-photo-video fa-3x"></i></div>
+                <div class="floating-element" style="left: 10%; top: 30%; color: #091458;"><i class="fas fa-magic fa-3x"></i></div>
+                <div class="floating-element" style="left: 30%; top: 75%; color: #b91421;"><i class="fas fa-music fa-3x"></i></div>
             </div>
             
             <div id="parallaxTitle" class="parallax-title">Equipment</div>
@@ -1259,7 +1817,7 @@
             // Clear existing particles
             particlesContainer.innerHTML = '';
             
-            const particleCount = 80; // Increased count for more immersive effect
+            const particleCount = 100; // Increased count
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -1269,48 +1827,25 @@
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Random depth (z-index and scale for 3D effect)
-                const depth = Math.random() * 5;
-                particle.style.zIndex = Math.floor(depth);
-                
-                // Random size with 3D perception (closer particles appear larger)
-                const size = (Math.random() * 4 + 1) * (depth / 2 + 1);
+                // Random size
+                const size = Math.random() * 4 + 1;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
-                // Varied brightness based on depth (closer particles are brighter)
-                const opacity = 0.3 + (depth / 5) * 0.7;
-                particle.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
+                // Random opacity
+                const opacity = 0.3 + Math.random() * 0.7;
+                particle.style.opacity = opacity;
                 
-                // Add subtle glow effect to some particles
-                if (Math.random() > 0.7) {
-                    const glowSize = Math.random() * 5 + 2;
-                    const glowColor = Math.random() > 0.5 ? 'rgba(255, 255, 200, 0.3)' : 'rgba(200, 200, 255, 0.3)';
-                    particle.style.boxShadow = `0 0 ${glowSize}px ${glowSize / 2}px ${glowColor}`;
-                }
+                // Faster animation with random duration and delay
+                const duration = 6 + Math.random() * 12;
+                const delay = Math.random() * 10;
                 
-                // Random animation with variable speed based on depth
-                const delay = Math.random() * 20;
-                const duration = (Math.random() * 15 + 10) * (5 / (depth + 1)); // Closer particles move faster
-                
-                // Alternating animation patterns for more organic feel
-                const animationType = Math.floor(Math.random() * 3);
-                switch(animationType) {
-                    case 0:
-                        particle.style.animation = `floatParticle ${duration}s infinite linear`;
-                        break;
-                    case 1:
-                        particle.style.animation = `floatParticleAlt ${duration}s infinite ease-in-out`;
-                        break;
-                    case 2:
-                        particle.style.animation = `pulseParticle ${duration}s infinite ease-in-out`;
-                        break;
-                }
-                
+                // Set animation properties individually for better browser compatibility
+                particle.style.animationName = 'floatingParticle';
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationTimingFunction = 'ease-in-out';
+                particle.style.animationIterationCount = 'infinite';
                 particle.style.animationDelay = `${delay}s`;
-                
-                // Add custom attributes for parallax effect
-                particle.setAttribute('data-depth', 0.2 + depth / 10);
                 
                 particlesContainer.appendChild(particle);
             }
@@ -1355,11 +1890,11 @@
             hint.innerHTML = '<div class="mouse-icon"></div><span>Move mouse to explore</span>';
             container.appendChild(hint);
             
-            // Fade out after 5 seconds
+            // Fade out after 10 seconds instead of 5
             setTimeout(() => {
                 hint.style.opacity = '0';
-                setTimeout(() => hint.remove(), 1000);
-            }, 5000);
+                setTimeout(() => hint.remove(), 1500); // Longer fade out animation (1.5s)
+            }, 10000); // Show for 10 seconds
         }
         
         // Initialize everything when DOM is loaded
@@ -1386,6 +1921,12 @@
                     
                     // Force a reflow to ensure animations are applied
                     void el.offsetWidth;
+                });
+                
+                // Ensure particles are animating by forcing a reflow
+                document.querySelectorAll('.particle').forEach(particle => {
+                    // Force a reflow to ensure animations are applied
+                    void particle.offsetWidth;
                 });
             }, 100);
             
