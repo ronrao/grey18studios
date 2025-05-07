@@ -9,6 +9,8 @@
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="styles-updated.css">
     <link rel="stylesheet" href="portfolio.css">
+    <!-- Grey18 Styling -->
+    <link rel="stylesheet" href="css/grey18-styling.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -18,6 +20,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <!-- Include script for header and footer -->
     <script src="include.js"></script>
+    <!-- Grey18 Text Processor -->
+    <script src="scripts/grey18-text-processor.js"></script>
     <style>
         /* CSS Variables */
         :root {
@@ -852,6 +856,10 @@
             margin: 0;
             padding: 0;
         }
+        
+        .grey18 {
+            color: #d1d1d1; /* This is 18% grey in hex */
+        }
     </style>
 </head>
 <body>
@@ -866,16 +874,16 @@
             
             <div class="portfolio-hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number" id="projects-counter">250+</div>
-                    <div class="stat-text">Projects</div>
+                    <div class="stat-number" id="projects-counter">4000+</div>
+                    <div class="stat-text">Projects Completed</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" id="clients-counter">120+</div>
-                    <div class="stat-text">Clients</div>
+                    <div class="stat-number" id="clients-counter">800+</div>
+                    <div class="stat-text">Audio Projects</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" id="years-counter">15+</div>
-                    <div class="stat-text">Years Experience</div>
+                    <div class="stat-number" id="years-counter">20+</div>
+                    <div class="stat-text">Years of Experience</div>
                 </div>
             </div>
             
@@ -889,18 +897,159 @@
     <section class="portfolio-categories">
         <div class="container">
             <div class="portfolio-nav">
-                <p class="category-title"><span class="highlight">Browse</span> our work by category</p>
+                <p class="category-title"><span class="highlight">Browse</span> by Category</p>
                 <div class="portfolio-nav-items">
-                    <a href="#photography" class="portfolio-nav-item active" data-category="photography">Photography</a>
+                    <a href="#video-production" class="portfolio-nav-item active" data-category="video-production">Video Production</a>
+                    <a href="#photography" class="portfolio-nav-item" data-category="photography">Photography</a>
+                    <a href="#editing-grading" class="portfolio-nav-item" data-category="editing-grading">Editing and Colour Grading</a>
                     <a href="#sound-recording" class="portfolio-nav-item" data-category="sound-recording">Sound Recording</a>
                     <a href="#dubbing" class="portfolio-nav-item" data-category="dubbing">Dubbing</a>
-                    <a href="#mixing" class="portfolio-nav-item" data-category="mixing">Audio Mixing</a>
-                    <a href="#editing" class="portfolio-nav-item" data-category="editing">Photo & Video Editing</a>
-                    <a href="#grading" class="portfolio-nav-item" data-category="grading">Colour Grading</a>
+                    <a href="#mixing" class="portfolio-nav-item" data-category="mixing">Audio Mixing & Mastering</a>
                 </div>
             </div>
 
-            <div id="photography" class="portfolio-category active">
+            <div id="video-production" class="portfolio-category active">
+                <div class="category-header">
+                    <h2>Video Production</h2>
+                    <p>Professional video production for commercials, films, corporate videos, and events</p>
+                </div>
+
+                <div class="genre-grid">
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Commercial Production</h3>
+                            <div class="genre-description">
+                                <p>Engaging visual stories for brands of all sizes</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1585024406217-7612941167a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Commercial Production 1">
+                                    <div class="overlay">
+                                        <h4>Product Commercial</h4>
+                                        <p>Luxury watch brand</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1574717024453-e40f1df0c991?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Commercial Production 2">
+                                    <div class="overlay">
+                                        <h4>Fashion Brand Campaign</h4>
+                                        <p>Summer collection launch</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Commercial Production 3">
+                                    <div class="overlay">
+                                        <h4>Food Commercial</h4>
+                                        <p>Restaurant promo</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
+                        </div>
+                    </div>
+
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Corporate Videos</h3>
+                            <div class="genre-description">
+                                <p>Professional corporate content for businesses and organizations</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Video 1">
+                                    <div class="overlay">
+                                        <h4>Company Profile</h4>
+                                        <p>Tech startup introduction</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Video 2">
+                                    <div class="overlay">
+                                        <h4>Conference Highlights</h4>
+                                        <p>Annual industry summit</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Video 3">
+                                    <div class="overlay">
+                                        <h4>Training Video</h4>
+                                        <p>Employee onboarding series</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
+                        </div>
+                    </div>
+
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Event Coverage</h3>
+                            <div class="genre-description">
+                                <p>Comprehensive coverage of special events and occasions</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Event Coverage 1">
+                                    <div class="overlay">
+                                        <h4>Music Festival</h4>
+                                        <p>Weekend live music event</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Event Coverage 2">
+                                    <div class="overlay">
+                                        <h4>Product Launch</h4>
+                                        <p>Tech company product reveal</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Event Coverage 3">
+                                    <div class="overlay">
+                                        <h4>Wedding Film</h4>
+                                        <p>Cinematic wedding coverage</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="photography" class="portfolio-category">
                 <div class="category-header">
                     <h2>Photography</h2>
                     <p>Professional photography for all your creative and commercial needs</p>
@@ -944,6 +1093,138 @@
                                 <p>Interior and exterior architectural photography</p>
                                 <a href="#" class="btn primary">View Gallery</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editing-grading" class="portfolio-category">
+                <div class="category-header">
+                    <h2>Editing and Colour Grading</h2>
+                    <p>Professional editing and colour grading for photos, videos, films and commercials</p>
+                </div>
+
+                <div class="genre-grid">
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Video Editing</h3>
+                            <div class="genre-description">
+                                <p>Professional video editing services for all types of content</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 1">
+                                    <div class="overlay">
+                                        <h4>Music Video Edit</h4>
+                                        <p>Fast-paced music video edit</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1604346744144-6a9a47bcaef5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 2">
+                                    <div class="overlay">
+                                        <h4>Documentary Edit</h4>
+                                        <p>Nature documentary series</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1635514569156-0bbf5be4b202?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 3">
+                                    <div class="overlay">
+                                        <h4>Commercial Edit</h4>
+                                        <p>Promotional content editing</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
+                        </div>
+                    </div>
+
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Photo Retouching</h3>
+                            <div class="genre-description">
+                                <p>Professional photo enhancement and retouching</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 1">
+                                    <div class="overlay">
+                                        <h4>Product Retouching</h4>
+                                        <p>E-commerce product photos</p>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1605095236821-140ee6a11b0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 2">
+                                    <div class="overlay">
+                                        <h4>Portrait Retouching</h4>
+                                        <p>Professional headshots</p>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 3">
+                                    <div class="overlay">
+                                        <h4>Fashion Retouching</h4>
+                                        <p>Magazine editorial</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
+                        </div>
+                    </div>
+
+                    <div class="genre-card">
+                        <div class="genre-header">
+                            <h3>Colour Grading</h3>
+                            <div class="genre-description">
+                                <p>Cinematic colour grading for film and video productions</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-gallery">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1598387181942-6ab7bf1f37f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 1">
+                                    <div class="overlay">
+                                        <h4>Feature Film</h4>
+                                        <p>Cinematic colour treatment</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1634655377962-e6e7ab9ebd5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 2">
+                                    <div class="overlay">
+                                        <h4>Music Video</h4>
+                                        <p>Stylistic colour grade</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="https://images.unsplash.com/photo-1611162618758-4a29a01f2096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 3">
+                                    <div class="overlay">
+                                        <h4>Commercial</h4>
+                                        <p>Brand-specific colour palette</p>
+                                        <div class="view-btn">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn view-more">View More</button>
                         </div>
                     </div>
                 </div>
@@ -1090,104 +1371,6 @@
                                 <h3>Commercial</h3>
                                 <p>Audio post-production for commercials</p>
                                 <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="editing" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Photo & Video Editing</h2>
-                    <p>Professional photo and video editing services</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Retouching">
-                            <div class="genre-overlay">
-                                <h3>Photo Retouching</h3>
-                                <p>Professional photo retouching services</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Manipulation">
-                            <div class="genre-overlay">
-                                <h3>Photo Manipulation</h3>
-                                <p>Creative compositing and manipulation</p>
-                                <a href="#" class="btn primary">View Gallery</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1574717024453-354899f042e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Video Editing">
-                            <div class="genre-overlay">
-                                <h3>Video Editing</h3>
-                                <p>Professional video post-production</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Motion Graphics">
-                            <div class="genre-overlay">
-                                <h3>Motion Graphics</h3>
-                                <p>Custom motion graphics and animation</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="grading" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Colour Grading</h2>
-                    <p>Professional colour grading for film, video, and photos</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Grading">
-                            <div class="genre-overlay">
-                                <h3>Film</h3>
-                                <p>Cinematic colour grading for films</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Grading">
-                            <div class="genre-overlay">
-                                <h3>Commercial</h3>
-                                <p>Colour grading for commercials and ads</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Video Grading">
-                            <div class="genre-overlay">
-                                <h3>Music Video</h3>
-                                <p>Creative colour grading for music videos</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Photo Grading">
-                            <div class="genre-overlay">
-                                <h3>Photo</h3>
-                                <p>Professional colour grading for photography</p>
-                                <a href="#" class="btn primary">View Gallery</a>
                             </div>
                         </div>
                     </div>
@@ -1607,23 +1790,54 @@
             const clientsCounter = document.getElementById('clients-counter');
             const yearsCounter = document.getElementById('years-counter');
             
-            if (projectsCounter) animateCounter(projectsCounter, 0, 250, 2000);
-            if (clientsCounter) animateCounter(clientsCounter, 0, 120, 2000);
-            if (yearsCounter) animateCounter(yearsCounter, 0, 15, 2000);
+            // Store original values as data attributes
+            if (projectsCounter) {
+                const projectsValue = projectsCounter.textContent.trim().replace(/\D/g, '');
+                projectsCounter.setAttribute('data-target', projectsValue);
+            }
+            
+            if (clientsCounter) {
+                const clientsValue = clientsCounter.textContent.trim().replace(/\D/g, '');
+                clientsCounter.setAttribute('data-target', clientsValue);
+            }
+            
+            if (yearsCounter) {
+                const yearsValue = yearsCounter.textContent.trim().replace(/\D/g, '');
+                yearsCounter.setAttribute('data-target', yearsValue);
+            }
+            
+            // Start animations with a slight delay
+            setTimeout(() => {
+                if (projectsCounter) animateCounter(projectsCounter, 0, parseInt(projectsCounter.getAttribute('data-target')), 2000);
+                if (clientsCounter) animateCounter(clientsCounter, 0, parseInt(clientsCounter.getAttribute('data-target')), 2000);
+                if (yearsCounter) animateCounter(yearsCounter, 0, parseInt(yearsCounter.getAttribute('data-target')), 2000);
+            }, 300);
         }
         
         // Counter animation
         function animateCounter(element, start, end, duration) {
+            // Reset counter to zero
+            element.innerHTML = '0+';
+            
             let startTimestamp = null;
+            // Use easing for smoother animation
+            const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+            
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
+                const easedProgress = easeOutCubic(progress);
+                const value = Math.floor(easedProgress * (end - start) + start);
                 element.innerHTML = value + '+';
+                
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
+                } else {
+                    // Ensure final value is exactly the target
+                    element.innerHTML = end + '+';
                 }
             };
+            
             window.requestAnimationFrame(step);
         }
         

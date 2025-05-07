@@ -1,10 +1,10 @@
-# Grey 18 Studio Website
+# Grey 18 Studios Website
 
-Professional website for Grey 18 Studio, featuring audio and visual production services.
+Professional website for Grey 18 Studios, featuring audio and visual production services.
 
 ## Overview
 
-This website showcases Grey 18 Studio's comprehensive audio and visual production services including:
+This website showcases Grey 18 Studios' comprehensive audio and visual production services including:
 - Photography
 - Sound Recording
 - Dubbing
@@ -44,8 +44,8 @@ When making changes to the main website, care should be taken not to modify thes
 Simply clone the repository and open the HTML files in a browser. No build steps are required.
 
 ```
-git clone https://github.com/your-username/grey-18-studio.git
-cd grey-18-studio
+git clone https://github.com/your-username/grey-18-studios.git
+cd grey-18-studios
 ```
 
 ## File Structure
@@ -93,7 +93,7 @@ This guide will help you set up Git and deploy the website to GitHub Pages.
 
 4. **Make your first commit**:
    ```
-   git commit -m "Initial commit for Grey 18 Studio website"
+   git commit -m "Initial commit for Grey 18 Studios website"
    ```
 
 ### Connecting to GitHub
@@ -101,14 +101,14 @@ This guide will help you set up Git and deploy the website to GitHub Pages.
 1. **Create a new repository on GitHub**:
    - Go to [GitHub](https://github.com) and sign in
    - Click the "+" icon in the top right and select "New repository"
-   - Name your repository (e.g., "grey18studio")
+   - Name your repository (e.g., "grey18studios")
    - Keep it public if you want to use the free GitHub Pages
    - Do not initialize with README, .gitignore, or license
    - Click "Create repository"
 
 2. **Connect your local repository to GitHub**:
    ```
-   git remote add origin https://github.com/yourusername/grey18studio.git
+   git remote add origin https://github.com/yourusername/grey18studios.git
    ```
 
 3. **Push your code to GitHub**:
@@ -127,7 +127,7 @@ This guide will help you set up Git and deploy the website to GitHub Pages.
    - Click "Save"
 
 2. **Access your deployed website**:
-   - Your site will be published at `https://yourusername.github.io/grey18studio/`
+   - Your site will be published at `https://yourusername.github.io/grey18studios/`
    - GitHub will show you the URL in the GitHub Pages section
 
 #### Option 2: Deploy using GitHub Actions (more control)

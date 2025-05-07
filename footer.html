@@ -15,6 +15,9 @@
             margin: 0;
             padding: 0;
         }
+        .grey18 {
+            color: #d1d1d1; /* This is 18% grey in hex */
+        }
     </style>
     <!-- Add font awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -62,23 +65,21 @@
                                 <i class="fas fa-map-marker-alt" style="color: #ffffff; font-size: 20px;"></i>
                             </div>
                             <div style="flex-grow: 1;">
-                                <h3 style="font-size: 1.2rem; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center;">
-                                    <span>Visit Us</span>
-                                    <span style="display: inline-block; margin-left: 10px; width: 30px; height: 2px; background: linear-gradient(to right, #b91421, transparent);"></span>
-                                </h3>
+                                <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="font-size: 1.2rem; color: #ffffff; margin: 0; display: flex; align-items: center;">
+                                        <span>Visit Us</span>
+                                        <span style="display: inline-block; margin-left: 10px; width: 30px; height: 2px; background: linear-gradient(to right, #b91421, transparent);"></span>
+                                    </h3>
+                                </div>
                                 <a href="https://maps.app.goo.gl/krFhLnDZemJoPNu37" target="_blank" 
-                                    style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 10px 20px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 10px; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                    style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 10px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
                                     onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
                                     onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='translateX(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';">
                                     <i class="fas fa-map-marker-alt" style="margin-right: 8px; color: #b91421;"></i>
-                                    Grey18 Audio & Visual Studio<br>
+                                    Grey<span class="grey18">18</span> Audio & Visual Studio<br>
                                     <span style="margin-left: 25px; font-size: 0.9em;">19th main, 3rd Cross Rd, BTM 2nd Stage,</span><br>
                                     <span style="margin-left: 25px; font-size: 0.9em;">BTM Layout, Bengaluru, Karnataka 560076</span>
                                 </a>
-                                <div style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 5px;">
-                                    <i class="fas fa-clock" style="margin-right: 8px; color: #b91421;"></i>
-                                    Monday - Friday: 9:00 AM - 6:00 PM
-                                </div>
                             </div>
                         </div>
                         
@@ -100,26 +101,24 @@
                                 </div>
                                 
                                 <div style="margin-bottom: 10px; display: flex; align-items: center; flex-wrap: wrap;">
-                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">Main Line:</div> -->
-                                    <a href="tel:+919845031965" 
-                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
-                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
-                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
-                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
-                                        <i class="fas fa-phone-alt" style="margin-right: 8px; color: #b91421;"></i>
-                                        +91 9845031965
-                                    </a>
-                                </div>
-                                
-                                <div style="display: flex; align-items: center; flex-wrap: wrap;">
-                                    <!-- <div style="font-size: 0.9rem; color: #bbbbbb; margin-right: 15px; width: 120px;">Bookings:</div> -->
                                     <a href="tel:+919845017930" 
                                         style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
                                         onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
                                         onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
                                         onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
                                         <i class="fas fa-phone-alt" style="margin-right: 8px; color: #b91421;"></i>
-                                        +91 9845017930
+                                        +91 9845017930 <span style="font-size: 0.85em; opacity: 0.8;">(Creative Director Giridhar Divan)</span>
+                                    </a>
+                                </div>
+                                
+                                <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                    <a href="tel:+919845031965" 
+                                        style="display: inline-block; background: rgba(30, 30, 30, 0.7); color: #cccccc; text-decoration: none; border-radius: 6px; padding: 8px 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                        onmouseover="this.style.backgroundColor='rgba(185, 20, 33, 0.2)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';" 
+                                        onmouseout="this.style.backgroundColor='rgba(30, 30, 30, 0.7)'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+                                        onclick="this.style.transform='scale(0.95)'; setTimeout(() => {this.style.transform='scale(1)'}, 100);">
+                                        <i class="fas fa-phone-alt" style="margin-right: 8px; color: #b91421;"></i>
+                                        +91 9845031965 <span style="font-size: 0.85em; opacity: 0.8;">(Creative Strategist Ronit Rao)</span>
                                     </a>
                                 </div>
                             </div>
@@ -339,7 +338,7 @@
                 <div>
                     <h3 style="font-size: 1.2rem; margin-bottom: 20px; color: #ffffff; position: relative; padding-bottom: 10px;">About Us</h3>
                     <div style="content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #b91421;"></div>
-                    <p style="margin-bottom: 20px;">Grey 18 Studio provides comprehensive audio and visual production services, delivering exceptional quality and creative solutions to clients worldwide.</p>
+                    <p style="margin-bottom: 20px;">Grey <span class="grey18">18</span> Studios provides comprehensive audio and visual production services, delivering exceptional quality and creative solutions to clients worldwide.</p>
                     <div style="display: flex; gap: 15px; margin-top: 20px;">
                         <a href="#" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(40, 40, 40, 0.7); color: #ffffff; font-size: 16px; border: 1px solid rgba(255, 255, 255, 0.1);"><i class="fab fa-twitter"></i></a>
@@ -380,7 +379,7 @@
             
             <!-- Footer bottom -->
             <div style="padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
-                <p style="font-size: 0.9rem; color: #cccccc;">&copy; <span id="current-year">2023</span> Grey 18 Studio. All Rights Reserved. | Designed by <a href="#" style="color: #b91421; text-decoration: none;">Grey 18 Studio</a></p>
+                <p style="font-size: 0.9rem; color: #cccccc;">&copy; <span id="current-year">2023</span> Grey <span class="grey18">18</span> Studios. All Rights Reserved. | Designed by <a href="#" style="color: #b91421; text-decoration: none;">Grey <span class="grey18">18</span> Studios</a></p>
             </div>
         </div>
     </footer>

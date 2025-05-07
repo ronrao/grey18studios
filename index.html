@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="styles-updated.css">
+    <!-- Grey18 Styling -->
+    <link rel="stylesheet" href="css/grey18-styling.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -19,6 +21,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!-- Include script -->
     <script src="include.js"></script>
+    <!-- Grey18 Text Processor -->
+    <script src="scripts/grey18-text-processor.js"></script>
     <style>
         /* CSS Variables */
         :root {
@@ -1686,6 +1690,10 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        .grey18 {
+            color: #d1d1d1; /* This is 18% grey in hex */
+        }
     </style>
 </head>
 <body>
@@ -1724,13 +1732,13 @@
                     <h1 class="animated-heading">
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0s;">Creating</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.15s;">Exceptional</span>
-                        <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.3s;">Audio</span>
                         <br>
-                        <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.45s;">&</span>
+                        <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.3s;">Audio</span>
+                        <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.45s;"><span style="font-size: 0.85em;">&</span></span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.6s;">Visual</span>
                         <span class="word" style="opacity: 1; transform: translateY(0) rotate(0); animation-delay: 0.75s;">Experiences</span>
                     </h1>
-                    <p class="animated-text" style="opacity: 1; transform: translateY(0);">Professional photography, sound recording, dubbing, and post-production services for your creative needs</p>
+                    <p class="animated-text" style="opacity: 1; transform: translateY(0);">Video Production, Photography, Sound Recording, Dubbing, and Post-Production services for all your creative needs</p>
                     
                     <div class="typing-container" style="opacity: 1; transform: translateY(0);">
                         <h3 class="typing-text"></h3>
@@ -1782,12 +1790,28 @@
                 <p>Comprehensive audio and visual solutions for all your creative needs</p>
             </div>
             <div class="services-grid">
+                <div class="service-card" data-service="video-production">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Production</h3>
+                    <p>Professional video production services for commercials, films, corporate videos and events</p>
+                    <button class="service-expand-btn">Learn More</button>
+                </div>
                 <div class="service-card" data-service="photography">
                     <div class="service-icon">
                         <i class="fas fa-camera"></i>
                     </div>
                     <h3>Photography</h3>
                     <p>Professional photography for events, portraits, products, and commercial use</p>
+                    <button class="service-expand-btn">Learn More</button>
+                </div>
+                <div class="service-card" data-service="editing-grading">
+                    <div class="service-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <h3>Editing and Colour Grading</h3>
+                    <p>Professional editing and colour grading for photos, videos, films and commercials</p>
                     <button class="service-expand-btn">Learn More</button>
                 </div>
                 <div class="service-card" data-service="sound-recording">
@@ -1814,27 +1838,61 @@
                     <p>Expert mixing and mastering to give your audio the professional finish it deserves</p>
                     <button class="service-expand-btn">Learn More</button>
                 </div>
-                <div class="service-card" data-service="editing">
-                    <div class="service-icon">
-                        <i class="fas fa-photo-video"></i>
-                    </div>
-                    <h3>Photo & Video Editing</h3>
-                    <p>Creative editing services to enhance and transform your visual content</p>
-                    <button class="service-expand-btn">Learn More</button>
-                </div>
-                <div class="service-card" data-service="grading">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Colour Grading</h3>
-                    <p>Professional colour correction and grading for films, videos, and photos</p>
-                    <button class="service-expand-btn">Learn More</button>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Service Expanded Views -->
+    <div class="service-expanded-view" id="video-production-expanded">
+        <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2>Video Production Services</h2>
+            <p class="expanded-description">Our professional video production services cover everything from concept development to final delivery, creating high-quality videos for commercials, films, corporate videos, and events.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Video Production Work</h3>
+                <div class="expanded-portfolio-grid">
+                    <!-- Updated with high-quality images -->
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1601058268499-e52e4cd49509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Commercial Production">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Production</h4>
+                            <p>Brand commercials and advertisements</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1540317700647-ec69694d70d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Video">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Corporate Video</h4>
+                            <p>Corporate profiles and training videos</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Event Coverage">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Event Coverage</h4>
+                            <p>Professional event video production</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1492552085122-36706e815be9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Short Film">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Short Films</h4>
+                            <p>Creative storytelling through film</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#video-production" class="btn primary view-all-btn">View All Video Production Work</a>
+            </div>
+        </div>
+    </div>
+
     <div class="service-expanded-view" id="photography-expanded">
         <div class="expanded-content">
             <div class="expanded-close">
@@ -1877,6 +1935,54 @@
                     </div>
                 </div>
                 <a href="portfolio.html#photography" class="btn primary view-all-btn">View All Photography Work</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-expanded-view" id="editing-grading-expanded">
+        <div class="expanded-content">
+            <div class="expanded-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2>Editing and Colour Grading Services</h2>
+            <p class="expanded-description">Our professional editing and colour grading services enhance and transform your visual content, whether it's photo retouching, video editing, or cinematic colour treatment.</p>
+            
+            <div class="expanded-portfolio">
+                <h3>Featured Editing and Colour Grading Projects</h3>
+                <div class="expanded-portfolio-grid">
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1616165415772-f5b95c4417a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Edit</h4>
+                            <p>TV commercial post-production</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Commercial Retouching</h4>
+                            <p>Professional photo retouching</p>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1634469875582-a0469cc99fea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Film Grading">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Film Colour Treatment</h4>
+                            <p>Cinematic colour grading</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                    <div class="expanded-portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1598550468793-d8d5fecd7eb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Music Video Grading">
+                        <div class="expanded-portfolio-caption">
+                            <h4>Music Video</h4>
+                            <p>Stylized colour grading</p>
+                            <i class="fas fa-play-circle play-btn"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="portfolio.html#editing-grading" class="btn primary view-all-btn">View All Editing & Grading Projects</a>
             </div>
         </div>
     </div>
@@ -2147,22 +2253,22 @@
                     </div>
                 </div>
                 <div class="about-text">
-                    <h3>About Grey 18 Studio</h3>
-                    <p>Grey 18 Studio was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
+                    <h3>About Grey <span class="grey18">18</span> Studios</h3>
+                    <p>Grey <span class="grey18">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
                     <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
                     
                     <div class="stats">
                         <div class="stat">
-                            <span class="count">350+</span>
+                            <span class="count">4000+</span>
                             <span class="label">Projects Completed</span>
                         </div>
                         <div class="stat">
-                            <span class="count">120+</span>
-                            <span class="label">Happy Clients</span>
+                            <span class="count">800+</span>
+                            <span class="label">Audio Projects</span>
                         </div>
                         <div class="stat">
-                            <span class="count">15+</span>
-                            <span class="label">Industry Awards</span>
+                            <span class="count">20+</span>
+                            <span class="label">Years of Experience</span>
                         </div>
                     </div>
                     
