@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="screenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="frameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+    <linearGradient id="keyboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b91421"/>
+      <stop offset="100%" stop-color="#7d0e17"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Floor Shadow -->
+  <ellipse cx="100" cy="190" rx="60" ry="8" fill="#000" opacity="0.3"/>
+  
+  <!-- Computer Stand (Curved) -->
+  <path d="M90,150 L90,165 C90,170 110,170 110,165 L110,150 Z" 
+        fill="url(#standGradient)" stroke="#444" stroke-width="0.5"/>
+  <path d="M80,175 L120,175 C130,175 135,170 130,165 L70,165 C65,170 70,175 80,175 Z"
+        fill="url(#standGradient)" stroke="#444" stroke-width="0.5"/>
+
+  <!-- Monitor with Curved Edges -->
+  <path d="M50,40 
+           C45,40 40,45 40,50 
+           L40,130 
+           C40,135 45,140 50,140 
+           L150,140 
+           C155,140 160,135 160,130 
+           L160,50 
+           C160,45 155,40 150,40 Z" 
+        fill="url(#frameGradient)" stroke="#555" stroke-width="1"/>
+  
+  <!-- Screen with Curved Edges -->
+  <path d="M55,45 
+           C52,45 50,47 50,50 
+           L50,120 
+           C50,123 52,125 55,125 
+           L145,125 
+           C148,125 150,123 150,120 
+           L150,50 
+           C150,47 148,45 145,45 Z" 
+        fill="url(#screenGradient)" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Screen Content - Video Timeline -->
+  <rect x="55" y="50" width="90" height="65" rx="3" fill="#111" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Video Preview Area -->
+  <rect x="60" y="55" width="50" height="35" rx="2" fill="#000" stroke="#222" stroke-width="0.5"/>
+  
+  <!-- Video Timeline Tracks -->
+  <rect x="60" y="95" width="80" height="4" rx="1" fill="#333"/>
+  <rect x="60" y="100" width="80" height="4" rx="1" fill="#222"/>
+  <rect x="60" y="105" width="80" height="4" rx="1" fill="#333"/>
+  
+  <!-- Timeline Clips -->
+  <rect x="65" y="95" width="15" height="4" rx="1" fill="url(#timelineGradient)"/>
+  <rect x="85" y="95" width="20" height="4" rx="1" fill="url(#timelineGradient)"/>
+  <rect x="70" y="100" width="25" height="4" rx="1" fill="#555"/>
+  <rect x="100" y="100" width="15" height="4" rx="1" fill="#555"/>
+  <rect x="65" y="105" width="10" height="4" rx="1" fill="#666"/>
+  <rect x="90" y="105" width="25" height="4" rx="1" fill="#666"/>
+  
+  <!-- Playhead -->
+  <rect x="95" y="92" width="1" height="20" fill="#b91421"/>
+  <path d="M92,92 L99,92 L95.5,89 Z" fill="#b91421"/>
+  
+  <!-- Controls Panel -->
+  <rect x="115" y="55" width="25" height="35" rx="2" fill="#222" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Control Buttons -->
+  <circle cx="127.5" cy="62" r="3" fill="#333" stroke="#444" stroke-width="0.3"/>
+  <circle cx="127.5" cy="72" r="3" fill="#333" stroke="#444" stroke-width="0.3"/>
+  <circle cx="127.5" cy="82" r="3" fill="#b91421" stroke="#7d0e17" stroke-width="0.3"/>
+  
+  <!-- Sliders -->
+  <rect x="120" y="90" width="15" height="2" rx="1" fill="#333"/>
+  <rect x="120" y="95" width="15" height="2" rx="1" fill="#333"/>
+  <circle cx="125" cy="90" r="2" fill="#666"/>
+  <circle cx="130" cy="95" r="2" fill="#666"/>
+  
+  <!-- Keyboard (Curved) -->
+  <path d="M70,145 
+           C65,145 60,150 60,155 
+           L60,165 
+           C60,170 65,175 70,175 
+           L130,175 
+           C135,175 140,170 140,165 
+           L140,155 
+           C140,150 135,145 130,145 Z" 
+        fill="url(#keyboardGradient)" stroke="#444" stroke-width="0.5"/>
+  
+  <!-- Keyboard Keys (Suggesting Layout) -->
+  <rect x="65" y="150" width="70" height="20" rx="2" fill="#222" stroke="#333" stroke-width="0.3"/>
+  
+  <!-- Key Rows -->
+  <rect x="67" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="73" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="79" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="85" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="91" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="97" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="103" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="109" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="115" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="121" y="152" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="127" y="152" width="6" height="3" rx="1" fill="#111"/>
+  
+  <!-- Second Row -->
+  <rect x="69" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="75" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="81" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="87" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="93" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="99" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="105" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="111" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="117" y="157" width="4" height="3" rx="1" fill="#111"/>
+  <rect x="123" y="157" width="4" height="3" rx="1" fill="#111"/>
+  
+  <!-- Space Bar Row -->
+  <rect x="75" y="162" width="50" height="3" rx="1" fill="#111"/>
+  <rect x="67" y="162" width="6" height="3" rx="1" fill="#111"/>
+  <rect x="127" y="162" width="6" height="3" rx="1" fill="#111"/>
+  
+  <!-- Edit Controls -->
+  <rect x="140" y="155" width="8" height="8" rx="2" fill="#b91421" filter="url(#glow)"/>
+  <rect x="140" y="165" width="8" height="8" rx="2" fill="#555"/>
+  
+  <!-- Mouse (Curved) -->
+  <path d="M150,160 
+           C150,155 145,150 140,155 
+           C135,160 135,170 140,175 
+           C145,180 150,175 150,170 Z" 
+        fill="#222" stroke="#444" stroke-width="0.5"/>
+  <path d="M145,160 L145,165" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Editor Logo -->
+  <text x="100" y="135" font-family="Arial" font-size="4" fill="#ccc" text-anchor="middle">GREY18 EDIT PRO</text>
+</svg> 
