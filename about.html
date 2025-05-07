@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="about.css">
     <!-- Grey18 Styling -->
     <link rel="stylesheet" href="css/grey18-styling.css">
+    <!-- Custom cursor CSS -->
+    <link rel="stylesheet" href="css/custom-cursor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -1107,6 +1109,16 @@
     </style>
 </head>
 <body>
+    <!-- Custom cursor with camera icon -->
+    <div class="custom-cursor">
+        <div class="lens"></div>
+        <div class="shutter"></div>
+        <i class="fas fa-camera"></i>
+    </div>
+    
+    <!-- Camera flash effect -->
+    <div class="camera-flash"></div>
+    
     <!-- Header Container -->
     <div id="header-container"></div>
 
@@ -2022,5 +2034,9 @@
             });
         });
     </script>
+    
+    <!-- Custom cursor script -->
+    <script src="scripts/custom-cursor.js"></script>
+    <script src="assets/audio/camera-shutter.js"></script>
 </body>
 </html> 

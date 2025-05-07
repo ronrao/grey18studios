@@ -448,82 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Custom cursor with magnetic effect
-  const cursor = document.querySelector('.custom-cursor');
-  if (cursor) {
-    document.addEventListener('mousemove', function(e) {
-      // Default cursor positioning
-      const posX = e.clientX;
-      const posY = e.clientY;
-      
-      // Use GSAP for smoother cursor movement if available
-      if (typeof gsap !== 'undefined') {
-        gsap.to(cursor, {
-          left: posX,
-          top: posY,
-          duration: 0.2,
-          ease: "power2.out"
-        });
-      } else {
-        cursor.style.left = `${posX}px`;
-        cursor.style.top = `${posY}px`;
-      }
-    });
-    
-    // Enhanced magnetic effect for interactive elements
-    const magneticElements = document.querySelectorAll('a, button, .service-card, .portfolio-item, .social-icon');
-    
-    magneticElements.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        cursor.classList.add('cursor-active');
-        
-        // Scale effect
-        if (typeof gsap !== 'undefined') {
-          gsap.to(cursor, {
-            scale: 1.5,
-            opacity: 0.9,
-            duration: 0.3
-          });
-        } else {
-          cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-          cursor.style.opacity = '0.9';
-        }
-      });
-      
-      item.addEventListener('mouseleave', function() {
-        cursor.classList.remove('cursor-active');
-        
-        // Reset scale
-        if (typeof gsap !== 'undefined') {
-          gsap.to(cursor, {
-            scale: 1,
-            opacity: 0.7,
-            duration: 0.3
-          });
-        } else {
-          cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-          cursor.style.opacity = '0.7';
-        }
-      });
-      
-      // Magnetic pull effect
-      item.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const deltaX = e.clientX - centerX;
-        const deltaY = e.clientY - centerY;
-        
-        if (typeof gsap !== 'undefined') {
-          gsap.to(cursor, {
-            left: e.clientX - deltaX * 0.2,
-            top: e.clientY - deltaY * 0.2,
-            duration: 0.2
-          });
-        }
-      });
-    });
-  }
+  customCursor();
 
   // Enhanced form validation with better feedback
   const contactForm = document.getElementById('contact-form');
@@ -1336,6 +1261,9 @@ function animateContact() {
 
 // Custom cursor animation
 function customCursor() {
+  // Don't initialize if already handled by inline script
+  if (window.customCursorInitialized) return;
+  
   const cursor = document.querySelector('.custom-cursor');
   
   if (!cursor) return;

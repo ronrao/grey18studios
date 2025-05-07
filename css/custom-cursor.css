@@ -1,0 +1,137 @@
+/* Custom cursor with camera icon */
+.custom-cursor {
+    position: fixed;
+    width: 36px;
+    height: 28px;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    background-image: linear-gradient(to bottom, #666, #444);
+    pointer-events: none;
+    display: none; /* Hidden by default but will be shown via JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0.8;
+    transform: translate(-50%, -50%);
+    border: 2px solid #888;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 5px rgba(255,255,255,0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    will-change: transform, left, top;
+}
+
+.custom-cursor i {
+    color: #ff5252;
+    font-size: 12px;
+    margin-top: -2px;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+}
+
+.custom-cursor::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 12px;
+    width: 14px;
+    height: 6px;
+    background-color: #555;
+    border-radius: 4px 4px 0 0;
+    border-top: 1px solid #999;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+}
+
+.custom-cursor::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 5px;
+    height: 5px;
+    background-color: #ff3333;
+    box-shadow: 0 0 3px #ff6666;
+    border-radius: 50%;
+    animation: blink 4s infinite;
+}
+
+/* Lens element */
+.custom-cursor .lens {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #444 0%, #666 40%, #444 100%);
+    border: 1px solid #777;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.5), 0 0 2px rgba(255,255,255,0.3);
+}
+
+/* Shutter button */
+.custom-cursor .shutter {
+    position: absolute;
+    top: -4px;
+    right: 8px;
+    width: 8px;
+    height: 4px;
+    background-color: #aaa;
+    border-radius: 2px;
+    border: 1px solid #bbb;
+}
+
+/* Camera flash animation on cursor only */
+.cursor-flash {
+    filter: brightness(4) contrast(1.5);
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+    animation: cursorFlash 0.2s ease forwards;
+}
+
+@keyframes cursorFlash {
+    0% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(1) contrast(1); }
+    50% { transform: translate(-50%, -50%) scale(0.95); filter: brightness(5) contrast(1.7); box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.9), 0 0 40px 15px rgba(255, 255, 255, 0.7); }
+    100% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(4) contrast(1.5); }
+}
+
+/* Hide default cursor on desktop only */
+@media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+    html, body, a, button, .btn, .service-card, .portfolio-item, 
+    .nav-link, .expanded-close, .social-icon, .logo, 
+    .scroll-down, .menu-toggle, input, select, textarea {
+        cursor: none !important;
+    }
+}
+
+/* Camera flash effect container */
+.camera-flash {
+    display: none;
+}
+
+@keyframes blink {
+    0% { opacity: 0.3; }
+    5% { opacity: 1; }
+    10% { opacity: 0.3; }
+    95% { opacity: 0.3; }
+    100% { opacity: 0.3; }
+}
+
+/* Only show cursor on larger screens, not on touch devices */
+@media (min-width: 992px) {
+    .custom-cursor {
+        display: flex;
+    }
+    
+    html, body, a, button, .btn, .service-card, .portfolio-item, 
+    .nav-link, .expanded-close, .social-icon, .logo, 
+    .scroll-down, .menu-toggle, input, select, textarea {
+        cursor: none !important;
+    }
+}
+
+/* For touch devices, use normal cursor */
+@media (max-width: 991px) {
+    html, body, a, button, .btn, .service-card, .portfolio-item, 
+    .nav-link, .expanded-close, .social-icon, .logo, 
+    .scroll-down, .menu-toggle, input, select, textarea {
+        cursor: auto !important;
+    }
+} 
