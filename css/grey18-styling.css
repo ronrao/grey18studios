@@ -1,0 +1,47 @@
+/* Grey18 Styling - Special styling for specific terms */
+
+/* Make all instances of 'Grey' display in 18% neutral grey color */
+span.grey-text {
+    color: #d1d1d1 !important; /* 18% neutral grey in hex */
+    font-weight: inherit !important;
+}
+
+/* Make all instances of '18' display in red color */
+
+/* Style for Grey 18 Studios to ensure it displays properly and is always plural */
+.studio-name {
+    white-space: nowrap !important;
+}
+
+/* Specific override for animated-heading to ensure styles are applied during animations */
+.animated-heading span.grey-text,
+.animated-heading span.eighteen-text {
+    color: inherit; /* Let the GSAP animation handle color during animation */
+    transition: color 0.5s ease !important;
+}
+
+/* Apply actual colors after animation is complete */
+.animated-heading span.grey-text {
+    animation: applyGreyColor 0.1s 2s forwards !important;
+}
+
+.animated-heading span.eighteen-text {
+    animation: applyRedColor 0.1s 2s forwards !important;
+}
+
+@keyframes applyGreyColor {
+    to {
+        color: #d1d1d1 !important;
+    }
+}
+
+@keyframes applyRedColor {
+    to {
+        color: #b91421 !important;
+    }
+} 
+
+span.eighteen-text {
+    color: #b91421 !important; /* Brand red color */
+    font-weight: inherit !important;
+}

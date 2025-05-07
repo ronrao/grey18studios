@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles-updated.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="about.css">
+    <!-- Grey18 Styling -->
+    <link rel="stylesheet" href="css/grey18-styling.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
@@ -17,6 +19,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <!-- Include script -->
     <script src="include.js"></script>
+    <!-- Grey18 Text Processor -->
+    <script src="scripts/grey18-text-processor.js"></script>
     <style>
         /* Theme-specific styles */
         :root {
@@ -372,7 +376,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, var(--white), #e0e0e0);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            /* -webkit-text-fill-color: transparent; */
             opacity: 0;
             transform: translateY(30px);
         }
@@ -1096,6 +1100,10 @@
                 height: 100px;
             }
         }
+
+        .grey18 {
+            color: #d1d1d1; /* This is 18% grey in hex */
+        }
     </style>
 </head>
 <body>
@@ -1113,9 +1121,9 @@
         <div class="about-hero-content">
             <h1 class="animated-heading">
                 <span class="word">About</span>
-                <span class="word">Grey</span>
-                <span class="word">18</span>
-                <span class="word">Studio</span>
+                <span class="word"><span class="grey-text">Grey</span></span>
+                <span class="word"><span class="eighteen-text">18</span></span>
+                <span class="word">Studios</span>
             </h1>
             <p>Meet the team behind our creative audio & visual production</p>
         </div>
@@ -1143,8 +1151,8 @@
                         
                         <div class="story-section active" id="section-story">
                             <h2>Our Story</h2>
-                            <p>Grey 18 Studio was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
-                            <p>The name "Grey 18" represents our philosophy of finding the perfect balance between technical precision and creative expression. Grey symbolizes the neutral middle ground where art and technology meet, while 18 represents the studio's founding principle of achieving excellence in all aspects of production.</p>
+                            <p>Grey <span class="grey18">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
+                            <p>The name "Grey <span class="grey18">18</span>" represents our philosophy of finding the perfect balance between technical precision and creative expression. Grey symbolizes the neutral middle ground where art and technology meet, while <span class="grey18">18</span> represents the studio's founding principle of achieving excellence in all aspects of production.</p>
                             <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
                         </div>
                         
@@ -1169,16 +1177,16 @@
                     
                     <div class="about-stats">
                         <div class="stat">
-                            <span class="count">350+</span>
+                            <span class="count">4000+</span>
                             <span class="label">Projects Completed</span>
                         </div>
                         <div class="stat">
-                            <span class="count">120+</span>
-                            <span class="label">Happy Clients</span>
+                            <span class="count">800+</span>
+                            <span class="label">Audio Projects</span>
                         </div>
                         <div class="stat">
-                            <span class="count">15+</span>
-                            <span class="label">Industry Awards</span>
+                            <span class="count">20+</span>
+                            <span class="label">Years of Experience</span>
                         </div>
                     </div>
                 </div>
@@ -1196,7 +1204,7 @@
         <div class="container">
             <div class="section-header animate-on-scroll fade-up">
                 <h2>Meet Our Team</h2>
-                <p>The creative minds behind Grey 18 Studio</p>
+                <p>The creative minds behind Grey <span class="grey18">18</span> Studios</p>
             </div>
             
             <div class="team-grid">
@@ -1630,27 +1638,55 @@
             // Animate the stat numbers
             function animateValue(element, start, end, duration) {
                 let startTimestamp = null;
+                // Use easing for smoother animation
+                const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+                
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    element.innerHTML = Math.floor(progress * (end - start) + start) + (element.innerText.includes('+') ? '+' : '');
+                    const easedProgress = easeOutCubic(progress);
+                    const currentValue = Math.floor(easedProgress * (end - start) + start);
+                    
+                    element.innerHTML = currentValue + '+';
+                    
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
+                    } else {
+                        // Make sure we display the exact end value
+                        element.innerHTML = end + '+';
                     }
                 };
+                
                 window.requestAnimationFrame(step);
             }
             
             const statCounts = document.querySelectorAll('.count');
             
+            // Store original values right away to prevent inconsistencies
             statCounts.forEach((statCount) => {
-                const endValue = parseInt(statCount.textContent);
-                statCount.textContent = '0';
+                // Extract the numeric value, removing any non-digit characters
+                const originalValue = statCount.textContent.trim().replace(/\D/g, '');
+                // Store the original value as a data attribute
+                statCount.setAttribute('data-target', originalValue);
+                // Display the original value until animation starts
+                statCount.textContent = originalValue + '+';
+            });
+            
+            statCounts.forEach((statCount) => {
+                // Use the stored target value to ensure consistency
+                const endValue = parseInt(statCount.getAttribute('data-target'));
                 
                 ScrollTrigger.create({
                     trigger: statCount,
                     start: 'top 80%',
-                    onEnter: () => animateValue(statCount, 0, endValue, 2000),
+                    onEnter: () => {
+                        // Reset to zero and start animation
+                        statCount.textContent = '0+';
+                        // Small delay for better visibility
+                        setTimeout(() => {
+                            animateValue(statCount, 0, endValue, 2000);
+                        }, 100);
+                    },
                     once: true
                 });
             });

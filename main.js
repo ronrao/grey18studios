@@ -822,12 +822,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const countElements = statsSection.querySelectorAll('.count');
     let animationTriggered = false;
     
+    // Store original values right away to prevent inconsistencies
+    countElements.forEach(countElement => {
+      // Extract the numeric value, removing any non-digit characters
+      const originalValue = countElement.textContent.trim().replace(/\D/g, '');
+      // Store the original value for consistent reference
+      countElement.setAttribute('data-original', originalValue);
+      // Keep original display during page load
+      countElement.textContent = originalValue + '+';
+    });
+    
     function animateStats() {
       if (isElementInViewport(statsSection) && !animationTriggered) {
         animationTriggered = true;
         
         countElements.forEach(countElement => {
-          const targetCount = parseInt(countElement.textContent);
+          // Use the stored original value for animation
+          const targetCount = parseInt(countElement.getAttribute('data-original'));
+          // Reset counter to 0 before animation starts
+          countElement.textContent = '0+';
+          
           const duration = 2000; // 2 seconds
           const startTime = Date.now();
           const startValue = 0;
@@ -842,21 +856,25 @@ document.addEventListener('DOMContentLoaded', function() {
               const easedProgress = 1 - Math.pow(1 - progress, 3);
               const currentCount = Math.floor(startValue + (targetCount - startValue) * easedProgress);
               
-              countElement.textContent = currentCount + (countElement.textContent.includes('+') ? '+' : '');
+              countElement.textContent = currentCount + '+';
               requestAnimationFrame(updateCount);
             } else {
-              countElement.textContent = targetCount + (countElement.textContent.includes('+') ? '+' : '');
+              // Ensure final value is exactly the target
+              countElement.textContent = targetCount + '+';
             }
           }
           
-          updateCount();
+          // Small delay before starting animation
+          setTimeout(() => {
+            updateCount();
+          }, 100);
         });
       }
     }
     
     window.addEventListener('scroll', animateStats);
-    // Initial check
-    setTimeout(animateStats, 500);
+    // Initial check with a delay to ensure DOM is ready
+    setTimeout(animateStats, 800);
   }
 });
 

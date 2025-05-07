@@ -1109,27 +1109,55 @@ function initCounterAnimation() {
     
     if (!counters.length) return;
     
+    // Store original values to ensure consistency
     counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target') || +counter.innerText.replace(/\D/g, '');
+        // Get the target value from text content, removing any non-digit characters
+        const originalValue = counter.innerText.trim().replace(/\D/g, '');
+        // Store original value as a data attribute for reference
+        counter.setAttribute('data-original', originalValue);
+        // Set starting value to 0
+        counter.textContent = '0+';
+    });
+    
+    counters.forEach(counter => {
+        // Use data-original attribute to ensure consistent target value
+        const target = parseInt(counter.getAttribute('data-original'));
         const duration = 2000; // 2 seconds
-        const step = Math.ceil(target / (duration / 16)); // 60fps
-        let current = 0;
         
-        const updateCounter = () => {
-            current += step;
-            if (current >= target) {
-                counter.innerText = target + '+';
-            } else {
-                counter.innerText = current + '+';
-                requestAnimationFrame(updateCounter);
-            }
+        const animateCounter = () => {
+            // Use a more consistent animation approach with proper timing
+            const startTime = Date.now();
+            
+            const updateCounter = () => {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Use easing function for smoother animation
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.floor(target * easedProgress);
+                
+                counter.textContent = currentValue + '+';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Ensure the final value is exactly the target
+                    counter.textContent = target + '+';
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
         };
         
         // Start counter animation when element is in viewport
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    updateCounter();
+                    // Delay the animation start slightly for better visibility
+                    setTimeout(() => {
+                        animateCounter();
+                    }, 300);
                     observer.unobserve(entry.target);
                 }
             });

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing Plans | Grey 18 Studio</title>
-    <meta name="description" content="Explore our flexible pricing plans for audio and visual production services. Choose from per-project or monthly retainer options.">
+    <meta name="description" content="Explore our flexible pricing plans for audio and visual production services. Choose from a variety of specialized packages to meet your creative needs.">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-updated.css">
+    <!-- Grey18 Styling -->
+    <link rel="stylesheet" href="css/grey18-styling.css">
     
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -19,10 +21,17 @@
     
     <!-- Include script for header and footer -->
     <script src="include.js"></script>
+    <!-- Grey18 Text Processor -->
+    <script src="scripts/grey18-text-processor.js"></script>
     
     <style>
-        /* Add consistent variables */
+        /* Color variables from index.html */
         :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #262626;
+            --medium-grey: #333333;
+            --light-grey: #cccccc; 
+            --white: #ffffff;
             --accent-primary: #b91421;
             --accent-secondary: #091458;
             --accent-gradient: linear-gradient(135deg, #b91421, #091458);
@@ -39,12 +48,13 @@
         .pricing-hero {
             background: var(--grey-gradient-1);
             padding-top: 180px !important;
-            height: 60vh;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
+            overflow: hidden; /* For animations */
         }
         
         .pricing-hero::before {
@@ -66,6 +76,7 @@
             margin: 0 auto;
             text-align: center;
             padding: 0 20px;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
         
         .pricing-hero-content h1 {
@@ -83,220 +94,22 @@
             color: var(--light-grey);
         }
         
-        /* Consistent section styling */
-        section {
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
-            opacity: 0.3;
-        }
-        
+        /* Package card styles inspired by 4Burner Studio */
         .pricing-section {
             background: var(--grey-gradient-2);
             padding: 80px 0;
         }
         
-        .pricing-toggle-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 50px;
+        .packages-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .pricing-toggle-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin: 0 15px;
-            cursor: pointer;
-            transition: color 0.3s;
-            color: #f5f5f5;
-        }
-        
-        .pricing-toggle-text.active {
-            color: var(--accent-primary);
-        }
-        
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #444444;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background: var(--accent-gradient);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        
-        /* Fix pricing card visibility */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .pricing-card {
-            background-color: rgba(37, 37, 37, 0.7);
-            border-radius: var(--card-border-radius);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: #f5f5f5;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 3px solid var(--accent-primary);
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .pricing-header {
-            background-color: rgba(37, 37, 37, 0.9);
-            color: #f5f5f5;
-            padding: 25px 20px;
-            text-align: center;
-        }
-        
-        .popular .pricing-header {
-            background-color: var(--accent-primary);
-            color: var(--white);
-        }
-        
-        .pricing-tier {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .pricing-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .popular .pricing-amount {
-            color: var(--white);
-        }
-        
-        .pricing-period {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        .pricing-features {
-            padding: 30px 20px;
-        }
-        
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 30px;
-        }
-        
-        .feature-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            color: #f5f5f5;
-        }
-        
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .feature-list i {
-            color: var(--accent-primary);
-            margin-right: 10px;
-        }
-        
-        /* Ensure buttons have consistent styling */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn.primary {
-            background-color: var(--accent-primary);
-            color: var(--white);
-        }
-        
-        .btn.secondary {
-            background-color: transparent;
-            color: var(--white);
-            border: 2px solid var(--accent-secondary);
-        }
-        
-        .btn.secondary:hover {
-            background-color: var(--accent-secondary);
-            color: var(--white);
-        }
-        
-        /* Section header styling consistent with index.html */
         .section-header {
             text-align: center;
             margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out forwards;
         }
         
         .section-header h2 {
@@ -327,6 +140,198 @@
             text-align: center;
         }
         
+        .package-card {
+            background-color: rgba(37, 37, 37, 0.7);
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 50px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #f5f5f5;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid var(--accent-primary);
+            display: grid;
+            grid-template-columns: 1fr;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: calc(var(--card-index) * 0.2s);
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .package-header {
+            background-color: rgba(25, 25, 25, 0.9);
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .package-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .package-content {
+            padding: 25px 30px;
+            position: relative;
+        }
+        
+        .package-description {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: var(--light-grey);
+        }
+        
+        .package-deliverables {
+            margin-bottom: 20px;
+        }
+        
+        .package-deliverables h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--white);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+        
+        .deliverables-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+        }
+        
+        .deliverables-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: baseline;
+            color: #f5f5f5;
+        }
+        
+        .deliverables-list li i {
+            color: var(--accent-primary);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .package-price {
+            background: rgba(30, 30, 30, 0.5);
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .price-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .package-addons {
+            margin-top: 20px;
+        }
+        
+        .addon-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .addon-list li {
+            padding: 8px 0;
+            color: #d5d5d5;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+        
+        .addon-list li:first-child {
+            border-top: none;
+        }
+        
+        .package-cta {
+            margin-top: 25px;
+            text-align: left;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn.primary {
+            background-color: var(--accent-primary);
+            color: var(--white);
+        }
+
+        .featured-package {
+            position: relative;
+            border-left: 3px solid var(--accent-secondary);
+            border-top: 3px solid var(--accent-primary);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent-primary);
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            z-index: 1;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+        }
+        
+        .package-image {
+            max-width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            margin: 10px 0 0 0;
+            object-fit: cover;
+        }
+        
+        /* Two column layout for larger screens */
+        @media screen and (min-width: 992px) {
+            .package-card {
+                grid-template-columns: 0.7fr 1.3fr;
+            }
+            
+            .package-header {
+                border-bottom: none;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .package-image {
+                margin-top: auto;
+                height: 170px;
+                width: 100%;
+            }
+        }
+        
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             .pricing-hero-content h1 {
@@ -337,14 +342,250 @@
                 font-size: 1rem;
             }
             
-            .pricing-grid {
-                grid-template-columns: 1fr;
+            .package-header h3 {
+                font-size: 1.5rem;
             }
             
-            .pricing-toggle-container {
-                flex-direction: column;
-                gap: 15px;
+            .package-content {
+                padding: 20px;
             }
+            
+            .price-amount {
+                font-size: 1.4rem;
+            }
+
+            .package-image {
+                height: 120px;
+            }
+        }
+        
+        /* Contact button for pricing */
+        .pricing-contact {
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(37, 37, 37, 0.5);
+            border-radius: var(--card-border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1.2s;
+            opacity: 0;
+        }
+        
+        .pricing-contact h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .pricing-contact p {
+            margin-bottom: 20px;
+            color: var(--light-grey);
+        }
+        
+        .btn.contact-btn {
+            padding: 15px 35px;
+            font-size: 1rem;
+            background: var(--accent-gradient);
+        }
+
+        /* Custom quote modal */
+        .custom-quote-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .custom-quote-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(37, 37, 37, 0.95);
+            border-radius: var(--card-border-radius);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            padding: 40px;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-primary);
+        }
+
+        .custom-quote-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(185, 20, 33, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(185, 20, 33, 0.6);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .modal-content p {
+            color: var(--light-grey);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-button {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(185, 20, 33, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(185, 20, 33, 0);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Fix for content visibility */
+        .package-card {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            animation: none !important; /* Disable animations that might cause loading issues */
+            visibility: visible !important;
+            display: grid !important;
+        }
+        
+        .pricing-hero-content, 
+        .section-header,
+        .pricing-contact {
+            opacity: 1 !important;
+            animation: none !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure images are properly sized */
+        .package-image {
+            max-width: 100%;
+            height: 170px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 10px 0 0 0;
+            display: block !important;
+        }
+        
+        /* Fix button styling to ensure it's visible */
+        .btn.contact-btn {
+            background: var(--accent-primary); /* Fallback if gradient doesn't work */
+            background: linear-gradient(135deg, #b91421, #091458);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1rem;
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Additional fallback styles for key elements */
+        body {
+            background: #222222 !important; /* Simple background if gradient doesn't load */
+        }
+        
+        .pricing-section {
+            background-color: #111111 !important; /* Fallback background */
+            padding: 80px 0;
+            display: block !important;
+        }
+        
+        /* Ensure package content is visible */
+        .package-content, .package-header {
+            display: block !important;
+            visibility: visible !important;
         }
     </style>
 </head>
@@ -354,267 +595,231 @@
 
     <section class="pricing-hero">
         <div class="pricing-hero-content">
-            <h1>Our Pricing Plans</h1>
-            <p>Flexible options to meet your audio & visual production needs</p>
+            <h1>Our Pricing Packages</h1>
+            <p>Professional audio and visual production services tailored to your needs</p>
         </div>
     </section>
     
     <!-- Pricing Section -->
     <section class="pricing-section">
-        <div class="container">
+        <div class="packages-container">
             <div class="section-header">
-                <h2>Our Pricing Plans</h2>
-                <p>Transparent pricing tailored to your production needs</p>
+                <h2>Service Packages</h2>
+                <p>Choose from our selection of professional production packages</p>
             </div>
             
-            <div class="pricing-toggle-container">
-                <div id="per-project-desc" class="pricing-toggle-text active">Per Project</div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="pricing-toggle">
-                    <span class="slider"></span>
-                </label>
-                <div id="monthly-desc" class="pricing-toggle-text">Monthly Retainer</div>
-            </div>
-            
-            <!-- Per Project Pricing -->
-            <div class="pricing-plans pay-per-project">
-                <div class="pricing-grid">
-                    <!-- Basic Package -->
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Basic Package</div>
-                            <div class="pricing-amount">$600</div>
-                            <div class="pricing-period">per project</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 1 standard service</li>
-                                <li><i class="fas fa-check"></i> Up to 5 minutes of finished content</li>
-                                <li><i class="fas fa-check"></i> 2 rounds of revisions</li>
-                                <li><i class="fas fa-check"></i> Delivery within 7 business days</li>
-                                <li><i class="fas fa-check"></i> Basic color grading</li>
-                                <li><i class="fas fa-times"></i> Sound design</li>
-                                <li><i class="fas fa-times"></i> Premium effects</li>
-                                <li><i class="fas fa-times"></i> Rush delivery</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+            <!-- Photography Package -->
+            <div class="package-card" style="--card-index: 1;">
+                <div class="package-header">
+                    <h3>Photography Package</h3>
+                    <img src="https://images.unsplash.com/photo-1576155861761-74b4baccb5fa" alt="Photography Package" class="package-image">
+                </div>
+                <div class="package-content">
+                    <div class="package-description">
+                        Our professional photography services cover a wide range of needs, from portrait sessions to commercial product shoots and event coverage.
                     </div>
                     
-                    <!-- Standard Package -->
-                    <div class="pricing-card popular">
-                        <div class="popular-badge">Popular</div>
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Standard Package</div>
-                            <div class="pricing-amount">$1,200</div>
-                            <div class="pricing-period">per project</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 2 combined services</li>
-                                <li><i class="fas fa-check"></i> Up to 15 minutes of finished content</li>
-                                <li><i class="fas fa-check"></i> 3 rounds of revisions</li>
-                                <li><i class="fas fa-check"></i> Delivery within 5 business days</li>
-                                <li><i class="fas fa-check"></i> Advanced color grading</li>
-                                <li><i class="fas fa-check"></i> Basic sound design</li>
-                                <li><i class="fas fa-check"></i> Standard effects package</li>
-                                <li><i class="fas fa-times"></i> Rush delivery</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+                    <div class="package-deliverables">
+                        <h4>Deliverables:</h4>
+                        <ul class="deliverables-list">
+                            <li><i class="fas fa-check"></i> 16 professionally edited photos (in a single session)</li>
+                            <li><i class="fas fa-check"></i> 12 primary subjects (1 image each)</li>
+                            <li><i class="fas fa-check"></i> 4 environmental/context shots</li>
+                            <li><i class="fas fa-check"></i> 1 composite group shot</li>
+                            <li><i class="fas fa-check"></i> Includes props, equipment, styling & editing</li>
+                        </ul>
                     </div>
                     
-                    <!-- Premium Package -->
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Premium Package</div>
-                            <div class="pricing-amount">$2,500</div>
-                            <div class="pricing-period">per project</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 3+ combined services</li>
-                                <li><i class="fas fa-check"></i> Up to 30 minutes of finished content</li>
-                                <li><i class="fas fa-check"></i> Unlimited revisions</li>
-                                <li><i class="fas fa-check"></i> Delivery within 3 business days</li>
-                                <li><i class="fas fa-check"></i> Premium color grading</li>
-                                <li><i class="fas fa-check"></i> Advanced sound design</li>
-                                <li><i class="fas fa-check"></i> Premium effects package</li>
-                                <li><i class="fas fa-check"></i> Rush delivery available</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+                    <div class="package-price">
+                        <span class="price-amount">₹92,000</span> for a 1-day shoot
+                    </div>
+                    
+                    <div class="package-addons">
+                        <ul class="addon-list">
+                            <li>* Additional images @ ₹7,500 each</li>
+                            <li>* 15-second reels @ ₹18,500 each</li>
+                            <li>* 30-40 second showcase video @ ₹37,000</li>
+                            <li>* Additional image edits @ ₹3,700 each</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-cta">
+                        <a href="index.html#contact" class="btn primary">Get Started</a>
                     </div>
                 </div>
             </div>
             
-            <!-- Monthly Retainer Pricing -->
-            <div class="pricing-plans monthly-retainer">
-                <div class="pricing-grid">
-                    <!-- Starter Retainer -->
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Starter Retainer</div>
-                            <div class="pricing-amount">$1,500</div>
-                            <div class="pricing-period">per month</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 2 projects per month</li>
-                                <li><i class="fas fa-check"></i> Total of 20 minutes content</li>
-                                <li><i class="fas fa-check"></i> 2 rounds of revisions</li>
-                                <li><i class="fas fa-check"></i> 1 service category only</li>
-                                <li><i class="fas fa-check"></i> Standard equipment access</li>
-                                <li><i class="fas fa-check"></i> Basic color grading</li>
-                                <li><i class="fas fa-times"></i> Priority scheduling</li>
-                                <li><i class="fas fa-times"></i> Dedicated project manager</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+            <!-- Sound Recording Package -->
+            <div class="package-card featured-package" style="--card-index: 2;">
+                <div class="featured-badge">Popular</div>
+                <div class="package-header">
+                    <h3>Sound Recording Package</h3>
+                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0" alt="Sound Recording Package" class="package-image">
+                </div>
+                <div class="package-content">
+                    <div class="package-description">
+                        Our state-of-the-art recording studio provides the perfect environment for capturing vocals, instruments, and full bands with exceptional clarity and precision.
                     </div>
                     
-                    <!-- Pro Retainer -->
-                    <div class="pricing-card popular">
-                        <div class="popular-badge">Popular</div>
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Pro Retainer</div>
-                            <div class="pricing-amount">$3,000</div>
-                            <div class="pricing-period">per month</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 4 projects per month</li>
-                                <li><i class="fas fa-check"></i> Total of 40 minutes content</li>
-                                <li><i class="fas fa-check"></i> 3 rounds of revisions</li>
-                                <li><i class="fas fa-check"></i> 2 service categories</li>
-                                <li><i class="fas fa-check"></i> Premium equipment access</li>
-                                <li><i class="fas fa-check"></i> Advanced color grading</li>
-                                <li><i class="fas fa-check"></i> Priority scheduling</li>
-                                <li><i class="fas fa-times"></i> Dedicated project manager</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+                    <div class="package-deliverables">
+                        <h4>Deliverables:</h4>
+                        <ul class="deliverables-list">
+                            <li><i class="fas fa-check"></i> 8 hours of studio recording time</li>
+                            <li><i class="fas fa-check"></i> Professional sound engineer</li>
+                            <li><i class="fas fa-check"></i> Up to 6 audio tracks</li>
+                            <li><i class="fas fa-check"></i> Basic mixing and mastering</li>
+                            <li><i class="fas fa-check"></i> 2 rounds of revisions</li>
+                        </ul>
                     </div>
                     
-                    <!-- Enterprise Retainer -->
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <div class="pricing-tier">Enterprise Retainer</div>
-                            <div class="pricing-amount">$5,000+</div>
-                            <div class="pricing-period">per month</div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check"></i> 6+ projects per month</li>
-                                <li><i class="fas fa-check"></i> Unlimited content minutes</li>
-                                <li><i class="fas fa-check"></i> Unlimited revisions</li>
-                                <li><i class="fas fa-check"></i> All service categories</li>
-                                <li><i class="fas fa-check"></i> Exclusive equipment access</li>
-                                <li><i class="fas fa-check"></i> Premium color grading</li>
-                                <li><i class="fas fa-check"></i> Priority scheduling</li>
-                                <li><i class="fas fa-check"></i> Dedicated project manager</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="index.html#contact" class="btn">Get Started</a>
-                        </div>
+                    <div class="package-price">
+                        <span class="price-amount">₹1,15,000</span> per project
+                    </div>
+                    
+                    <div class="package-addons">
+                        <ul class="addon-list">
+                            <li>* Additional recording hours @ ₹11,500/hour</li>
+                            <li>* Extra audio tracks @ ₹7,500 each</li>
+                            <li>* Advanced mixing service @ ₹38,000</li>
+                            <li>* Additional revisions @ ₹15,000 per round</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-cta">
+                        <a href="index.html#contact" class="btn primary">Get Started</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Custom Quote Section -->
-    <section class="custom-quote">
-        <div class="container">
-            <h3>Need a Custom Solution?</h3>
-            <p>We understand that every project is unique. Contact us for a tailored quote that matches your specific requirements and budget.</p>
-            <a href="index.html#contact" class="btn btn-primary">Request Custom Quote</a>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Everything you need to know about our pricing and services</p>
             </div>
             
-            <div class="faq-grid">
-                <div class="faq-column">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What's included in the basic service package?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Our basic package includes one standard service (photography, sound recording, dubbing, audio mixing, video editing, or color grading) for projects up to 5 minutes in length. You'll receive 2 rounds of revisions and delivery within 7 business days.</p>
-                        </div>
+            <!-- Video Production Package -->
+            <div class="package-card" style="--card-index: 3;">
+                <div class="package-header">
+                    <h3>Video Production Package</h3>
+                    <img src="https://images.unsplash.com/photo-1540655037529-e9a72cee5e99" alt="Video Production Package" class="package-image">
+                </div>
+                <div class="package-content">
+                    <div class="package-description">
+                        Complete video production services including filming, editing, color grading, and sound design for commercial, promotional, or creative projects.
                     </div>
                     
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How do I know which package is right for me?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>The right package depends on your project scope, timeline, and budget. Basic is ideal for simple, single-service projects, Standard works well for mid-sized projects requiring multiple services, and Premium is best for complex, full-production projects with tight deadlines. Still unsure? Contact us for a personalized recommendation.</p>
-                        </div>
+                    <div class="package-deliverables">
+                        <h4>Deliverables:</h4>
+                        <ul class="deliverables-list">
+                            <li><i class="fas fa-check"></i> 10 hours of filming (1-day shoot)</li>
+                            <li><i class="fas fa-check"></i> Professional equipment and crew</li>
+                            <li><i class="fas fa-check"></i> Up to 3 minutes of final edited content</li>
+                            <li><i class="fas fa-check"></i> Color grading and basic effects</li>
+                            <li><i class="fas fa-check"></i> Original music and sound design</li>
+                            <li><i class="fas fa-check"></i> 3 rounds of revisions</li>
+                        </ul>
                     </div>
                     
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Do you offer discounts for non-profits or educational institutions?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Yes, we offer special pricing for non-profit organizations, educational institutions, and student projects. Please contact us with details about your organization and project for more information.</p>
-                        </div>
+                    <div class="package-price">
+                        <span class="price-amount">₹1,90,000</span> per project
+                    </div>
+                    
+                    <div class="package-addons">
+                        <ul class="addon-list">
+                            <li>* Additional filming day @ ₹92,000</li>
+                            <li>* Extra minute of content @ ₹30,000</li>
+                            <li>* Premium visual effects @ ₹26,000 per scene</li>
+                            <li>* Additional revisions @ ₹19,000 per round</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-cta">
+                        <a href="index.html#contact" class="btn primary">Get Started</a>
                     </div>
                 </div>
-                
-                <div class="faq-column">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What happens if I need revisions beyond what's included?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Additional revisions beyond your package allowance are billed at $100 per hour. We'll always notify you before incurring any extra charges and provide an estimate of the time required for your requested changes.</p>
-                        </div>
+            </div>
+            
+            <!-- Audio Post-Production Package -->
+            <div class="package-card" style="--card-index: 4;">
+                <div class="package-header">
+                    <h3>Audio Post-Production</h3>
+                    <img src="https://images.unsplash.com/photo-1590301157890-1c7ef7a23757" alt="Audio Post-Production Package" class="package-image">
+                </div>
+                <div class="package-content">
+                    <div class="package-description">
+                        Professional audio post-production services including mixing, mastering, sound design, and voice-over/dubbing work for your media projects.
                     </div>
                     
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Is there a cancellation fee?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Cancellations made more than 7 days before the project start date receive a full refund minus a 10% administrative fee. Cancellations between 2-7 days receive a 50% refund. Cancellations within 48 hours of the project start are non-refundable.</p>
-                        </div>
+                    <div class="package-deliverables">
+                        <h4>Deliverables:</h4>
+                        <ul class="deliverables-list">
+                            <li><i class="fas fa-check"></i> Complete audio post-production</li>
+                            <li><i class="fas fa-check"></i> Up to 10 minutes of content</li>
+                            <li><i class="fas fa-check"></i> Professional sound design</li>
+                            <li><i class="fas fa-check"></i> Mixing and mastering</li>
+                            <li><i class="fas fa-check"></i> 2 rounds of revisions</li>
+                        </ul>
                     </div>
                     
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How do monthly retainers work?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Monthly retainers provide reserved capacity for recurring production needs. You'll sign a 3-month minimum agreement and pay monthly in advance. Unused capacity doesn't roll over to the next month, but you'll always have priority scheduling for your allocated projects.</p>
-                        </div>
+                    <div class="package-price">
+                        <span class="price-amount">₹75,000</span> per project
+                    </div>
+                    
+                    <div class="package-addons">
+                        <ul class="addon-list">
+                            <li>* Additional content @ ₹6,000 per minute</li>
+                            <li>* Voice-over recording @ ₹22,500 per hour</li>
+                            <li>* Custom music composition @ ₹34,000</li>
+                            <li>* Additional revisions @ ₹11,500 per round</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-cta">
+                        <a href="index.html#contact" class="btn primary">Get Started</a>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Color Grading Package -->
+            <div class="package-card" style="--card-index: 5;">
+                <div class="package-header">
+                    <h3>Color Grading Package</h3>
+                    <img src="https://images.unsplash.com/photo-1618609255910-cb2bed8fe29d" alt="Color Grading Package" class="package-image">
+                </div>
+                <div class="package-content">
+                    <div class="package-description">
+                        Professional color correction and grading services to enhance mood, tone, and visual impact for your films, videos, and commercial content.
+                    </div>
+                    
+                    <div class="package-deliverables">
+                        <h4>Deliverables:</h4>
+                        <ul class="deliverables-list">
+                            <li><i class="fas fa-check"></i> Professional color grading</li>
+                            <li><i class="fas fa-check"></i> Up to 5 minutes of content</li>
+                            <li><i class="fas fa-check"></i> Custom look development</li>
+                            <li><i class="fas fa-check"></i> Color matching across scenes</li>
+                            <li><i class="fas fa-check"></i> 2 rounds of revisions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-price">
+                        <span class="price-amount">₹68,000</span> per project
+                    </div>
+                    
+                    <div class="package-addons">
+                        <ul class="addon-list">
+                            <li>* Additional content @ ₹11,500 per minute</li>
+                            <li>* Multiple color versions @ ₹15,000 per version</li>
+                            <li>* Advanced color effects @ ₹19,000</li>
+                            <li>* Additional revisions @ ₹7,500 per round</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="package-cta">
+                        <a href="index.html#contact" class="btn primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Custom Quote CTA -->
+            <div class="pricing-contact">
+                <h3>Need a Custom Solution?</h3>
+                <p>We understand that every project is unique. Contact us for a tailored quote that matches your specific requirements and budget.</p>
+                <a href="index.html#contact" class="btn contact-btn pulse-animation" id="custom-quote-btn">Request Custom Quote</a>
             </div>
         </div>
     </section>
@@ -623,6 +828,69 @@
     <div id="footer-container"></div>
 
     <script src="script.js"></script>
+    <script>
+        // This script ensures all content loads properly and handles the custom quote button
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            // Force images to load properly
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                // Add error handling for images
+                img.onerror = function() {
+                    console.error('Failed to load image:', img.src);
+                    // Set a fallback image if the original fails
+                    img.src = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04';
+                };
+                // Force reload of images
+                const currentSrc = img.src;
+                img.src = '';
+                setTimeout(() => {
+                    img.src = currentSrc;
+                }, 50);
+            });
+            
+            // Fix for package cards to ensure they're visible
+            const packageCards = document.querySelectorAll('.package-card');
+            packageCards.forEach((card, index) => {
+                // Force visibility regardless of animation state
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+                card.style.setProperty('--card-index', index + 1);
+                
+                // Add hover effects (ensuring they work properly)
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+                });
+            });
+            
+            // Fix the custom quote button to scroll to footer contact instead of showing modal
+            const customQuoteBtn = document.getElementById('custom-quote-btn');
+            if (customQuoteBtn) {
+                customQuoteBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Custom quote button clicked');
+                    
+                    // Remove modal functionality and scroll to footer contact instead
+                    const footerContact = document.getElementById('footer-container');
+                    if (footerContact) {
+                        console.log('Scrolling to footer contact');
+                        footerContact.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        console.error('Footer contact section not found');
+                        // Fallback - direct to contact anchor
+                        window.location.href = 'index.html#contact';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html> 
 
