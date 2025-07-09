@@ -34,6 +34,11 @@ let bodyScrollPosition = 0;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let lastScrollTop = 0;
+let currentModalCategory = null;
+let currentModalImages = [];
+
+window.currentLightboxArray = [];
+window.currentLightboxIndex = 0;
 
 // Event Listeners with null checks
 if (window) {
@@ -1276,3 +1281,418 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// === BEGIN: Simple Photo Gallery with Hardcoded Categories ===
+const videoCategories = {
+  cat1: [
+    "",
+    ""
+  ],
+  cat2: [
+    "",
+    ""
+  ]
+};
+
+const photoCategories = {
+  portrait: [
+    'assets/PICTURES/Portrait 12.jpg',
+    'assets/PICTURES/Portrait 13.jpg',
+    'assets/PICTURES/Portrait 14.jpg',
+    'assets/PICTURES/Portrait 15.jpg',
+    'assets/PICTURES/Portrait 17.jpg',
+    'assets/PICTURES/Portrait 18.jpg',
+    'assets/PICTURES/Portrait 19.jpg',
+    'assets/PICTURES/Portrait 20.jpg',
+    'assets/PICTURES/Portrait 21.jpg',
+    'assets/PICTURES/Portrait 22.jpg',
+    'assets/PICTURES/Portrait 23.jpg',
+    'assets/PICTURES/Portrait 24.jpg',
+    'assets/PICTURES/Portrait 25.jpg',
+    'assets/PICTURES/Portrait 26.jpg',
+    'assets/PICTURES/Portrait 27.jpg',
+    'assets/PICTURES/Portrait 28.jpg',
+    'assets/PICTURES/Portrait 29.jpg',
+    'assets/PICTURES/Portrait 30.jpg',
+    'assets/PICTURES/Portrait 31.jpg',
+    'assets/PICTURES/Portrait 32.jpg',
+    'assets/PICTURES/Portrait 33.jpg',
+    'assets/PICTURES/Portrait 34.jpg',
+    'assets/PICTURES/Portrait 35.jpg',
+    'assets/PICTURES/Portrait 36.jpg',
+    'assets/PICTURES/Portrait 37.jpg',
+    'assets/PICTURES/Portrait 38.jpg',
+    'assets/PICTURES/Portrait 39.jpg',
+    'assets/PICTURES/Portrait 40.jpg',
+    'assets/PICTURES/Portrait 41.jpg',
+    'assets/PICTURES/Portrait 42.jpg',
+    'assets/PICTURES/Portrait 43.jpg',
+    'assets/PICTURES/Portrait 44.jpg',
+    'assets/PICTURES/Portrait 45.jpg',
+    'assets/PICTURES/Portrait 46.jpg',
+    'assets/PICTURES/Portrait 47.jpg',
+    'assets/PICTURES/Portrait 48.jpg',
+    'assets/PICTURES/Mythriya 2.jpg',
+    'assets/PICTURES/Mythriya 3.jpg',
+    'assets/PICTURES/Mythriya 4.jpg',
+    'assets/PICTURES/Mythriya 5.jpg',
+    'assets/PICTURES/Mythriya 6.jpg',
+    'assets/PICTURES/Mythriya 7.jpg',
+    'assets/PICTURES/Mythriya 8.jpg',
+    'assets/PICTURES/Mythriya 9.jpg',
+    'assets/PICTURES/Mythriya 10.jpg',
+    'assets/PICTURES/Mythriya 11.jpg',
+    'assets/PICTURES/Mythriya 12.jpg',
+    'assets/PICTURES/Mythriya 13.jpg',
+    'assets/PICTURES/Mythriya 14.jpg',
+    'assets/PICTURES/Mythriya 15.jpg',
+    'assets/PICTURES/Mythriya 16.jpg',
+    'assets/PICTURES/Mythriya 17.jpg',
+    'assets/PICTURES/Mythriya 18.jpg',
+    'assets/PICTURES/Mythriya 19.jpg',
+    'assets/PICTURES/Mythriya 20.jpg',
+    'assets/PICTURES/Mythriya 21.jpg',
+    'assets/PICTURES/Mythriya 22.jpg',
+    'assets/PICTURES/Mythriya 23.jpg',
+    'assets/PICTURES/Mythriya 24.jpg',
+    'assets/PICTURES/Mythriya 25.jpg',
+    'assets/PICTURES/Mythriya 26.jpg',
+    'assets/PICTURES/Mythriya 27.jpg',
+    'assets/PICTURES/Mythriya 28.jpg',
+    'assets/PICTURES/Mythriya 29.jpg',
+    'assets/PICTURES/Mythriya 30.jpg',
+    'assets/PICTURES/Mythriya 31.jpg',
+    'assets/PICTURES/Mythriya 32.jpg',
+    'assets/PICTURES/Mythriya 33.jpg',
+    'assets/PICTURES/Mythriya 34.jpg',
+    'assets/PICTURES/Mythriya 35.jpg',
+    'assets/PICTURES/Mythriya 36.jpg',
+    'assets/PICTURES/Mythriya 37.jpg',
+    'assets/PICTURES/Mythriya 38.jpg',
+    'assets/PICTURES/Mythriya 39.jpg',
+    'assets/PICTURES/Mythriya 40.jpg',
+    'assets/PICTURES/Mythriya 41.jpg',
+    'assets/PICTURES/Mythriya 42.jpg',
+    'assets/PICTURES/Mythriya 43.jpg',
+    'assets/PICTURES/Mythriya.jpg',
+    'assets/PICTURES/Portrait Remakes/300.jpg',
+    'assets/PICTURES/Portrait Remakes/Johnny Depp.jpg',
+    'assets/PICTURES/Portrait Remakes/Aishwariya Rai.jpg',
+    'assets/PICTURES/Portrait Remakes/Anne Hathway.jpg',
+    'assets/PICTURES/Portrait Remakes/Audrey Hepburn.jpg',
+    'assets/PICTURES/Portrait Remakes/Dabangg .jpg',
+    'assets/PICTURES/Portrait Remakes/Dev D.jpg',
+    'assets/PICTURES/Portrait Remakes/Emma Watson.jpg',
+    'assets/PICTURES/Portrait Remakes/Godfather.jpg',
+    'assets/PICTURES/Portrait Remakes/Hulk.jpg',
+    'assets/PICTURES/Portrait Remakes/Julia Roberts.jpg',
+    'assets/PICTURES/Portrait Remakes/Leonardo Di Caprio.jpg',
+    'assets/PICTURES/Portrait Remakes/Madmen.jpg',
+    'assets/PICTURES/Portrait Remakes/Meryl Streep.jpg',
+    'assets/PICTURES/Portrait Remakes/MJ.jpg',
+    'assets/PICTURES/Portrait Remakes/Nargis Fakhri.jpg',
+    'assets/PICTURES/Portrait Remakes/Rocky.jpg',
+    'assets/PICTURES/Portrait Remakes/Rocket Singh.jpg'
+  ],
+  product: [
+    'assets/PICTURES/Product 2.jpg',
+    'assets/PICTURES/Product 5.jpg',
+    'assets/PICTURES/Product 8.jpg',
+    'assets/PICTURES/Product 12.jpg',
+    'assets/PICTURES/Product 13.jpg',
+    'assets/PICTURES/Product 14.jpg',
+    'assets/PICTURES/Product 15.jpg',
+    'assets/PICTURES/Product 16.jpg',
+    'assets/PICTURES/Product 17.jpg',
+    'assets/PICTURES/Product 18.jpg',
+    'assets/PICTURES/Product 19.jpg',
+    'assets/PICTURES/Product 20.jpg',
+    'assets/PICTURES/Product 21.jpg',
+    'assets/PICTURES/Product 22.jpg',
+    'assets/PICTURES/Product 23.jpg',
+    'assets/PICTURES/Product 24.jpg',
+    'assets/PICTURES/Product 25.jpg',
+    'assets/PICTURES/Product 26.jpg',
+    'assets/PICTURES/Product 27.jpg',
+    'assets/PICTURES/Product 28.jpg',
+    'assets/PICTURES/Product 29.jpg',
+    'assets/PICTURES/Product 30.jpg',
+    'assets/PICTURES/Product 31.jpg',
+    'assets/PICTURES/Product 33.jpg',
+    'assets/PICTURES/Product 34.jpg',
+    'assets/PICTURES/Product 35.jpg'
+  ],
+  corporate: [
+    'assets/PICTURES/Kuberan Silks Poster.jpg','assets/PICTURES/GE Poster 4.jpg','assets/PICTURES/GE Poster.jpg','assets/PICTURES/Transteel Poster 4.jpg','assets/PICTURES/Transteel Poster 5.jpg','assets/PICTURES/Transteel Poster 3.jpg','assets/PICTURES/SK Silks Poster 2.jpg','assets/PICTURES/Sudarshan Silk Palace Poster.JPG','assets/PICTURES/Transteel Poster 6.jpg','assets/PICTURES/Transteel Poster.jpg','assets/PICTURES/Transteel Poster 7.jpg','assets/PICTURES/GE Poster 2.jpg','assets/PICTURES/Sudarshan Silk Palace Poster 2.jpg','assets/PICTURES/SK Silks Poster.jpg','assets/PICTURES/Transteel Poster 2.jpg','assets/PICTURES/GE Poster 3.jpg','assets/PICTURES/Meenakshi Silks Poster Kannada.jpg','assets/PICTURES/Meenakshi Silks Poster English.jpg','assets/PICTURES/Kuberan Silks Poster 3.jpg','assets/PICTURES/Kuberan Silks Poster 2.jpg'
+  ],
+  architecture: [
+    'assets/PICTURES/Architecture 4.jpg',
+    'assets/PICTURES/Architecture 5.jpg',
+    'assets/PICTURES/Architecture 6.jpg',
+    'assets/PICTURES/Architecture 7.jpg',
+    'assets/PICTURES/Architecture 8.jpg',
+    'assets/PICTURES/Architecture 9.jpg',
+    'assets/PICTURES/Architecture 10.jpg',
+    'assets/PICTURES/Architecture 11.jpg',
+    'assets/PICTURES/Architecture 12.jpg',
+    'assets/PICTURES/Architecture 13.jpg',
+    'assets/PICTURES/Architecture 14.jpg',
+    'assets/PICTURES/Architecture 15.jpg',
+    'assets/PICTURES/Architecture 16.jpg',
+    'assets/PICTURES/Architecture 17.jpg',
+    'assets/PICTURES/Architecture 18.jpg',
+    'assets/PICTURES/Architecture 19.jpg',
+    'assets/PICTURES/Architecture 20.jpg',
+    'assets/PICTURES/Architecture 21.jpg',
+    'assets/PICTURES/Architecture 22.jpg',
+    'assets/PICTURES/Architecture 23.jpg',
+    'assets/PICTURES/Architecture 24.jpg',
+    'assets/PICTURES/Architecture 25.jpg',
+    'assets/PICTURES/Architecture 26.jpg',
+    'assets/PICTURES/Architecture 27.jpg',
+    'assets/PICTURES/Architecture 28.jpg',
+    'assets/PICTURES/Architecture 29.jpg'
+  ],
+  poster: [
+    'assets/PICTURES/For The Untamed Poster 2.jpg',
+    'assets/PICTURES/For The Untamed Poster 3.JPG',
+    'assets/PICTURES/For The Untamed Poster.jpg',
+    'assets/PICTURES/Kuberan Silks Poster 2.jpg',
+    'assets/PICTURES/Kuberan Silks Poster 3.jpg',
+    'assets/PICTURES/Kuberan Silks Poster.jpg',
+    'assets/PICTURES/Liquid Metal Poster 2.jpg',
+    'assets/PICTURES/Liquid Metal Poster 3.jpg',
+    'assets/PICTURES/Liquid Metal Poster 4.jpg',
+    'assets/PICTURES/Liquid Metal Poster 5.jpg',
+    'assets/PICTURES/Liquid Metal Poster 6.jpg',
+    'assets/PICTURES/Liquid Metal Poster.jpg',
+    'assets/PICTURES/Meenakshi Silks Poster English.jpg',
+    'assets/PICTURES/Meenakshi Silks Poster Kannada.jpg',
+    'assets/PICTURES/GE Poster 2.jpg',
+    'assets/PICTURES/GE Poster 3.jpg',
+    'assets/PICTURES/GE Poster 4.jpg',
+    'assets/PICTURES/GE Poster.jpg',
+    'assets/PICTURES/Bioline Poster.JPG',
+    'assets/PICTURES/Bioline Poster 3.JPG',
+    'assets/PICTURES/Bioline Poster 2.jpg',
+    'assets/PICTURES/Bhajarangi Poster.jpg',
+    'assets/PICTURES/Bhajarangi Poster 3.jpg',
+    'assets/PICTURES/Bhajarangi Poster 2.jpg'
+  ]
+};
+
+function renderPhotoCards() {
+  const grid = document.querySelector('#photography .genre-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const categories = [
+    { key: 'portrait', title: 'Portrait', desc: 'Professional studio and environmental portraits' },
+    { key: 'product', title: 'Product', desc: 'Commercial product photography for brands' },
+    { key: 'corporate', title: 'Corporate', desc: 'Corporate events and team photography' },
+    { key: 'architecture', title: 'Architecture', desc: 'Interior and exterior architectural photography' },
+    { key: 'poster', title: 'Poster', desc: 'Creative posters and advertising campaigns' }
+  ];
+  categories.forEach(cat => {
+    const div = document.createElement('div');
+    div.className = 'genre-card';
+    const imgSrc = photoCategories[cat.key][0] || '';
+    div.innerHTML = `
+      <div class="genre-image" style="border:2px solid #eee;box-shadow:0 4px 16px rgba(0,0,0,0.12);border-radius:12px;overflow:hidden;transition:box-shadow 0.3s;">
+        <img src="${imgSrc}" alt="${cat.title} Photography" loading="lazy" style="width:100%;height:260px;object-fit:cover;">
+        <div class="genre-overlay">
+          <h3>${cat.title}</h3>
+          <p>${cat.desc}</p>
+          <a href="#" class="btn primary photo-sample-btn" data-category="${cat.key}">Watch Samples</a>
+        </div>
+      </div>
+    `;
+    div.onmouseover = () => div.querySelector('.genre-image').style.boxShadow = '0 8px 32px rgba(0,0,0,0.18)';
+    div.onmouseout = () => div.querySelector('.genre-image').style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
+    grid.appendChild(div);
+  });
+}
+
+function openPhotoCategoryModal(category, hideFilters = false) {
+  const galleryModal = document.querySelector('.gallery-modal');
+  const galleryTitle = document.querySelector('.gallery-title');
+  const galleryDescription = document.querySelector('.gallery-description');
+  const galleryGrid = document.querySelector('.gallery-modal .gallery-grid');
+  let title = 'Studio Gallery';
+  let desc = 'A collection of our best studio work.';
+  if (category === 'portrait') { title = 'Portrait Photography'; desc = 'Professional studio and environmental portraits.'; }
+  if (category === 'product') { title = 'Product Photography'; desc = 'Commercial product photography for brands.'; }
+  if (category === 'corporate') { title = 'Corporate Photography'; desc = 'Corporate events and team photography.'; }
+  if (category === 'architecture') { title = 'Architecture Photography'; desc = 'Interior and exterior architectural photography.'; }
+  if (category === 'poster') { title = 'Poster Gallery'; desc = 'Creative posters and advertising campaigns.'; }
+  galleryTitle.textContent = title;
+  galleryDescription.textContent = desc;
+  galleryGrid.innerHTML = '';
+  const images = photoCategories[category] || [];
+  images.forEach((imgSrc, idx) => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `<img src="${imgSrc}" alt="${category} photo" loading="lazy" style="cursor:zoom-in;">`;
+    div.onclick = function() {
+      openImageLightbox(images, idx);
+    };
+    galleryGrid.appendChild(div);
+  });
+  if (!hideFilters) renderModalFilters(category); else {
+    const filterBar = document.querySelector('.modal-filter-bar');
+    if (filterBar) filterBar.style.display = 'none';
+  }
+  galleryModal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function renderModalFilters(activeCategory) {
+  const galleryModal = document.querySelector('.gallery-modal');
+  let filterBar = galleryModal.querySelector('.modal-filter-bar');
+  if (!filterBar) {
+    filterBar = document.createElement('div');
+    filterBar.className = 'modal-filter-bar';
+    filterBar.style = 'display:flex;justify-content:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;';
+    galleryModal.querySelector('.gallery-modal-content').insertBefore(filterBar, galleryModal.querySelector('.gallery-title'));
+  }
+  filterBar.style.display = 'flex';
+  filterBar.style.justifyContent = 'center';
+  filterBar.style.gap = '16px';
+  filterBar.style.marginBottom = '32px';
+  filterBar.style.flexWrap = 'wrap';
+  filterBar.innerHTML = '';
+  const cats = [
+    { key: 'portrait', label: 'Portrait' },
+    { key: 'product', label: 'Product' },
+    { key: 'corporate', label: 'Corporate' },
+    { key: 'architecture', label: 'Architecture' },
+    { key: 'poster', label: 'Poster' }
+  ];
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'modal-filter-btn' + (cat.key === activeCategory ? ' active' : '');
+    btn.textContent = cat.label;
+    btn.style = `
+      padding: 10px 28px;
+      border-radius: 30px;
+      border: none;
+      background: ${cat.key === activeCategory ? 'var(--accent-primary,#b91421)' : 'rgba(255,255,255,0.08)'};
+      color: ${cat.key === activeCategory ? '#fff' : '#eee'};
+      font-size: 1.08rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      cursor: pointer;
+      outline: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin: 0 2px;
+      border: 2px solid transparent;
+    `;
+    btn.onmouseover = () => {
+      btn.style.background = 'var(--accent-primary,#b91421)';
+      btn.style.color = '#fff';
+      btn.style.boxShadow = '0 4px 16px rgba(185,20,33,0.18)';
+    };
+    btn.onmouseout = () => {
+      btn.style.background = cat.key === activeCategory ? 'var(--accent-primary,#b91421)' : 'rgba(255,255,255,0.08)';
+      btn.style.color = cat.key === activeCategory ? '#fff' : '#eee';
+      btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.10)';
+    };
+    btn.onclick = () => openPhotoCategoryModal(cat.key);
+    filterBar.appendChild(btn);
+  });
+}
+
+// Lightbox for full-size image view with navigation for modal gallery
+function openImageLightbox(images, index) {
+  if (!Array.isArray(images) || images.length === 0) return;
+  let lightbox = document.querySelector('.image-lightbox');
+  if (lightbox) lightbox.remove();
+  if (openImageLightbox._escHandler) {
+    document.removeEventListener('keydown', openImageLightbox._escHandler);
+  }
+  lightbox = document.createElement('div');
+  lightbox.className = 'image-lightbox';
+  lightbox.style = `
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.92);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(.4,0,.2,1);
+  `;
+  lightbox.innerHTML = `
+    <div class="lightbox-content" style="position:relative;max-width:96vw;max-height:96vh;display:flex;align-items:center;justify-content:center;transform:scale(0.92);opacity:0;transition:transform 0.35s cubic-bezier(.4,0,.2,1),opacity 0.35s cubic-bezier(.4,0,.2,1);overflow:hidden;">
+      <img src="${images[index]}" alt="Full Size" style="max-width:96vw;max-height:96vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.5);background:#222;transition:opacity 0.35s, transform 0.35s;">
+      <button class="lightbox-close" style="position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;background:rgba(185,20,33,0.95);color:#fff;font-size:2rem;border:none;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;transition:background 0.2s;">&times;</button>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    lightbox.style.opacity = '1';
+    const content = lightbox.querySelector('.lightbox-content');
+    if (content) {
+      content.style.transform = 'scale(1)';
+      content.style.opacity = '1';
+    }
+  }, 10);
+  lightbox.querySelector('.lightbox-close').onclick = function(e) {
+    e.stopPropagation();
+    closeImageLightbox();
+  };
+  lightbox.onclick = function(e) {
+    if (e.target === lightbox) closeImageLightbox();
+  };
+  openImageLightbox._escHandler = function(e) {
+    if (e.key === 'Escape') closeImageLightbox();
+  };
+  document.addEventListener('keydown', openImageLightbox._escHandler);
+}
+
+function closeImageLightbox() {
+  const lightbox = document.querySelector('.image-lightbox');
+  if (lightbox) {
+    // Animate out (fade and scale)
+    const content = lightbox.querySelector('.lightbox-content');
+    if (content) {
+      content.style.transform = 'scale(0.92)';
+      content.style.opacity = '0';
+    }
+    lightbox.style.opacity = '0';
+    setTimeout(() => {
+      if (lightbox.parentNode) lightbox.parentNode.removeChild(lightbox);
+    }, 350);
+  }
+  // Remove Escape handler if present
+  if (openImageLightbox._escHandler) {
+    document.removeEventListener('keydown', openImageLightbox._escHandler);
+    openImageLightbox._escHandler = null;
+  }
+  // If modal is still open, keep overflow hidden, else restore
+  const galleryModal = document.querySelector('.gallery-modal');
+  if (galleryModal && galleryModal.style.display === 'flex') {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderPhotoCards();
+  document.querySelector('#photography').addEventListener('click', function(e) {
+    if (e.target.classList.contains('photo-sample-btn')) {
+      e.preventDefault();
+      const cat = e.target.getAttribute('data-category');
+      openPhotoCategoryModal(cat, true);
+    }
+  });
+  document.querySelectorAll('.btn.primary').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (btn.classList.contains('photo-sample-btn')) return;
+      e.preventDefault();
+      openPhotoCategoryModal('portrait', false);
+    });
+  });
+});
+// === END: Simple Photo Gallery with Hardcoded Categories ===
