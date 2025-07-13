@@ -185,6 +185,102 @@
             }
         }
         
+        /* Mobile responsive styles for service modal */
+        @media (max-width: 768px) {
+            .service-modal-content {
+                padding: 20px 15px 15px 15px !important;
+                max-width: 95vw !important;
+                width: 95vw !important;
+            }
+            
+            .service-title {
+                font-size: 2rem !important;
+            }
+            
+            .service-name {
+                font-size: 1.5rem !important;
+            }
+            
+            .service-portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+                gap: 15px !important;
+            }
+            
+            .service-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .service-actions .btn {
+                margin: 0 !important;
+                width: 100%;
+            }
+        }
+        
+        /* Service Modal Styles */
+        .service-modal {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .service-modal-content {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #181824 0%, #1a1a2e 100%);
+        }
+        
+        .service-close:hover {
+            background: rgba(185, 20, 33, 1) !important;
+            transform: scale(1.1);
+        }
+        
+        .service-portfolio-item:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4) !important;
+        }
+        
+        .service-portfolio-item img {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .service-actions .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-actions .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .service-actions .btn:hover::before {
+            left: 100%;
+        }
+        
+        .service-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(185, 20, 33, 0.3);
+        }
+        
         /* Enhanced interactive hero section */
         .hero {
             position: relative;
@@ -1726,6 +1822,9 @@
     </script>
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Custom cursor with camera icon -->
     <div class="custom-cursor">
         <div class="lens"></div>
@@ -1748,7 +1847,7 @@
     <!-- Header Container -->
     <div id="header-container"></div>
 
-    <section id="home" class="hero">
+    <section id="home" class="hero" id="main-content">
         <video class="hero-bg-video" autoplay loop muted playsinline>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4" type="video/mp4">
         </video>
@@ -1821,447 +1920,55 @@
             <div class="services-grid">
                 <div class="service-card" data-service="video-production">
                     <div class="service-icon">
-                        <i class="fas fa-video"></i>
+                        <i class="fas fa-video" aria-hidden="true"></i>
                     </div>
                     <h3>Video Production</h3>
                     <p>Professional video production services for commercials, films, corporate videos and events</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Video Production services">Learn More</button>
                 </div>
                 <div class="service-card" data-service="photography">
                     <div class="service-icon">
-                        <i class="fas fa-camera"></i>
+                        <i class="fas fa-camera" aria-hidden="true"></i>
                     </div>
                     <h3>Photography</h3>
                     <p>Professional photography for events, portraits, products, and commercial use</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Photography services">Learn More</button>
                 </div>
                 <div class="service-card" data-service="editing-grading">
                     <div class="service-icon">
-                        <i class="fas fa-photo-video"></i>
+                        <i class="fas fa-photo-video" aria-hidden="true"></i>
                     </div>
                     <h3>Editing and Colour Grading</h3>
                     <p>Professional editing and colour grading for photos, videos, films and commercials</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Editing and Colour Grading services">Learn More</button>
                 </div>
                 <div class="service-card" data-service="sound-recording">
                     <div class="service-icon">
-                        <i class="fas fa-microphone-alt"></i>
+                        <i class="fas fa-microphone-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Sound Recording</h3>
                     <p>State-of-the-art recording facilities for vocals, instruments, and full bands</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Sound Recording services">Learn More</button>
                 </div>
                 <div class="service-card" data-service="dubbing">
                     <div class="service-icon">
-                        <i class="fas fa-headphones"></i>
+                        <i class="fas fa-headphones" aria-hidden="true"></i>
                     </div>
                     <h3>Dubbing</h3>
                     <p>Professional voice-over and dubbing services for multiple languages</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Dubbing services">Learn More</button>
                 </div>
                 <div class="service-card" data-service="mixing">
                     <div class="service-icon">
-                        <i class="fas fa-sliders-h"></i>
+                        <i class="fas fa-sliders-h" aria-hidden="true"></i>
                     </div>
                     <h3>Audio Mixing & Mastering</h3>
                     <p>Expert mixing and mastering to give your audio the professional finish it deserves</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <button class="service-expand-btn" aria-label="Learn more about Audio Mixing & Mastering services">Learn More</button>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Service Expanded Views -->
-    <div class="service-expanded-view" id="video-production-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Video Production Services</h2>
-            <p class="expanded-description">Our professional video production services cover everything from concept development to final delivery, creating high-quality videos for commercials, films, corporate videos, and events.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Video Production Work</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated with high-quality images -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1601058268499-e52e4cd49509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Commercial Production">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Production</h4>
-                            <p>Brand commercials and advertisements</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1540317700647-ec69694d70d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Corporate Video">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Corporate Video</h4>
-                            <p>Corporate profiles and training videos</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Event Coverage">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Event Coverage</h4>
-                            <p>Professional event video production</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1492552085122-36706e815be9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Short Film">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Short Films</h4>
-                            <p>Creative storytelling through film</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#video-production" class="btn primary view-all-btn">View All Video Production Work</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="photography-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Photography Services</h2>
-            <p class="expanded-description">Our professional photography services cover a wide range of needs, from portrait sessions to commercial product shoots and event coverage.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Photography Work</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Portrait Photography">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Portrait Session</h4>
-                            <p>Professional studio portraits</p>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Event Photography">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Corporate Event</h4>
-                            <p>Professional event coverage</p>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Product Photography">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Product Showcase</h4>
-                            <p>Commercial product photography</p>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Wedding Photography">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Wedding Collection</h4>
-                            <p>Wedding day coverage</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#photography" class="btn primary view-all-btn">View All Photography Work</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="editing-grading-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Editing and Colour Grading Services</h2>
-            <p class="expanded-description">Our professional editing and colour grading services enhance and transform your visual content, whether it's photo retouching, video editing, or cinematic colour treatment.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Editing and Colour Grading Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1616165415772-f5b95c4417a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Edit</h4>
-                            <p>TV commercial post-production</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Retouching</h4>
-                            <p>Professional photo retouching</p>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1634469875582-a0469cc99fea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Film Grading">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Film Colour Treatment</h4>
-                            <p>Cinematic colour grading</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598550468793-d8d5fecd7eb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Music Video Grading">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Music Video</h4>
-                            <p>Stylized colour grading</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#editing-grading" class="btn primary view-all-btn">View All Editing & Grading Projects</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="sound-recording-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Sound Recording Services</h2>
-            <p class="expanded-description">Our state-of-the-art recording studio provides the perfect environment for capturing vocals, instruments, and full bands with exceptional clarity and precision.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Recording Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Vocal Recording">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Vocal Sessions</h4>
-                            <p>Professional vocal recording</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Band Recording">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Band Recording</h4>
-                            <p>Full band studio sessions</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Podcast Recording">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Podcast Production</h4>
-                            <p>Professional podcast recording</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Orchestral Recording">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Orchestral Session</h4>
-                            <p>Orchestral recording project</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#sound-recording" class="btn primary view-all-btn">View All Recording Projects</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="dubbing-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Dubbing Services</h2>
-            <p class="expanded-description">Our professional voice-over and dubbing services provide high-quality audio in multiple languages for films, commercials, animations, and more.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Dubbing Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Commercial Dubbing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Voice-Over</h4>
-                            <p>Multi-language commercial dubbing</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Animation Dubbing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Animation Project</h4>
-                            <p>Character voice acting</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Documentary Narration">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Documentary Narration</h4>
-                            <p>Professional narration services</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Dubbing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Film Dubbing</h4>
-                            <p>International film adaptation</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#dubbing" class="btn primary view-all-btn">View All Dubbing Projects</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="mixing-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Audio Mixing & Mastering Services</h2>
-            <p class="expanded-description">Our expert mixing and mastering services ensure your audio projects sound professional, balanced, and ready for distribution on any platform.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Mixing & Mastering Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Album Mixing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Album Production</h4>
-                            <p>Full album mixing and mastering</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Soundtrack">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Film Soundtrack</h4>
-                            <p>Cinematic audio production</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="EP Production">
-                        <div class="expanded-portfolio-caption">
-                            <h4>EP Production</h4>
-                            <p>Independent artist EP project</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Post Production">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Audio Post-Production</h4>
-                            <p>TV show audio post-production</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#mixing" class="btn primary view-all-btn">View All Mixing & Mastering Projects</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="editing-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Photo & Video Editing Services</h2>
-            <p class="expanded-description">Our creative editing services enhance and transform your visual content, whether it's photo retouching or comprehensive video post-production.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Editing Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Retouching">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Retouching</h4>
-                            <p>Professional photo retouching</p>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Video Editing">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Commercial Edit</h4>
-                            <p>TV commercial post-production</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Wedding Video">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Wedding Highlight</h4>
-                            <p>Cinematic wedding video edit</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Composite">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Creative Composite</h4>
-                            <p>Advanced photo manipulation</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#editing" class="btn primary view-all-btn">View All Editing Projects</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="service-expanded-view" id="grading-expanded">
-        <div class="expanded-content">
-            <div class="expanded-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2>Colour Grading Services</h2>
-            <p class="expanded-description">Our professional colour correction and grading services bring cinematic quality to your films, videos, and photos, enhancing mood and visual impact.</p>
-            
-            <div class="expanded-portfolio">
-                <h3>Featured Colour Grading Projects</h3>
-                <div class="expanded-portfolio-grid">
-                    <!-- Updated image source -->
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Film Grading">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Short Film</h4>
-                            <p>Cinematic colour treatment</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Music Video">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Music Video</h4>
-                            <p>Stylized colour grading</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Commercial">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Luxury Brand Campaign</h4>
-                            <p>Commercial colour treatment</p>
-                            <i class="fas fa-play-circle play-btn"></i>
-                        </div>
-                    </div>
-                    <div class="expanded-portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1598188306155-25e400eb5078" alt="Photo Grading">
-                        <div class="expanded-portfolio-caption">
-                            <h4>Photo Series</h4>
-                            <p>Consistent colour treatment</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="portfolio.html#grading" class="btn primary view-all-btn">View All Colour Grading Projects</a>
-            </div>
-        </div>
-    </div>
 
     <section id="about-preview" class="about-preview">
         <div class="container">
@@ -2336,6 +2043,9 @@
                 <!-- Text Testimonial 1 -->
                 <div class="testimonial-item text-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">SJ</span>
+                        </div>
                         <div class="testimonial-text">
                             <p>"Grey 18 Studio transformed our vision into reality. Their photography services were exceptional, and the team was professional throughout the project. The attention to detail and commitment to quality was remarkable. I couldn't be happier with the results!"</p>
                         </div>
@@ -2349,8 +2059,11 @@
                 <!-- Video Testimonial 1 - Simple direct embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">DM</span>
+                        </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/VIDEO_ID_2" 
+                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
                                 title="Client Testimonial" frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen></iframe>
@@ -2365,6 +2078,9 @@
                 <!-- Text Testimonial 2 -->
                 <div class="testimonial-item text-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">MR</span>
+                        </div>
                         <div class="testimonial-text">
                             <p>"The audio mixing and mastering services at Grey 18 Studio are world-class. They brought a new dimension to our latest album that exceeded our expectations. Their expertise in sound engineering and dedication to perfection made all the difference. Will definitely work with them again on our next project."</p>
                         </div>
@@ -2378,8 +2094,11 @@
                 <!-- Video Testimonial 2 - Simple direct embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">JL</span>
+                        </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/VIDEO_ID_3" 
+                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/9bZkp7q19f0" 
                                 title="Client Testimonial" frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen></iframe>
@@ -2394,6 +2113,9 @@
                 <!-- Text Testimonial 3 -->
                 <div class="testimonial-item text-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">ET</span>
+                        </div>
                         <div class="testimonial-text">
                             <p>"Working with the team at Grey 18 for our commercial video was seamless. Their attention to detail in colour grading and editing made all the difference. The collaborative approach allowed us to achieve exactly the mood and style we were aiming for. The end result was exactly what we envisioned and more."</p>
                         </div>
@@ -2407,8 +2129,11 @@
                 <!-- Video Testimonial 3 - Simple direct embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">RC</span>
+                        </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/VIDEO_ID_4" 
+                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/jNQXAC9IVRw" 
                                 title="Client Testimonial" frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen></iframe>
@@ -2462,19 +2187,28 @@
                             const dot = document.createElement('span');
                             dot.classList.add('dot');
                             if (index === 0) dot.classList.add('active');
-                            dot.addEventListener('click', () => showTestimonial(index));
+                            dot.addEventListener('click', () => {
+                                // Add dot click effect
+                                dot.style.transform = 'scale(0.8)';
+                                setTimeout(() => {
+                                    dot.style.transform = 'scale(1)';
+                                }, 150);
+                                showTestimonial(index);
+                            });
                             dotsContainer.appendChild(dot);
                         });
                     }
 
                     // Function to show a specific testimonial
                     function showTestimonial(index) {
-                        // Hide all testimonials
+                        // Hide all testimonials immediately
                         testimonials.forEach(testimonial => {
                             testimonial.style.display = 'none';
                             testimonial.classList.remove('active');
                             testimonial.style.opacity = '0';
                             testimonial.style.visibility = 'hidden';
+                            testimonial.style.transform = 'translateX(0)';
+                            testimonial.style.transition = '';
                         });
 
                         // Show the selected testimonial
@@ -2483,7 +2217,9 @@
                         testimonials[index].style.opacity = '1';
                         testimonials[index].style.visibility = 'visible';
                         testimonials[index].style.position = 'relative';
-                        
+                        testimonials[index].style.transform = 'translateX(0)';
+                        testimonials[index].style.transition = '';
+
                         // If it's a video testimonial, ensure the video is properly loaded
                         if (testimonials[index].classList.contains('video-testimonial')) {
                             const iframe = testimonials[index].querySelector('iframe');
@@ -2493,7 +2229,7 @@
                                 iframe.src = '';
                                 setTimeout(() => {
                                     iframe.src = src;
-                                }, 50);
+                                }, 100);
                             }
                         }
 
@@ -2518,6 +2254,12 @@
                     // Next button click handler
                     if (nextBtn) {
                         nextBtn.addEventListener('click', function() {
+                            // Add button press effect
+                            this.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                this.style.transform = 'scale(1)';
+                            }, 150);
+                            
                             currentIndex = (currentIndex + 1) % testimonials.length;
                             showTestimonial(currentIndex);
                         });
@@ -2526,6 +2268,12 @@
                     // Previous button click handler
                     if (prevBtn) {
                         prevBtn.addEventListener('click', function() {
+                            // Add button press effect
+                            this.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                this.style.transform = 'scale(1)';
+                            }, 150);
+                            
                             currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
                             showTestimonial(currentIndex);
                         });
@@ -2992,93 +2740,235 @@
             }
         });
     </script>
-    <!-- Add improved service expanded view handler script -->
+    <!-- Service Modal Popup Handler -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Service expanded view handlers
+            // Service modal elements
+            const serviceModal = document.querySelector('.service-modal');
+            const serviceClose = document.querySelector('.service-close');
             const serviceCards = document.querySelectorAll('.service-card');
-            const expandedViews = document.querySelectorAll('.service-expanded-view');
-            const closeButtons = document.querySelectorAll('.expanded-close');
-            let scrollPosition = 0;
             
-            // Open expanded view
+            // Service data with images from assets/PICTURES
+            const serviceData = {
+                'video-production': {
+                    name: 'Video Production',
+                    icon: 'fas fa-video',
+                    description: 'Our professional video production services cover everything from concept development to final delivery, creating high-quality videos for commercials, films, corporate videos, and events. We handle pre-production planning, filming, and post-production editing to deliver compelling visual content.',
+                    images: [
+                        { src: 'assets/PICTURES/Product 1.jpg', alt: 'Commercial Production', title: 'Commercial Production', description: 'Brand commercials and advertisements' },
+                        { src: 'assets/PICTURES/Product 2.jpg', alt: 'Corporate Video', title: 'Corporate Video', description: 'Corporate profiles and training videos' },
+                        { src: 'assets/PICTURES/Product 3.jpg', alt: 'Event Coverage', title: 'Event Coverage', description: 'Professional event video production' },
+                        { src: 'assets/PICTURES/Product 4.jpg', alt: 'Short Film', title: 'Short Films', description: 'Creative storytelling through film' }
+                    ]
+                },
+                'photography': {
+                    name: 'Photography',
+                    icon: 'fas fa-camera',
+                    description: 'Our professional photography services cover a wide range of needs, from portrait sessions to commercial product shoots and event coverage. We use state-of-the-art equipment and techniques to capture stunning images that tell your story.',
+                    images: [
+                        { src: 'assets/PICTURES/Portrait 1.jpg', alt: 'Portrait Photography', title: 'Portrait Session', description: 'Professional studio portraits' },
+                        { src: 'assets/PICTURES/Portrait 2.jpg', alt: 'Event Photography', title: 'Corporate Event', description: 'Professional event coverage' },
+                        { src: 'assets/PICTURES/Portrait 3.jpg', alt: 'Product Photography', title: 'Product Showcase', description: 'Commercial product photography' },
+                        { src: 'assets/PICTURES/Portrait 4.jpg', alt: 'Wedding Photography', title: 'Wedding Collection', description: 'Wedding day coverage' }
+                    ]
+                },
+                'editing-grading': {
+                    name: 'Editing and Colour Grading',
+                    icon: 'fas fa-photo-video',
+                    description: 'Our professional editing and colour grading services enhance and transform your visual content, whether it\'s photo retouching, video editing, or cinematic colour treatment. We bring your vision to life with precision and creativity.',
+                    images: [
+                        { src: 'assets/PICTURES/Product 5.jpg', alt: 'Video Editing', title: 'Commercial Edit', description: 'TV commercial post-production' },
+                        { src: 'assets/PICTURES/Product 6.jpg', alt: 'Photo Retouching', title: 'Commercial Retouching', description: 'Professional photo retouching' },
+                        { src: 'assets/PICTURES/Product 7.jpg', alt: 'Film Grading', title: 'Film Colour Treatment', description: 'Cinematic colour grading' },
+                        { src: 'assets/PICTURES/Product 8.jpg', alt: 'Music Video Grading', title: 'Music Video', description: 'Stylized colour grading' }
+                    ]
+                },
+                'sound-recording': {
+                    name: 'Sound Recording',
+                    icon: 'fas fa-microphone-alt',
+                    description: 'Our state-of-the-art recording studio provides the perfect environment for capturing vocals, instruments, and full bands with exceptional clarity and precision. We offer professional recording services for all types of audio projects.',
+                    images: [
+                        { src: 'assets/PICTURES/Portrait 5.jpg', alt: 'Vocal Recording', title: 'Vocal Sessions', description: 'Professional vocal recording' },
+                        { src: 'assets/PICTURES/Portrait 6.jpg', alt: 'Band Recording', title: 'Band Recording', description: 'Full band studio sessions' },
+                        { src: 'assets/PICTURES/Portrait 7.jpg', alt: 'Podcast Recording', title: 'Podcast Production', description: 'Professional podcast recording' },
+                        { src: 'assets/PICTURES/Portrait 8.jpg', alt: 'Orchestral Recording', title: 'Orchestral Session', description: 'Orchestral recording project' }
+                    ]
+                },
+                'dubbing': {
+                    name: 'Dubbing',
+                    icon: 'fas fa-headphones',
+                    description: 'Our professional voice-over and dubbing services provide high-quality audio in multiple languages for films, commercials, animations, and more. We work with experienced voice actors and use advanced technology for seamless results.',
+                    images: [
+                        { src: 'assets/PICTURES/Portrait 9.jpg', alt: 'Commercial Dubbing', title: 'Commercial Voice-Over', description: 'Multi-language commercial dubbing' },
+                        { src: 'assets/PICTURES/Portrait 10.jpg', alt: 'Animation Dubbing', title: 'Animation Project', description: 'Character voice acting' },
+                        { src: 'assets/PICTURES/Portrait 11.jpg', alt: 'Documentary Narration', title: 'Documentary Narration', description: 'Professional narration services' },
+                        { src: 'assets/PICTURES/Portrait 12.jpg', alt: 'Film Dubbing', title: 'Film Dubbing', description: 'International film adaptation' }
+                    ]
+                },
+                'mixing': {
+                    name: 'Audio Mixing & Mastering',
+                    icon: 'fas fa-sliders-h',
+                    description: 'Our expert mixing and mastering services ensure your audio projects sound professional, balanced, and ready for distribution on any platform. We use industry-standard tools and techniques to achieve the perfect sound.',
+                    images: [
+                        { src: 'assets/PICTURES/Product 9.jpg', alt: 'Album Mixing', title: 'Album Production', description: 'Full album mixing and mastering' },
+                        { src: 'assets/PICTURES/Product 10.jpg', alt: 'Film Soundtrack', title: 'Film Soundtrack', description: 'Cinematic audio production' },
+                        { src: 'assets/PICTURES/Product 11.jpg', alt: 'EP Production', title: 'EP Production', description: 'Independent artist EP project' },
+                        { src: 'assets/PICTURES/Product 12.jpg', alt: 'Post Production', title: 'Audio Post-Production', description: 'TV show audio post-production' }
+                    ]
+                }
+            };
+            
+            // Open service modal
             serviceCards.forEach(card => {
                 const expandBtn = card.querySelector('.service-expand-btn');
                 if (expandBtn) {
                     expandBtn.addEventListener('click', function(e) {
                         e.preventDefault();
                         const serviceType = card.getAttribute('data-service');
-                        const expandedView = document.getElementById(`${serviceType}-expanded`);
+                        const serviceInfo = serviceData[serviceType];
                         
-                        if (expandedView) {
-                            // Store current scroll position
-                            scrollPosition = window.scrollY;
+                        if (serviceInfo && serviceModal) {
+                            // Update modal content
+                            updateServiceModal(serviceInfo);
                             
-                            // Disable body scroll to prevent double scrolling
+                            // Show modal with animation
+                            serviceModal.style.display = 'flex';
+                            gsap.fromTo(serviceModal,
+                                { opacity: 0 },
+                                { opacity: 1, duration: 0.3, ease: 'power2.out' }
+                            );
+                            gsap.fromTo('.service-modal-content',
+                                { scale: 0.8, opacity: 0 },
+                                { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }
+                            );
+                            
+                            // Disable body scroll
                             document.body.style.overflow = 'hidden';
-                            document.body.style.position = 'fixed';
-                            document.body.style.width = '100%';
-                            document.body.style.top = `-${scrollPosition}px`;
-                            
-                            // Remove scroll from all expanded views to prevent double scrolling
-                            expandedViews.forEach(view => {
-                                view.style.overflowY = 'hidden';
-                            });
-                            
-                            // Enable scroll only on the specific expanded view
-                            expandedView.style.overflowY = 'auto';
-                            
-                            // Show expanded view with smooth fade-in
-                            expandedView.style.display = 'block';
-                            setTimeout(() => {
-                                expandedView.classList.add('active');
-                            }, 10);
                         }
                     });
                 }
             });
             
-            // Close expanded view
-            closeButtons.forEach(button => {
-                button.addEventListener('click', closeExpandedView);
-            });
+            // Update modal content function
+            function updateServiceModal(serviceInfo) {
+                const modal = document.querySelector('.service-modal');
+                const iconElement = modal.querySelector('.service-icon-large i');
+                const nameElement = modal.querySelector('.service-name');
+                const detailsElement = modal.querySelector('.service-details');
+                const portfolioGrid = modal.querySelector('.service-portfolio-grid');
+                
+                // Update service info
+                iconElement.className = serviceInfo.icon;
+                nameElement.textContent = serviceInfo.name;
+                detailsElement.textContent = serviceInfo.description;
+                
+                // Clear and populate portfolio grid
+                portfolioGrid.innerHTML = '';
+                serviceInfo.images.forEach(image => {
+                    const portfolioItem = document.createElement('div');
+                    portfolioItem.className = 'service-portfolio-item';
+                    portfolioItem.style.cssText = 'position:relative;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:transform 0.3s ease;';
+                    portfolioItem.innerHTML = `
+                        <img src="${image.src}" alt="${image.alt}" style="width:100%;height:200px;object-fit:cover;display:block;">
+                        <div class="portfolio-overlay" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:20px;color:#fff;">
+                            <h5 style="margin:0 0 8px 0;font-size:1.1rem;">${image.title}</h5>
+                            <p style="margin:0;font-size:0.9rem;opacity:0.9;">${image.description}</p>
+                        </div>
+                    `;
+                    portfolioGrid.appendChild(portfolioItem);
+                });
+            }
             
-            // Close on click outside content
-            expandedViews.forEach(view => {
-                view.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeExpandedView();
+            // Close service modal
+            if (serviceClose) {
+                serviceClose.addEventListener('click', closeServiceModal);
+            }
+            
+            // Close modal when clicking outside content
+            if (serviceModal) {
+                serviceModal.addEventListener('click', function(e) {
+                    if (e.target === serviceModal) {
+                        closeServiceModal();
                     }
                 });
-            });
+            }
             
             // Close on ESC key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeExpandedView();
+                if (e.key === 'Escape' && serviceModal.style.display === 'flex') {
+                    closeServiceModal();
                 }
             });
             
-            // Function to close expanded views
-            function closeExpandedView() {
-                expandedViews.forEach(view => {
-                    view.classList.remove('active');
-                    
-                    // After animation, hide the view
-                    setTimeout(() => {
-                        view.style.display = 'none';
-                        view.style.overflowY = 'hidden';
-                        
-                        // Re-enable scrolling and restore position
+            // Function to close service modal
+            function closeServiceModal() {
+                gsap.to(serviceModal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        serviceModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                gsap.to('.service-modal-content', {
+                    scale: 0.8,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                });
+            }
+            // Get Quote button scrolls to contact form
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('service-quote-btn')) {
+                    e.preventDefault();
+                    closeServiceModal();
+                    setTimeout(function() {
+                        // Reset body styles before scrolling
                         document.body.style.overflow = '';
                         document.body.style.position = '';
                         document.body.style.width = '';
                         document.body.style.top = '';
-                        window.scrollTo(0, scrollPosition);
-                    }, 300);
-                });
-            }
+                        const contactSection = document.getElementById('footer-contact');
+                        if (contactSection) {
+                            contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 350);
+                }
+            });
         });
     </script>
+
+    <!-- Service Modal Popup -->
+    <div class="service-modal" style="display:none;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(0,0,0,0.92);">
+        <div class="service-modal-content" style="background:#181824;padding:40px 30px 30px 30px;border-radius:18px;max-width:1000px;width:90vw;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+            <div class="service-modal-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:18px;">
+                <div style="display:flex;align-items:center;gap:16px;min-width:0;">
+                    <span class="service-icon-large" style="display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border-radius:50%;padding:12px 14px 10px 14px;box-shadow:0 2px 12px rgba(0,0,0,0.10);">
+                        <i class="fas fa-video" style="font-size:1.6rem;color:var(--accent-primary);"></i>
+                    </span>
+                    <h2 class="service-name" style="font-size:1.7rem;color:#fff;text-align:left;margin:0;font-weight:800;letter-spacing:-1px;line-height:1.1;text-shadow:0 2px 12px rgba(0,0,0,0.18);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Service Name</h2>
+                </div>
+                <button class="service-close" style="width:44px;height:44px;border-radius:50%;background:rgba(185,20,33,0.95);color:#fff;font-size:2rem;border:none;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;transition:background 0.2s;flex-shrink:0;">
+                    &times;
+                </button>
+            </div>
+            <div class="service-content">
+                <div class="service-info" style="margin-bottom:30px;">
+                    <p class="service-details" style="color:#d1d1d1;text-align:center;line-height:1.6;font-size:1rem;max-width:600px;margin:0 auto 18px auto;font-weight:400;">Service description will be populated dynamically.</p>
+                    <hr class="service-divider" style="border:none;border-top:1.5px solid rgba(255,255,255,0.10);margin:24px auto 0 auto;width:80px;">
+                </div>
+                <div class="service-portfolio">
+                    <h4 style="color:#fff;text-align:center;margin-bottom:20px;font-size:1.35rem;letter-spacing:-0.5px;">Featured Work</h4>
+                    <div class="service-portfolio-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:30px;"></div>
+                    <div class="service-actions" style="text-align:center;">
+                        <a href="portfolio.html" class="btn primary" style="margin-right:15px;">View Full Portfolio</a>
+                        <a href="#footer-contact" class="btn secondary service-quote-btn">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Service Modal -->
 </body>
 </html> 

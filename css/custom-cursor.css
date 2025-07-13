@@ -92,12 +92,17 @@
     100% { transform: translate(-50%, -50%) scale(0.85) rotate(-3deg); filter: brightness(4) contrast(1.5); }
 }
 
-/* Hide default cursor on desktop only */
+/* Enhanced desktop-only cursor hiding */
 @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
     html, body, a, button, .btn, .service-card, .portfolio-item, 
     .nav-link, .expanded-close, .social-icon, .logo, 
     .scroll-down, .menu-toggle, input, select, textarea {
         cursor: none !important;
+    }
+    
+    /* Show custom cursor on desktop */
+    .custom-cursor {
+        display: flex !important;
     }
 }
 
@@ -114,24 +119,63 @@
     100% { opacity: 0.3; }
 }
 
-/* Only show cursor on larger screens, not on touch devices */
-@media (min-width: 992px) {
+/* Mobile and touch device optimizations */
+@media (max-width: 991px), (hover: none), (pointer: coarse) {
+    /* Completely hide custom cursor on mobile/touch devices */
     .custom-cursor {
-        display: flex;
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
     
-    html, body, a, button, .btn, .service-card, .portfolio-item, 
-    .nav-link, .expanded-close, .social-icon, .logo, 
-    .scroll-down, .menu-toggle, input, select, textarea {
-        cursor: none !important;
-    }
-}
-
-/* For touch devices, use normal cursor */
-@media (max-width: 991px) {
+    /* Use normal cursor on mobile/touch devices */
     html, body, a, button, .btn, .service-card, .portfolio-item, 
     .nav-link, .expanded-close, .social-icon, .logo, 
     .scroll-down, .menu-toggle, input, select, textarea {
         cursor: auto !important;
+    }
+    
+    /* Ensure proper touch targets on mobile */
+    a, button, .btn, .service-card, .portfolio-item, 
+    .nav-link, .expanded-close, .social-icon, .logo, 
+    .scroll-down, .menu-toggle, input, select, textarea {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Improve touch feedback */
+    a:active, button:active, .btn:active, .service-card:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Additional mobile-specific touch improvements */
+@media (max-width: 768px) {
+    /* Larger touch targets for mobile */
+    .service-card {
+        padding: 20px 15px;
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        padding: 15px 25px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Improve button spacing on mobile */
+    .cta-buttons {
+        gap: 15px;
+    }
+    
+    /* Better touch targets for navigation */
+    .nav-link {
+        padding: 12px 15px;
+    }
+    
+    .menu-toggle {
+        padding: 10px;
+        min-width: 44px;
+        min-height: 44px;
     }
 } 
