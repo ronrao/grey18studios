@@ -1766,6 +1766,18 @@
                     }, 300 + (index * 100));
                 });
             }
+            
+            // Handle hash navigation for category selection
+            function selectCategoryFromHash() {
+                const hash = window.location.hash.replace('#', '');
+                if (!hash) return;
+                const navItem = document.querySelector('.portfolio-nav-item[data-category="' + hash + '"]');
+                if (navItem) {
+                    navItem.click();
+                }
+            }
+            selectCategoryFromHash();
+            window.addEventListener('hashchange', selectCategoryFromHash);
         });
         
         // Initialize particles in the hero section

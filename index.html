@@ -1812,6 +1812,67 @@
         </div>
     </div>
 
+    <section id="about-preview" class="about-preview">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-video">
+                    <!-- Local video embed for logo video -->
+                    <div class="about-video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                        <video id="about-logo-video" 
+                            width="100%" 
+                            height="100%" 
+                            src="assets/video/logo video.mp4" 
+                            title="Grey 18 Studio Logo Video" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; object-fit: cover;"
+                            controls autoplay muted loop playsinline>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>About Grey <span class="grey18">18</span> Studios</h3>
+                    <p>Grey <span class="grey18">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
+                    <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
+                    
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="count">4000+</span>
+                            <span class="label">Projects Completed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="count">800+</span>
+                            <span class="label">Audio Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="count">20+</span>
+                            <span class="label">Years of Experience</span>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="btn primary">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // About video fix - using the same pattern as testimonials
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const aboutVideo = document.getElementById('about-video');
+                    if (aboutVideo) {
+                        // Reload the iframe to ensure it displays correctly
+                        const src = aboutVideo.src;
+                        aboutVideo.src = '';
+                        setTimeout(() => {
+                            aboutVideo.src = src;
+                            console.log("About video reloaded");
+                        }, 100);
+                    }
+                }, 500);
+            });
+        </script>
+    </section>
+
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
@@ -1825,7 +1886,7 @@
                     </div>
                     <h3>Video Production</h3>
                     <p>Professional video production services for commercials, films, corporate videos and events</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#video-production" class="service-expand-btn">Learn More</a>
                 </div>
                 <div class="service-card" data-service="photography">
                     <div class="service-icon">
@@ -1833,7 +1894,7 @@
                     </div>
                     <h3>Photography</h3>
                     <p>Professional photography for events, portraits, products, and commercial use</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#photography" class="service-expand-btn">Learn More</a>
                 </div>
                 <div class="service-card" data-service="editing-grading">
                     <div class="service-icon">
@@ -1841,7 +1902,7 @@
                     </div>
                     <h3>Editing and Colour Grading</h3>
                     <p>Professional editing and colour grading for photos, videos, films and commercials</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#editing-grading" class="service-expand-btn">Learn More</a>
                 </div>
                 <div class="service-card" data-service="sound-recording">
                     <div class="service-icon">
@@ -1849,7 +1910,7 @@
                     </div>
                     <h3>Sound Recording</h3>
                     <p>State-of-the-art recording facilities for vocals, instruments, and full bands</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#sound-recording" class="service-expand-btn">Learn More</a>
                 </div>
                 <div class="service-card" data-service="dubbing">
                     <div class="service-icon">
@@ -1857,7 +1918,7 @@
                     </div>
                     <h3>Dubbing</h3>
                     <p>Professional voice-over and dubbing services for multiple languages</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#dubbing" class="service-expand-btn">Learn More</a>
                 </div>
                 <div class="service-card" data-service="mixing">
                     <div class="service-icon">
@@ -1865,7 +1926,7 @@
                     </div>
                     <h3>Audio Mixing & Mastering</h3>
                     <p>Expert mixing and mastering to give your audio the professional finish it deserves</p>
-                    <button class="service-expand-btn">Learn More</button>
+                    <a href="portfolio.html#mixing" class="service-expand-btn">Learn More</a>
                 </div>
             </div>
         </div>
@@ -2262,68 +2323,6 @@
             </div>
         </div>
     </div>
-
-    <section id="about-preview" class="about-preview">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-video">
-                    <!-- Direct iframe embed following testimonials pattern -->
-                    <div class="about-video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
-                        <iframe id="about-video" 
-                            width="100%" 
-                            height="100%" 
-                            src="https://www.youtube.com/embed/VIDEO_ID_1" 
-                            title="Grey 18 Studio Video" 
-                            frameborder="0" 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <h3>About Grey <span class="grey18">18</span> Studios</h3>
-                    <p>Grey <span class="grey18">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
-                    <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="count">4000+</span>
-                            <span class="label">Projects Completed</span>
-                        </div>
-                        <div class="stat">
-                            <span class="count">800+</span>
-                            <span class="label">Audio Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="count">20+</span>
-                            <span class="label">Years of Experience</span>
-                        </div>
-                    </div>
-                    
-                    <a href="about.html" class="btn primary">Learn More About Us</a>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // About video fix - using the same pattern as testimonials
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    const aboutVideo = document.getElementById('about-video');
-                    if (aboutVideo) {
-                        // Reload the iframe to ensure it displays correctly
-                        const src = aboutVideo.src;
-                        aboutVideo.src = '';
-                        setTimeout(() => {
-                            aboutVideo.src = src;
-                            console.log("About video reloaded");
-                        }, 100);
-                    }
-                }, 500);
-            });
-        </script>
-    </section>
 
     <section id="testimonials" class="testimonials">
         <div class="container">
