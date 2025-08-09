@@ -357,6 +357,7 @@
         }
         .genre-card {
             width: 100% !important;
+            height: 100% !important;
             display: flex !important;
             flex-direction: row !important;
             align-items: stretch !important;
@@ -365,27 +366,54 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 1.5px 6px rgba(185,20,33,0.07) !important;
             border: 1.5px solid rgba(255,255,255,0.08) !important;
             margin-bottom: 0 !important;
-            overflow: hidden !important;
-            padding: 0 0 32px 0 !important;
-            min-height: 400px !important;
+            overflow: visible !important;
+            padding: 0 !important;
             transition: box-shadow 0.25s, transform 0.25s;
+            transform: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
         .genre-card:hover {
             box-shadow: 0 16px 48px rgba(185,20,33,0.13), 0 2px 8px rgba(9,20,88,0.09) !important;
             transform: translateY(-4px) scale(1.012) !important;
         }
+        .genre-card.animate-in {
+            transform: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
         .genre-content {
-            flex: 1 1 380px;
-            padding: 48px 40px 0 48px;
+            flex: 1 1 50%;
+            padding: 48px 40px 48px 48px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            overflow: visible;
+            word-wrap: break-word;
+            hyphens: auto;
+            min-height: fit-content;
         }
         .genre-header {
             margin-bottom: 0.7rem;
+            flex-shrink: 0;
+        }
+        .genre-header h3 {
+            font-size: 1.5rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .genre-description {
             margin-bottom: 1.2rem;
+            flex-shrink: 0;
+        }
+        .genre-description p {
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            margin: 0;
         }
         .divider {
             width: 100%;
@@ -394,23 +422,61 @@
             opacity: 0.13;
             border-radius: 1px;
             margin: 0.7rem 0 1.2rem 0;
+            flex-shrink: 0;
+        }
+        .genre-details {
+            flex: 1;
+            overflow: visible;
+            min-height: fit-content;
+        }
+        .genre-details h4 {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .genre-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: visible;
+        }
+        .genre-details li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .genre-details li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
         }
         .genre-video {
-            flex: 0 0 420px;
+            flex: 0 0 50%;
             min-width: 320px;
             max-width: 540px;
-            width: 40%;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #181824;
-            padding: 32px 32px 32px 0;
+            padding: 32px;
+            position: relative;
+            overflow: visible;
         }
         .video-wrapper {
             width: 100%;
-            padding-bottom: 56.25%;
             height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             position: relative;
+            margin: 0 auto;
+            max-width: 100%;
+            background: #000;
+            border-radius: 18px;
+            overflow: hidden;
         }
         .video-wrapper iframe {
             position: absolute;
@@ -421,21 +487,65 @@
             border: 0;
             border-radius: 18px;
             background: #000;
+            max-width: 100%;
+            max-height: 100%;
+            z-index: 1;
+            display: block;
+            opacity: 1;
+            visibility: visible;
         }
         @media (max-width: 900px) {
             .genre-card {
                 flex-direction: column !important;
                 min-height: unset !important;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
             }
             .genre-content {
-                padding: 18px 10px 0 10px;
+                padding: 24px 20px 24px 20px;
+                flex: 1;
+            }
+            .genre-header h3 {
+                font-size: 1.3rem;
+            }
+            .genre-description p {
+                font-size: 0.95rem;
             }
             .genre-video {
                 width: 100%;
                 min-width: unset;
                 max-width: unset;
                 border-radius: 0 0 22px 22px;
-                padding: 18px 10px 18px 10px;
+                padding: 20px;
+                flex: 0 0 auto;
+            }
+            .video-wrapper {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 768px) {
+            .genre-card {
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            .genre-content {
+                padding: 20px 15px 20px 15px;
+            }
+            .genre-header h3 {
+                font-size: 1.2rem;
+            }
+            .genre-description p {
+                font-size: 0.9rem;
+            }
+            .genre-details li {
+                font-size: 0.9rem;
+            }
+            .genre-video {
+                padding: 15px;
             }
         }
         .genre-overlay {
@@ -697,18 +807,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Luxury Real Estate Promo</h3>
+                                <h3>Sudarshan Silks Deepavali TVC</h3>
                                 <div class="genre-description">
-                                    <p>Showcasing premium amenities and lifestyle for a high-end real estate brand, designed to attract discerning buyers.</p>
+                                    <p>Celebrate the Radiance of Deepavali with Sudarshan Silks. This festive season, adorn yourself in timeless elegance. Discover the perfect saree for every cherished moment — where tradition meets sophistication, and every thread tells a story of joy, beauty, and celebration.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Stunning property visuals</li>
-                                    <li>Focus on luxury and exclusivity</li>
-                                    <li>Dynamic editing and color grading</li>
+                                    <li>Elegant showcase of luxurious sarees with intricate detailing</li>
+                                    <li>Rich, vibrant color palettes inspired by tradition and celebration</li>
+                                    <li>Emotive storytelling highlighting family, joy, and cultural pride</li>
+                                    <li>Designed to evoke nostalgia, elegance, and festive glamour</li>
                                 </ul>
                             </div>
                         </div>
@@ -721,18 +832,18 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Brand Awareness Campaign</h3>
+                                <h3>Sudarshan Jewellers TVC</h3>
                                 <div class="genre-description">
-                                    <p>Creative campaign video crafted to boost brand recognition and connect emotionally with the target audience.</p>
+                                    <p>Timeless Elegance, Exceptional Value — Only at Sudarshan Jewellers. Discover a world of brilliance with our wide collection of gold, silver, and traditional jewellery. From everyday elegance to statement pieces, experience luxury that's beautifully crafted and priced just right.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Strong narrative and messaging</li>
-                                    <li>Engaging visuals and sound design</li>
-                                    <li>Optimized for social media reach</li>
+                                    <li>Bright, colourful visuals with a modern, elegant aesthetic</li>
+                                    <li>Showcases a wide variety of jewellery styles and collections</li>
+                                    <li>Dynamic editing and vibrant color grading for visual appeal</li>
                                 </ul>
                             </div>
                         </div>
@@ -745,18 +856,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Corporate Profile Film</h3>
+                                <h3>Sudarshan Silks Brand Film</h3>
                                 <div class="genre-description">
-                                    <p>Professional profile video for a leading business, highlighting values, vision, and achievements to inspire trust.</p>
+                                    <p>Bringing the story of Sudarshan Silks to life. This film captures the essence of tradition, craftsmanship, and customer devotion. Through elegant visuals and authentic storytelling, we showcase a brand rooted in quality and grace — where every saree is a celebration of timeless Indian artistry.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Executive interviews and testimonials</li>
-                                    <li>Office and team showcase</li>
-                                    <li>Clean, modern editing style</li>
+                                    <li>Warm, elegant visual palette emphasizing tradition and comfort</li>
+                                    <li>Smooth transitions and graceful pacing to reflect the flow of silk</li>
+                                    <li>Natural lighting and soft color grading to create an inviting mood</li>
+                                    <li>Subtle sound design and music score enhancing emotional warmth</li>
                                 </ul>
                             </div>
                         </div>
@@ -769,18 +881,18 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Jewellery TVC</h3>
+                                <h3>Authentic Spices TVC</h3>
                                 <div class="genre-description">
-                                    <p>Visually rich TV commercial for a jewellery brand, focusing on elegance, tradition, and celebration.</p>
+                                    <p>Authentic spices that elevate everyday cooking. Through rich visuals, earthy tones, and a focus on quality ingredients, the ad builds a strong identity around trust, tradition, and flavour-first storytelling. It's a tribute to the hands that cook and the spices that make every dish memorable.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Close-up product shots</li>
-                                    <li>Festive and emotional tone</li>
-                                    <li>High production value</li>
+                                    <li>Warm, earthy visual palette reflecting authenticity and rootedness</li>
+                                    <li>Smooth, intentional pacing to reflect care and craftsmanship</li>
+                                    <li>Emphasis on brand ethos: trust, quality, and everyday value</li>
                                 </ul>
                             </div>
                         </div>
@@ -793,18 +905,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Corporate Event Highlights</h3>
+                                <h3>Gifting Brand Film</h3>
                                 <div class="genre-description">
-                                    <p>Capturing the energy and key moments of a major corporate event, with dynamic editing and engaging visuals.</p>
+                                    <p>A heartfelt brand film that captures the joy of giving and the magic of meaningful surprises. With an uplifting visual style and emotional storytelling, the film showcases how the brand helped turn ordinary days into special memories — one thoughtful gift at a time.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Live event coverage</li>
-                                    <li>Speaker and audience reactions</li>
-                                    <li>Fast-paced, energetic edit</li>
+                                    <li>Bright, feel-good visuals centered around joy, celebration, and connection</li>
+                                    <li>Warm, inviting color grading to evoke happiness and sentiment</li>
+                                    <li>Designed to reflect the convenience and reliability of online gifting</li>
+                                    <li>Human-centric storytelling that aligns with the brand's emotional core</li>
                                 </ul>
                             </div>
                         </div>
@@ -817,18 +930,18 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Food Product TVC</h3>
+                                <h3>Vemica Kitchen TVC</h3>
                                 <div class="genre-description">
-                                    <p>Delicious visuals and mouth-watering shots for a food product TV commercial, designed to entice and engage.</p>
+                                    <p>Bringing your kitchen to life with bold, flavorful visuals and high-impact storytelling. The film positions Vemica as the secret behind restaurant-quality dishes at home — highlighting the ease, confidence, and satisfaction that come with every pack. A visual journey through taste, skill, and the joy of cooking meat to perfection.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Appetizing close-ups</li>
-                                    <li>Bright, vibrant color grading</li>
-                                    <li>Clear product messaging</li>
+                                    <li>Bold, punchy editing to match the strong, spicy flavor profile</li>
+                                    <li>Visual tone balancing aspirational cooking with everyday accessibility</li>
+                                    <li>Professional-style kitchen shots to convey "masterchef at home" appeal</li>
                                 </ul>
                             </div>
                         </div>
@@ -841,18 +954,18 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Brand Launch Promo</h3>
+                                <h3>Young Performers Show Promo</h3>
                                 <div class="genre-description">
-                                    <p>Energetic promo video for a new product launch, designed to create excitement and anticipation.</p>
+                                    <p>A vibrant, high-energy promo to spotlight the joy, talent, and spirit of young performers. With colorful visuals, dynamic choreography, and upbeat music, the film sets the tone for a show that celebrates expression, passion, and the limitless energy of childhood.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Quick cuts and upbeat music</li>
-                                    <li>Product reveal moments</li>
-                                    <li>Social media optimized</li>
+                                    <li>Bright, playful visuals that reflect a joyful and youthful energy</li>
+                                    <li>Emotionally uplifting moments capturing kids' smiles, reactions, and stage presence</li>
+                                    <li>Designed to generate buzz and create a sense of anticipation around the show launch</li>
                                 </ul>
                             </div>
                         </div>
@@ -865,18 +978,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Non-Veg Masala TVC</h3>
+                                <h3>Vemica Traditional Kitchen TVC</h3>
                                 <div class="genre-description">
-                                    <p>Flavorful, high-energy TV commercial for a food brand, focusing on taste and authenticity.</p>
+                                    <p>A nostalgic, heartwarming film that brings the timeless taste of a grandmother's kitchen into today's homes. Through rich, earthy visuals and emotionally rooted storytelling, the ad evokes tradition, love, and the essence of homemade flavour — now captured in every Vemica jar.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Dynamic food shots</li>
-                                    <li>Brand personality and humor</li>
-                                    <li>Memorable tagline</li>
+                                    <li>Emotive storytelling capturing the warmth of generational cooking</li>
+                                    <li>Subtle lighting and color grading to reflect heritage and authenticity</li>
+                                    <li>Brand positioned as a bridge between tradition and convenience</li>
+                                    <li>Designed to evoke memory, comfort, and culinary trust</li>
                                 </ul>
                             </div>
                         </div>
@@ -889,18 +1003,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Product Demo TVC</h3>
+                                <h3>Coorg Coffee TVC</h3>
                                 <div class="genre-description">
-                                    <p>Engaging product demonstration video, highlighting features and benefits for potential customers.</p>
+                                    <p>Capture the serenity of mornings and the richness of coffee straight from Coorg's lush plantations. With atmospheric visuals and a calm, grounded rhythm, the film is designed to awaken the senses and connect viewers with the origins of their perfect cup.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Clear product walkthrough</li>
-                                    <li>Benefit-focused messaging</li>
-                                    <li>Professional voiceover</li>
+                                    <li>Slow, cinematic pacing to evoke calmness and morning tranquility</li>
+                                    <li>Warm, rich color grading to highlight the depth and aroma of coffee</li>
+                                    <li>Emphasis on freshness and direct-from-source authenticity</li>
+                                    <li>Designed to connect premium quality with peaceful everyday moments</li>
                                 </ul>
                             </div>
                         </div>
@@ -913,18 +1028,20 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Event Recap Video</h3>
+                                <h3>Bridal Jewellery TVC</h3>
                                 <div class="genre-description">
-                                    <p>Recap of a major event, capturing the highlights, atmosphere, and key moments for attendees and stakeholders.</p>
+                                    <p>A visual ode to tradition, grace, and celebration. Centered around a woman adorned in intricate bridal jewellery, the film captures the emotional essence of gifting, festivity, and the timeless beauty of Indian wedding traditions. Every frame is designed to reflect joy, elegance, and heritage.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Event highlights and interviews</li>
-                                    <li>Atmospheric b-roll</li>
-                                    <li>Engaging recap edit</li>
+                                    <li>Rich, detailed close-ups of traditional jewellery: necklaces, earrings, bangles, and maang tikka</li>
+                                    <li>Warm, golden color grading to complement wedding attire and create a regal atmosphere</li>
+                                    <li>Emotion-driven storytelling around preparation, gifting, and special moments</li>
+                                    <li>Traditional background score underscoring cultural richness and joy</li>
+                                    <li>Focus on facial expressions and gestures to evoke emotional depth</li>
                                 </ul>
                             </div>
                         </div>
@@ -937,18 +1054,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Brand Story Film</h3>
+                                <h3>Niks Masala TVC</h3>
                                 <div class="genre-description">
-                                    <p>Inspirational brand story film, designed to connect emotionally and build loyalty with the audience.</p>
+                                    <p>A heartfelt, home-centric story that celebrates the emotional bond formed through food. With subtle performances, warm visuals, and a relatable moment of approval, the ad shows how Niks Masala brings generations together — making every meal not just delicious, but meaningful.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Authentic storytelling</li>
-                                    <li>Emotional connection</li>
-                                    <li>High-quality cinematography</li>
+                                    <li>Intimate, home-based setting to reflect everyday family life</li>
+                                    <li>Soft, warm lighting to create an emotionally comforting tone</li>
+                                    <li>Expressive performances capturing anticipation, worry, and joy</li>
+                                    <li>Focus on the transformation of emotion through taste</li>
                                 </ul>
                             </div>
                         </div>
@@ -961,18 +1079,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Fashion TVC</h3>
+                                <h3>Crispy Day Brand Film</h3>
                                 <div class="genre-description">
-                                    <p>Stylish TV commercial for a fashion brand, featuring models, trends, and creative direction.</p>
+                                    <p>A bold and flavour-forward brand film to introduce the company's vision and product line to the world. Through vibrant visuals, dynamic editing, and a strong emphasis on freshness and authenticity, the video positions Crispy Day as a new but trustworthy name in Indian kitchens — ready to spice up every meal.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>On-trend fashion visuals</li>
-                                    <li>Creative direction</li>
-                                    <li>Energetic editing</li>
+                                    <li>Bright, colorful visuals that establish a fresh and modern brand identity</li>
+                                    <li>Energetic background score to build excitement around the launch</li>
+                                    <li>Visual language that balances tradition with a contemporary edge</li>
+                                    <li>Designed to establish credibility, spark curiosity, and drive first-time trials</li>
                                 </ul>
                             </div>
                         </div>
@@ -985,18 +1104,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Automotive TVC</h3>
+                                <h3>Premium Tonic TVC</h3>
                                 <div class="genre-description">
-                                    <p>Dynamic TV commercial for an automotive brand, highlighting performance, design, and innovation.</p>
+                                    <p>A visually refined product film that captures the essence of sophistication in every pour. Through crisp cinematography and detailed sound design, the film brings to life the effervescence, clarity, and premium character of a tonic crafted with "London's finest flavours." Designed to elevate — both the drink and the experience.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Action shots and driving sequences</li>
-                                    <li>Focus on innovation</li>
-                                    <li>High-energy soundtrack</li>
+                                    <li>Ultra close-up shots of tonic being poured, with a focus on fizz and clarity</li>
+                                    <li>Controlled, minimalist lighting to enhance transparency and sparkle</li>
+                                    <li>Slow-motion and high-frame-rate shots to emphasize texture and motion</li>
+                                    <li>Designed to evoke refinement, mixology culture, and modern indulgence</li>
                                 </ul>
                             </div>
                         </div>
@@ -1009,18 +1129,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Documentary Short</h3>
+                                <h3>Saptham Kitchen TVC</h3>
                                 <div class="genre-description">
-                                    <p>Short documentary film, telling a real story with impact and authenticity.</p>
+                                    <p>A warm, slice-of-life story that highlights trust through everyday conversations. Set in a casual kitchen environment, the ad captures a relatable moment between neighbors, emphasizing how Saptham has become the go-to choice for conscious, modern households. The tone is friendly, authentic, and reassuring — just like the brand itself.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Real-life storytelling</li>
-                                    <li>Authentic interviews</li>
-                                    <li>Emotional resonance</li>
+                                    <li>Natural kitchen setting with a couple casually cooking together</li>
+                                    <li>Curious neighbor character used as a relatable narrative device</li>
+                                    <li>Smooth transition from lifestyle to product spotlight</li>
+                                    <li>Emphasis on brand loyalty and usage across all cooking needs</li>
                                 </ul>
                             </div>
                         </div>
@@ -1033,18 +1154,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Music Video</h3>
+                                <h3>Saptham Grocery Expansion TVC</h3>
                                 <div class="genre-description">
-                                    <p>Creative music video production, blending performance, narrative, and visual effects.</p>
+                                    <p>Introduces Saptham's expanded grocery line with a light-hearted and engaging interaction. We used subtle humor and natural performances to show how consumers are pleasantly surprised to discover that Saptham offers more than just oil. The focus was on portraying abundance, trust, and the convenience of shopping everything under one brand — all with a clean, everyday aesthetic.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Performance and narrative blend</li>
-                                    <li>Visual effects</li>
-                                    <li>Dynamic camera work</li>
+                                    <li>Shelving and stacking groceries to visually suggest abundance and variety</li>
+                                    <li>Dialogue-driven reveal of Saptham's expansion beyond oil</li>
+                                    <li>Playful interaction with neighbor to create a memorable hook</li>
+                                    <li>Subtle branding through visible packaging integration</li>
                                 </ul>
                             </div>
                         </div>
@@ -1057,18 +1179,19 @@
                     <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
-                                <h3>Animation TVC</h3>
+                                <h3>Saptham Lamp Lighting TVC</h3>
                                 <div class="genre-description">
-                                    <p>Animated TV commercial, using motion graphics and character animation to tell a brand story.</p>
+                                    <p>A calm, reverent visual tone to reflect the cultural and emotional significance of lighting a lamp. Through close-up details and graceful pacing, the ad captures the quiet beauty of tradition, positioning Saptham as a brand that supports both daily rituals and deeper spiritual connections.</p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="genre-details">
                                 <h4>Highlights</h4>
                                 <ul>
-                                    <li>Motion graphics</li>
-                                    <li>Character animation</li>
-                                    <li>Brand storytelling</li>
+                                    <li>Serene, culturally rooted visuals of traditional lamp-lighting</li>
+                                    <li>Close-ups of oil pouring and the lamp flame for emotional resonance</li>
+                                    <li>Minimalistic, reverent tone to match the ritual of lighting a lamp</li>
+                                    <li>Hero product reveal with a calm, confident brand introduction</li>
                                 </ul>
                             </div>
                         </div>
@@ -1452,12 +1575,12 @@
                     category.style.display = 'block';
                     category.style.visibility = 'visible';
                     category.style.opacity = '1';
-                    category.style.transform = 'translateY(0)';
+                    category.style.transform = 'none';
                 } else {
                     category.style.display = 'none';
                     category.style.visibility = 'hidden';
                     category.style.opacity = '0';
-                    category.style.transform = 'translateY(30px)';
+                    category.style.transform = 'none';
                 }
             });
             
@@ -1466,7 +1589,7 @@
                 setTimeout(() => {
                     item.classList.add('animate-in');
                     item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
+                    item.style.transform = 'none';
                 }, 100 + (index * 100));
             });
             
@@ -1490,7 +1613,7 @@
                         category.style.display = 'none';
                         category.style.visibility = 'hidden';
                         category.style.opacity = '0';
-                        category.style.transform = 'translateY(30px)';
+                        category.style.transform = 'none';
                     });
                     
                     // Show selected category
@@ -1499,7 +1622,7 @@
                     selectedCategory.style.display = 'block';
                     selectedCategory.style.visibility = 'visible';
                     selectedCategory.style.opacity = '1';
-                    selectedCategory.style.transform = 'translateY(0)';
+                    selectedCategory.style.transform = 'none';
                     
                     // Animate the category header
                     const categoryHeader = selectedCategory.querySelector('.category-header');
@@ -1509,13 +1632,9 @@
                     const genreCards = selectedCategory.querySelectorAll('.genre-card');
                     genreCards.forEach((card, index) => {
                         card.classList.remove('animate-in');
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(50px)';
                         
                         setTimeout(() => {
                             card.classList.add('animate-in');
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
                         }, 200 + (index * 100));
                     });
                     
@@ -1883,106 +2002,104 @@
         
         function initPortfolioAnimations() {
             // Initialize ScrollTrigger for scroll animations
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Hero section animations
-            const heroTitle = document.querySelector(".portfolio-hero-content h1");
-            const heroDescription = document.querySelector(".portfolio-hero-content p");
-            const heroStats = document.querySelector(".portfolio-hero-stats");
-            const heroButtons = document.querySelector(".hero-buttons");
-            
-            if (heroTitle) {
-                gsap.from(heroTitle, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.2,
-                    ease: "power3.out"
-                });
-            }
-            
-            if (heroDescription) {
-                gsap.from(heroDescription, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.4,
-                    ease: "power3.out"
-                });
-            }
-            
-            if (heroStats) {
-                gsap.from(heroStats, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.6,
-                    ease: "power3.out"
-                });
-            }
-            
-            if (heroButtons) {
-                gsap.from(heroButtons, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.8,
-                    ease: "power3.out"
-                });
-            }
-            
-            // Portfolio nav animations
-            gsap.from(".portfolio-nav", {
-                scrollTrigger: {
-                    trigger: ".portfolio-nav",
-                    start: "top 90%"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-            
-            // Add scroll animations to all sections and elements
-            document.querySelectorAll('section').forEach(section => {
-                gsap.from(section, {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Hero section animations
+                const heroTitle = document.querySelector(".portfolio-hero-content h1");
+                const heroDescription = document.querySelector(".portfolio-hero-content p");
+                const heroStats = document.querySelector(".portfolio-hero-stats");
+                const heroButtons = document.querySelector(".hero-buttons");
+                
+                if (heroTitle) {
+                    gsap.from(heroTitle, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.2,
+                        ease: "power3.out"
+                    });
+                }
+                
+                if (heroDescription) {
+                    gsap.from(heroDescription, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.4,
+                        ease: "power3.out"
+                    });
+                }
+                
+                if (heroStats) {
+                    gsap.from(heroStats, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.6,
+                        ease: "power3.out"
+                    });
+                }
+                
+                if (heroButtons) {
+                    gsap.from(heroButtons, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.8,
+                        ease: "power3.out"
+                    });
+                }
+                
+                // Portfolio nav animations
+                gsap.from(".portfolio-nav", {
                     scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        once: true
+                        trigger: ".portfolio-nav",
+                        start: "top 90%"
                     },
-                    y: 30,
-                    opacity: 0.8,
+                    y: 50,
+                    opacity: 0,
                     duration: 0.8,
-                    ease: "power2.out"
+                    ease: "power3.out"
                 });
-            });
+                
+                // Add scroll animations to all sections and elements
+                document.querySelectorAll('section').forEach(section => {
+                    gsap.from(section, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%",
+                            once: true
+                        },
+                        y: 30,
+                        opacity: 0.8,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+            }
         }
 
         function updateGenreGridLayout() {
-          const videoCategory = document.getElementById('video-production');
-          const allGenreGrids = document.querySelectorAll('.genre-grid');
-          allGenreGrids.forEach(grid => {
-            if (videoCategory && videoCategory.classList.contains('active')) {
-              grid.classList.add('video-column-layout');
-            } else {
-              grid.classList.remove('video-column-layout');
-            }
-          });
+            const videoCategory = document.getElementById('video-production');
+            const allGenreGrids = document.querySelectorAll('.genre-grid');
+            allGenreGrids.forEach(grid => {
+                if (videoCategory && videoCategory.classList.contains('active')) {
+                    grid.classList.add('video-column-layout');
+                } else {
+                    grid.classList.remove('video-column-layout');
+                }
+            });
         }
 
         // Call on load and on tab switch
         updateGenreGridLayout();
+        const navItems = document.querySelectorAll('.portfolio-nav-item');
         navItems.forEach(item => {
-          item.addEventListener('click', function() {
-            setTimeout(updateGenreGridLayout, 10);
-          });
+            item.addEventListener('click', function() {
+                setTimeout(updateGenreGridLayout, 10);
+            });
         });
     </script>
-    
-    <!-- Custom cursor scripts -->
-    <script src="scripts/custom-cursor.js"></script>
-    <script src="assets/audio/camera-shutter.js"></script>
-    <script src="portfolio-standalone.js"></script>
 </body>
-</html> 
+</html>
