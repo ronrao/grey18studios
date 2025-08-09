@@ -826,31 +826,68 @@
         
         .testimonial-content {
             background: var(--secondary-dark);
-            padding: 30px;
+            padding: 40px 30px 30px 30px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            min-height: 350px; /* Consistent height for all testimonials */
+            min-height: 420px;
             display: flex;
             flex-direction: column;
-            margin-bottom: 0; /* Remove any bottom margin */
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border-left: 3px solid var(--accent-primary);
         }
         
-        .testimonial-content p {
+        .testimonial-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 4px 12px rgba(185, 20, 33, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .avatar-initials {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-text {
             flex: 1;
-            min-height: 150px; /* Ensure text has enough space */
-            font-size: 1.1rem;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .testimonial-text p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: var(--white);
+            font-style: italic;
         }
         
         .video-wrapper {
             flex: 1;
             margin-bottom: 20px;
             position: relative;
-            min-height: 220px; /* Fixed height for video wrapper */
-            border-radius: 10px;
+            min-height: 220px;
+            max-height: 220px;
+            border-radius: 12px;
             overflow: hidden;
             background-color: #000;
+            width: 100%;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
         }
         
         .video-wrapper iframe {
@@ -860,22 +897,29 @@
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: 12px;
         }
         
         .client-info {
             margin-top: auto;
             padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            text-align: center;
         }
         
         .client-info h4 {
-            margin-bottom: 5px;
-            font-size: 1.1rem;
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-weight: 600;
         }
         
         .client-info p {
             font-size: 0.9rem;
             margin: 0;
-            min-height: auto;
+            color: var(--light-grey);
+            opacity: 0.8;
         }
         
         .unified-testimonial-slider {
@@ -1046,12 +1090,14 @@
         /* Additional testimonial fixes - Specific to this section only */
         .testimonial-item .testimonial-content {
             height: auto;
-            min-height: 380px;
+            min-height: 420px;
             max-height: none;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 30px;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px 30px 30px;
+            border-left: 3px solid var(--accent-primary);
         }
         
         .testimonial-text {
@@ -1060,12 +1106,15 @@
             flex-direction: column;
             justify-content: center;
             margin-bottom: 20px;
+            width: 100%;
         }
         
         .testimonial-text p {
             margin: 0;
             line-height: 1.6;
             font-size: 1.1rem;
+            color: var(--white);
+            font-style: italic;
         }
         
         .testimonial-item.video-testimonial .video-wrapper {
@@ -1073,22 +1122,32 @@
             min-height: 220px;
             max-height: 220px;
             margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #000;
+            width: 100%;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
         }
         
         .testimonial-item .client-info {
             margin-top: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 15px;
+            width: 100%;
+            text-align: center;
         }
         
         .testimonial-item .client-info h4 {
             margin: 0 0 5px 0;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-weight: 600;
         }
         
         .testimonial-item .client-info p {
             margin: 0;
             font-size: 0.9rem;
+            color: var(--light-grey);
             opacity: 0.8;
         }
 
@@ -2056,21 +2115,21 @@
                     </div>
                 </div>
                 
-                <!-- Video Testimonial 1 - Simple direct embed -->
+                <!-- Video Testimonial 1 - Vimeo embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
                         <div class="testimonial-avatar" aria-hidden="true">
-                            <span class="avatar-initials">DM</span>
+                            <span class="avatar-initials">RK</span>
                         </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-                                title="Client Testimonial" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1107084227" 
+                                title="Client Testimonial - Rajesh Krishnan" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
                                 allowfullscreen></iframe>
                         </div>
                         <div class="client-info">
-                            <h4>David Mitchell</h4>
-                            <p>Film Director, Visual Productions</p>
+                            <h4>Rajesh Krishnan</h4>
+                            <p>Singer</p>
                         </div>
                     </div>
                 </div>
@@ -2091,21 +2150,21 @@
                     </div>
                 </div>
                 
-                <!-- Video Testimonial 2 - Simple direct embed -->
+                <!-- Video Testimonial 2 - Vimeo embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
                         <div class="testimonial-avatar" aria-hidden="true">
-                            <span class="avatar-initials">JL</span>
+                            <span class="avatar-initials">VP</span>
                         </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/9bZkp7q19f0" 
-                                title="Client Testimonial" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1107083473" 
+                                title="Client Testimonial - Vijay Prakash" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
                                 allowfullscreen></iframe>
                         </div>
                         <div class="client-info">
-                            <h4>Jessica Lee</h4>
-                            <p>Fashion Photographer, Style Collective</p>
+                            <h4>Vijay Prakash</h4>
+                            <p>Singer</p>
                         </div>
                     </div>
                 </div>
@@ -2126,21 +2185,78 @@
                     </div>
                 </div>
                 
-                <!-- Video Testimonial 3 - Simple direct embed -->
+                <!-- Video Testimonial 3 - Vimeo embed -->
                 <div class="testimonial-item video-testimonial">
                     <div class="testimonial-content">
                         <div class="testimonial-avatar" aria-hidden="true">
-                            <span class="avatar-initials">RC</span>
+                            <span class="avatar-initials">SA</span>
                         </div>
                         <div class="video-wrapper">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/jNQXAC9IVRw" 
-                                title="Client Testimonial" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1107083008" 
+                                title="Client Testimonial - Rishab Shetty" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
                                 allowfullscreen></iframe>
                         </div>
                         <div class="client-info">
-                            <h4>Robert Chen</h4>
-                            <p>Music Producer, Harmony Studios</p>
+                            <h4>Sanjith</h4>
+                            <p>Singer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Testimonial 4 - Vimeo embed -->
+                <div class="testimonial-item video-testimonial">
+                    <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">RS</span>
+                        </div>
+                        <div class="video-wrapper">
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1107081961" 
+                                title="Client Testimonial - Sanjith" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="client-info">
+                            <h4>Rishab Shetty</h4>
+                            <p>Actor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Testimonial 5 - Vimeo embed -->
+                <div class="testimonial-item video-testimonial">
+                    <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">NJ</span>
+                        </div>
+                        <div class="video-wrapper">
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1105423628" 
+                                title="Client Testimonial - Navarasa Nayaka Jaggesh" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="client-info">
+                            <h4>Navarasa Nayaka Jaggesh</h4>
+                            <p>Actor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Testimonial 6 - Vimeo embed -->
+                <div class="testimonial-item video-testimonial">
+                    <div class="testimonial-content">
+                        <div class="testimonial-avatar" aria-hidden="true">
+                            <span class="avatar-initials">SU</span>
+                        </div>
+                        <div class="video-wrapper">
+                            <iframe width="100%" height="250" src="https://player.vimeo.com/video/1105421943" 
+                                title="Client Testimonial - Sudharani" frameborder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture" 
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="client-info">
+                            <h4>Sudharani</h4>
+                            <p>Actor</p>
                         </div>
                     </div>
                 </div>
