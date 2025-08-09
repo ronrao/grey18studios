@@ -24,6 +24,43 @@
                 openImageLightbox(img.src);
             }
         });
+
+        // --- Portfolio Section Animations ---
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.utils.toArray('.genre-card.animate-in').forEach((card, i) => {
+            gsap.fromTo(card, {
+              opacity: 0,
+              y: 40,
+              scale: 0.98
+            }, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              delay: i * 0.08,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                once: true
+              }
+            });
+          });
+        }
+        // Fade-in effect for images/videos on load
+        function fadeInOnLoad(selector) {
+          document.querySelectorAll(selector).forEach(el => {
+            if (el.complete || el.readyState === 4) {
+              el.classList.add('fade-in');
+            } else {
+              el.addEventListener('load', () => el.classList.add('fade-in'));
+            }
+          });
+        }
+        fadeInOnLoad('.genre-image img');
+        fadeInOnLoad('.genre-video iframe');
+        // --- End Portfolio Section Animations ---
     });
 
     // Main portfolio initialization function

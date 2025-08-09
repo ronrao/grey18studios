@@ -1,7 +1,7 @@
 /**
  * Grey 18 Studio - Custom Camera Cursor Script
+ * Enhanced version with better mobile detection and performance
  * This script implements a camera-style custom cursor for desktop devices only.
- * Include this script in all pages for consistent cursor behavior across the site.
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,24 +9,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursor = document.querySelector('.custom-cursor');
     const cameraFlash = document.querySelector('.camera-flash');
     
-    // Check if device is touch-enabled
-    const isTouchDevice = ('ontouchstart' in window) || 
-                          (navigator.maxTouchPoints > 0) || 
-                          (navigator.msMaxTouchPoints > 0) ||
-                          window.matchMedia("(hover: none)").matches;
+    // Enhanced touch device detection
+    const isTouchDevice = (function() {
+        return (
+            'ontouchstart' in window ||
+            navigator.maxTouchPoints > 0 ||
+            navigator.msMaxTouchPoints > 0 ||
+            window.matchMedia("(hover: none)").matches ||
+            window.matchMedia("(pointer: coarse)").matches ||
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        );
+    })();
     
-    // Display cursor immediately on load (only on desktop)
-    if (cursor && !isTouchDevice && window.innerWidth >= 992) {
+    // Enhanced desktop detection
+    const isDesktop = (function() {
+        return (
+            window.innerWidth >= 992 &&
+            !isTouchDevice &&
+            window.matchMedia("(hover: hover)").matches &&
+            window.matchMedia("(pointer: fine)").matches
+        );
+    })();
+    
+    // Initialize cursor only on desktop devices
+    if (cursor && isDesktop) {
+        // Ensure cursor is visible and positioned correctly
         cursor.style.display = 'flex';
+        cursor.style.opacity = '0.8';
         
         // Set initial position (center of screen)
-        cursor.style.left = window.innerWidth / 2 + 'px';
-        cursor.style.top = window.innerHeight / 2 + 'px';
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        cursor.style.left = centerX + 'px';
+        cursor.style.top = centerY + 'px';
         
-        // Custom cursor functionality for desktop only
+        // Custom cursor movement for desktop only
         document.addEventListener('mousemove', function(e) {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
+            
+            // Ensure cursor remains visible during movement
+            if (cursor.style.display !== 'flex') {
+                cursor.style.display = 'flex';
+            }
         });
         
         // Hide cursor when leaving window
@@ -36,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Show cursor when entering window
         document.addEventListener('mouseover', function() {
             cursor.style.display = 'flex';
         });
@@ -53,7 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Play camera shutter sound if available
             if (window.cameraShutterSound) {
-                window.cameraShutterSound.play();
+                try {
+                    window.cameraShutterSound.play().catch(e => {
+                        console.log('Camera sound play failed:', e);
+                    });
+                } catch (e) {
+                    console.log('Camera sound not available');
+                }
             }
             
             // Remove the animation class after it completes
@@ -62,10 +94,53 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 200);
         });
         
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Re-check if we should still show cursor after resize
+            if (!isDesktop || window.innerWidth < 992) {
+                cursor.style.display = 'none';
+            } else {
+                cursor.style.display = 'flex';
+            }
+        });
+        
         // Prevent other cursor implementations from running
         window.customCursorInitialized = true;
+        
+        console.log('Custom cursor initialized for desktop');
+        
     } else if (cursor) {
-        // Make sure cursor is hidden on mobile/touch devices
+        // Completely disable cursor on mobile/touch devices
         cursor.style.display = 'none';
+        cursor.style.opacity = '0';
+        cursor.style.pointerEvents = 'none';
+        
+        // Remove any cursor-related event listeners on mobile
+        document.removeEventListener('mousemove', null);
+        document.removeEventListener('click', null);
+        
+        console.log('Custom cursor disabled for mobile/touch device');
+    }
+    
+    // Additional mobile-specific optimizations
+    if (isTouchDevice) {
+        // Ensure all interactive elements have proper touch targets
+        const touchElements = document.querySelectorAll('a, button, .btn, .service-card, .portfolio-item, .nav-link, .expanded-close, .social-icon, .logo, .scroll-down, .menu-toggle, input, select, textarea');
+        
+        touchElements.forEach(element => {
+            // Add minimum touch target size for mobile
+            if (window.innerWidth <= 768) {
+                const computedStyle = window.getComputedStyle(element);
+                const minHeight = parseInt(computedStyle.minHeight) || 0;
+                const minWidth = parseInt(computedStyle.minWidth) || 0;
+                
+                if (minHeight < 44) {
+                    element.style.minHeight = '44px';
+                }
+                if (minWidth < 44) {
+                    element.style.minWidth = '44px';
+                }
+            }
+        });
     }
 }); 

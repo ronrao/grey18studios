@@ -670,7 +670,7 @@
                 </div>
 
                 <div class="genre-grid video-column-layout">
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Kalyani Developers TVC</h3>
@@ -694,7 +694,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Luxury Real Estate Promo</h3>
@@ -718,7 +718,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Brand Awareness Campaign</h3>
@@ -742,7 +742,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Corporate Profile Film</h3>
@@ -766,7 +766,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Jewellery TVC</h3>
@@ -790,7 +790,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Corporate Event Highlights</h3>
@@ -814,7 +814,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Food Product TVC</h3>
@@ -838,7 +838,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Brand Launch Promo</h3>
@@ -862,7 +862,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Non-Veg Masala TVC</h3>
@@ -886,7 +886,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Product Demo TVC</h3>
@@ -910,7 +910,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Event Recap Video</h3>
@@ -934,7 +934,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Brand Story Film</h3>
@@ -958,7 +958,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Fashion TVC</h3>
@@ -982,7 +982,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Automotive TVC</h3>
@@ -1006,7 +1006,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Documentary Short</h3>
@@ -1030,7 +1030,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Music Video</h3>
@@ -1054,7 +1054,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="genre-card animate-in">
+                    <div class="genre-card animate-in" tabindex="0">
                         <div class="genre-content">
                             <div class="genre-header">
                                 <h3>Animation TVC</h3>
@@ -1766,6 +1766,18 @@
                     }, 300 + (index * 100));
                 });
             }
+            
+            // Handle hash navigation for category selection
+            function selectCategoryFromHash() {
+                const hash = window.location.hash.replace('#', '');
+                if (!hash) return;
+                const navItem = document.querySelector('.portfolio-nav-item[data-category="' + hash + '"]');
+                if (navItem) {
+                    navItem.click();
+                }
+            }
+            selectCategoryFromHash();
+            window.addEventListener('hashchange', selectCategoryFromHash);
         });
         
         // Initialize particles in the hero section
