@@ -38,9 +38,55 @@ async function includeHTML(elementId, filePath) {
                 initializeHeader();
             }
         } else if (filePath.includes('footer.html')) {
-            const footerContent = tempContainer.querySelector('footer');
+            // Parse the full HTML document
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            const footerContent = doc.querySelector('footer');
+            const footerStyles = doc.querySelector('style');
+            const footerScripts = doc.querySelectorAll('script');
+            const footerLinks = doc.querySelectorAll('link[rel="stylesheet"]');
+            
             if (footerContent) {
                 document.getElementById(elementId).innerHTML = footerContent.outerHTML;
+                
+                // Add the footer styles if they exist
+                if (footerStyles) {
+                    const styleElement = document.createElement('style');
+                    styleElement.textContent = footerStyles.textContent;
+                    document.head.appendChild(styleElement);
+                }
+                
+                // Add external stylesheet links if they exist
+                footerLinks.forEach(link => {
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = link.rel;
+                    linkElement.href = link.href;
+                    if (link.integrity) linkElement.integrity = link.integrity;
+                    if (link.crossOrigin) linkElement.crossOrigin = link.crossOrigin;
+                    if (!document.querySelector(`link[href="${link.href}"]`)) {
+                        document.head.appendChild(linkElement);
+                    }
+                });
+                
+                // Add the footer scripts if they exist
+                footerScripts.forEach(script => {
+                    if (script.src) {
+                        // External script
+                        if (!document.querySelector(`script[src="${script.src}"]`)) {
+                            const scriptElement = document.createElement('script');
+                            scriptElement.src = script.src;
+                            if (script.integrity) scriptElement.integrity = script.integrity;
+                            if (script.crossOrigin) scriptElement.crossOrigin = script.crossOrigin;
+                            document.head.appendChild(scriptElement);
+                        }
+                    } else if (script.textContent.trim()) {
+                        // Inline script
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = script.textContent;
+                        document.body.appendChild(scriptElement);
+                    }
+                });
                 
                 // After footer is loaded, check if we need to scroll to footer-contact
                 setTimeout(() => {
@@ -63,7 +109,7 @@ async function includeHTML(elementId, filePath) {
                             }
                         });
                     });
-                }, 100);
+                }, 200);
             }
         }
     } catch (error) {
