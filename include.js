@@ -136,7 +136,7 @@ function createBackupHeader(elementId) {
                 <li><a href="about.html" id="nav-about">About</a></li>
                 <li><a href="equipment.html" id="nav-equipment">Equipment</a></li>
                 <li><a href="pricing.html" id="nav-pricing">Pricing</a></li>
-                <li><a href="contact.html" id="nav-contact">Contact</a></li>
+                <li><a href="index.html#collaborate" id="nav-contact">Contact</a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -170,9 +170,6 @@ function initializeHeader() {
             break;
         case 'pricing.html':
             currentNavItem = document.getElementById('nav-pricing');
-            break;
-        case 'contact.html':
-            currentNavItem = document.getElementById('nav-contact');
             break;
         default:
             if (currentPage === '' || currentPage === '/') {

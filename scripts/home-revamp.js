@@ -113,19 +113,22 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/editing-video.jpg',
-                    alt: 'Commercial video production set',
+                    type: 'video',
+                    src: 'https://player.vimeo.com/video/1023847619',
+                    alt: 'Commercial video production',
                     title: 'Commercial Production',
                     description: 'Brand commercials and advertisements'
                 },
                 {
-                    src: 'images/portfolio/photography-corporate.jpg',
-                    alt: 'Corporate video filming',
+                    type: 'video',
+                    src: 'https://player.vimeo.com/video/1023846133',
+                    alt: 'Corporate video production',
                     title: 'Corporate Video',
                     description: 'Corporate profiles and training films'
                 },
                 {
-                    src: 'images/portfolio/grading-commercial.jpg',
+                    type: 'video',
+                    src: 'https://player.vimeo.com/video/990163225',
                     alt: 'Event video coverage',
                     title: 'Event Coverage',
                     description: 'Live events and experiential shoots'
@@ -144,22 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/photography-portrait.jpg',
+                    src: 'assets/photos/Port-(24).jpg',
                     alt: 'Portrait photography session',
                     title: 'Portrait Session',
                     description: 'Studio and lifestyle portraits'
                 },
                 {
-                    src: 'images/portfolio/photography-product.jpg',
+                    src: 'assets/photos/Product-(16).jpg',
                     alt: 'Product photography setup',
                     title: 'Product Showcase',
                     description: 'Commercial product photography'
                 },
                 {
-                    src: 'images/portfolio/photography-corporate.jpg',
-                    alt: 'Corporate photography',
-                    title: 'Corporate Photography',
-                    description: 'Professional corporate imagery'
+                    src: 'assets/photos/Architecture-(10).jpg',
+                    alt: 'Architecture photography',
+                    title: 'Architecture Photography',
+                    description: 'Professional architectural imagery'
                 }
             ],
             link: 'portfolio.html#photography'
@@ -175,19 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/editing-video.jpg',
+                    src: 'assets/photos/Final-(3).jpg',
                     alt: 'Video editor working on commercial edit',
                     title: 'Commercial Edit',
                     description: 'TV commercial post-production'
                 },
                 {
-                    src: 'images/portfolio/editing-photo.jpg',
+                    src: 'assets/photos/Port-(7).jpg',
                     alt: 'Photo retouching process',
                     title: 'Photo Retouching',
                     description: 'High-end photo finishing'
                 },
                 {
-                    src: 'images/portfolio/grading-film.jpg',
+                    src: 'assets/photos/Mythriya-(15).jpg',
                     alt: 'Colour grading for film project',
                     title: 'Film Colour Treatment',
                     description: 'Cinematic colour grading'
@@ -206,19 +209,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/audio-music.jpg',
-                    alt: 'Singer recording vocals in studio',
+                    src: 'audio-viz',
+                    alt: 'Professional sound recording studio',
                     title: 'Vocal Sessions',
                     description: 'Professional vocal recording'
                 },
                 {
-                    src: 'images/portfolio/audio-voiceover.jpg',
+                    src: 'audio-viz',
                     alt: 'Voice-over recording in studio',
                     title: 'Voice-over Recording',
                     description: 'Professional voice-over sessions'
                 },
                 {
-                    src: 'images/portfolio/audio-podcast.jpg',
+                    src: 'audio-viz',
                     alt: 'Podcast recording setup',
                     title: 'Podcast Production',
                     description: 'Podcast and voice-over suites'
@@ -237,19 +240,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/dubbing-commercial.jpg',
+                    src: 'audio-viz',
                     alt: 'Voice-over artist in recording booth',
                     title: 'Commercial Voice-over',
                     description: 'Campaign and promo dubbing'
                 },
                 {
-                    src: 'images/portfolio/dubbing-animation.jpg',
+                    src: 'audio-viz',
                     alt: 'Animation dubbing session',
                     title: 'Animation Project',
                     description: 'Character voice performance'
                 },
                 {
-                    src: 'images/portfolio/dubbing-film.jpg',
+                    src: 'audio-viz',
                     alt: 'Film dubbing session',
                     title: 'Film Dubbing',
                     description: 'Feature film dubbing and ADR'
@@ -268,19 +271,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             gallery: [
                 {
-                    src: 'images/portfolio/mixing-music.jpg',
+                    src: 'audio-viz',
                     alt: 'Mixing engineer at console',
                     title: 'Album Production',
                     description: 'Albums and EP mastering'
                 },
                 {
-                    src: 'images/portfolio/mixing-film.jpg',
+                    src: 'audio-viz',
                     alt: 'Film soundtrack mixing session',
                     title: 'Film Soundtrack',
                     description: 'Cinema-grade audio finishing'
                 },
                 {
-                    src: 'images/portfolio/mixing-commercial.jpg',
+                    src: 'audio-viz',
                     alt: 'Commercial audio mixing',
                     title: 'Commercial Mixing',
                     description: 'Commercial and broadcast audio'
@@ -294,6 +297,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!serviceModal) return;
         const details = serviceDetails[serviceKey];
         if (!details) return;
+        
+        // Store service key for visualization logic
+        if (serviceModal) {
+            serviceModal.dataset.service = serviceKey;
+        }
 
         if (modalTitle) modalTitle.textContent = details.title;
         if (modalLead) modalLead.textContent = details.lead;
@@ -312,37 +320,174 @@ document.addEventListener('DOMContentLoaded', () => {
             modalGallery.innerHTML = '';
             details.gallery.forEach(entry => {
                 const figure = document.createElement('figure');
-                const image = document.createElement('img');
-                // Try relative path first (works better with Go Live)
-                // Remove leading slash if present for relative path
-                const relativePath = entry.src.startsWith('/') ? entry.src.substring(1) : entry.src;
-                image.src = relativePath;
-                image.alt = entry.alt;
-                image.loading = 'lazy';
-                image.style.width = '100%';
-                image.style.height = '180px';
-                image.style.objectFit = 'cover';
-                image.style.objectPosition = 'center';
                 
-                // Try absolute path as fallback if relative fails
-                image.onerror = function() {
-                    const absolutePath = '/' + relativePath;
-                    if (this.src !== absolutePath && !this.dataset.triedAbsolute) {
-                        console.warn('Relative path failed, trying absolute:', relativePath, '->', absolutePath);
-                        this.dataset.triedAbsolute = 'true';
-                        this.src = absolutePath;
+                // Check if entry is a video (has type: 'video' or src contains 'vimeo' or 'youtube')
+                if (entry.type === 'video' || entry.src.includes('vimeo.com') || entry.src.includes('youtube.com')) {
+                    // Create iframe for video
+                    const videoWrapper = document.createElement('div');
+                    videoWrapper.style.width = '100%';
+                    videoWrapper.style.height = '180px';
+                    videoWrapper.style.position = 'relative';
+                    videoWrapper.style.overflow = 'hidden';
+                    videoWrapper.style.borderRadius = '8px';
+                    
+                    const iframe = document.createElement('iframe');
+                    iframe.src = entry.src;
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.border = 'none';
+                    iframe.style.borderRadius = '8px';
+                    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.frameBorder = '0';
+                    
+                    videoWrapper.appendChild(iframe);
+                    figure.appendChild(videoWrapper);
+                } else {
+                    // Check if this is an audio service that should use animated visualization
+                    const audioServices = ['sound-recording', 'dubbing', 'mixing'];
+                    const isAudioService = audioServices.includes(serviceKey);
+                    
+                    // Check if entry.src indicates we should use visualization
+                    const shouldUseVisualization = entry.src === 'audio-viz' || 
+                                                   (isAudioService && entry.src.includes('audio-viz'));
+                    
+                    if (shouldUseVisualization || (audioServices.includes(serviceKey) && !entry.src.match(/\.(jpg|jpeg|png|gif|webp)$/i))) {
+                        // Create animated audio visualization
+                        const vizContainer = document.createElement('div');
+                        vizContainer.className = 'audio-visualization';
+                        vizContainer.style.width = '100%';
+                        vizContainer.style.height = '180px';
+                        vizContainer.style.position = 'relative';
+                        vizContainer.style.overflow = 'hidden';
+                        vizContainer.style.borderRadius = '8px';
+                        vizContainer.style.background = 'linear-gradient(135deg, rgba(185, 20, 33, 0.15) 0%, rgba(9, 20, 88, 0.2) 100%)';
+                        vizContainer.style.display = 'flex';
+                        vizContainer.style.alignItems = 'center';
+                        vizContainer.style.justifyContent = 'center';
+                        
+                        // Create waveform visualization (background layer)
+                        const waveform = document.createElement('div');
+                        waveform.className = 'audio-waveform';
+                        waveform.style.display = 'flex';
+                        waveform.style.alignItems = 'center';
+                        waveform.style.justifyContent = 'center';
+                        waveform.style.gap = '4px';
+                        waveform.style.height = '100%';
+                        waveform.style.width = '100%';
+                        waveform.style.position = 'absolute';
+                        waveform.style.top = '0';
+                        waveform.style.left = '0';
+                        waveform.style.zIndex = '1';
+                        waveform.style.opacity = '0.5';
+                        
+                        // Create bars for waveform
+                        for (let i = 0; i < 20; i++) {
+                            const bar = document.createElement('div');
+                            bar.className = 'waveform-bar';
+                            const height = 20 + Math.random() * 80;
+                            bar.style.width = '6px';
+                            bar.style.height = `${height}%`;
+                            bar.style.background = `linear-gradient(to top, 
+                                var(--accent-primary) 0%, 
+                                rgba(185, 20, 33, 0.6) 50%, 
+                                var(--accent-secondary) 100%)`;
+                            bar.style.borderRadius = '3px';
+                            bar.style.animation = `waveformPulse ${0.8 + Math.random() * 0.4}s ease-in-out infinite`;
+                            bar.style.animationDelay = `${i * 0.05}s`;
+                            waveform.appendChild(bar);
+                        }
+                        
+                        // Add icon overlay with unique icons for each card
+                        const iconOverlay = document.createElement('div');
+                        iconOverlay.style.position = 'absolute';
+                        iconOverlay.style.top = '50%';
+                        iconOverlay.style.left = '50%';
+                        iconOverlay.style.transform = 'translate(-50%, -50%)';
+                        iconOverlay.style.fontSize = '3rem';
+                        iconOverlay.style.color = '#ffffff';
+                        iconOverlay.style.opacity = '0.9';
+                        iconOverlay.style.pointerEvents = 'none';
+                        iconOverlay.style.zIndex = '2';
+                        iconOverlay.style.textShadow = '0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(185, 20, 33, 0.3)';
+                        
+                        // Set unique icon based on service and card title
+                        let iconClass = '';
+                        if (serviceKey === 'sound-recording') {
+                            if (entry.title === 'Vocal Sessions') {
+                                iconClass = 'fas fa-microphone-alt';
+                            } else if (entry.title === 'Voice-over Recording') {
+                                iconClass = 'fas fa-comments';
+                            } else if (entry.title === 'Podcast Production') {
+                                iconClass = 'fas fa-podcast';
+                            }
+                        } else if (serviceKey === 'dubbing') {
+                            if (entry.title === 'Commercial Voice-over') {
+                                iconClass = 'fas fa-bullhorn';
+                            } else if (entry.title === 'Animation Project') {
+                                iconClass = 'fas fa-film';
+                            } else if (entry.title === 'Film Dubbing') {
+                                iconClass = 'fas fa-video';
+                            }
+                        } else if (serviceKey === 'mixing') {
+                            if (entry.title === 'Album Production') {
+                                iconClass = 'fas fa-compact-disc';
+                            } else if (entry.title === 'Film Soundtrack') {
+                                iconClass = 'fas fa-music';
+                            } else if (entry.title === 'Commercial Mixing') {
+                                iconClass = 'fas fa-sliders-h';
+                            }
+                        }
+                        
+                        if (iconClass) {
+                            iconOverlay.innerHTML = `<i class="${iconClass}"></i>`;
+                        }
+                        
+                        vizContainer.appendChild(waveform);
+                        vizContainer.appendChild(iconOverlay);
+                        figure.appendChild(vizContainer);
                     } else {
-                        console.error('Failed to load image from both paths:', relativePath);
-                        this.style.backgroundColor = 'rgba(12, 14, 20, 0.8)';
-                        this.style.display = 'flex';
-                        this.style.alignItems = 'center';
-                        this.style.justifyContent = 'center';
-                        this.style.color = 'rgba(255, 255, 255, 0.5)';
-                        this.style.fontSize = '0.8rem';
-                        this.alt = 'Image not available';
+                        // Create image element for regular images
+                        const image = document.createElement('img');
+                        // Try relative path first (works better with Go Live)
+                        // Remove leading slash if present for relative path
+                        const relativePath = entry.src.startsWith('/') ? entry.src.substring(1) : entry.src;
+                        image.src = relativePath;
+                        image.alt = entry.alt;
+                        image.loading = 'lazy';
+                        image.style.width = '100%';
+                        image.style.height = '180px';
+                        image.style.objectFit = 'cover';
+                        image.style.objectPosition = 'center';
+                        image.style.borderRadius = '8px';
+                        
+                        // Try absolute path as fallback if relative fails
+                        image.onerror = function() {
+                            const absolutePath = '/' + relativePath;
+                            if (this.src !== absolutePath && !this.dataset.triedAbsolute) {
+                                console.warn('Relative path failed, trying absolute:', relativePath, '->', absolutePath);
+                                this.dataset.triedAbsolute = 'true';
+                                this.src = absolutePath;
+                            } else if (!this.dataset.triedBase) {
+                                // Try without assets/ prefix as another fallback
+                                const basePath = relativePath.replace('assets/', '');
+                                console.warn('Trying base path:', basePath);
+                                this.dataset.triedBase = 'true';
+                                this.src = basePath;
+                            } else {
+                                console.error('Failed to load image from all paths:', relativePath);
+                                // Use a placeholder color instead of error message
+                                this.style.backgroundColor = 'rgba(185, 20, 33, 0.1)';
+                                this.style.display = 'flex';
+                                this.style.alignItems = 'center';
+                                this.style.justifyContent = 'center';
+                                this.style.border = '2px dashed rgba(185, 20, 33, 0.3)';
+                                this.style.borderRadius = '8px';
+                            }
+                        };
+                        figure.appendChild(image);
                     }
-                };
-                figure.appendChild(image);
+                }
 
                 const caption = document.createElement('figcaption');
                 const title = document.createElement('strong');
@@ -497,14 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showreelModal?.querySelectorAll('[data-close]').forEach(trigger => {
         trigger.addEventListener('click', () => closeShowreel());
     });
-
-    // Open showreel modal by default on page load
-    if (showreelModal) {
-        // Small delay to ensure page is fully loaded
-        setTimeout(() => {
-            openShowreel();
-        }, 500);
-    }
 
     /* -------------------------------------------------------------------------- */
     /* Escape key handling                                                        */

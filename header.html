@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: clamp(1.2rem, 2vw, 1.8rem) clamp(2rem, 5vw, 6rem);
+            padding: clamp(1rem, 1.5vw, 1.5rem) clamp(2rem, 5vw, 6rem);
             z-index: 1000;
             transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
             background: 
@@ -55,7 +55,7 @@
         }
 
         header.sticky {
-            padding: clamp(1rem, 2vw, 1.4rem) clamp(2rem, 5vw, 6rem);
+            padding: clamp(0.8rem, 1.2vw, 1.2rem) clamp(2rem, 5vw, 6rem);
             box-shadow: 
                 0 12px 40px rgba(0, 0, 0, 0.5),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.08);
@@ -128,8 +128,10 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: clamp(0.5rem, 1.5vw, 1.5rem);
+            gap: clamp(0.2rem, 0.8vw, 0.8rem);
             align-items: center;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
         }
 
         nav ul li {
@@ -143,11 +145,14 @@
             text-decoration: none;
             position: relative;
             transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem clamp(0.6rem, 1vw, 1rem);
             border-radius: 8px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             font-family: 'Cormorant Garamond', serif;
             letter-spacing: 0.05em;
+            white-space: nowrap;
         }
 
         nav ul li a::before {
@@ -480,40 +485,31 @@
                 color: var(--accent-primary);
             }
 
-            /* Active/Selected Item Styling */
+            /* Active/Selected Item Styling - Clean and Simple */
             nav ul li a.active {
-                background: linear-gradient(135deg, 
-                    rgba(185, 20, 33, 0.15) 0%, 
-                    rgba(185, 20, 33, 0.08) 100%);
+                background: rgba(185, 20, 33, 0.2);
                 border-color: var(--accent-primary);
                 border-width: 2px;
                 color: var(--text-main);
                 font-weight: 600;
                 transform: translateX(0);
-                box-shadow: 
-                    0 0 0 1px rgba(185, 20, 33, 0.3),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-                    0 2px 8px rgba(185, 20, 33, 0.15);
             }
 
             nav ul li a.active::before {
-                opacity: 0.6;
-                background: linear-gradient(135deg, 
-                    rgba(185, 20, 33, 0.25) 0%, 
-                    rgba(9, 20, 88, 0.1) 100%);
+                opacity: 0;
             }
 
             nav ul li a.active::after {
-                height: 70%;
-                background: var(--accent-gradient);
-                box-shadow: 0 0 8px rgba(185, 20, 33, 0.5);
+                height: 80%;
+                background: var(--accent-primary);
+                width: 3px;
+                box-shadow: none;
             }
 
             nav ul li a.active i {
                 opacity: 1;
                 color: var(--accent-primary);
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 4px rgba(185, 20, 33, 0.6));
+                transform: scale(1);
             }
 
             nav ul li a.active span {
@@ -558,7 +554,7 @@
                 <li><a href="about.html" id="nav-about"><i class="fas fa-info-circle"></i><span>About</span></a></li>
                 <li><a href="equipment.html" id="nav-equipment"><i class="fas fa-cogs"></i><span>Equipment</span></a></li>
                 <li><a href="pricing.html" id="nav-pricing"><i class="fas fa-tag"></i><span>Pricing</span></a></li>
-                <li><a href="#footer-contact" id="nav-contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+                <li><a href="index.html#collaborate" id="nav-contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -587,9 +583,6 @@
                     break;
                 case 'pricing.html':
                     currentNavItem = document.getElementById('nav-pricing');
-                    break;
-                case 'contact.html':
-                    currentNavItem = document.getElementById('nav-contact');
                     break;
                 default:
                     if (currentPage === '' || currentPage === '/') {

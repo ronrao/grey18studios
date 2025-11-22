@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Equipment | Grey 18 Studio</title>
-    <!-- Grey18 Styling -->
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-uH1HfSCM5tB9Zjg5eQof8I4eAbOeXtfLOcOfeUeawuO/HEdBDEuDfSU/EYEYVplpXCMVvjJAnCmvYz3d0+M8w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <!-- Custom cursor CSS -->
     <link rel="stylesheet" href="css/custom-cursor.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Include script for header and footer -->
     <script src="include.js"></script>
     <!-- Grey18 Text Processor -->
@@ -39,16 +42,21 @@
         }
         
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(to bottom, #1a1a1a, #121212);
-            color: var(--light-grey);
+            font-family: 'Cormorant Garamond', serif;
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
             line-height: 1.6;
         }
         
         h1, h2, h3, h4 {
-            font-family: 'Comfortaa', cursive;
-            font-weight: 700;
-            color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--text-main);
         }
         
         img {
@@ -76,15 +84,13 @@
         /* Hero Section */
         .equipment-hero {
             position: relative;
-            height: 60vh;
-            min-height: 500px;
-            background: linear-gradient(135deg, rgba(9,20,88,0.85), rgba(185,20,33,0.85)), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1920');
-            background-size: cover;
-            background-position: center;
+            min-height: 60vh;
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 100px;
+            padding: clamp(5rem, 10vw, 9rem) 0;
+            padding-top: 180px;
         }
         
         .equipment-hero::before {

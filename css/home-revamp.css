@@ -75,6 +75,34 @@ body.has-modal {
     padding: 0 clamp(1.5rem, 4vw, 2.5rem);
 }
 
+/* Mobile/Tablet: Full width containers */
+@media (max-width: 1024px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .section--services {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .section--services .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 clamp(1rem, 4vw, 2rem);
+        margin: 0;
+    }
+    
+    .services__grid {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        justify-items: stretch;
+    }
+}
+
 .section {
     padding: clamp(5rem, 10vw, 9rem) 0;
     position: relative;
@@ -289,6 +317,7 @@ body.has-modal {
 .hero {
     position: relative;
     min-height: 100vh;
+    max-height: 100vh;
     display: flex;
     align-items: flex-start;
     overflow: hidden;
@@ -334,7 +363,7 @@ body.has-modal {
     align-items: flex-start;
     min-height: 100vh;
     padding-top: clamp(2rem, 4vw, 2rem);
-    padding-bottom: clamp(2rem, 4vw, 2rem);
+    padding-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 .hero__showreel {
@@ -507,7 +536,7 @@ body.has-modal {
 
 .hero__scroll {
     position: absolute;
-    bottom: clamp(3rem, 5vw, 4.5rem);
+    bottom: clamp(1.5rem, 3vw, 2.5rem);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -733,6 +762,7 @@ body.has-modal {
         radial-gradient(ellipse at 80% 50%, rgba(185, 20, 33, 0.12) 0%, transparent 70%),
         transparent;
     position: relative;
+    overflow: visible;
 }
 
 .services__grid {
@@ -740,6 +770,10 @@ body.has-modal {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: clamp(2rem, 4vw, 2.8rem);
     position: relative;
+    width: 100%;
+    max-width: 100%;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 .service-card {
@@ -1502,15 +1536,61 @@ body.has-modal {
 @media (max-width: 1200px) {
     .container {
         padding: 0 clamp(1.5rem, 3vw, 2rem);
+        width: 100%;
+        max-width: 100%;
     }
 
     .section {
         padding: clamp(4rem, 8vw, 7rem) 0;
+        overflow: visible;
     }
 
+    .section--services .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 clamp(1rem, 3vw, 2rem);
+        margin: 0;
+    }
+    
     .services__grid {
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: clamp(1.5rem, 3vw, 2.5rem);
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .section--services {
+        overflow: visible;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    /* Tablet: Smaller play button in bottom corner */
+    .hero__showreel {
+        position: fixed;
+        bottom: clamp(1.5rem, 3vw, 2rem);
+        right: clamp(1.5rem, 3vw, 2rem);
+        width: 64px;
+        height: 64px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        margin-left: 0;
+        z-index: 100;
+    }
+    
+    .hero__showreel-label {
+        display: none;
+    }
+    
+    .hero__showreel-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-size: 1.2rem;
     }
 }
 
@@ -1523,9 +1603,29 @@ body.has-modal {
     }
 
     .hero__showreel {
+        position: fixed;
+        bottom: clamp(1.5rem, 3vw, 2rem);
+        right: clamp(1.5rem, 3vw, 2rem);
         grid-column: 1;
-        align-self: flex-start;
-        margin-bottom: 2rem;
+        align-self: auto;
+        margin-bottom: 0;
+        margin-left: 0;
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        z-index: 100;
+    }
+    
+    .hero__showreel-label {
+        display: none;
+    }
+    
+    .hero__showreel-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
     }
 
     .hero__content {
@@ -1549,9 +1649,27 @@ body.has-modal {
         transform: rotate(0deg);
     }
 
+    .section--services .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 clamp(1rem, 3vw, 1.5rem);
+        margin: 0;
+    }
+    
     .services__grid {
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: clamp(1.5rem, 3vw, 2rem);
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .section--services {
+        overflow: visible;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .service-card {
@@ -1571,6 +1689,15 @@ body.has-modal {
     .showreel-modal__panel {
         max-width: min(850px, 95vw);
         padding: clamp(2rem, 4vw, 2.5rem);
+    }
+    
+    .service-modal__panel {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        flex-flow: wrap;
+        height: 92vh;
+        overflow-y: scroll;
     }
 
     .service-modal__gallery {
@@ -1604,6 +1731,31 @@ body.has-modal {
     .hero__layout {
         padding-top: clamp(5rem, 10vw, 7rem);
         padding-bottom: clamp(3.5rem, 7vw, 5rem);
+    }
+    
+    /* Mobile: Smaller play button in bottom corner, no text */
+    .hero__showreel {
+        position: fixed;
+        bottom: clamp(1.2rem, 2.5vw, 1.8rem);
+        right: clamp(1.2rem, 2.5vw, 1.8rem);
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        margin-left: 0;
+        z-index: 100;
+    }
+    
+    .hero__showreel-label {
+        display: none;
+    }
+    
+    .hero__showreel-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-size: 1rem;
     }
 
     .hero__headline {
@@ -1661,9 +1813,34 @@ body.has-modal {
         font-size: 2.5rem;
     }
 
+    .section--services .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 clamp(1rem, 4vw, 1.5rem);
+        margin: 0;
+    }
+    
     .services__grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .section--services {
+        overflow: visible;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .service-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0;
     }
 
     .service-card {
@@ -1711,6 +1888,15 @@ body.has-modal {
         padding: clamp(1.5rem, 3vw, 2rem);
         border-radius: 24px;
     }
+    
+    .service-modal__panel {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        flex-flow: wrap;
+        height: 92vh;
+        overflow-y: scroll;
+    }
 
     .service-modal__header {
         flex-direction: column;
@@ -1748,10 +1934,21 @@ body.has-modal {
 @media (max-width: 600px) {
     .container {
         padding: 0 clamp(1rem, 3vw, 1.5rem);
+        width: 100%;
+        max-width: 100%;
     }
 
     .section {
         padding: clamp(3rem, 6vw, 4.5rem) 0;
+        overflow: visible;
+    }
+    
+    .section--services {
+        overflow: visible;
+    }
+    
+    .section--services .container {
+        overflow: visible;
     }
 
     .section-intro {
@@ -1774,6 +1971,42 @@ body.has-modal {
 
     .hero__layout {
         padding: clamp(4.5rem, 8vw, 6rem) 0 clamp(3rem, 5vw, 4rem);
+    }
+    
+    /* Small mobile: Even smaller play button */
+    .hero__showreel {
+        width: 52px;
+        height: 52px;
+        bottom: clamp(1rem, 2vw, 1.5rem);
+        right: clamp(1rem, 2vw, 1.5rem);
+    }
+    
+    .hero__showreel-icon {
+        font-size: 0.9rem;
+    }
+    
+    .hero__showreel {
+        position: fixed;
+        bottom: clamp(1.5rem, 3vw, 2rem);
+        right: clamp(1.5rem, 3vw, 2rem);
+        width: 64px;
+        height: 64px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        margin-left: 0;
+        z-index: 100;
+    }
+    
+    .hero__showreel-label {
+        display: none;
+    }
+    
+    .hero__showreel-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-size: 1.2rem;
     }
 
     .hero__eyebrow {
@@ -1909,6 +2142,12 @@ body.has-modal {
         max-width: 98vw;
         padding: clamp(1.2rem, 3vw, 1.8rem);
         border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        flex-flow: wrap;
+        height: 92vh;
+        overflow-y: scroll;
     }
 
     .service-modal__close,
@@ -1967,14 +2206,77 @@ body.has-modal {
     }
 }
 
+/* Audio Visualization Styles */
+@keyframes waveformPulse {
+    0%, 100% {
+        transform: scaleY(0.3);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scaleY(1);
+        opacity: 0.5;
+    }
+}
+
+.audio-visualization {
+    position: relative;
+    background: linear-gradient(135deg, 
+        rgba(185, 20, 33, 0.12) 0%, 
+        rgba(9, 20, 88, 0.18) 50%,
+        rgba(185, 20, 33, 0.12) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        inset 0 0 20px rgba(185, 20, 33, 0.1),
+        0 0 30px rgba(9, 20, 88, 0.15);
+}
+
+.audio-visualization:hover {
+    border-color: rgba(185, 20, 33, 0.3);
+    box-shadow: 
+        inset 0 0 30px rgba(185, 20, 33, 0.2),
+        0 0 40px rgba(9, 20, 88, 0.25);
+}
+
+.audio-visualization .audio-waveform {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.audio-visualization .waveform-bar {
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.service-modal__gallery figure:hover .audio-visualization {
+    transform: scale(1.02);
+}
+
+.service-modal__gallery figure:hover .audio-visualization .waveform-bar {
+    box-shadow: 0 0 10px rgba(185, 20, 33, 0.5);
+}
+
 /* Small Mobile Devices (480px and below) */
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
+        width: 100%;
+        max-width: 100%;
     }
 
     .section {
         padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+        overflow: visible;
+    }
+    
+    .section--services {
+        overflow: visible;
+    }
+    
+    .section--services .container {
+        overflow: visible;
     }
 
     .section-title {

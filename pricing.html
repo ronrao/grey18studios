@@ -6,13 +6,16 @@
     <title>Pricing Plans | Grey 18 Studio</title>
     <meta name="description" content="Explore our flexible pricing plans for audio and visual production services. Choose from a variety of specialized packages to meet your creative needs.">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles-updated.css">
-    <!-- Grey18 Styling -->
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-uH1HfSCM5tB9Zjg5eQof8I4eAbOeXtfLOcOfeUeawuO/HEdBDEuDfSU/EYEYVplpXCMVvjJAnCmvYz3d0+M8w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <!-- Custom cursor CSS -->
     <link rel="stylesheet" href="css/custom-cursor.css">
     
     <!-- Animation Libraries -->
@@ -44,19 +47,26 @@
         
         /* Fix visibility issues while matching home page color scheme */
         body {
-            background: linear-gradient(to bottom, #333333, #222222, #111111, #000000);
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .pricing-hero {
-            background: var(--grey-gradient-1);
+            background: transparent;
             padding-top: 180px !important;
-            height: 50vh;
+            min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            overflow: hidden; /* For animations */
+            overflow: hidden;
+            padding: clamp(5rem, 10vw, 9rem) 0;
         }
         
         .pricing-hero::before {

@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Grey 18 Studio</title>
-    <!-- Common CSS -->
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-uH1HfSCM5tB9Zjg5eQof8I4eAbOeXtfLOcOfeUeawuO/HEdBDEuDfSU/EYEYVplpXCMVvjJAnCmvYz3d0+M8w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Core Styles -->
     <link rel="stylesheet" href="style.css">
-    <!-- Page specific CSS -->
-    <link rel="stylesheet" href="styles-updated.css">
-    <link rel="stylesheet" href="portfolio.css">
-    <!-- Grey18 Styling -->
+    <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <!-- Custom cursor CSS -->
     <link rel="stylesheet" href="css/custom-cursor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Page specific CSS -->
+    <link rel="stylesheet" href="portfolio.css">
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -44,17 +46,24 @@
         /* Enhanced Portfolio Hero Section - Fixed alignment */
         .portfolio-hero {
             position: relative;
-            height: 100vh; /* Full viewport height */
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a, #050505);
+            background: transparent;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 150px 0px 80px 0 !important; /* Remove padding */
-            margin: 0 !important; /* Remove margin to fix gap */
-            border-bottom: 5px solid; /* Add border instead of margin */
-            border-image: var(--accent-gradient) 1;
+            padding: 180px 0 clamp(5rem, 10vw, 9rem) 0;
+            margin: 0;
+        }
+        
+        body {
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .portfolio-hero::before {
@@ -754,7 +763,7 @@
             
             <div class="hero-buttons">
                 <a href="#photography" class="btn primary">Explore Gallery</a>
-                <a href="contact.html" class="btn secondary">Contact Us</a>
+                <a href="index.html#collaborate" class="btn secondary">Contact Us</a>
             </div>
         </div>
     </section>
@@ -1212,7 +1221,7 @@
                 <div class="genre-grid">
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="assets/PICTURES/Mythriya 39.jpg" alt="Portrait Photography">
+                            <img src="assets/photos/Port-(24).jpg" alt="Portrait Photography">
                             <div class="genre-overlay">
                                 <h3>Portrait</h3>
                                 <p>Professional studio and environmental portraits</p>
@@ -1222,7 +1231,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="assets/PICTURES/Liquid Metal Poster 2.jpg" alt="Product Photography">
+                            <img src="assets/photos/Product-(16).jpg" alt="Product Photography">
                             <div class="genre-overlay">
                                 <h3>Product</h3>
                                 <p>Commercial product photography for brands</p>
@@ -1232,7 +1241,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="assets/PICTURES/Transteel Poster 4.jpg" alt="Corporate Photography">
+                            <img src="assets/photos/CM-(17).jpg" alt="Corporate Photography">
                             <div class="genre-overlay">
                                 <h3>Corporate</h3>
                                 <p>Corporate events and team photography</p>
@@ -1242,7 +1251,7 @@
                     </div>
                     <div class="genre-card">
                         <div class="genre-image">
-                            <img src="assets/PICTURES/For The Untamed Poster.jpg" alt="Architecture Photography">
+                            <img src="assets/photos/Architecture-(10).jpg" alt="Architecture Photography">
                             <div class="genre-overlay">
                                 <h3>Architecture</h3>
                                 <p>Interior and exterior architectural photography</p>

@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Grey 18 Studio</title>
-    <!-- Common CSS -->
-    <link rel="stylesheet" href="styles-updated.css">
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-uH1HfSCM5tB9Zjg5eQof8I4eAbOeXtfLOcOfeUeawuO/HEdBDEuO/HEdBDEuDfSU/EYEYVplpXCMVvjJAnCmvYz3d0+M8w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/home-revamp.css">
+    <link rel="stylesheet" href="css/grey18-styling.css">
+    <link rel="stylesheet" href="css/custom-cursor.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="about.css">
-    <!-- Grey18 Styling -->
-    <link rel="stylesheet" href="css/grey18-styling.css">
-    <!-- Custom cursor CSS -->
-    <link rel="stylesheet" href="css/custom-cursor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -24,29 +27,20 @@
     <!-- Grey18 Text Processor -->
     <script src="scripts/grey18-text-processor.js"></script>
     <style>
-        /* Theme-specific styles */
-        :root {
-            --primary-dark: #333333;
-            --secondary-dark: #4d4d4d;
-            --accent-teal: #4ecdc4;
-            --white: #ffffff;
-            --light-grey: #f5f5f5;
-            --dark-grey: #444444;
-            --black: #000000;
-            --transition: all 0.3s ease;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            /* Add consistent accent colors from index.html */
-            --accent-primary: #b91421;
-            --accent-secondary: #091458;
-            --accent-gradient: linear-gradient(135deg, #b91421, #091458);
-            --grey-gradient-1: linear-gradient(135deg, #333333, #222222);
-            --grey-gradient-2: linear-gradient(135deg, #222222, #111111);
-            --card-border-radius: 10px;
+        /* Override body background to match home page */
+        body {
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
+            font-family: 'Cormorant Garamond', serif;
         }
-    
+        
         /* Ensure text is visible */
         p, h1, h2, h3, h4, h5, h6 {
-            color: var(--white);
+            color: var(--text-main);
         }
         
         /* Team section styles */
@@ -270,15 +264,16 @@
         
         /* About hero section styling to match index.html */
         .about-hero {
-            background: var(--grey-gradient-1) !important;
+            background: transparent !important;
             padding-top: 180px !important;
-            height: 60vh;
+            min-height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding: clamp(5rem, 10vw, 9rem) 0;
         }
 
         /* Hero background shapes */
@@ -413,22 +408,26 @@
             white-space: nowrap;
         }
         
-        /* Consistent section styling */
+        /* Consistent section styling to match home page */
         section {
-            padding: 100px 0;
+            padding: clamp(5rem, 10vw, 9rem) 0;
             position: relative;
             overflow: hidden;
         }
         
-        section::after {
+        section + section::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 2px;
-            background: linear-gradient(to right, transparent, var(--accent-primary), var(--accent-secondary), transparent);
-            opacity: 0.3;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--accent-primary) 25%,
+                var(--accent-secondary) 75%,
+                transparent 100%);
+            opacity: 0.6;
         }
         
         /* Ensure buttons have consistent styling */
@@ -1222,7 +1221,7 @@
             <div class="team-grid">
                 <div class="team-member animate-on-scroll fade-up" data-member="giridhar">
                     <div class="member-image">
-                        <img src="images/giridhar-divan.jpg" alt="Founder & Creative Director - Giridhar Divan">
+                        <img src="assets/photos/People-(28).jpg" alt="Founder & Creative Director - Giridhar Divan">
                     </div>
                     <div class="member-info">
                         <h3>Giridhar Divan</h3>
@@ -1244,7 +1243,7 @@
                 
                 <div class="team-member animate-on-scroll fade-up" data-delay="200">
                     <div class="member-image">
-                        <img src="images/ronit-rao.jpg" alt="Creative Strategist & Marketing Head - Ronit Rao">
+                        <img src="assets/photos/Port-(3).jpg" alt="Creative Strategist & Marketing Head - Ronit Rao">
                     </div>
                     <div class="member-info">
                         <h3>Ronit Rao</h3>
@@ -1828,7 +1827,7 @@
             <span class="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-header">
-                    <img src="images/giridhar-divan.jpg" alt="Giridhar Divan" class="modal-image">
+                    <img src="assets/photos/People-(28).jpg" alt="Giridhar Divan" class="modal-image">
                     <div class="modal-title">
                         <h2>Giridhar Divan</h2>
                         <p class="modal-subtitle">Founder & Creative Director</p>
@@ -1888,7 +1887,7 @@
             <span class="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-header">
-                    <img src="images/ronit-rao.jpg" alt="Ronit Rao" class="modal-image">
+                    <img src="assets/photos/Port-(3).jpg" alt="Ronit Rao" class="modal-image">
                     <div class="modal-title">
                         <h2>Ronit Rao</h2>
                         <p class="modal-subtitle">Creative Strategist & Marketing Head</p>
