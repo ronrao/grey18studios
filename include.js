@@ -38,9 +38,55 @@ async function includeHTML(elementId, filePath) {
                 initializeHeader();
             }
         } else if (filePath.includes('footer.html')) {
-            const footerContent = tempContainer.querySelector('footer');
+            // Parse the full HTML document
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            const footerContent = doc.querySelector('footer');
+            const footerStyles = doc.querySelector('style');
+            const footerScripts = doc.querySelectorAll('script');
+            const footerLinks = doc.querySelectorAll('link[rel="stylesheet"]');
+            
             if (footerContent) {
                 document.getElementById(elementId).innerHTML = footerContent.outerHTML;
+                
+                // Add the footer styles if they exist
+                if (footerStyles) {
+                    const styleElement = document.createElement('style');
+                    styleElement.textContent = footerStyles.textContent;
+                    document.head.appendChild(styleElement);
+                }
+                
+                // Add external stylesheet links if they exist
+                footerLinks.forEach(link => {
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = link.rel;
+                    linkElement.href = link.href;
+                    if (link.integrity) linkElement.integrity = link.integrity;
+                    if (link.crossOrigin) linkElement.crossOrigin = link.crossOrigin;
+                    if (!document.querySelector(`link[href="${link.href}"]`)) {
+                        document.head.appendChild(linkElement);
+                    }
+                });
+                
+                // Add the footer scripts if they exist
+                footerScripts.forEach(script => {
+                    if (script.src) {
+                        // External script
+                        if (!document.querySelector(`script[src="${script.src}"]`)) {
+                            const scriptElement = document.createElement('script');
+                            scriptElement.src = script.src;
+                            if (script.integrity) scriptElement.integrity = script.integrity;
+                            if (script.crossOrigin) scriptElement.crossOrigin = script.crossOrigin;
+                            document.head.appendChild(scriptElement);
+                        }
+                    } else if (script.textContent.trim()) {
+                        // Inline script
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = script.textContent;
+                        document.body.appendChild(scriptElement);
+                    }
+                });
                 
                 // After footer is loaded, check if we need to scroll to footer-contact
                 setTimeout(() => {
@@ -63,7 +109,7 @@ async function includeHTML(elementId, filePath) {
                             }
                         });
                     });
-                }, 100);
+                }, 200);
             }
         }
     } catch (error) {
@@ -90,7 +136,7 @@ function createBackupHeader(elementId) {
                 <li><a href="about.html" id="nav-about">About</a></li>
                 <li><a href="equipment.html" id="nav-equipment">Equipment</a></li>
                 <li><a href="pricing.html" id="nav-pricing">Pricing</a></li>
-                <li><a href="contact.html" id="nav-contact">Contact</a></li>
+                <li><a href="index.html#collaborate" id="nav-contact">Contact</a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -124,9 +170,6 @@ function initializeHeader() {
             break;
         case 'pricing.html':
             currentNavItem = document.getElementById('nav-pricing');
-            break;
-        case 'contact.html':
-            currentNavItem = document.getElementById('nav-contact');
             break;
         default:
             if (currentPage === '' || currentPage === '/') {

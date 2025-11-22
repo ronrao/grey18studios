@@ -28,8 +28,8 @@
     --button-border-radius: 50px;
     
     /* Font families */
-    --heading-font: 'Comfortaa', cursive;
-    --body-font: 'Quicksand', sans-serif;
+    --heading-font: 'Cormorant Garamond', serif;
+    --body-font: 'Cormorant Garamond', serif;
 }
 
 /* Reset styles */
@@ -696,7 +696,7 @@ section:first-of-type {
 /* Hero section enhancements */
 .hero {
     position: relative;
-    height: 90vh;
+    height: fit-content;
     min-height: 600px;
     display: flex;
     align-items: center;
