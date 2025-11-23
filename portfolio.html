@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <link rel="stylesheet" href="css/custom-cursor.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="portfolio.css">
     <!-- Animation Libraries -->
@@ -43,147 +42,13 @@
             --text-color: #f5f5f5;
         }
         
-        /* Enhanced Portfolio Hero Section - Fixed alignment */
-        .portfolio-hero {
-            position: relative;
-            min-height: 100vh;
-            background: transparent;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 180px 0 clamp(5rem, 10vw, 9rem) 0;
-            margin: 0;
-        }
-        
-        body {
-            background:
-                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
-                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
-                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
-                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
-            background-attachment: fixed;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .portfolio-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(185, 20, 33, 0.15) 0%, transparent 35%),
-                radial-gradient(circle at 80% 70%, rgba(9, 20, 88, 0.15) 0%, transparent 35%);
-            animation: pulsate 15s infinite alternate;
-            pointer-events: none;
-        }
-        
-        .portfolio-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--accent-gradient);
-            opacity: 0.9;
-            z-index: 3;
-        }
-        
-        @keyframes pulsate {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-        
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 50%;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-        
-        .portfolio-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1000px;
-            text-align: center;
-            padding: 0 20px;
-            animation: fadeIn 1s ease-out;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .portfolio-hero-content h1 {
-            font-size: 5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            color: var(--white);
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #fff, #ccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            display: inline-block;
-            line-height: 1.1;
-        }
-        
-        .portfolio-hero-content h1 .highlight {
-            color: var(--accent-primary);
-            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .portfolio-hero-content h1::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--accent-gradient);
-            border-radius: 2px;
-        }
-        
-        .portfolio-hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            color: var(--light-grey);
-            line-height: 1.5;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-        
+        /* Portfolio Hero Stats - Enhanced styling to match home page */
         .portfolio-hero-stats {
             display: flex;
             justify-content: center;
-            margin: 4rem 0;
+            margin: clamp(2rem, 4vw, 3rem) 0;
             flex-wrap: wrap;
-            gap: 70px; /* Increase gap for better spacing */
+            gap: clamp(2rem, 5vw, 4rem);
             width: 100%;
             max-width: 900px;
             margin-left: auto;
@@ -200,29 +65,33 @@
             content: '';
             position: absolute;
             top: 50%;
-            right: -35px; /* Move divider further */
+            right: calc(-2rem - 1vw);
             transform: translateY(-50%);
             width: 1px;
-            height: 70px; /* Taller divider */
-            background: rgba(255,255,255,0.15); /* More subtle divider */
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
         }
         
         .stat-number {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 700;
-            color: var(--white);
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--white), var(--light-grey));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
         
         .stat-text {
-            font-size: 1.1rem;
-            color: var(--light-grey);
+            font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 400;
+            letter-spacing: 0.15em;
+            font-weight: 500;
         }
         
         .hero-buttons {
@@ -728,11 +597,6 @@
 </head>
 <body>
     <!-- Custom cursor with camera icon -->
-    <div class="custom-cursor">
-        <div class="lens"></div>
-        <div class="shutter"></div>
-        <i class="fas fa-camera"></i>
-    </div>
     
     <!-- Camera flash effect -->
     <div class="camera-flash"></div>
@@ -740,45 +604,77 @@
     <!-- Header Container -->
     <div id="header-container"></div>
 
-    <section class="portfolio-hero">
-        <div class="particles-container" id="particles-container"></div>
-        <div class="portfolio-hero-content">
-            <h1><span class="highlight">Creative</span> Portfolio</h1>
-            <p>Explore our diverse collection of professional work across multiple creative disciplines, showcasing technical excellence and artistic vision</p>
-            
-            <div class="portfolio-hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="projects-counter">4000+</div>
-                    <div class="stat-text">Projects Completed</div>
+    <section class="hero portfolio-hero" id="portfolio-hero" aria-labelledby="portfolio-hero-title">
+        <!-- Creative Animated Background -->
+        <div class="portfolio-hero__background">
+            <div class="portfolio-hero__gradient"></div>
+            <div class="portfolio-hero__particles">
+                <div class="particle particle--1"></div>
+                <div class="particle particle--2"></div>
+                <div class="particle particle--3"></div>
+                <div class="particle particle--4"></div>
+                <div class="particle particle--5"></div>
+                <div class="particle particle--6"></div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="clients-counter">800+</div>
-                    <div class="stat-text">Audio Projects</div>
+            <div class="portfolio-hero__grid"></div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="years-counter">28+</div>
-                    <div class="stat-text">Years of Experience</div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <div class="container hero__layout">
+            <div class="hero__content" data-animate>
+                <p class="hero__eyebrow">Creative Portfolio</p>
+                <h1 class="hero__headline" id="portfolio-hero-title">
+                    Showcasing Excellence in Every Frame
+                </h1>
+                <p class="hero__summary">
+                    Explore our diverse collection of professional work across multiple creative disciplines, showcasing technical excellence and artistic vision.
+                </p>
+                
+                <div class="hero__actions">
+                    <a class="btn btn--primary" href="#portfolio-categories">
+                        <span>Explore Gallery</span>
+                        <i class="fas fa-images" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn--ghost" href="index.html#collaborate">
+                        <span>Get in Touch</span>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
                 </div>
             </div>
             
-            <div class="hero-buttons">
-                <a href="#photography" class="btn primary">Explore Gallery</a>
-                <a href="index.html#collaborate" class="btn secondary">Contact Us</a>
-            </div>
+        <div class="hero__scroll" data-animate>
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </div>
     </section>
 
-    <section class="portfolio-categories">
+    <section class="portfolio-categories" id="portfolio-categories">
         <div class="container">
-            <div class="portfolio-nav">
-                <p class="category-title"><span class="highlight">Browse</span> by Category</p>
-                <div class="portfolio-nav-items">
-                    <a href="#video-production" class="portfolio-nav-item active" data-category="video-production">Video Production</a>
-                    <a href="#photography" class="portfolio-nav-item" data-category="photography">Photography</a>
-                    <a href="#editing-grading" class="portfolio-nav-item" data-category="editing-grading">Editing and Colour Grading</a>
-                    <a href="#sound-recording" class="portfolio-nav-item" data-category="sound-recording">Sound Recording</a>
-                    <a href="#dubbing" class="portfolio-nav-item" data-category="dubbing">Dubbing</a>
-                    <a href="#mixing" class="portfolio-nav-item" data-category="mixing">Audio Mixing & Mastering</a>
+            <!-- Creative Filter Section - Rebuilt from Scratch -->
+            <div class="portfolio-filters">
+                <div class="portfolio-filters__inner">
+                    <p class="portfolio-filters__title">Browse by Category</p>
+                    <ul class="portfolio-filters__list">
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button active" data-category="video-production">Video Production</button>
+                        </li>
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button" data-category="photography">Photography</button>
+                        </li>
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button" data-category="editing-grading">Editing & Grading</button>
+                        </li>
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button" data-category="sound-recording">Sound Recording</button>
+                        </li>
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button" data-category="dubbing">Dubbing</button>
+                        </li>
+                        <li class="portfolio-filters__item">
+                            <button class="portfolio-filters__button" data-category="mixing">Audio Mixing</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -788,426 +684,260 @@
                     <p>Professional video production for commercials, films, corporate videos, and events</p>
                 </div>
 
-                <div class="genre-grid video-column-layout">
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Kalyani Developers TVC</h3>
-                                <div class="genre-description">
-                                    <p>Elegant, story-driven commercial for Kalyani Developers, highlighting lifestyle and aspiration for their new residential project.</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Emotional storytelling and cinematic visuals</li>
-                                    <li>Targeted for TV and digital campaigns</li>
-                                    <li>Professional cast and high-end production</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                <div class="portfolio-grid">
+                    <div class="portfolio-card animate-in" data-video-id="1023847619" data-title="Kalyani Developers TVC" data-description="Elegant, story-driven commercial for Kalyani Developers, highlighting lifestyle and aspiration for their new residential project." data-highlights='["Emotional storytelling and cinematic visuals","Targeted for TV and digital campaigns","Professional cast and high-end production"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/1023847619" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Kalyani Developers TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Sudarshan Silks Deepavali TVC</h3>
-                                <div class="genre-description">
-                                    <p>Celebrate the Radiance of Deepavali with Sudarshan Silks. This festive season, adorn yourself in timeless elegance. Discover the perfect saree for every cherished moment — where tradition meets sophistication, and every thread tells a story of joy, beauty, and celebration.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Elegant showcase of luxurious sarees with intricate detailing</li>
-                                    <li>Rich, vibrant color palettes inspired by tradition and celebration</li>
-                                    <li>Emotive storytelling highlighting family, joy, and cultural pride</li>
-                                    <li>Designed to evoke nostalgia, elegance, and festive glamour</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="1023846133" data-title="Sudarshan Silks Deepavali TVC" data-description="Celebrate the Radiance of Deepavali with Sudarshan Silks. This festive season, adorn yourself in timeless elegance. Discover the perfect saree for every cherished moment — where tradition meets sophistication, and every thread tells a story of joy, beauty, and celebration." data-highlights='["Elegant showcase of luxurious sarees with intricate detailing","Rich, vibrant color palettes inspired by tradition and celebration","Emotive storytelling highlighting family, joy, and cultural pride","Designed to evoke nostalgia, elegance, and festive glamour"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/1023846133" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Sudarshan Silks Deepavali TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Sudarshan Jewellers TVC</h3>
-                                <div class="genre-description">
-                                    <p>Timeless Elegance, Exceptional Value — Only at Sudarshan Jewellers. Discover a world of brilliance with our wide collection of gold, silver, and traditional jewellery. From everyday elegance to statement pieces, experience luxury that's beautifully crafted and priced just right.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Bright, colourful visuals with a modern, elegant aesthetic</li>
-                                    <li>Showcases a wide variety of jewellery styles and collections</li>
-                                    <li>Dynamic editing and vibrant color grading for visual appeal</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="990163225" data-title="Sudarshan Jewellers TVC" data-description="Timeless Elegance, Exceptional Value — Only at Sudarshan Jewellers. Discover a world of brilliance with our wide collection of gold, silver, and traditional jewellery. From everyday elegance to statement pieces, experience luxury that's beautifully crafted and priced just right." data-highlights='["Bright, colourful visuals with a modern, elegant aesthetic","Showcases a wide variety of jewellery styles and collections","Dynamic editing and vibrant color grading for visual appeal"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/990163225" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Sudarshan Jewellers TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Sudarshan Silks Brand Film</h3>
-                                <div class="genre-description">
-                                    <p>Bringing the story of Sudarshan Silks to life. This film captures the essence of tradition, craftsmanship, and customer devotion. Through elegant visuals and authentic storytelling, we showcase a brand rooted in quality and grace — where every saree is a celebration of timeless Indian artistry.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Warm, elegant visual palette emphasizing tradition and comfort</li>
-                                    <li>Smooth transitions and graceful pacing to reflect the flow of silk</li>
-                                    <li>Natural lighting and soft color grading to create an inviting mood</li>
-                                    <li>Subtle sound design and music score enhancing emotional warmth</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="760593147" data-title="Sudarshan Silks Brand Film" data-description="Bringing the story of Sudarshan Silks to life. This film captures the essence of tradition, craftsmanship, and customer devotion. Through elegant visuals and authentic storytelling, we showcase a brand rooted in quality and grace — where every saree is a celebration of timeless Indian artistry." data-highlights='["Warm, elegant visual palette emphasizing tradition and comfort","Smooth transitions and graceful pacing to reflect the flow of silk","Natural lighting and soft color grading to create an inviting mood","Subtle sound design and music score enhancing emotional warmth"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/760593147" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Sudarshan Silks Brand Film</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Authentic Spices TVC</h3>
-                                <div class="genre-description">
-                                    <p>Authentic spices that elevate everyday cooking. Through rich visuals, earthy tones, and a focus on quality ingredients, the ad builds a strong identity around trust, tradition, and flavour-first storytelling. It's a tribute to the hands that cook and the spices that make every dish memorable.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Warm, earthy visual palette reflecting authenticity and rootedness</li>
-                                    <li>Smooth, intentional pacing to reflect care and craftsmanship</li>
-                                    <li>Emphasis on brand ethos: trust, quality, and everyday value</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="791596397" data-title="Authentic Spices TVC" data-description="Authentic spices that elevate everyday cooking. Through rich visuals, earthy tones, and a focus on quality ingredients, the ad builds a strong identity around trust, tradition, and flavour-first storytelling. It's a tribute to the hands that cook and the spices that make every dish memorable." data-highlights='["Warm, earthy visual palette reflecting authenticity and rootedness","Smooth, intentional pacing to reflect care and craftsmanship","Emphasis on brand ethos: trust, quality, and everyday value"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/791596397" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Authentic Spices TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Gifting Brand Film</h3>
-                                <div class="genre-description">
-                                    <p>A heartfelt brand film that captures the joy of giving and the magic of meaningful surprises. With an uplifting visual style and emotional storytelling, the film showcases how the brand helped turn ordinary days into special memories — one thoughtful gift at a time.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Bright, feel-good visuals centered around joy, celebration, and connection</li>
-                                    <li>Warm, inviting color grading to evoke happiness and sentiment</li>
-                                    <li>Designed to reflect the convenience and reliability of online gifting</li>
-                                    <li>Human-centric storytelling that aligns with the brand's emotional core</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="747141340" data-title="Gifting Brand Film" data-description="A heartfelt brand film that captures the joy of giving and the magic of meaningful surprises. With an uplifting visual style and emotional storytelling, the film showcases how the brand helped turn ordinary days into special memories — one thoughtful gift at a time." data-highlights='["Bright, feel-good visuals centered around joy, celebration, and connection","Warm, inviting color grading to evoke happiness and sentiment","Designed to reflect the convenience and reliability of online gifting","Human-centric storytelling that aligns with the brand's emotional core"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/747141340" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Gifting Brand Film</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Vemica Kitchen TVC</h3>
-                                <div class="genre-description">
-                                    <p>Bringing your kitchen to life with bold, flavorful visuals and high-impact storytelling. The film positions Vemica as the secret behind restaurant-quality dishes at home — highlighting the ease, confidence, and satisfaction that come with every pack. A visual journey through taste, skill, and the joy of cooking meat to perfection.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Bold, punchy editing to match the strong, spicy flavor profile</li>
-                                    <li>Visual tone balancing aspirational cooking with everyday accessibility</li>
-                                    <li>Professional-style kitchen shots to convey "masterchef at home" appeal</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="746041347" data-title="Vemica Kitchen TVC" data-description="Bringing your kitchen to life with bold, flavorful visuals and high-impact storytelling. The film positions Vemica as the secret behind restaurant-quality dishes at home — highlighting the ease, confidence, and satisfaction that come with every pack. A visual journey through taste, skill, and the joy of cooking meat to perfection." data-highlights='["Bold, punchy editing to match the strong, spicy flavor profile","Visual tone balancing aspirational cooking with everyday accessibility","Professional-style kitchen shots to convey \"masterchef at home\" appeal"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/746041347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Vemica Kitchen TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Young Performers Show Promo</h3>
-                                <div class="genre-description">
-                                    <p>A vibrant, high-energy promo to spotlight the joy, talent, and spirit of young performers. With colorful visuals, dynamic choreography, and upbeat music, the film sets the tone for a show that celebrates expression, passion, and the limitless energy of childhood.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Bright, playful visuals that reflect a joyful and youthful energy</li>
-                                    <li>Emotionally uplifting moments capturing kids' smiles, reactions, and stage presence</li>
-                                    <li>Designed to generate buzz and create a sense of anticipation around the show launch</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="743022127" data-title="Young Performers Show Promo" data-description="A vibrant, high-energy promo to spotlight the joy, talent, and spirit of young performers. With colorful visuals, dynamic choreography, and upbeat music, the film sets the tone for a show that celebrates expression, passion, and the limitless energy of childhood." data-highlights='["Bright, playful visuals that reflect a joyful and youthful energy","Emotionally uplifting moments capturing kids&apos; smiles, reactions, and stage presence","Designed to generate buzz and create a sense of anticipation around the show launch"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/743022127" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Young Performers Show Promo</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Vemica Traditional Kitchen TVC</h3>
-                                <div class="genre-description">
-                                    <p>A nostalgic, heartwarming film that brings the timeless taste of a grandmother's kitchen into today's homes. Through rich, earthy visuals and emotionally rooted storytelling, the ad evokes tradition, love, and the essence of homemade flavour — now captured in every Vemica jar.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Emotive storytelling capturing the warmth of generational cooking</li>
-                                    <li>Subtle lighting and color grading to reflect heritage and authenticity</li>
-                                    <li>Brand positioned as a bridge between tradition and convenience</li>
-                                    <li>Designed to evoke memory, comfort, and culinary trust</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="746041371" data-title="Vemica Traditional Kitchen TVC" data-description="A nostalgic, heartwarming film that brings the timeless taste of a grandmother's kitchen into today's homes. Through rich, earthy visuals and emotionally rooted storytelling, the ad evokes tradition, love, and the essence of homemade flavour — now captured in every Vemica jar." data-highlights='["Emotive storytelling capturing the warmth of generational cooking","Subtle lighting and color grading to reflect heritage and authenticity","Brand positioned as a bridge between tradition and convenience","Designed to evoke memory, comfort, and culinary trust"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/746041371" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Vemica Traditional Kitchen TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Coorg Coffee TVC</h3>
-                                <div class="genre-description">
-                                    <p>Capture the serenity of mornings and the richness of coffee straight from Coorg's lush plantations. With atmospheric visuals and a calm, grounded rhythm, the film is designed to awaken the senses and connect viewers with the origins of their perfect cup.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Slow, cinematic pacing to evoke calmness and morning tranquility</li>
-                                    <li>Warm, rich color grading to highlight the depth and aroma of coffee</li>
-                                    <li>Emphasis on freshness and direct-from-source authenticity</li>
-                                    <li>Designed to connect premium quality with peaceful everyday moments</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="746041308" data-title="Coorg Coffee TVC" data-description="Capture the serenity of mornings and the richness of coffee straight from Coorg's lush plantations. With atmospheric visuals and a calm, grounded rhythm, the film is designed to awaken the senses and connect viewers with the origins of their perfect cup." data-highlights='["Slow, cinematic pacing to evoke calmness and morning tranquility","Warm, rich color grading to highlight the depth and aroma of coffee","Emphasis on freshness and direct-from-source authenticity","Designed to connect premium quality with peaceful everyday moments"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/746041308" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Coorg Coffee TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Bridal Jewellery TVC</h3>
-                                <div class="genre-description">
-                                    <p>A visual ode to tradition, grace, and celebration. Centered around a woman adorned in intricate bridal jewellery, the film captures the emotional essence of gifting, festivity, and the timeless beauty of Indian wedding traditions. Every frame is designed to reflect joy, elegance, and heritage.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Rich, detailed close-ups of traditional jewellery: necklaces, earrings, bangles, and maang tikka</li>
-                                    <li>Warm, golden color grading to complement wedding attire and create a regal atmosphere</li>
-                                    <li>Emotion-driven storytelling around preparation, gifting, and special moments</li>
-                                    <li>Traditional background score underscoring cultural richness and joy</li>
-                                    <li>Focus on facial expressions and gestures to evoke emotional depth</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="741609456" data-title="Bridal Jewellery TVC" data-description="A visual ode to tradition, grace, and celebration. Centered around a woman adorned in intricate bridal jewellery, the film captures the emotional essence of gifting, festivity, and the timeless beauty of Indian wedding traditions. Every frame is designed to reflect joy, elegance, and heritage." data-highlights='["Rich, detailed close-ups of traditional jewellery: necklaces, earrings, bangles, and maang tikka","Warm, golden color grading to complement wedding attire and create a regal atmosphere","Emotion-driven storytelling around preparation, gifting, and special moments","Traditional background score underscoring cultural richness and joy","Focus on facial expressions and gestures to evoke emotional depth"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/741609456" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Bridal Jewellery TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Niks Masala TVC</h3>
-                                <div class="genre-description">
-                                    <p>A heartfelt, home-centric story that celebrates the emotional bond formed through food. With subtle performances, warm visuals, and a relatable moment of approval, the ad shows how Niks Masala brings generations together — making every meal not just delicious, but meaningful.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Intimate, home-based setting to reflect everyday family life</li>
-                                    <li>Soft, warm lighting to create an emotionally comforting tone</li>
-                                    <li>Expressive performances capturing anticipation, worry, and joy</li>
-                                    <li>Focus on the transformation of emotion through taste</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="746042574" data-title="Niks Masala TVC" data-description="A heartfelt, home-centric story that celebrates the emotional bond formed through food. With subtle performances, warm visuals, and a relatable moment of approval, the ad shows how Niks Masala brings generations together — making every meal not just delicious, but meaningful." data-highlights='["Intimate, home-based setting to reflect everyday family life","Soft, warm lighting to create an emotionally comforting tone","Expressive performances capturing anticipation, worry, and joy","Focus on the transformation of emotion through taste"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/746042574" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Niks Masala TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Crispy Day Brand Film</h3>
-                                <div class="genre-description">
-                                    <p>A bold and flavour-forward brand film to introduce the company's vision and product line to the world. Through vibrant visuals, dynamic editing, and a strong emphasis on freshness and authenticity, the video positions Crispy Day as a new but trustworthy name in Indian kitchens — ready to spice up every meal.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Bright, colorful visuals that establish a fresh and modern brand identity</li>
-                                    <li>Energetic background score to build excitement around the launch</li>
-                                    <li>Visual language that balances tradition with a contemporary edge</li>
-                                    <li>Designed to establish credibility, spark curiosity, and drive first-time trials</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="746044675" data-title="Crispy Day Brand Film" data-description="A bold and flavour-forward brand film to introduce the company's vision and product line to the world. Through vibrant visuals, dynamic editing, and a strong emphasis on freshness and authenticity, the video positions Crispy Day as a new but trustworthy name in Indian kitchens — ready to spice up every meal." data-highlights='["Bright, colorful visuals that establish a fresh and modern brand identity","Energetic background score to build excitement around the launch","Visual language that balances tradition with a contemporary edge","Designed to establish credibility, spark curiosity, and drive first-time trials"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/746044675" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Crispy Day Brand Film</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Premium Tonic TVC</h3>
-                                <div class="genre-description">
-                                    <p>A visually refined product film that captures the essence of sophistication in every pour. Through crisp cinematography and detailed sound design, the film brings to life the effervescence, clarity, and premium character of a tonic crafted with "London's finest flavours." Designed to elevate — both the drink and the experience.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Ultra close-up shots of tonic being poured, with a focus on fizz and clarity</li>
-                                    <li>Controlled, minimalist lighting to enhance transparency and sparkle</li>
-                                    <li>Slow-motion and high-frame-rate shots to emphasize texture and motion</li>
-                                    <li>Designed to evoke refinement, mixology culture, and modern indulgence</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="747140996" data-title="Premium Tonic TVC" data-description="A visually refined product film that captures the essence of sophistication in every pour. Through crisp cinematography and detailed sound design, the film brings to life the effervescence, clarity, and premium character of a tonic crafted with \"London's finest flavours.\" Designed to elevate — both the drink and the experience." data-highlights='["Ultra close-up shots of tonic being poured, with a focus on fizz and clarity","Controlled, minimalist lighting to enhance transparency and sparkle","Slow-motion and high-frame-rate shots to emphasize texture and motion","Designed to evoke refinement, mixology culture, and modern indulgence"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/747140996" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Premium Tonic TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Saptham Kitchen TVC</h3>
-                                <div class="genre-description">
-                                    <p>A warm, slice-of-life story that highlights trust through everyday conversations. Set in a casual kitchen environment, the ad captures a relatable moment between neighbors, emphasizing how Saptham has become the go-to choice for conscious, modern households. The tone is friendly, authentic, and reassuring — just like the brand itself.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Natural kitchen setting with a couple casually cooking together</li>
-                                    <li>Curious neighbor character used as a relatable narrative device</li>
-                                    <li>Smooth transition from lifestyle to product spotlight</li>
-                                    <li>Emphasis on brand loyalty and usage across all cooking needs</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="1095901717" data-title="Saptham Kitchen TVC" data-description="A warm, slice-of-life story that highlights trust through everyday conversations. Set in a casual kitchen environment, the ad captures a relatable moment between neighbors, emphasizing how Saptham has become the go-to choice for conscious, modern households. The tone is friendly, authentic, and reassuring — just like the brand itself." data-highlights='["Natural kitchen setting with a couple casually cooking together","Curious neighbor character used as a relatable narrative device","Smooth transition from lifestyle to product spotlight","Emphasis on brand loyalty and usage across all cooking needs"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/1095901717" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Saptham Kitchen TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Saptham Grocery Expansion TVC</h3>
-                                <div class="genre-description">
-                                    <p>Introduces Saptham's expanded grocery line with a light-hearted and engaging interaction. We used subtle humor and natural performances to show how consumers are pleasantly surprised to discover that Saptham offers more than just oil. The focus was on portraying abundance, trust, and the convenience of shopping everything under one brand — all with a clean, everyday aesthetic.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Shelving and stacking groceries to visually suggest abundance and variety</li>
-                                    <li>Dialogue-driven reveal of Saptham's expansion beyond oil</li>
-                                    <li>Playful interaction with neighbor to create a memorable hook</li>
-                                    <li>Subtle branding through visible packaging integration</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
+                    <div class="portfolio-card animate-in" data-video-id="1095906827" data-title="Saptham Grocery Expansion TVC" data-description="Introduces Saptham's expanded grocery line with a light-hearted and engaging interaction. We used subtle humor and natural performances to show how consumers are pleasantly surprised to discover that Saptham offers more than just oil. The focus was on portraying abundance, trust, and the convenience of shopping everything under one brand — all with a clean, everyday aesthetic." data-highlights='["Shelving and stacking groceries to visually suggest abundance and variety","Dialogue-driven reveal of Saptham's expansion beyond oil","Playful interaction with neighbor to create a memorable hook","Subtle branding through visible packaging integration"]'>
+                        <div class="portfolio-card__thumbnail">
                                 <iframe src="https://player.vimeo.com/video/1095906827" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Saptham Grocery Expansion TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                     </div>
-                    <div class="genre-card animate-in" tabindex="0">
-                        <div class="genre-content">
-                            <div class="genre-header">
-                                <h3>Saptham Lamp Lighting TVC</h3>
-                                <div class="genre-description">
-                                    <p>A calm, reverent visual tone to reflect the cultural and emotional significance of lighting a lamp. Through close-up details and graceful pacing, the ad captures the quiet beauty of tradition, positioning Saptham as a brand that supports both daily rituals and deeper spiritual connections.</p>
                                 </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="genre-details">
-                                <h4>Highlights</h4>
-                                <ul>
-                                    <li>Serene, culturally rooted visuals of traditional lamp-lighting</li>
-                                    <li>Close-ups of oil pouring and the lamp flame for emotional resonance</li>
-                                    <li>Minimalistic, reverent tone to match the ritual of lighting a lamp</li>
-                                    <li>Hero product reveal with a calm, confident brand introduction</li>
-                                </ul>
+                    <div class="portfolio-card animate-in" data-video-id="1095907345" data-title="Saptham Lamp Lighting TVC" data-description="A calm, reverent visual tone to reflect the cultural and emotional significance of lighting a lamp. Through close-up details and graceful pacing, the ad captures the quiet beauty of tradition, positioning Saptham as a brand that supports both daily rituals and deeper spiritual connections." data-highlights='["Serene, culturally rooted visuals of traditional lamp-lighting","Close-ups of oil pouring and the lamp flame for emotional resonance","Minimalistic, reverent tone to match the ritual of lighting a lamp","Hero product reveal with a calm, confident brand introduction"]'>
+                        <div class="portfolio-card__thumbnail">
+                                <iframe src="https://player.vimeo.com/video/1095907345" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                            <div class="portfolio-card__play-overlay">
+                                <i class="fas fa-play-circle"></i>
                             </div>
                         </div>
-                        <div class="genre-video">
-                            <div class="video-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1095907345" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            </div>
+                        <div class="portfolio-card__content">
+                            <h3 class="portfolio-card__title">Saptham Lamp Lighting TVC</h3>
+                            <a href="#" class="portfolio-card__view-more">
+                                View More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1566,6 +1296,21 @@
             // Initialize particles in the hero section
             createParticles();
             
+        // Immediately show portfolio hero content (override data-animate opacity)
+        const portfolioHeroContent = document.querySelector('.portfolio-hero .hero__content');
+        const portfolioHeroScroll = document.querySelector('.portfolio-hero .hero__scroll');
+        if (portfolioHeroContent) {
+            portfolioHeroContent.classList.add('is-visible');
+            portfolioHeroContent.style.opacity = '1';
+            portfolioHeroContent.style.transform = 'translateY(0)';
+            portfolioHeroContent.style.visibility = 'visible';
+        }
+        if (portfolioHeroScroll) {
+            portfolioHeroScroll.classList.add('is-visible');
+            portfolioHeroScroll.style.opacity = '1';
+            portfolioHeroScroll.style.transform = 'translateY(0)';
+        }
+            
             // Initialize counters in the hero section
             initCounters();
             
@@ -1579,8 +1324,11 @@
             const portfolioCategories = document.querySelectorAll('.portfolio-category');
             
             // Make sure portfolio categories are properly set up
+            // Show first category by default if none is active
+            let hasActive = false;
             portfolioCategories.forEach(category => {
                 if (category.classList.contains('active')) {
+                    hasActive = true;
                     category.style.display = 'block';
                     category.style.visibility = 'visible';
                     category.style.opacity = '1';
@@ -1592,6 +1340,20 @@
                     category.style.transform = 'none';
                 }
             });
+            
+            // If no category is active, activate the first one
+            if (!hasActive && portfolioCategories.length > 0) {
+                const firstCategory = portfolioCategories[0];
+                const firstNavItem = navItems[0];
+                
+                if (firstCategory && firstNavItem) {
+                    firstCategory.classList.add('active');
+                    firstCategory.style.display = 'block';
+                    firstCategory.style.visibility = 'visible';
+                    firstCategory.style.opacity = '1';
+                    firstNavItem.classList.add('active');
+                }
+            }
             
             // Animate the nav items with staggered delay
             navItems.forEach((item, index) => {
@@ -1613,48 +1375,82 @@
                     // Add active class to clicked nav item
                     this.classList.add('active');
                     
-                    // Get category ID
-                    const categoryId = this.getAttribute('data-category');
+                    // Get category ID from data-category or href
+                    let categoryId = this.getAttribute('data-category');
+                    if (!categoryId) {
+                        const href = this.getAttribute('href');
+                        if (href) {
+                            categoryId = href.substring(1); // Remove #
+                        }
+                    }
                     
-                    // Hide all categories
+                    console.log('Filter clicked, categoryId:', categoryId);
+                    
+                    // Hide all categories with fade out
                     portfolioCategories.forEach(category => {
+                        category.style.transition = 'opacity 0.3s ease, visibility 0.3s';
                         category.classList.remove('active');
-                        category.style.display = 'none';
-                        category.style.visibility = 'hidden';
                         category.style.opacity = '0';
-                        category.style.transform = 'none';
+                        category.style.visibility = 'hidden';
+                        
+                        setTimeout(() => {
+                            category.style.display = 'none';
+                        }, 300);
                     });
                     
-                    // Show selected category
+                    // Show selected category with fade in
+                    setTimeout(() => {
                     const selectedCategory = document.getElementById(categoryId);
-                    selectedCategory.classList.add('active');
+                        if (selectedCategory) {
                     selectedCategory.style.display = 'block';
                     selectedCategory.style.visibility = 'visible';
+                            selectedCategory.style.transition = 'opacity 0.5s ease, visibility 0.5s';
+                            
+                            setTimeout(() => {
+                                selectedCategory.classList.add('active');
                     selectedCategory.style.opacity = '1';
-                    selectedCategory.style.transform = 'none';
                     
                     // Animate the category header
                     const categoryHeader = selectedCategory.querySelector('.category-header');
-                    categoryHeader.classList.add('animate-in');
+                                if (categoryHeader) {
+                                    categoryHeader.style.opacity = '0';
+                                    categoryHeader.style.transform = 'translateY(20px)';
+                                    setTimeout(() => {
+                                        categoryHeader.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                        categoryHeader.style.opacity = '1';
+                                        categoryHeader.style.transform = 'translateY(0)';
+                                    }, 100);
+                                }
                     
                     // Animate the genre cards with staggered delay
-                    const genreCards = selectedCategory.querySelectorAll('.genre-card');
+                                const genreCards = selectedCategory.querySelectorAll('.genre-card, .portfolio-gallery-item');
                     genreCards.forEach((card, index) => {
-                        card.classList.remove('animate-in');
+                                    card.style.opacity = '0';
+                                    card.style.transform = 'translateY(30px)';
                         
                         setTimeout(() => {
-                            card.classList.add('animate-in');
+                                        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                                        card.style.opacity = '1';
+                                        card.style.transform = 'translateY(0)';
                         }, 200 + (index * 100));
                     });
+                            }, 50);
                     
                     // Smooth scroll to the category section
-                    const offset = 100; // Offset from the top
-                    const targetPosition = selectedCategory.getBoundingClientRect().top + window.pageYOffset - offset;
+                            setTimeout(() => {
+                                const offset = 150;
+                                const categoryTop = selectedCategory.offsetTop;
+                                const targetPosition = categoryTop - offset;
                     
                     window.scrollTo({
-                        top: targetPosition,
+                                    top: Math.max(0, targetPosition),
                         behavior: 'smooth'
                     });
+                            }, 200);
+                        } else {
+                            console.error('Category not found:', categoryId);
+                        }
+                    }, 300);
                 });
             });
             
@@ -1958,6 +1754,11 @@
             const clientsCounter = document.getElementById('clients-counter');
             const yearsCounter = document.getElementById('years-counter');
             
+            // Skip if counters don't exist (removed from portfolio page)
+            if (!projectsCounter && !clientsCounter && !yearsCounter) {
+                return;
+            }
+            
             // Store original values as data attributes
             if (projectsCounter) {
                 const projectsValue = projectsCounter.textContent.trim().replace(/\D/g, '');
@@ -2015,10 +1816,10 @@
                 gsap.registerPlugin(ScrollTrigger);
                 
                 // Hero section animations
-                const heroTitle = document.querySelector(".portfolio-hero-content h1");
-                const heroDescription = document.querySelector(".portfolio-hero-content p");
+                const heroTitle = document.querySelector(".hero__headline");
+                const heroDescription = document.querySelector(".hero__summary");
                 const heroStats = document.querySelector(".portfolio-hero-stats");
-                const heroButtons = document.querySelector(".hero-buttons");
+                const heroButtons = document.querySelector(".hero__actions");
                 
                 if (heroTitle) {
                     gsap.from(heroTitle, {
@@ -2089,26 +1890,29 @@
             }
         }
 
-        function updateGenreGridLayout() {
-            const videoCategory = document.getElementById('video-production');
-            const allGenreGrids = document.querySelectorAll('.genre-grid');
-            allGenreGrids.forEach(grid => {
-                if (videoCategory && videoCategory.classList.contains('active')) {
-                    grid.classList.add('video-column-layout');
-                } else {
-                    grid.classList.remove('video-column-layout');
-                }
-            });
-        }
-
-        // Call on load and on tab switch
-        updateGenreGridLayout();
-        const navItems = document.querySelectorAll('.portfolio-nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                setTimeout(updateGenreGridLayout, 10);
-            });
-        });
     </script>
+    <!-- Portfolio Modal -->
+    <div class="portfolio-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="portfolio-modal__backdrop" data-close></div>
+        <div class="portfolio-modal__panel">
+            <button class="portfolio-modal__close" type="button" data-close aria-label="Close portfolio details">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="portfolio-modal__content">
+                <div class="portfolio-modal__header">
+                    <h3 data-modal-title></h3>
+                </div>
+                <p class="portfolio-modal__description" data-modal-description></p>
+                <div class="portfolio-modal__divider"></div>
+                <div class="portfolio-modal__highlights">
+                    <h4>Highlights</h4>
+                    <ul data-modal-highlights></ul>
+                </div>
+                <div class="portfolio-modal__video" data-modal-video></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="portfolio.js"></script>
 </body>
 </html>
