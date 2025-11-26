@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="css/grey18-styling.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="portfolio.css">
+    <!-- EmailJS for Contact Form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            try {
+                emailjs.init("1C70BfGW-WtXy38dl");
+                console.log("EmailJS initialized with public key: 1C70BfGW-WtXy38dl");
+            } catch (error) {
+                console.error("Error initializing EmailJS:", error);
+            }
+        })();
+    </script>
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -605,18 +617,15 @@
     <div id="header-container"></div>
 
     <section class="hero portfolio-hero" id="portfolio-hero" aria-labelledby="portfolio-hero-title">
-        <!-- Creative Animated Background -->
+        <!-- Two Rows of Scrolling Photos Background -->
         <div class="portfolio-hero__background">
-            <div class="portfolio-hero__gradient"></div>
-            <div class="portfolio-hero__particles">
-                <div class="particle particle--1"></div>
-                <div class="particle particle--2"></div>
-                <div class="particle particle--3"></div>
-                <div class="particle particle--4"></div>
-                <div class="particle particle--5"></div>
-                <div class="particle particle--6"></div>
+            <div class="portfolio-hero__photo-row portfolio-hero__photo-row--top" id="hero-photo-scroll-top">
+                <!-- Photos will be dynamically inserted here -->
                 </div>
-            <div class="portfolio-hero__grid"></div>
+            <div class="portfolio-hero__photo-row portfolio-hero__photo-row--bottom" id="hero-photo-scroll-bottom">
+                <!-- Photos will be dynamically inserted here -->
+                </div>
+            <div class="portfolio-hero__overlay-gradient"></div>
                 </div>
         <div class="hero__overlay" aria-hidden="true"></div>
 
@@ -639,10 +648,10 @@
                         <span>Get in Touch</span>
                         <i class="fas fa-envelope" aria-hidden="true"></i>
                     </a>
-                </div>
-                </div>
             </div>
-            
+            </div>
+                </div>
+
         <div class="hero__scroll" data-animate>
             <span>Scroll</span>
             <i class="fas fa-chevron-down" aria-hidden="true"></i>
@@ -651,628 +660,56 @@
 
     <section class="portfolio-categories" id="portfolio-categories">
         <div class="container">
-            <!-- Creative Filter Section - Rebuilt from Scratch -->
-            <div class="portfolio-filters">
-                <div class="portfolio-filters__inner">
-                    <p class="portfolio-filters__title">Browse by Category</p>
-                    <ul class="portfolio-filters__list">
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button active" data-category="video-production">Video Production</button>
-                        </li>
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button" data-category="photography">Photography</button>
-                        </li>
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button" data-category="editing-grading">Editing & Grading</button>
-                        </li>
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button" data-category="sound-recording">Sound Recording</button>
-                        </li>
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button" data-category="dubbing">Dubbing</button>
-                        </li>
-                        <li class="portfolio-filters__item">
-                            <button class="portfolio-filters__button" data-category="mixing">Audio Mixing</button>
-                        </li>
-                    </ul>
+            <!-- Portfolio Header with Tabs -->
+            <div class="portfolio-header">
+                <h2>Our Portfolio</h2>
+                <p>A curated collection of our best work across video production and photography</p>
+                
+                <!-- Portfolio Tabs -->
+                <div class="portfolio-tabs" role="tablist">
+                    <button class="portfolio-tab active" data-tab="photos" role="tab" aria-selected="true" aria-controls="photos-grid">
+                        <i class="fas fa-images" aria-hidden="true"></i>
+                        <span>Photos</span>
+                    </button>
+                    <button class="portfolio-tab" data-tab="videos" role="tab" aria-selected="false" aria-controls="videos-grid">
+                        <i class="fas fa-video" aria-hidden="true"></i>
+                        <span>Videos</span>
+                    </button>
                 </div>
             </div>
 
-            <div id="video-production" class="portfolio-category active">
-                <div class="category-header">
-                    <h2>Video Production</h2>
-                    <p>Professional video production for commercials, films, corporate videos, and events</p>
+            <!-- Photos Grid -->
+            <div id="photos-grid" class="unified-portfolio-grid portfolio-grid-content active" role="tabpanel" aria-labelledby="photos-tab"></div>
+            
+            <!-- Videos Grid -->
+            <div id="videos-grid" class="unified-portfolio-grid portfolio-grid-content" role="tabpanel" aria-labelledby="videos-tab"></div>
                 </div>
-
-                <div class="portfolio-grid">
-                    <div class="portfolio-card animate-in" data-video-id="1023847619" data-title="Kalyani Developers TVC" data-description="Elegant, story-driven commercial for Kalyani Developers, highlighting lifestyle and aspiration for their new residential project." data-highlights='["Emotional storytelling and cinematic visuals","Targeted for TV and digital campaigns","Professional cast and high-end production"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/1023847619" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Kalyani Developers TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="1023846133" data-title="Sudarshan Silks Deepavali TVC" data-description="Celebrate the Radiance of Deepavali with Sudarshan Silks. This festive season, adorn yourself in timeless elegance. Discover the perfect saree for every cherished moment — where tradition meets sophistication, and every thread tells a story of joy, beauty, and celebration." data-highlights='["Elegant showcase of luxurious sarees with intricate detailing","Rich, vibrant color palettes inspired by tradition and celebration","Emotive storytelling highlighting family, joy, and cultural pride","Designed to evoke nostalgia, elegance, and festive glamour"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/1023846133" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Sudarshan Silks Deepavali TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="990163225" data-title="Sudarshan Jewellers TVC" data-description="Timeless Elegance, Exceptional Value — Only at Sudarshan Jewellers. Discover a world of brilliance with our wide collection of gold, silver, and traditional jewellery. From everyday elegance to statement pieces, experience luxury that's beautifully crafted and priced just right." data-highlights='["Bright, colourful visuals with a modern, elegant aesthetic","Showcases a wide variety of jewellery styles and collections","Dynamic editing and vibrant color grading for visual appeal"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/990163225" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Sudarshan Jewellers TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="760593147" data-title="Sudarshan Silks Brand Film" data-description="Bringing the story of Sudarshan Silks to life. This film captures the essence of tradition, craftsmanship, and customer devotion. Through elegant visuals and authentic storytelling, we showcase a brand rooted in quality and grace — where every saree is a celebration of timeless Indian artistry." data-highlights='["Warm, elegant visual palette emphasizing tradition and comfort","Smooth transitions and graceful pacing to reflect the flow of silk","Natural lighting and soft color grading to create an inviting mood","Subtle sound design and music score enhancing emotional warmth"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/760593147" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Sudarshan Silks Brand Film</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="791596397" data-title="Authentic Spices TVC" data-description="Authentic spices that elevate everyday cooking. Through rich visuals, earthy tones, and a focus on quality ingredients, the ad builds a strong identity around trust, tradition, and flavour-first storytelling. It's a tribute to the hands that cook and the spices that make every dish memorable." data-highlights='["Warm, earthy visual palette reflecting authenticity and rootedness","Smooth, intentional pacing to reflect care and craftsmanship","Emphasis on brand ethos: trust, quality, and everyday value"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/791596397" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Authentic Spices TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="747141340" data-title="Gifting Brand Film" data-description="A heartfelt brand film that captures the joy of giving and the magic of meaningful surprises. With an uplifting visual style and emotional storytelling, the film showcases how the brand helped turn ordinary days into special memories — one thoughtful gift at a time." data-highlights='["Bright, feel-good visuals centered around joy, celebration, and connection","Warm, inviting color grading to evoke happiness and sentiment","Designed to reflect the convenience and reliability of online gifting","Human-centric storytelling that aligns with the brand's emotional core"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/747141340" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Gifting Brand Film</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="746041347" data-title="Vemica Kitchen TVC" data-description="Bringing your kitchen to life with bold, flavorful visuals and high-impact storytelling. The film positions Vemica as the secret behind restaurant-quality dishes at home — highlighting the ease, confidence, and satisfaction that come with every pack. A visual journey through taste, skill, and the joy of cooking meat to perfection." data-highlights='["Bold, punchy editing to match the strong, spicy flavor profile","Visual tone balancing aspirational cooking with everyday accessibility","Professional-style kitchen shots to convey \"masterchef at home\" appeal"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/746041347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Vemica Kitchen TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="743022127" data-title="Young Performers Show Promo" data-description="A vibrant, high-energy promo to spotlight the joy, talent, and spirit of young performers. With colorful visuals, dynamic choreography, and upbeat music, the film sets the tone for a show that celebrates expression, passion, and the limitless energy of childhood." data-highlights='["Bright, playful visuals that reflect a joyful and youthful energy","Emotionally uplifting moments capturing kids&apos; smiles, reactions, and stage presence","Designed to generate buzz and create a sense of anticipation around the show launch"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/743022127" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Young Performers Show Promo</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="746041371" data-title="Vemica Traditional Kitchen TVC" data-description="A nostalgic, heartwarming film that brings the timeless taste of a grandmother's kitchen into today's homes. Through rich, earthy visuals and emotionally rooted storytelling, the ad evokes tradition, love, and the essence of homemade flavour — now captured in every Vemica jar." data-highlights='["Emotive storytelling capturing the warmth of generational cooking","Subtle lighting and color grading to reflect heritage and authenticity","Brand positioned as a bridge between tradition and convenience","Designed to evoke memory, comfort, and culinary trust"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/746041371" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Vemica Traditional Kitchen TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="746041308" data-title="Coorg Coffee TVC" data-description="Capture the serenity of mornings and the richness of coffee straight from Coorg's lush plantations. With atmospheric visuals and a calm, grounded rhythm, the film is designed to awaken the senses and connect viewers with the origins of their perfect cup." data-highlights='["Slow, cinematic pacing to evoke calmness and morning tranquility","Warm, rich color grading to highlight the depth and aroma of coffee","Emphasis on freshness and direct-from-source authenticity","Designed to connect premium quality with peaceful everyday moments"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/746041308" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Coorg Coffee TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="741609456" data-title="Bridal Jewellery TVC" data-description="A visual ode to tradition, grace, and celebration. Centered around a woman adorned in intricate bridal jewellery, the film captures the emotional essence of gifting, festivity, and the timeless beauty of Indian wedding traditions. Every frame is designed to reflect joy, elegance, and heritage." data-highlights='["Rich, detailed close-ups of traditional jewellery: necklaces, earrings, bangles, and maang tikka","Warm, golden color grading to complement wedding attire and create a regal atmosphere","Emotion-driven storytelling around preparation, gifting, and special moments","Traditional background score underscoring cultural richness and joy","Focus on facial expressions and gestures to evoke emotional depth"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/741609456" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Bridal Jewellery TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="746042574" data-title="Niks Masala TVC" data-description="A heartfelt, home-centric story that celebrates the emotional bond formed through food. With subtle performances, warm visuals, and a relatable moment of approval, the ad shows how Niks Masala brings generations together — making every meal not just delicious, but meaningful." data-highlights='["Intimate, home-based setting to reflect everyday family life","Soft, warm lighting to create an emotionally comforting tone","Expressive performances capturing anticipation, worry, and joy","Focus on the transformation of emotion through taste"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/746042574" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Niks Masala TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="746044675" data-title="Crispy Day Brand Film" data-description="A bold and flavour-forward brand film to introduce the company's vision and product line to the world. Through vibrant visuals, dynamic editing, and a strong emphasis on freshness and authenticity, the video positions Crispy Day as a new but trustworthy name in Indian kitchens — ready to spice up every meal." data-highlights='["Bright, colorful visuals that establish a fresh and modern brand identity","Energetic background score to build excitement around the launch","Visual language that balances tradition with a contemporary edge","Designed to establish credibility, spark curiosity, and drive first-time trials"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/746044675" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Crispy Day Brand Film</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="747140996" data-title="Premium Tonic TVC" data-description="A visually refined product film that captures the essence of sophistication in every pour. Through crisp cinematography and detailed sound design, the film brings to life the effervescence, clarity, and premium character of a tonic crafted with \"London's finest flavours.\" Designed to elevate — both the drink and the experience." data-highlights='["Ultra close-up shots of tonic being poured, with a focus on fizz and clarity","Controlled, minimalist lighting to enhance transparency and sparkle","Slow-motion and high-frame-rate shots to emphasize texture and motion","Designed to evoke refinement, mixology culture, and modern indulgence"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/747140996" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Premium Tonic TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="1095901717" data-title="Saptham Kitchen TVC" data-description="A warm, slice-of-life story that highlights trust through everyday conversations. Set in a casual kitchen environment, the ad captures a relatable moment between neighbors, emphasizing how Saptham has become the go-to choice for conscious, modern households. The tone is friendly, authentic, and reassuring — just like the brand itself." data-highlights='["Natural kitchen setting with a couple casually cooking together","Curious neighbor character used as a relatable narrative device","Smooth transition from lifestyle to product spotlight","Emphasis on brand loyalty and usage across all cooking needs"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/1095901717" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Saptham Kitchen TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="1095906827" data-title="Saptham Grocery Expansion TVC" data-description="Introduces Saptham's expanded grocery line with a light-hearted and engaging interaction. We used subtle humor and natural performances to show how consumers are pleasantly surprised to discover that Saptham offers more than just oil. The focus was on portraying abundance, trust, and the convenience of shopping everything under one brand — all with a clean, everyday aesthetic." data-highlights='["Shelving and stacking groceries to visually suggest abundance and variety","Dialogue-driven reveal of Saptham's expansion beyond oil","Playful interaction with neighbor to create a memorable hook","Subtle branding through visible packaging integration"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/1095906827" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Saptham Grocery Expansion TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                    </div>
-                                </div>
-                    <div class="portfolio-card animate-in" data-video-id="1095907345" data-title="Saptham Lamp Lighting TVC" data-description="A calm, reverent visual tone to reflect the cultural and emotional significance of lighting a lamp. Through close-up details and graceful pacing, the ad captures the quiet beauty of tradition, positioning Saptham as a brand that supports both daily rituals and deeper spiritual connections." data-highlights='["Serene, culturally rooted visuals of traditional lamp-lighting","Close-ups of oil pouring and the lamp flame for emotional resonance","Minimalistic, reverent tone to match the ritual of lighting a lamp","Hero product reveal with a calm, confident brand introduction"]'>
-                        <div class="portfolio-card__thumbnail">
-                                <iframe src="https://player.vimeo.com/video/1095907345" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
-                            <div class="portfolio-card__play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-card__content">
-                            <h3 class="portfolio-card__title">Saptham Lamp Lighting TVC</h3>
-                            <a href="#" class="portfolio-card__view-more">
-                                View More
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="photography" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Photography</h2>
-                    <p>Professional photography for all your creative and commercial needs</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="assets/photos/Port-(24).jpg" alt="Portrait Photography">
-                            <div class="genre-overlay">
-                                <h3>Portrait</h3>
-                                <p>Professional studio and environmental portraits</p>
-                                <a href="#" class="btn primary photo-sample-btn" data-category="portrait">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="assets/photos/Product-(16).jpg" alt="Product Photography">
-                            <div class="genre-overlay">
-                                <h3>Product</h3>
-                                <p>Commercial product photography for brands</p>
-                                <a href="#" class="btn primary photo-sample-btn" data-category="product">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="assets/photos/CM-(17).jpg" alt="Corporate Photography">
-                            <div class="genre-overlay">
-                                <h3>Corporate</h3>
-                                <p>Corporate events and team photography</p>
-                                <a href="#" class="btn primary photo-sample-btn" data-category="corporate">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="assets/photos/Architecture-(10).jpg" alt="Architecture Photography">
-                            <div class="genre-overlay">
-                                <h3>Architecture</h3>
-                                <p>Interior and exterior architectural photography</p>
-                                <a href="#" class="btn primary photo-sample-btn" data-category="architecture">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="editing-grading" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Editing and Colour Grading</h2>
-                    <p>Professional editing and colour grading for photos, videos, films and commercials</p>
-                </div>
-
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-header">
-                            <h3>Video Editing</h3>
-                            <div class="genre-description">
-                                <p>Professional video editing services for all types of content</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-gallery">
-                            <div class="gallery-grid">
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 1">
-                                    <div class="overlay">
-                                        <h4>Music Video Edit</h4>
-                                        <p>Fast-paced music video edit</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1604346744144-6a9a47bcaef5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 2">
-                                    <div class="overlay">
-                                        <h4>Documentary Edit</h4>
-                                        <p>Nature documentary series</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1635514569156-0bbf5be4b202?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Video Editing 3">
-                                    <div class="overlay">
-                                        <h4>Commercial Edit</h4>
-                                        <p>Promotional content editing</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn view-more">View More</button>
-                        </div>
-                    </div>
-
-                    <div class="genre-card">
-                        <div class="genre-header">
-                            <h3>Photo Retouching</h3>
-                            <div class="genre-description">
-                                <p>Professional photo enhancement and retouching</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-gallery">
-                            <div class="gallery-grid">
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 1">
-                                    <div class="overlay">
-                                        <h4>Product Retouching</h4>
-                                        <p>E-commerce product photos</p>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1605095236821-140ee6a11b0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 2">
-                                    <div class="overlay">
-                                        <h4>Portrait Retouching</h4>
-                                        <p>Professional headshots</p>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Photo Retouching 3">
-                                    <div class="overlay">
-                                        <h4>Fashion Retouching</h4>
-                                        <p>Magazine editorial</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn view-more">View More</button>
-                        </div>
-                    </div>
-
-                    <div class="genre-card">
-                        <div class="genre-header">
-                            <h3>Colour Grading</h3>
-                            <div class="genre-description">
-                                <p>Cinematic colour grading for film and video productions</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-gallery">
-                            <div class="gallery-grid">
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1598387181942-6ab7bf1f37f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 1">
-                                    <div class="overlay">
-                                        <h4>Feature Film</h4>
-                                        <p>Cinematic colour treatment</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1634655377962-e6e7ab9ebd5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 2">
-                                    <div class="overlay">
-                                        <h4>Music Video</h4>
-                                        <p>Stylistic colour grade</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gallery-item">
-                                    <img src="https://images.unsplash.com/photo-1611162618758-4a29a01f2096?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Colour Grading 3">
-                                    <div class="overlay">
-                                        <h4>Commercial</h4>
-                                        <p>Brand-specific colour palette</p>
-                                        <div class="view-btn">
-                                            <i class="fas fa-play-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn view-more">View More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="sound-recording" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Sound Recording</h2>
-                    <p>Professional sound recording for music, voice, and audio production</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Recording">
-                            <div class="genre-overlay">
-                                <h3>Music Production</h3>
-                                <p>Full-service music recording and production</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Recording">
-                            <div class="genre-overlay">
-                                <h3>Podcast</h3>
-                                <p>Professional podcast recording and production</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Voice Over Recording">
-                            <div class="genre-overlay">
-                                <h3>Voice Over</h3>
-                                <p>Professional voice over recording for commercials</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Sound Design">
-                            <div class="genre-overlay">
-                                <h3>Sound Design</h3>
-                                <p>Custom sound design for films and media</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="dubbing" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Dubbing</h2>
-                    <p>Professional voice-over and dubbing services in multiple languages</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Dubbing">
-                            <div class="genre-overlay">
-                                <h3>Film</h3>
-                                <p>Multi-language film dubbing services</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1578022761797-b8636ac1773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Animation Dubbing">
-                            <div class="genre-overlay">
-                                <h3>Animation</h3>
-                                <p>Character voice acting for animation</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1522869635100-187f6605042a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Dubbing">
-                            <div class="genre-overlay">
-                                <h3>Commercial</h3>
-                                <p>Multi-language commercial voice-overs</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1523297467724-f6758d7124c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Documentary Dubbing">
-                            <div class="genre-overlay">
-                                <h3>Documentary</h3>
-                                <p>Professional narration and dubbing services</p>
-                                <a href="#" class="btn primary">Watch Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="mixing" class="portfolio-category">
-                <div class="category-header">
-                    <h2>Audio Mixing & Mastering</h2>
-                    <p>Professional audio mixing and mastering for music and media</p>
-                </div>
-                <div class="genre-grid">
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Music Mixing">
-                            <div class="genre-overlay">
-                                <h3>Music</h3>
-                                <p>Professional mixing and mastering for music</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Film Mixing">
-                            <div class="genre-overlay">
-                                <h3>Film</h3>
-                                <p>Audio post-production for film</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1593698054598-5e81bd0d4b81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Podcast Mixing">
-                            <div class="genre-overlay">
-                                <h3>Podcast</h3>
-                                <p>Professional podcast mixing and mastering</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="genre-card">
-                        <div class="genre-image">
-                            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Commercial Mixing">
-                            <div class="genre-overlay">
-                                <h3>Commercial</h3>
-                                <p>Audio post-production for commercials</p>
-                                <a href="#" class="btn primary">Listen to Samples</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
+    <!-- Portfolio Modal - Unified for Photos and Videos -->
+    <div class="portfolio-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="portfolio-modal__backdrop" data-close></div>
+        <div class="portfolio-modal__panel">
+            <button class="portfolio-modal__close" type="button" data-close aria-label="Close portfolio details">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="portfolio-modal__content">
+                <div class="portfolio-modal__header">
+                    <h3 data-modal-title></h3>
+                                </div>
+                <p class="portfolio-modal__description" data-modal-description></p>
+                <div class="portfolio-modal__divider"></div>
+                <div class="portfolio-modal__highlights">
+                                <h4>Highlights</h4>
+                    <ul data-modal-highlights></ul>
+                            </div>
+                <div class="portfolio-modal__media" data-modal-media></div>
+                    </div>
+                </div>
+            </div>
+
+    <script src="scripts/portfolio-grid.js"></script>
+    <script src="portfolio.js"></script>
     <!-- Gallery Modal -->
     <div class="gallery-modal" style="display:none;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(0,0,0,0.92);">
       <div class="gallery-modal-content" style="background:#181824;padding:40px 30px 30px 30px;border-radius:18px;max-width:900px;width:90vw;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
@@ -1280,9 +717,152 @@
         <h2 class="gallery-title" style="margin-bottom:8px;font-size:2rem;color:#fff;text-align:center;">Gallery</h2>
         <p class="gallery-description" style="margin-bottom:24px;color:#ccc;text-align:center;">A collection of our best work.</p>
         <div class="gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;"></div>
-      </div>
-    </div>
+                </div>
+                            </div>
     <!-- End Gallery Modal -->
+    
+    <!-- Let's Collaborate Section -->
+    <section class="section section--cta" id="collaborate" aria-labelledby="cta-title">
+        <div class="container">
+            <div class="cta-layout" data-animate>
+                <div class="cta-content">
+                    <p class="section-eyebrow">Let's collaborate</p>
+                    <h2 class="section-title" id="cta-title">
+                        Ready to capture your next idea with Grey <span class="grey-text">18</span> Studios?
+                    </h2>
+                    <p class="section-summary">
+                        Share your project goals and we'll shape a production plan that delivers with precision and style.
+                    </p>
+                </div>
+                <div class="cta-form-wrapper">
+                    <form id="contact-form" class="cta-contact-form" action="javascript:void(0);" onsubmit="
+                        event.preventDefault();
+                        
+                        const form = this;
+                        const btnText = document.getElementById('btn-text');
+                        const successMsg = document.getElementById('success-message');
+                        const errorMsg = document.getElementById('error-message');
+                        
+                        const name = form.name ? form.name.value.trim() : '';
+                        const email = form.email ? form.email.value.trim() : '';
+                        const service = form.service ? form.service.value.trim() : '';
+                        const message = form.message ? form.message.value.trim() : '';
+                        
+                        if (!name || !email || !service || !message) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please fill in all required fields.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please enter a valid email address.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        if (btnText) {
+                            btnText.innerHTML = '<i class=\'fas fa-spinner fa-spin\'></i> Sending...';
+                        }
+                        if (successMsg) {
+                            successMsg.style.display = 'none';
+                        }
+                        if (errorMsg) {
+                            errorMsg.style.display = 'none';
+                        }
+                        
+                        const formData = {
+                            name: name,
+                            email: email,
+                            mobile: form.mobile ? form.mobile.value.trim() : '',
+                            service: service,
+                            message: message
+                        };
+                        
+                        if (typeof emailjs !== 'undefined') {
+                            emailjs.send('service_6ixt3mz', 'template_pfju2vd', formData, '1C70BfGW-WtXy38dl')
+                                .then(function(response) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (successMsg) {
+                                        successMsg.style.display = 'block';
+                                    }
+                                    alert('Thank you! Your message has been sent successfully.');
+                                    form.reset();
+                                }, function(error) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (errorMsg) {
+                                        errorMsg.textContent = 'Oops! Something went wrong. Please try again or contact us directly.';
+                                        errorMsg.style.display = 'block';
+                                    }
+                                    alert('Oops! Something went wrong. Please try again or contact us directly.');
+                                });
+                } else {
+                            alert('Email service not available. Please contact us directly.');
+                        }
+                        
+                        return false;
+                    ">
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-user cta-form-icon"></i>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="cta-form-field">
+                                <i class="fas fa-envelope cta-form-icon"></i>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+            </div>
+
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-phone cta-form-icon"></i>
+                                <input type="tel" id="mobile" name="mobile" placeholder="Phone Number">
+                </div>
+                            <div class="cta-form-field">
+                                <i class="fas fa-tag cta-form-icon"></i>
+                                <select id="service" name="service" required>
+                                    <option value="" disabled selected>Select Service</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Sound Recording">Sound Recording</option>
+                                    <option value="Dubbing">Dubbing</option>
+                                    <option value="Audio Mixing & Mastering">Audio Mixing & Mastering</option>
+                                    <option value="Photo & Video Editing">Photo & Video Editing</option>
+                                    <option value="Colour Grading">Colour Grading</option>
+                                </select>
+                </div>
+            </div>
+
+                        <div class="cta-form-field">
+                            <i class="fas fa-comment cta-form-icon"></i>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+            </div>
+
+                        <div class="cta-form-message cta-form-message--success" id="success-message">Thank you! Your message has been sent successfully.</div>
+                        <div class="cta-form-message cta-form-message--error" id="error-message"></div>
+                        
+                        <button type="submit" class="btn btn--primary cta-form-submit">
+                            <span id="btn-text">Send Message <i class="fas fa-paper-plane"></i></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
@@ -1309,6 +889,27 @@
             portfolioHeroScroll.classList.add('is-visible');
             portfolioHeroScroll.style.opacity = '1';
             portfolioHeroScroll.style.transform = 'translateY(0)';
+        }
+        
+        // Immediately show CTA section content (override data-animate opacity)
+        const ctaLayout = document.querySelector('.section--cta .cta-layout');
+        const ctaContent = document.querySelector('.section--cta .cta-content');
+        const ctaFormWrapper = document.querySelector('.section--cta .cta-form-wrapper');
+        if (ctaLayout) {
+            ctaLayout.classList.add('is-visible');
+            ctaLayout.style.opacity = '1';
+            ctaLayout.style.transform = 'translateY(0)';
+            ctaLayout.style.visibility = 'visible';
+        }
+        if (ctaContent) {
+            ctaContent.style.opacity = '1';
+            ctaContent.style.transform = 'none';
+            ctaContent.style.visibility = 'visible';
+        }
+        if (ctaFormWrapper) {
+            ctaFormWrapper.style.opacity = '1';
+            ctaFormWrapper.style.transform = 'none';
+            ctaFormWrapper.style.visibility = 'visible';
         }
             
             // Initialize counters in the hero section

@@ -14,9 +14,20 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <link rel="stylesheet" href="css/custom-cursor.css">
     <!-- Page specific CSS -->
     <link rel="stylesheet" href="about.css">
+    <!-- EmailJS for Contact Form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            try {
+                emailjs.init("1C70BfGW-WtXy38dl");
+                console.log("EmailJS initialized with public key: 1C70BfGW-WtXy38dl");
+            } catch (error) {
+                console.error("Error initializing EmailJS:", error);
+            }
+        })();
+    </script>
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -37,7 +48,7 @@
             background-attachment: fixed;
             font-family: 'Cormorant Garamond', serif;
         }
-        
+    
         /* Ensure text is visible */
         p, h1, h2, h3, h4, h5, h6 {
             color: var(--text-main);
@@ -1108,208 +1119,389 @@
     </style>
 </head>
 <body>
-    <!-- Custom cursor with camera icon -->
-    <div class="custom-cursor">
-        <div class="lens"></div>
-        <div class="shutter"></div>
-        <i class="fas fa-camera"></i>
-    </div>
-    
-    <!-- Camera flash effect -->
-    <div class="camera-flash"></div>
-    
     <!-- Header Container -->
     <div id="header-container"></div>
 
-    <section class="about-hero">
-        <div class="hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-        <div class="about-hero-content">
-            <h1 class="animated-heading">
-                <span class="word">About</span>
-                <span class="word"><span class="grey-text">Grey</span></span>
-                <span class="word"><span class="eighteen-text">18</span></span>
-                <span class="word">Studios</span>
+    <section class="hero about-hero" id="about-hero" aria-labelledby="about-hero-title">
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="container hero__layout">
+            <div class="hero__content">
+                <p class="hero__eyebrow">About Grey <span class="grey-text">18</span> Studios</p>
+                <h1 class="hero__headline" id="about-hero-title">
+                    Crafting stories in sound and frame since day one.
             </h1>
-            <p>Meet the team behind our creative audio & visual production</p>
+                <p class="hero__summary">
+                    Founded to bring every audio and visual service under one roof, our studio blends technical mastery with artistic direction.
+                </p>
+            </div>
+        </div>
+        <div class="hero__scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </div>
     </section>
 
-    <section class="about-story animate-on-scroll">
+    <!-- About Grey 18 Studios Section -->
+    <section class="section section--about" id="about-content" aria-labelledby="about-content-title">
         <div class="container">
-            <div class="section-header animate-on-scroll fade-up">
-                <h2>Our Journey</h2>
-                <p>Discover how we've evolved into a premier audio & visual studio</p>
+            <div class="section-intro" data-animate>
+                <p class="section-eyebrow">About Grey <span class="grey-text">18</span> Studios</p>
+                <h2 class="section-title" id="about-content-title">
+                    Crafting stories in sound and frame since day one.
+                </h2>
+                <p class="section-summary">
+                    Founded to bring every audio and visual service under one roof, our studio blends technical mastery with artistic direction.
+                </p>
             </div>
-            <div class="story-content">
-                <div class="story-image animate-on-scroll fade-right">
-                    <div class="parallax-wrapper">
-                        <div class="parallax-image"></div>
-                        <div class="image-overlay"></div>
+
+            <div class="about__grid">
+                <div class="about__media" data-animate>
+                    <div class="media-frame">
+                        <video class="media-frame__video" src="assets/videos/Grey18 Studio - Graphic Video.MP4" controls muted loop playsinline>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                        </div>
+                        
+                <div class="about__content" data-animate>
+                    <p>
+                        Grey <span class="grey-text">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.
+                    </p>
+                    <p>
+                        We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations. From ideation to final delivery, our multi-disciplinary team crafts audio and visual experiences that resonate.
+                    </p>
+                        </div>
+                        </div>
+                        
+            <div class="about__bottom">
+                <div class="about__stats">
+                    <div class="about__stat-card" data-animate>
+                        <span class="about__stat-value">4000+</span>
+                        <span class="about__stat-label">Projects completed</span>
+                        </div>
+                    <div class="about__stat-card" data-animate>
+                        <span class="about__stat-value">800+</span>
+                        <span class="about__stat-label">Audio projects</span>
+                    </div>
+                    <div class="about__stat-card" data-animate>
+                        <span class="about__stat-value">28+</span>
+                        <span class="about__stat-label">Years of experience</span>
                     </div>
                 </div>
-                <div class="story-text animate-on-scroll fade-left">
-                    <div class="story-sections">
-                        <div class="section-indicator">
-                            <div class="section-dot active" data-section="story"></div>
-                            <div class="section-dot" data-section="approach"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="section section--team" id="team" aria-labelledby="team-title">
+        <div class="container">
+            <div class="section-intro" data-animate>
+                <p class="section-eyebrow">Our Team</p>
+                <h2 class="section-title" id="team-title">
+                    The creative minds behind Grey <span class="grey-text">18</span> Studios
+                </h2>
+                <p class="section-summary">
+                    Meet the talented professionals who bring passion, expertise, and creativity to every project.
+                </p>
                         </div>
-                        
-                        <div class="story-section active" id="section-story">
-                            <h2>Our Story</h2>
-                            <p>Grey <span class="grey18">18</span> Studios was founded with a vision to provide comprehensive audio and visual services under one roof. Our team of skilled professionals brings together decades of experience in various aspects of media production.</p>
-                            <p>The name "Grey <span class="grey18">18</span>" represents our philosophy of finding the perfect balance between technical precision and creative expression. Grey symbolizes the neutral middle ground where art and technology meet, while <span class="grey18">18</span> represents the studio's founding principle of achieving excellence in all aspects of production.</p>
-                            <p>We believe in combining technical excellence with creative vision to deliver exceptional results that exceed our clients' expectations.</p>
+            
+            <div class="team__grid">
+                <article class="team-member" data-animate>
+                    <div class="team-member__image">
+                        <img src="assets/Team/Giridhar Divan.png" alt="Founder & Creative Director - Giridhar Divan">
                         </div>
-                        
-                        <div class="story-section" id="section-approach">
-                            <h2>Our Approach</h2>
-                            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                                <li style="margin-bottom: 15px; position: relative; padding-left: 28px;">
-                                    <i class="fas fa-check-circle" style="color: var(--accent-primary); position: absolute; left: 0; top: 4px;"></i>
-                                    <strong>Client Collaboration:</strong> We work closely with clients to understand their vision and bring it to life using our expertise and cutting-edge equipment.
-                                </li>
-                                <li style="margin-bottom: 15px; position: relative; padding-left: 28px;">
-                                    <i class="fas fa-check-circle" style="color: var(--accent-primary); position: absolute; left: 0; top: 4px;"></i>
-                                    <strong>Comprehensive Services:</strong> From photography and audio recording to dubbing and post-production – delivering quality results on time and within budget.
-                                </li>
-                                <li style="margin-bottom: 15px; position: relative; padding-left: 28px;">
-                                    <i class="fas fa-check-circle" style="color: var(--accent-primary); position: absolute; left: 0; top: 4px;"></i>
-                                    <strong>Structured Process:</strong> Detailed consultation, meticulous planning, and consistent communication throughout project execution.
-                                </li>
-                            </ul>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Giridhar Divan</h3>
+                        <p class="team-member__position">Founder & Creative Director</p>
+                        <p class="team-member__description">A commercial advertising photographer and cinematographer based in India, working professionally since 1997. Specializing in fashion, product photography, ad films, and digital imaging.</p>
+                        <p class="team-member__vision">"The only thing I always knew was that nothing can keep me from pursuing my dreams."</p>
+                        <div class="team-member__social">
+                            <a href="https://www.instagram.com/giridhardivan_photography" target="_blank" class="team-member__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/giridhar-divan-3325b0109" target="_blank" class="team-member__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://divanagiri.myportfolio.com" target="_blank" class="team-member__social-link" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
+                            <a href="mailto:divanagiri@gmail.com" class="team-member__social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="https://www.facebook.com/giridhardivan" target="_blank" class="team-member__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.behance.net/giridhardivan" target="_blank" class="team-member__social-link" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                            <a href="https://twitter.com/divanagiri" target="_blank" class="team-member__social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
+                </article>
+                
+                <article class="team-member" data-animate>
+                    <div class="team-member__image">
+                        <img src="assets/Team/Ronit Rao.jpg" alt="Creative Strategist & Marketing Head - Ronit Rao">
+                </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Ronit Rao</h3>
+                        <p class="team-member__position">Creative Strategist & Marketing Head</p>
+                        <p class="team-member__description">A photographer and media enthusiast since 2015, with a passion for visual storytelling. Growing up in a rapidly evolving digital world, I found my true calling in creative arts as a profession.</p>
+                        <p class="team-member__vision">"Photography is more than a skill, it's my language to express the beauty, energy, and stories of the world around us."</p>
+                        <div class="team-member__social">
+                            <a href="https://www.instagram.com/worldxposedphotography/" target="_blank" class="team-member__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/ronitrao" target="_blank" class="team-member__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://ronrao.myportfolio.com/work" target="_blank" class="team-member__social-link" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
+                            <a href="mailto:ronrao001@gmail.com" class="team-member__social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="section section--values" id="values" aria-labelledby="values-title">
+        <div class="container">
+            <div class="section-intro" data-animate>
+                <p class="section-eyebrow">Our Values</p>
+                <h2 class="section-title" id="values-title">
+                    The principles that guide our work and creativity
+                </h2>
+                <p class="section-summary">
+                    These core values shape every project we undertake and every relationship we build.
+                </p>
+            </div>
+            
+            <div class="values__scroll-wrapper">
+                <div class="values__scroll-track">
+                    <!-- Original cards -->
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-star"></i>
+                    </div>
+                        <h3 class="value-card__title">Excellence</h3>
+                        <p class="value-card__description">We strive for excellence in every project, no matter how big or small. Quality is at the heart of everything we do.</p>
+                    </article>
                     
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="count">4000+</span>
-                            <span class="label">Projects Completed</span>
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
-                        <div class="stat">
-                            <span class="count">800+</span>
-                            <span class="label">Audio Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="count">28+</span>
-                            <span class="label">Years of Experience</span>
-                        </div>
+                        <h3 class="value-card__title">Creativity</h3>
+                        <p class="value-card__description">We bring fresh ideas and innovative approaches to every project, pushing the boundaries of what's possible.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-users"></i>
                     </div>
+                        <h3 class="value-card__title">Client Collaboration</h3>
+                        <p class="value-card__description">We work closely with clients to understand their vision and bring it to life using our expertise and cutting-edge equipment.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-cogs"></i>
+                </div>
+                        <h3 class="value-card__title">Comprehensive Services</h3>
+                        <p class="value-card__description">From photography and audio recording to dubbing and post-production – delivering quality results on time and within budget.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-project-diagram"></i>
+                    </div>
+                        <h3 class="value-card__title">Structured Process</h3>
+                        <p class="value-card__description">Detailed consultation, meticulous planning, and consistent communication throughout project execution.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="value-card__title">Reliability</h3>
+                        <p class="value-card__description">We honor our commitments, meet our deadlines, and deliver what we promise, every time.</p>
+                    </article>
+                    
+                    <!-- Duplicated cards for seamless loop -->
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-star"></i>
+                    </div>
+                        <h3 class="value-card__title">Excellence</h3>
+                        <p class="value-card__description">We strive for excellence in every project, no matter how big or small. Quality is at the heart of everything we do.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-lightbulb"></i>
+                </div>
+                        <h3 class="value-card__title">Creativity</h3>
+                        <p class="value-card__description">We bring fresh ideas and innovative approaches to every project, pushing the boundaries of what's possible.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-users"></i>
+            </div>
+                        <h3 class="value-card__title">Client Collaboration</h3>
+                        <p class="value-card__description">We work closely with clients to understand their vision and bring it to life using our expertise and cutting-edge equipment.</p>
+                    </article>
+            
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-cogs"></i>
+            </div>
+                        <h3 class="value-card__title">Comprehensive Services</h3>
+                        <p class="value-card__description">From photography and audio recording to dubbing and post-production – delivering quality results on time and within budget.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-project-diagram"></i>
+        </div>
+                        <h3 class="value-card__title">Structured Process</h3>
+                        <p class="value-card__description">Detailed consultation, meticulous planning, and consistent communication throughout project execution.</p>
+                    </article>
+                    
+                    <article class="value-card">
+                        <div class="value-card__icon">
+                            <i class="fas fa-clock"></i>
+        </div>
+                        <h3 class="value-card__title">Reliability</h3>
+                        <p class="value-card__description">We honor our commitments, meet our deadlines, and deliver what we promise, every time.</p>
+                    </article>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="team-section">
-        <div class="hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
+    
+    <!-- Let's Collaborate Section -->
+    <section class="section section--cta" id="collaborate" aria-labelledby="cta-title">
         <div class="container">
-            <div class="section-header animate-on-scroll fade-up">
-                <h2>Meet Our Team</h2>
-                <p>The creative minds behind Grey <span class="grey18">18</span> Studios</p>
+            <div class="cta-layout" data-animate>
+                <div class="cta-content">
+                    <p class="section-eyebrow">Let's collaborate</p>
+                    <h2 class="section-title" id="cta-title">
+                        Ready to capture your next idea with Grey <span class="grey-text">18</span> Studios?
+                    </h2>
+                    <p class="section-summary">
+                        Share your project goals and we'll shape a production plan that delivers with precision and style.
+                    </p>
             </div>
-            
-            <div class="team-grid">
-                <div class="team-member animate-on-scroll fade-up" data-member="giridhar">
-                    <div class="member-image">
-                        <img src="assets/photos/People-(28).jpg" alt="Founder & Creative Director - Giridhar Divan">
+                <div class="cta-form-wrapper">
+                    <form id="contact-form" class="cta-contact-form" action="javascript:void(0);" onsubmit="
+                        event.preventDefault();
+                        
+                        const form = this;
+                        const btnText = document.getElementById('btn-text');
+                        const successMsg = document.getElementById('success-message');
+                        const errorMsg = document.getElementById('error-message');
+                        
+                        const name = form.name ? form.name.value.trim() : '';
+                        const email = form.email ? form.email.value.trim() : '';
+                        const service = form.service ? form.service.value.trim() : '';
+                        const message = form.message ? form.message.value.trim() : '';
+                        
+                        if (!name || !email || !service || !message) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please fill in all required fields.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please enter a valid email address.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        if (btnText) {
+                            btnText.innerHTML = '<i class=\'fas fa-spinner fa-spin\'></i> Sending...';
+                        }
+                        if (successMsg) {
+                            successMsg.style.display = 'none';
+                        }
+                        if (errorMsg) {
+                            errorMsg.style.display = 'none';
+                        }
+                        
+                        const formData = {
+                            name: name,
+                            email: email,
+                            mobile: form.mobile ? form.mobile.value.trim() : '',
+                            service: service,
+                            message: message
+                        };
+                        
+                        if (typeof emailjs !== 'undefined') {
+                            emailjs.send('service_6ixt3mz', 'template_pfju2vd', formData, '1C70BfGW-WtXy38dl')
+                                .then(function(response) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (successMsg) {
+                                        successMsg.style.display = 'block';
+                                    }
+                                    alert('Thank you! Your message has been sent successfully.');
+                                    form.reset();
+                                }, function(error) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (errorMsg) {
+                                        errorMsg.textContent = 'Oops! Something went wrong. Please try again or contact us directly.';
+                                        errorMsg.style.display = 'block';
+                                    }
+                                    alert('Oops! Something went wrong. Please try again or contact us directly.');
+                                });
+                } else {
+                            alert('Email service not available. Please contact us directly.');
+                        }
+                        
+                        return false;
+                    ">
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-user cta-form-icon"></i>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
                     </div>
-                    <div class="member-info">
-                        <h3>Giridhar Divan</h3>
-                        <p class="position">Founder & Creative Director</p>
-                        <p class="description">A commercial advertising photographer and cinematographer based in India, working professionally since 1997. Specializing in fashion, product photography, ad films, and digital imaging.</p>
-                        <p class="vision">"The only thing I always knew was that nothing can keep me from pursuing my dreams."</p>
-                        <a href="#" class="btn-read-more">Read Full Bio</a>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/giridhardivan_photography" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/giridhardivan" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.behance.net/giridhardivan" target="_blank" class="social-icon"><i class="fab fa-behance"></i></a>
-                            <a href="https://twitter.com/divanagiri" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.linkedin.com/in/giridhar-divan-3325b0109" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://divanagiri.myportfolio.com" target="_blank" class="social-icon"><i class="fas fa-globe"></i></a>
-                            <a href="mailto:divanagiri@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
+                            <div class="cta-form-field">
+                                <i class="fas fa-envelope cta-form-icon"></i>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
                 </div>
                 
-                <div class="team-member animate-on-scroll fade-up" data-delay="200">
-                    <div class="member-image">
-                        <img src="assets/photos/Port-(3).jpg" alt="Creative Strategist & Marketing Head - Ronit Rao">
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-phone cta-form-icon"></i>
+                                <input type="tel" id="mobile" name="mobile" placeholder="Phone Number">
                     </div>
-                    <div class="member-info">
-                        <h3>Ronit Rao</h3>
-                        <p class="position">Creative Strategist & Marketing Head</p>
-                        <p class="description">A photographer and media enthusiast, with a passion for visual storytelling that began at the age of 13. Blends technical expertise with a creative eye to bring stories to life through images and videos.</p>
-                        <p class="vision">"Photography is more than a skill — it's my language to express the beauty, energy, and stories of the world around us."</p>
-                        <a href="#" class="btn-read-more">Read Full Bio</a>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/ronitrao" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://www.instagram.com/worldxposedphotography/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="https://ronrao.myportfolio.com/work" target="_blank" class="social-icon"><i class="fas fa-globe"></i></a>
-                            <a href="mailto:ronrao001@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="team-cta animate-on-scroll fade-up">
-                <a href="index.html#footer-contact" class="btn primary">Join Our Team</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="values-section">
-        <div class="hero-shapes">
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-        <div class="container">
-            <div class="section-header animate-on-scroll fade-up">
-                <h2>Our Values</h2>
-                <p>The principles that guide our work and creativity</p>
-            </div>
-            
-            <div class="values-grid">
-                <div class="value-card animate-on-scroll fade-up">
-                    <div class="value-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h3>Excellence</h3>
-                    <p>We strive for excellence in every project, no matter how big or small. Quality is at the heart of everything we do.</p>
+                            <div class="cta-form-field">
+                                <i class="fas fa-tag cta-form-icon"></i>
+                                <select id="service" name="service" required>
+                                    <option value="" disabled selected>Select Service</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Sound Recording">Sound Recording</option>
+                                    <option value="Dubbing">Dubbing</option>
+                                    <option value="Audio Mixing & Mastering">Audio Mixing & Mastering</option>
+                                    <option value="Photo & Video Editing">Photo & Video Editing</option>
+                                    <option value="Colour Grading">Colour Grading</option>
+                                </select>
+                            </div>
                 </div>
                 
-                <div class="value-card animate-on-scroll fade-up" data-delay="100">
-                    <div class="value-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>Creativity</h3>
-                    <p>We bring fresh ideas and innovative approaches to every project, pushing the boundaries of what's possible.</p>
+                        <div class="cta-form-field">
+                            <i class="fas fa-comment cta-form-icon"></i>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                 </div>
                 
-                <div class="value-card animate-on-scroll fade-up" data-delay="200">
-                    <div class="value-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Collaboration</h3>
-                    <p>We believe in the power of collaboration – both within our team and with our clients – to create the best possible results.</p>
-                </div>
-                
-                <div class="value-card animate-on-scroll fade-up" data-delay="300">
-                    <div class="value-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Reliability</h3>
-                    <p>We honor our commitments, meet our deadlines, and deliver what we promise, every time.</p>
+                        <div class="cta-form-message cta-form-message--success" id="success-message">Thank you! Your message has been sent successfully.</div>
+                        <div class="cta-form-message cta-form-message--error" id="error-message"></div>
+                        
+                        <button type="submit" class="btn btn--primary cta-form-submit">
+                            <span id="btn-text">Send Message <i class="fas fa-paper-plane"></i></span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1324,9 +1516,64 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Hero animation
+            // Immediately show ALL content (override data-animate opacity)
+            const allAnimatedElements = document.querySelectorAll('[data-animate]');
+            allAnimatedElements.forEach(el => {
+                el.classList.add('is-visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+                el.style.visibility = 'visible';
+            });
+            
+            // Show hero content
+            const heroContent = document.querySelector('.about-hero .hero__content');
+            const heroEyebrow = document.querySelector('.about-hero .hero__eyebrow');
+            const heroHeadline = document.querySelector('.about-hero .hero__headline');
+            const heroSummary = document.querySelector('.about-hero .hero__summary');
+            const heroScroll = document.querySelector('.about-hero .hero__scroll');
+            
+            [heroContent, heroEyebrow, heroHeadline, heroSummary, heroScroll].forEach(el => {
+                if (el) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                    el.style.visibility = 'visible';
+                }
+            });
+
+            heroContent.style.top = '15%';
+            
+            // Show section content
+            const sectionIntros = document.querySelectorAll('.section-intro');
+            sectionIntros.forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+                el.style.visibility = 'visible';
+            });
+            
+            // Show CTA section content
+            const ctaLayout = document.querySelector('.section--cta .cta-layout');
+            const ctaContent = document.querySelector('.section--cta .cta-content');
+            const ctaFormWrapper = document.querySelector('.section--cta .cta-form-wrapper');
+            if (ctaLayout) {
+                ctaLayout.classList.add('is-visible');
+                ctaLayout.style.opacity = '1';
+                ctaLayout.style.transform = 'translateY(0)';
+                ctaLayout.style.visibility = 'visible';
+            }
+            if (ctaContent) {
+                ctaContent.style.opacity = '1';
+                ctaContent.style.transform = 'none';
+                ctaContent.style.visibility = 'visible';
+            }
+            if (ctaFormWrapper) {
+                ctaFormWrapper.style.opacity = '1';
+                ctaFormWrapper.style.transform = 'none';
+                ctaFormWrapper.style.visibility = 'visible';
+            }
+            
+            // Hero animation (if old hero exists)
             const heroWords = document.querySelectorAll('.animated-heading .word');
-            const heroContent = document.querySelector('.about-hero-content p');
+            const heroContentOld = document.querySelector('.about-hero-content p');
             
             gsap.set(heroWords, { opacity: 0, y: 30 });
             gsap.set(heroContent, { opacity: 0, y: 30 });
@@ -1827,7 +2074,7 @@
             <span class="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-header">
-                    <img src="assets/photos/People-(28).jpg" alt="Giridhar Divan" class="modal-image">
+                    <img src="assets/Team/Giridhar Divan.png" alt="Giridhar Divan" class="modal-image">
                     <div class="modal-title">
                         <h2>Giridhar Divan</h2>
                         <p class="modal-subtitle">Founder & Creative Director</p>
@@ -1887,14 +2134,14 @@
             <span class="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-header">
-                    <img src="assets/photos/Port-(3).jpg" alt="Ronit Rao" class="modal-image">
+                    <img src="assets/Team/Ronit Rao.jpg" alt="Ronit Rao" class="modal-image">
                     <div class="modal-title">
                         <h2>Ronit Rao</h2>
                         <p class="modal-subtitle">Creative Strategist & Marketing Head</p>
                     </div>
                 </div>
                 <div class="modal-bio">
-                    <p>A photographer and media enthusiast, with a passion for visual storytelling that began at the age of 13. Growing up in a rapidly evolving digital world, I found my true calling behind the camera, turning my lifelong love for photography into a profession.</p>
+                    <p>A photographer and media enthusiast since 2015, with a passion for visual storytelling. Growing up in a rapidly evolving digital world, I found my true calling behind the camera, turning my lifelong love for photography into a profession.</p>
                     
                     <p>With a Bachelor's in Filmmaking and a Professional Photography Diploma from Paris, I blend technical expertise with a creative eye to bring stories to life through images and videos. I strive to capture visuals that are not just seen, but felt — inspiring emotion, curiosity, and connection.</p>
                     
@@ -1963,7 +2210,127 @@
     <!-- Modal functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Add this after your existing JavaScript
+            // Values scroll with manual drag support
+            const scrollWrapper = document.querySelector('.values__scroll-wrapper');
+            const scrollTrack = document.querySelector('.values__scroll-track');
+            
+            if (scrollWrapper && scrollTrack) {
+                let isDown = false;
+                let startX;
+                let currentTranslate = 0;
+                let animationPaused = false;
+                let scrollPosition = 0;
+                const scrollSpeed = 0.5; // pixels per frame
+                
+                // Calculate half width for seamless loop
+                const firstHalfWidth = scrollTrack.scrollWidth / 2;
+                
+                // Mouse events
+                scrollWrapper.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    scrollWrapper.classList.add('is-dragging');
+                    startX = e.pageX;
+                    currentTranslate = scrollPosition;
+                    animationPaused = true;
+                    e.preventDefault();
+                });
+                
+                scrollWrapper.addEventListener('mouseleave', () => {
+                    if (isDown) {
+                        isDown = false;
+                        scrollWrapper.classList.remove('is-dragging');
+                        scrollPosition = currentTranslate;
+                        setTimeout(() => {
+                            animationPaused = false;
+                        }, 100);
+                    }
+                });
+                
+                scrollWrapper.addEventListener('mouseup', () => {
+                    if (isDown) {
+                        isDown = false;
+                        scrollWrapper.classList.remove('is-dragging');
+                        scrollPosition = currentTranslate;
+                        setTimeout(() => {
+                            animationPaused = false;
+                        }, 100);
+                    }
+                });
+                
+                scrollWrapper.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX;
+                    const walk = (x - startX) * 2; // Scroll speed multiplier
+                    currentTranslate = scrollPosition - walk;
+                    
+                    // Handle seamless loop
+                    if (currentTranslate < 0) {
+                        currentTranslate = firstHalfWidth + currentTranslate;
+                    } else if (currentTranslate >= firstHalfWidth) {
+                        currentTranslate = currentTranslate - firstHalfWidth;
+                    }
+                    
+                    scrollTrack.style.transform = `translateX(-${currentTranslate}px)`;
+                });
+                
+                // Touch events for mobile
+                let touchStartX = 0;
+                let touchCurrentTranslate = 0;
+                
+                scrollWrapper.addEventListener('touchstart', (e) => {
+                    scrollWrapper.classList.add('is-dragging');
+                    touchStartX = e.touches[0].pageX;
+                    touchCurrentTranslate = scrollPosition;
+                    animationPaused = true;
+                });
+                
+                scrollWrapper.addEventListener('touchmove', (e) => {
+                    if (!touchStartX) return;
+                    e.preventDefault();
+                    const x = e.touches[0].pageX;
+                    const walk = (x - touchStartX) * 2;
+                    touchCurrentTranslate = scrollPosition - walk;
+                    
+                    // Handle seamless loop
+                    if (touchCurrentTranslate < 0) {
+                        touchCurrentTranslate = firstHalfWidth + touchCurrentTranslate;
+                    } else if (touchCurrentTranslate >= firstHalfWidth) {
+                        touchCurrentTranslate = touchCurrentTranslate - firstHalfWidth;
+                    }
+                    
+                    scrollTrack.style.transform = `translateX(-${touchCurrentTranslate}px)`;
+                });
+                
+                scrollWrapper.addEventListener('touchend', () => {
+                    if (touchStartX) {
+                        scrollWrapper.classList.remove('is-dragging');
+                        scrollPosition = touchCurrentTranslate;
+                        touchStartX = 0;
+                        setTimeout(() => {
+                            animationPaused = false;
+                        }, 100);
+                    }
+                });
+                
+                // Auto-scroll animation using transform (for smooth infinite loop)
+                function autoScroll() {
+                    if (!animationPaused && !isDown && !touchStartX) {
+                        scrollPosition += scrollSpeed;
+                        
+                        // Reset to 0 when reaching half width for seamless loop
+                        if (scrollPosition >= firstHalfWidth) {
+                            scrollPosition = 0;
+                        }
+                        
+                        scrollTrack.style.transform = `translateX(-${scrollPosition}px)`;
+                    }
+                    requestAnimationFrame(autoScroll);
+                }
+                
+                // Start auto-scroll
+                autoScroll();
+            }
             
             // Modal functionality
             const giridharModal = document.getElementById('teamBioModal');
@@ -2034,8 +2401,6 @@
         });
     </script>
     
-    <!-- Custom cursor script -->
-    <script src="scripts/custom-cursor.js"></script>
     <script src="assets/audio/camera-shutter.js"></script>
 </body>
 </html> 

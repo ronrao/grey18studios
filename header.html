@@ -399,7 +399,6 @@
             nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
             nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
             nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
-            nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
             
             nav ul li a {
                 font-size: 1.05rem;
@@ -548,13 +547,12 @@
                 <h2><span class="grey-text">GREY</span> <span class="eighteen-text">18</span> STUDIOS</h2>
             </div>
             <ul>
-                <li><a href="index.html" id="nav-home"><i class="fas fa-home"></i><span>Home</span></a></li>
-                <li><a href="index.html#services" id="nav-services"><i class="fas fa-briefcase"></i><span>Services</span></a></li>
-                <li><a href="portfolio.html" id="nav-portfolio"><i class="fas fa-images"></i><span>Portfolio</span></a></li>
-                <li><a href="about.html" id="nav-about"><i class="fas fa-info-circle"></i><span>About</span></a></li>
-                <li><a href="equipment.html" id="nav-equipment"><i class="fas fa-cogs"></i><span>Equipment</span></a></li>
-                <li><a href="pricing.html" id="nav-pricing"><i class="fas fa-tag"></i><span>Pricing</span></a></li>
-                <li><a href="index.html#collaborate" id="nav-contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+                <li><a href="index.html" id="nav-home"><i class="fas fa-house"></i><span>Home</span></a></li>
+                <li><a href="portfolio.html" id="nav-portfolio"><i class="fas fa-camera"></i><span>Portfolio</span></a></li>
+                <li><a href="about.html" id="nav-about"><i class="fas fa-users"></i><span>About</span></a></li>
+                <li><a href="equipment.html" id="nav-equipment"><i class="fas fa-toolbox"></i><span>Equipment</span></a></li>
+                <li><a href="pricing.html" id="nav-pricing"><i class="fas fa-receipt"></i><span>Pricing</span></a></li>
+                <li><a href="#collaborate" id="nav-contact"><i class="fas fa-paper-plane"></i><span>Contact</span></a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -592,6 +590,24 @@
             
             if (currentNavItem) {
                 currentNavItem.classList.add('active');
+            }
+            
+            // Handle Contact link to scroll to collaborate section
+            const contactLink = document.getElementById('nav-contact');
+            if (contactLink) {
+                contactLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const collaborateSection = document.getElementById('collaborate');
+                    if (collaborateSection) {
+                        collaborateSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    } else {
+                        // If collaborate section not found on current page, navigate to home page
+                        window.location.href = 'index.html#collaborate';
+                    }
+                });
             }
             
             // Toggle menu for mobile
@@ -641,11 +657,13 @@
                     }
                 });
 
-                // Close menu when clicking a link
+                // Close menu when clicking a link (except Contact which is handled above)
                 nav.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        closeMenu();
-                    });
+                    if (link.id !== 'nav-contact') {
+                        link.addEventListener('click', function() {
+                            closeMenu();
+                        });
+                    }
                 });
 
                 // Close menu on escape key

@@ -16,7 +16,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/home-revamp.css">
     <link rel="stylesheet" href="css/grey18-styling.css">
-    <link rel="stylesheet" href="css/custom-cursor.css">
+    <!-- EmailJS for Contact Form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            try {
+                emailjs.init("1C70BfGW-WtXy38dl");
+                console.log("EmailJS initialized with public key: 1C70BfGW-WtXy38dl");
+            } catch (error) {
+                console.error("Error initializing EmailJS:", error);
+            }
+        })();
+    </script>
     
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -45,7 +56,7 @@
             --card-border-radius: 10px;
         }
         
-        /* Fix visibility issues while matching home page color scheme */
+        /* Override body background to match about page exactly */
         body {
             background:
                 radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
@@ -53,200 +64,311 @@
                 radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
                 linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
             background-attachment: fixed;
-            font-family: 'Cormorant Garamond', serif;
+            background-image: none !important;
         }
         
+        /* Pricing Hero - Match About Page Structure */
         .pricing-hero {
-            background: transparent;
-            padding-top: 180px !important;
-            min-height: 50vh;
+            position: relative;
+            min-height: 100vh;
+            max-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            position: relative;
+            padding-top: clamp(6rem, 10vw, 8rem);
+            padding-bottom: clamp(4rem, 8vw, 6rem);
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(185, 20, 33, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(9, 20, 88, 0.18) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 50%, #040509 100%);
             overflow: hidden;
-            padding: clamp(5rem, 10vw, 9rem) 0;
         }
         
-        .pricing-hero::before {
+        .pricing-hero::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 80% 60%, rgba(9, 20, 88, 0.1) 0%, transparent 8%);
-            animation: shimmer 15s infinite alternate;
-            pointer-events: none;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(185, 20, 33, 0.4) 50%, 
+                transparent 100%);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            z-index: 3;
         }
         
-        .pricing-hero-content {
+        .pricing-hero .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(5, 6, 10, 0.7) 0%, rgba(5, 6, 10, 0.88) 55%, rgba(5, 6, 10, 1) 100%),
+                radial-gradient(ellipse at 25% 30%, rgba(185, 20, 33, 0.45) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 15%, rgba(9, 20, 88, 0.42) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .pricing-hero .hero__layout {
             position: relative;
             z-index: 2;
-            max-width: 850px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 0 20px;
-            animation: fadeInUp 0.8s ease-out forwards;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: center !important;
+            min-height: 100vh;
+            padding-top: 0;
+            padding-bottom: 0;
+            grid-template-columns: none !important;
         }
         
-        .pricing-hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, var(--white), #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .pricing-hero .hero__content {
+            text-align: left !important;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin: 0;
         }
         
-        .pricing-hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--light-grey);
+        .pricing-hero [data-animate],
+        .pricing-hero .hero__content,
+        .pricing-hero .hero__eyebrow,
+        .pricing-hero .hero__headline,
+        .pricing-hero .hero__summary {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
         }
         
-        /* Package card styles inspired by 4Burner Studio */
+        /* Remove any conflicting styles */
+        .pricing-hero-content {
+            display: none !important;
+        }
+        
+        /* Package section with category pills */
         .pricing-section {
-            background: var(--grey-gradient-2);
-            padding: 80px 0;
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            position: relative;
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
         }
         
         .packages-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 clamp(1.5rem, 4vw, 3rem);
+        }
+        
+        /* Category pills */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: clamp(3rem, 6vw, 4.5rem);
+            padding: 0 1rem;
+        }
+        
+        .category-pill {
+            padding: clamp(0.75rem, 1.2vw, 1rem) clamp(1.5rem, 2.5vw, 2rem);
+            background: 
+                linear-gradient(135deg, rgba(14, 16, 24, 0.9) 0%, rgba(20, 22, 32, 0.85) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--light-grey);
+            font-size: clamp(0.875rem, 1.2vw, 1rem);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .category-pill:hover,
+        .category-pill.active {
+            border-color: var(--accent-primary);
+            background: 
+                linear-gradient(135deg, rgba(185, 20, 33, 0.15) 0%, rgba(20, 22, 32, 0.85) 100%);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Packages grid */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 3rem;
+        }
+        
+        .package-category {
+            display: none;
+        }
+        
+        .package-category.active {
+            display: block;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out forwards;
+            margin-bottom: clamp(2rem, 4vw, 3rem);
         }
         
         .section-header h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            margin-bottom: 1rem;
             color: var(--white);
-        }
-        
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-primary);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .section-header p {
+            font-size: clamp(1rem, 1.3vw, 1.15rem);
+            color: var(--light-grey);
             max-width: 600px;
             margin: 0 auto;
-            font-size: 1.1rem;
-            color: var(--light-grey);
-            text-align: center;
         }
         
         .package-card {
-            background-color: rgba(37, 37, 37, 0.7);
-            border-radius: var(--card-border-radius);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            margin-bottom: 50px;
+            background: 
+                linear-gradient(135deg, rgba(14, 16, 24, 0.9) 0%, rgba(20, 22, 32, 0.85) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 2.5vw, 2rem);
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: #f5f5f5;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 3px solid var(--accent-primary);
-            display: grid;
-            grid-template-columns: 1fr;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease-out forwards;
-            animation-delay: calc(var(--card-index) * 0.2s);
+            transition: opacity 0.3s ease;
         }
         
         .package-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            border-color: rgba(185, 20, 33, 0.4);
+            box-shadow: 
+                0 30px 60px rgba(185, 20, 33, 0.2),
+                inset 0 0 0 1px rgba(185, 20, 33, 0.2);
+        }
+        
+        .package-card:hover::before {
+            opacity: 1;
         }
         
         .package-header {
-            background-color: rgba(25, 25, 25, 0.9);
-            padding: 25px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1.25rem;
+            min-height: 3.5rem;
             display: flex;
-            flex-direction: column;
+            align-items: flex-start;
         }
         
         .package-header h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            margin: 0;
             color: var(--white);
+            font-weight: 600;
+            line-height: 1.3;
         }
         
         .package-content {
-            padding: 25px 30px;
-            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
         
         .package-description {
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: clamp(0.9rem, 1.2vw, 1rem);
             color: var(--light-grey);
+            line-height: 1.6;
+            min-height: 3rem;
         }
         
         .package-deliverables {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            flex: 0 0 auto;
+            min-height: 10rem;
+            max-height: 10rem;
+            overflow: hidden;
         }
         
         .package-deliverables h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--white);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
+            font-size: clamp(0.875rem, 1.1vw, 1rem);
+            margin-bottom: 0.75rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .deliverables-list {
             list-style: none;
             padding: 0;
-            margin: 0 0 20px;
+            margin: 0;
         }
         
         .deliverables-list li {
-            padding: 8px 0;
+            padding: 0.5rem 0;
             display: flex;
-            align-items: baseline;
-            color: #f5f5f5;
+            align-items: flex-start;
+            color: var(--light-grey);
+            font-size: clamp(0.875rem, 1.1vw, 0.95rem);
+            line-height: 1.5;
         }
         
         .deliverables-list li i {
             color: var(--accent-primary);
-            margin-right: 10px;
-            font-size: 0.8rem;
+            margin-right: 0.75rem;
+            font-size: 0.7rem;
+            margin-top: 0.35rem;
+            flex-shrink: 0;
         }
         
         .package-price {
-            background: rgba(30, 30, 30, 0.5);
-            padding: 15px 20px;
+            margin: 0 0 1rem 0;
+            padding: 1rem;
+            background: rgba(185, 20, 33, 0.1);
+            border-left: 3px solid var(--accent-primary);
             border-radius: 8px;
-            display: inline-block;
-            margin-top: 10px;
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex: 0 0 auto;
         }
         
         .price-amount {
-            font-size: 1.6rem;
+            font-size: clamp(1.5rem, 2.5vw, 1.875rem);
             font-weight: 700;
             color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.2;
+            margin: 0;
         }
         
         .package-addons {
-            margin-top: 20px;
+            margin: 0 0 1rem 0;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 3.5rem;
+            flex: 0 0 auto;
         }
         
         .addon-list {
@@ -256,45 +378,53 @@
         }
         
         .addon-list li {
-            padding: 8px 0;
-            color: #d5d5d5;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-            font-size: 0.95rem;
-        }
-        
-        .addon-list li:first-child {
-            border-top: none;
+            padding: 0.4rem 0;
+            color: var(--light-grey);
+            font-size: clamp(0.8rem, 1vw, 0.875rem);
+            line-height: 1.5;
         }
         
         .package-cta {
-            margin-top: 25px;
-            text-align: left;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            min-height: 3.5rem;
         }
         
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(0.75rem, 1.2vw, 0.875rem) clamp(1.5rem, 2.5vw, 2rem);
             border-radius: 50px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
             transition: all 0.3s ease;
             cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
+            border: 2px solid transparent;
+            font-size: clamp(0.875rem, 1.1vw, 0.9rem);
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
+        .package-cta .btn {
+            width: 100%;
+        }
+        
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(185, 20, 33, 0.3);
         }
         
         .btn.primary {
-            background-color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--accent-primary), #d11a2a);
             color: var(--white);
+            border-color: var(--accent-primary);
+        }
+        
+        .btn.primary:hover {
+            background: linear-gradient(135deg, #d11a2a, var(--accent-primary));
         }
 
         .featured-package {
@@ -315,42 +445,14 @@
             clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
         }
         
-        .package-image {
-            max-width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            margin: 10px 0 0 0;
-            object-fit: cover;
-        }
-        
-        /* Two column layout for larger screens */
-        @media screen and (min-width: 992px) {
-            .package-card {
-                grid-template-columns: 0.7fr 1.3fr;
-            }
-            
-            .package-header {
-                border-bottom: none;
-                border-right: 1px solid rgba(255, 255, 255, 0.1);
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-            
-            .package-image {
-                margin-top: auto;
-                height: 170px;
-                width: 100%;
-            }
-        }
         
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
-            .pricing-hero-content h1 {
+            .pricing-hero .hero__headline {
                 font-size: 2.5rem;
             }
             
-            .pricing-hero-content p {
+            .pricing-hero .hero__summary {
                 font-size: 1rem;
             }
             
@@ -495,10 +597,6 @@
             text-align: center;
         }
 
-        .modal-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -543,97 +641,113 @@
             animation: pulse 2s infinite;
         }
 
-        /* Fix for content visibility */
-        .package-card {
+        /* Let's Collaborate Section - Match About Page */
+        .section--cta {
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            position: relative;
+            background:
+                radial-gradient(circle at 12% -10%, rgba(185, 20, 33, 0.15) 0%, transparent 42%),
+                radial-gradient(circle at 87% -8%, rgba(9, 20, 88, 0.22) 0%, transparent 48%),
+                radial-gradient(circle at 50% 105%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c13 0%, #070910 60%, #040509 100%);
+            background-attachment: fixed;
+        }
+        
+        .section--cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(185, 20, 33, 0.4) 50%, 
+                transparent 100%);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .section--cta .container {
+            width: var(--max-width);
+            max-width: min(1200px, 92vw);
+            margin: 0 auto;
+            padding: 0 clamp(1.5rem, 4vw, 2.5rem);
+        }
+        
+        .section--cta [data-animate],
+        .section--cta .cta-layout,
+        .section--cta .cta-content,
+        .section--cta .cta-form-wrapper {
             opacity: 1 !important;
-            transform: translateY(0) !important;
-            animation: none !important; /* Disable animations that might cause loading issues */
+            transform: none !important;
             visibility: visible !important;
+        }
+        
+        .section--cta .cta-layout {
             display: grid !important;
+            grid-template-columns: 1.1fr 0.9fr !important;
+            gap: clamp(3rem, 6vw, 5rem) !important;
+            align-items: start !important;
         }
         
-        .pricing-hero-content, 
-        .section-header,
-        .pricing-contact {
-            opacity: 1 !important;
-            animation: none !important;
-            visibility: visible !important;
+        @media (max-width: 968px) {
+            .section--cta .cta-layout {
+                grid-template-columns: 1fr !important;
+            }
         }
         
-        /* Ensure images are properly sized */
-        .package-image {
-            max-width: 100%;
-            height: 170px;
-            width: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 10px 0 0 0;
-            display: block !important;
+        /* Fix button width - match other pages */
+        .cta-form-submit.btn--primary {
+            width: auto !important;
+            display: inline-flex !important;
+            min-width: 200px;
         }
         
-        /* Fix button styling to ensure it's visible */
-        .btn.contact-btn {
-            background: var(--accent-primary); /* Fallback if gradient doesn't work */
-            background: linear-gradient(135deg, #b91421, #091458);
-            color: white;
-            padding: 15px 35px;
-            font-size: 1rem;
-            display: inline-block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        /* Additional fallback styles for key elements */
-        body {
-            background: #222222 !important; /* Simple background if gradient doesn't load */
-        }
-        
-        .pricing-section {
-            background-color: #111111 !important; /* Fallback background */
-            padding: 80px 0;
-            display: block !important;
-        }
-        
-        /* Ensure package content is visible */
-        .package-content, .package-header {
-            display: block !important;
-            visibility: visible !important;
-        }
     </style>
 </head>
 <body>
-    <!-- Custom cursor with camera icon -->
-    <div class="custom-cursor">
-        <div class="lens"></div>
-        <div class="shutter"></div>
-        <i class="fas fa-camera"></i>
-    </div>
-    
-    <!-- Camera flash effect -->
-    <div class="camera-flash"></div>
-    
     <!-- Header Container -->
     <div id="header-container"></div>
 
-    <section class="pricing-hero">
-        <div class="pricing-hero-content">
-            <h1>Our Pricing Packages</h1>
-            <p>Professional audio and visual production services tailored to your needs</p>
+    <section class="hero pricing-hero" id="pricing-hero" aria-labelledby="pricing-hero-title">
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="container hero__layout">
+            <div class="hero__content" data-animate>
+                <p class="hero__eyebrow">Investment</p>
+                <h1 class="hero__headline" id="pricing-hero-title">
+                    Where creativity meets <span class="grey-text">value</span>
+                </h1>
+                <p class="hero__summary">
+                    Professional production services crafted to elevate your vision. From photography to post-production, we deliver exceptional quality at transparent, competitive rates.
+                </p>
+            </div>
+        </div>
+        <div class="hero__scroll" data-animate>
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </div>
     </section>
     
     <!-- Pricing Section -->
     <section class="pricing-section">
         <div class="packages-container">
-            <div class="section-header">
-                <h2>Photography Packages</h2>
-                <p>Studio, product, pre-wedding, maternity, and more</p>
+            <!-- Category Pills -->
+            <div class="category-pills">
+                <button class="category-pill active" data-category="all">All Packages</button>
+                <button class="category-pill" data-category="photography">Photography</button>
+                <button class="category-pill" data-category="video">Video Production</button>
+                <button class="category-pill" data-category="color">Color Grading</button>
+                <button class="category-pill" data-category="studio">Studio Rental</button>
+                <button class="category-pill" data-category="audio">Audio Production</button>
             </div>
-            <!-- Studio Model Portrait Shoot -->
-            <div class="package-card" style="--card-index: 1;">
+            
+            <!-- Packages Grid -->
+            <div class="packages-grid">
+                <!-- Photography Packages -->
+                <div class="package-card" data-category="photography">
                 <div class="package-header">
                     <h3>Studio Model Portrait Shoot</h3>
-                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308" alt="Model Portrait Shoot" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -649,7 +763,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹25,000</span>
+                            <span class="price-amount">₹25,000 onwards</span>
                     </div>
                     <div class="package-addons">
                         <ul class="addon-list">
@@ -662,11 +776,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Studio Model Portrait Shoot with Locations/Sets -->
-            <div class="package-card" style="--card-index: 2;">
+                
+                <div class="package-card" data-category="photography">
                 <div class="package-header">
-                    <h3>Studio Model Portrait Shoot (with Locations/Sets)</h3>
-                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b" alt="Model Portrait Shoot with Sets" class="package-image">
+                    <h3>Studio Model Portrait Shoot</h3>
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -683,7 +796,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹50,000</span>
+                            <span class="price-amount">₹50,000 onwards</span>
                     </div>
                     <div class="package-addons">
                         <ul class="addon-list">
@@ -696,11 +809,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Studio Product Shoot -->
-            <div class="package-card" style="--card-index: 3;">
+                
+                <div class="package-card" data-category="photography">
                 <div class="package-header">
                     <h3>Studio Product Shoot</h3>
-                    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" alt="Product Shoot" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -716,7 +828,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹40,000 - ₹45,000</span>
+                            <span class="price-amount">₹40,000 onwards</span>
                     </div>
                     <div class="package-addons">
                         <ul class="addon-list">
@@ -728,50 +840,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Pre-wedding & Maternity/Baby Photoshoot
-            <div class="package-card" style="--card-index: 4;">
-                <div class="package-header">
-                    <h3>Pre-wedding / Maternity / Baby Photoshoot</h3>
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Pre-wedding Maternity Baby" class="package-image">
-                </div>
-                <div class="package-content">
-                    <div class="package-description">
-                        Custom packages for pre-wedding, maternity, and baby shoots. Timing and pricing vary.
-                    </div>
-                    <div class="package-deliverables">
-                        <h4>Contact us for details and a custom quote.</h4>
-                    </div>
-                    <div class="package-cta">
-                        <button type="button" class="btn primary book-now-btn">Get a Quote</button>
-                    </div>
-                </div>
-            </div>
-             Corporate/Industrial Photoshoots
-            <div class="package-card" style="--card-index: 5;">
-                <div class="package-header">
-                    <h3>Corporate & Industrial Photoshoots</h3>
-                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca" alt="Corporate Industrial" class="package-image">
-                </div>
-                <div class="package-content">
-                    <div class="package-description">
-                        We also do corporate and industrial photoshoots. Contact us to discuss your project and get a custom quote.
-                    </div>
-                    <div class="package-cta">
-                        <button type="button" class="btn primary book-now-btn">Contact Us</button>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- Video Production Packages -->
-            <div class="section-header">
-                <h2>Video Production</h2>
-                <p>TV commercials, documentaries, pre-wedding films, and more</p>
-            </div>
-            <!-- TV Commercial -->
-            <div class="package-card" style="--card-index: 6;">
+                <div class="package-card" data-category="video">
                 <div class="package-header">
                     <h3>TV Commercial</h3>
-                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b" alt="TV Commercial" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -786,7 +859,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹6,00,000 - ₹8,00,000</span>
+                            <span class="price-amount">₹6,00,000 onwards</span>
                     </div>
                     <div class="package-addons">
                         <ul class="addon-list">
@@ -798,11 +871,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Documentary Films -->
-            <div class="package-card" style="--card-index: 7;">
+                
+                <div class="package-card" data-category="video">
                 <div class="package-header">
                     <h3>Documentary Films</h3>
-                    <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99" alt="Documentary Films" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -817,7 +889,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹1,50,000 - ₹3,00,000</span>
+                            <span class="price-amount">₹1,50,000 onwards</span>
                     </div>
                     <div class="package-addons">
                         <ul class="addon-list">
@@ -829,31 +901,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Pre-wedding Video -->
-            <!-- <div class="package-card" style="--card-index: 8;">
-                <div class="package-header">
-                    <h3>Pre-wedding Video</h3>
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Pre-wedding Video" class="package-image">
-                </div>
-                <div class="package-content">
-                    <div class="package-description">
-                        Custom pre-wedding video packages. Contact us for details and a quote.
-                    </div>
-                    <div class="package-cta">
-                        <button type="button" class="btn primary book-now-btn">Get a Quote</button>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Colour Grading Packages -->
-            <div class="section-header">
-                <h2>Colour Grading</h2>
-                <p>Professional colour grading for TVCs, teasers, trailers, and more</p>
-            </div>
-            <div class="package-card" style="--card-index: 9;">
+                
+                <!-- Color Grading Packages -->
+                <div class="package-card" data-category="color">
                 <div class="package-header">
                     <h3>TVC Colour Grading</h3>
-                    <img src="https://images.unsplash.com/photo-1618609255910-cb2bed8fe29d" alt="TVC Colour Grading" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -869,17 +921,17 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹20,000</span>
+                        <span class="price-amount">₹20,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
                     </div>
                 </div>
             </div>
-            <div class="package-card" style="--card-index: 10;">
+                
+                <div class="package-card" data-category="color">
                 <div class="package-header">
                     <h3>Teasers & Trailers Colour Grading</h3>
-                    <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99" alt="Teasers Trailers Colour Grading" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -895,7 +947,7 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹45,000</span>
+                            <span class="price-amount">₹45,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
@@ -904,15 +956,9 @@
             </div>
 
             <!-- Studio Rental Packages -->
-            <div class="section-header">
-                <h2>Studio Rental</h2>
-                <p>Rent our professional studios for photography, sound recording, and music production. Flexible options for all your creative needs.</p>
-            </div>
-            <!-- Photo Studio Rental -->
-            <div class="package-card" style="--card-index: 11;">
+                <div class="package-card" data-category="studio">
                 <div class="package-header">
                     <h3>Photo Studio Rental</h3>
-                    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" alt="Photo Studio Rental" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -929,18 +975,17 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹12,000</span>
+                            <span class="price-amount">₹12,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
                     </div>
                 </div>
             </div>
-            <!-- Sound Recording Studio Rental -->
-            <div class="package-card" style="--card-index: 12;">
+                
+                <div class="package-card" data-category="studio">
                 <div class="package-header">
                     <h3>Sound Recording Studio Rental</h3>
-                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0" alt="Sound Recording Studio Rental" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -956,18 +1001,17 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹1,500</span> per hour
+                            <span class="price-amount">₹1,500 onwards</span> per hour
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
                     </div>
                 </div>
             </div>
-            <!-- Song Mixing and Mastering (YouTube Single) -->
-            <div class="package-card" style="--card-index: 13;">
+                
+                <div class="package-card" data-category="studio">
                 <div class="package-header">
-                    <h3>Song Mixing & Mastering (YouTube Single)</h3>
-                    <img src="https://images.unsplash.com/photo-1590301157890-1c7ef7a23757" alt="Song Mixing Mastering YouTube" class="package-image">
+                    <h3>Song Mixing & Mastering</h3>
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -982,18 +1026,17 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹12,000</span>
+                            <span class="price-amount">₹12,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
                     </div>
                 </div>
             </div>
-            <!-- Song Mixing and Mastering (Movie) -->
-            <div class="package-card" style="--card-index: 14;">
+                
+                <div class="package-card" data-category="studio">
                 <div class="package-header">
                     <h3>Song Mixing & Mastering (Movie)</h3>
-                    <img src="https://images.unsplash.com/photo-1590301157890-1c7ef7a23757" alt="Song Mixing Mastering Movie" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -1008,18 +1051,17 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹20,000</span>
+                        <span class="price-amount">₹20,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
                     </div>
                 </div>
             </div>
-            <!-- Sound Editing, Audio Mixing & Mastering -->
-            <div class="package-card" style="--card-index: 15;">
+                
+                <div class="package-card" data-category="studio">
                 <div class="package-header">
                     <h3>Sound Editing, Audio Mixing & Mastering</h3>
-                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0" alt="Sound Editing Audio Mixing Mastering" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -1040,15 +1082,9 @@
             </div>
 
             <!-- Audio Production Packages -->
-            <div class="section-header">
-                <h2>Audio Production</h2>
-                <p>Original music, jingles, and background scores for brands, films, and digital content. Crafted by experienced composers and producers.</p>
-            </div>
-            <!-- Jingles -->
-            <div class="package-card" style="--card-index: 16;">
+                <div class="package-card" data-category="audio">
                 <div class="package-header">
                     <h3>Jingles</h3>
-                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308" alt="Jingles" class="package-image">
                 </div>
                 <div class="package-content">
                     <div class="package-description">
@@ -1063,10 +1099,11 @@
                         </ul>
                     </div>
                     <div class="package-price">
-                        <span class="price-amount">₹1,50,000</span>
+                            <span class="price-amount">₹1,50,000 onwards</span>
                     </div>
                     <div class="package-cta">
                         <button type="button" class="btn primary book-now-btn">Book Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1093,110 +1130,193 @@
                     </div>
                 </div>
             </div> -->
-            <!-- Custom Quote CTA -->
-            <div class="pricing-contact">
-                <h3>Need a Custom Solution?</h3>
-                <p>We also cater to weddings, private and corporate events. Contact us to discuss your requirements and receive a quote.</p>
-                <button type="button" class="btn contact-btn pulse-animation" id="custom-quote-btn">Request Custom Quote</button>
-            </div>
+        </div>
+    </section>
+    
+    <!-- Let's Collaborate Section -->
+    <section class="section section--cta" id="collaborate" aria-labelledby="cta-title">
+        <div class="container">
+            <div class="cta-layout" data-animate>
+                <div class="cta-content">
+                    <p class="section-eyebrow">Let's collaborate</p>
+                    <h2 class="section-title" id="cta-title">
+                        Ready to capture your next idea with Grey <span class="grey-text">18</span> Studios?
+                    </h2>
+                    <p class="section-summary">
+                        Share your project goals and we'll shape a production plan that delivers with precision and style.
+                    </p>
+                </div>
+                <div class="cta-form-wrapper">
+                    <form id="contact-form" class="cta-contact-form" action="javascript:void(0);" onsubmit="
+                        event.preventDefault();
+                        
+                        const form = this;
+                        const btnText = document.getElementById('btn-text');
+                        const successMsg = document.getElementById('success-message');
+                        const errorMsg = document.getElementById('error-message');
+                        
+                        const name = form.name ? form.name.value.trim() : '';
+                        const email = form.email ? form.email.value.trim() : '';
+                        const service = form.service ? form.service.value.trim() : '';
+                        const message = form.message ? form.message.value.trim() : '';
+                        
+                        if (!name || !email || !service || !message) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please fill in all required fields.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            if (errorMsg) {
+                                errorMsg.textContent = 'Please enter a valid email address.';
+                                errorMsg.style.display = 'block';
+                            }
+                            if (successMsg) {
+                                successMsg.style.display = 'none';
+                            }
+                            return false;
+                        }
+                        
+                        if (btnText) {
+                            btnText.innerHTML = '<i class=\'fas fa-spinner fa-spin\'></i> Sending...';
+                        }
+                        if (successMsg) {
+                            successMsg.style.display = 'none';
+                        }
+                        if (errorMsg) {
+                            errorMsg.style.display = 'none';
+                        }
+                        
+                        const formData = {
+                            name: name,
+                            email: email,
+                            mobile: form.mobile ? form.mobile.value.trim() : '',
+                            service: service,
+                            message: message
+                        };
+                        
+                        if (typeof emailjs !== 'undefined') {
+                            emailjs.send('service_6ixt3mz', 'template_pfju2vd', formData, '1C70BfGW-WtXy38dl')
+                                .then(function(response) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (successMsg) {
+                                        successMsg.style.display = 'block';
+                                    }
+                                    alert('Thank you! Your message has been sent successfully.');
+                                    form.reset();
+                                }, function(error) {
+                                    if (btnText) {
+                                        btnText.innerHTML = 'Send Message <i class=\'fas fa-paper-plane\'></i>';
+                                    }
+                                    if (errorMsg) {
+                                        errorMsg.textContent = 'Oops! Something went wrong. Please try again or contact us directly.';
+                                        errorMsg.style.display = 'block';
+                                    }
+                                    alert('Oops! Something went wrong. Please try again or contact us directly.');
+                                });
+                        } else {
+                            alert('Email service not available. Please contact us directly.');
+                        }
+                        
+                        return false;
+                    ">
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-user cta-form-icon"></i>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                            <div class="cta-form-field">
+                                <i class="fas fa-envelope cta-form-icon"></i>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                </div>
+                        <div class="cta-form-row">
+                            <div class="cta-form-field">
+                                <i class="fas fa-phone cta-form-icon"></i>
+                                <input type="tel" id="mobile" name="mobile" placeholder="Phone Number">
+                </div>
+                            <div class="cta-form-field">
+                                <i class="fas fa-tag cta-form-icon"></i>
+                                <select id="service" name="service" required>
+                                    <option value="" disabled selected>Select Service</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Sound Recording">Sound Recording</option>
+                                    <option value="Dubbing">Dubbing</option>
+                                    <option value="Audio Mixing & Mastering">Audio Mixing & Mastering</option>
+                                    <option value="Photo & Video Editing">Photo & Video Editing</option>
+                                    <option value="Colour Grading">Colour Grading</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="cta-form-field">
+                            <i class="fas fa-comment cta-form-icon"></i>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <div class="cta-form-message cta-form-message--success" id="success-message" style="display: none;">Thank you! Your message has been sent successfully.</div>
+                        <div class="cta-form-message cta-form-message--error" id="error-message" style="display: none;"></div>
+                        <button type="submit" class="btn btn--primary cta-form-submit">
+                            <span id="btn-text">Send Message <i class="fas fa-paper-plane"></i></span>
+                        </button>
+            </form>
+        </div>
+    </div>
         </div>
     </section>
     
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
-    <!-- Booking Modal -->
-    <div id="booking-modal" class="custom-quote-modal">
-        <div class="modal-content">
-            <button class="modal-close" id="booking-modal-close">&times;</button>
-            <h3 style="margin-bottom: 25px; color: #b91421; font-weight: 700; letter-spacing: 1px;">Book This Package</h3>
-            <form id="booking-form" autocomplete="off" style="display: flex; flex-direction: column; gap: 18px;">
-                <input type="hidden" id="package_name" name="package_name">
-                <div style="position: relative;">
-                    <input type="text" id="user_name" name="user_name" placeholder="Your Name *" required style="width:100%;padding:12px 16px;border-radius:7px;border:1.5px solid #ccc;font-size:1.08rem;transition:border 0.2s;">
-                    <span class="input-error" id="error_user_name" style="color:#b91421;font-size:0.92rem;position:absolute;left:0;top:105%;display:none;"></span>
-                </div>
-                <div style="position: relative;">
-                    <input type="email" id="user_email" name="user_email" placeholder="Your Email *" required style="width:100%;padding:12px 16px;border-radius:7px;border:1.5px solid #ccc;font-size:1.08rem;transition:border 0.2s;">
-                    <span class="input-error" id="error_user_email" style="color:#b91421;font-size:0.92rem;position:absolute;left:0;top:105%;display:none;"></span>
-                </div>
-                <div style="position: relative;">
-                    <input type="tel" id="user_phone" name="user_phone" placeholder="Your Phone *" required style="width:100%;padding:12px 16px;border-radius:7px;border:1.5px solid #ccc;font-size:1.08rem;transition:border 0.2s;">
-                    <span class="input-error" id="error_user_phone" style="color:#b91421;font-size:0.92rem;position:absolute;left:0;top:105%;display:none;"></span>
-                </div>
-                <div style="position: relative;">
-                    <textarea id="user_message" name="user_message" placeholder="Message (required)" rows="3" required style="width:100%;padding:12px 16px;border-radius:7px;border:1.5px solid #ccc;font-size:1.08rem;transition:border 0.2s;"></textarea>
-                    <span class="input-error" id="error_user_message" style="color:#b91421;font-size:0.92rem;position:absolute;left:0;top:105%;display:none;"></span>
-                </div>
-                <button type="submit" class="modal-button" id="booking-submit-btn" disabled style="background:linear-gradient(135deg,#b91421,#091458);opacity:0.7;">Send Booking</button>
-                <div id="booking-form-status" style="margin-top:10px;text-align:center;"></div>
-            </form>
-        </div>
-    </div>
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // This script ensures all content loads properly and handles the custom quote button
+        // Category filtering
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM fully loaded');
-            
-            // Force images to load properly
-            const allImages = document.querySelectorAll('img');
-            allImages.forEach(img => {
-                // Add error handling for images
-                img.onerror = function() {
-                    console.error('Failed to load image:', img.src);
-                    // Set a fallback image if the original fails
-                    img.src = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04';
-                };
-                // Force reload of images
-                const currentSrc = img.src;
-                img.src = '';
-                setTimeout(() => {
-                    img.src = currentSrc;
-                }, 50);
-            });
-            
-            // Fix for package cards to ensure they're visible
+            const categoryPills = document.querySelectorAll('.category-pill');
             const packageCards = document.querySelectorAll('.package-card');
-            packageCards.forEach((card, index) => {
-                // Force visibility regardless of animation state
-                card.style.opacity = "1";
-                card.style.transform = "translateY(0)";
-                card.style.setProperty('--card-index', index + 1);
-                
-                // Add hover effects (ensuring they work properly)
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px)';
-                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+            
+            categoryPills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active pill
+                    categoryPills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter packages
+                    packageCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (category === 'all' || cardCategory === category) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
                 });
             });
             
-            // Fix the custom quote button to scroll to footer contact instead of showing modal
-            const customQuoteBtn = document.getElementById('custom-quote-btn');
-            if (customQuoteBtn) {
-                customQuoteBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Custom quote button clicked');
-                    
-                    // Remove modal functionality and scroll to footer contact instead
-                    const footerContact = document.getElementById('footer-container');
-                    if (footerContact) {
-                        console.log('Scrolling to footer contact');
-                        footerContact.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        console.error('Footer contact section not found');
-                        // Fallback - direct to contact anchor
-                        window.location.href = 'index.html#contact';
-                    }
-                });
-            }
+            // Ensure all cards are visible initially
+            packageCards.forEach(card => {
+                card.style.display = 'flex';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
         });
 
         // EmailJS initialization
@@ -1204,137 +1324,22 @@
             emailjs.init('1C70BfGW-WtXy38dl');
         })();
 
-        // Modal logic
-        const bookingModal = document.getElementById('booking-modal');
-        const bookingModalClose = document.getElementById('booking-modal-close');
-        const bookingForm = document.getElementById('booking-form');
-        const bookingFormStatus = document.getElementById('booking-form-status');
-        const packageNameInput = document.getElementById('package_name');
-
-        // Open modal and set package name
+        // Scroll to "Let's Collaborate" section when Book Now or Contact Us is clicked
         document.querySelectorAll('.book-now-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                // Find package name
-                let card = btn.closest('.package-card');
-                let pkgName = card ? card.querySelector('.package-header h3').textContent.trim() : '';
-                packageNameInput.value = pkgName;
-                bookingModal.classList.add('active');
-                bookingFormStatus.textContent = '';
-            });
-        });
-        // Close modal
-        bookingModalClose.addEventListener('click', function() {
-            bookingModal.classList.remove('active');
-        });
-        window.addEventListener('click', function(e) {
-            if (e.target === bookingModal) bookingModal.classList.remove('active');
-        });
-
-        // EmailJS form submission
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            bookingFormStatus.textContent = 'Sending...';
-            document.getElementById('booking-submit-btn').disabled = true;
-            emailjs.send('service_6ixt3mz', 'template_maupw6e', {
-                user_name: document.getElementById('user_name').value,
-                user_email: document.getElementById('user_email').value,
-                user_phone: document.getElementById('user_phone').value,
-                package_name: document.getElementById('package_name').value,
-                user_message: document.getElementById('user_message').value,
-                email: document.getElementById('user_email').value
-            }, '1C70BfGW-WtXy38dl')
-            .then(function(response) {
-                bookingFormStatus.textContent = 'Booking sent successfully! We will contact you soon.';
-                bookingForm.reset();
-                document.getElementById('booking-submit-btn').disabled = false;
-            }, function(error) {
-                bookingFormStatus.textContent = 'Failed to send booking. Please try again later.';
-                document.getElementById('booking-submit-btn').disabled = false;
+                const collaborateSection = document.getElementById('collaborate');
+                if (collaborateSection) {
+                    collaborateSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // --- Booking Form Validation ---
-        function validateEmail(email) {
-            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/.test(email);
-        }
-        function validatePhone(phone) {
-            return /^[0-9\-\+\s\(\)]{7,15}$/.test(phone);
-        }
-        function checkBookingFormValidity() {
-            let valid = true;
-            // Name
-            const name = document.getElementById('user_name').value.trim();
-            if (!name) {
-                document.getElementById('error_user_name').textContent = 'Name is required.';
-                document.getElementById('error_user_name').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('error_user_name').textContent = '';
-                document.getElementById('error_user_name').style.display = 'none';
-            }
-            // Email
-            const email = document.getElementById('user_email').value.trim();
-            if (!email) {
-                document.getElementById('error_user_email').textContent = 'Email is required.';
-                document.getElementById('error_user_email').style.display = 'block';
-                valid = false;
-            } else if (!validateEmail(email)) {
-                document.getElementById('error_user_email').textContent = 'Invalid email address.';
-                document.getElementById('error_user_email').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('error_user_email').textContent = '';
-                document.getElementById('error_user_email').style.display = 'none';
-            }
-            // Phone
-            const phone = document.getElementById('user_phone').value.trim();
-            if (!phone) {
-                document.getElementById('error_user_phone').textContent = 'Phone is required.';
-                document.getElementById('error_user_phone').style.display = 'block';
-                valid = false;
-            } else if (!validatePhone(phone)) {
-                document.getElementById('error_user_phone').textContent = 'Invalid phone number.';
-                document.getElementById('error_user_phone').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('error_user_phone').textContent = '';
-                document.getElementById('error_user_phone').style.display = 'none';
-            }
-            // Message
-            const message = document.getElementById('user_message').value.trim();
-            if (!message) {
-                document.getElementById('error_user_message').textContent = 'Message is required.';
-                document.getElementById('error_user_message').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('error_user_message').textContent = '';
-                document.getElementById('error_user_message').style.display = 'none';
-            }
-            // Enable/disable submit
-            const submitBtn = document.getElementById('booking-submit-btn');
-            if (valid) {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = 1;
-                submitBtn.style.cursor = 'pointer';
-            } else {
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = 0.7;
-                submitBtn.style.cursor = 'not-allowed';
-            }
-            return valid;
-        }
-        // Attach validation listeners
-        ['user_name','user_email','user_phone','user_message'].forEach(id => {
-            document.getElementById(id).addEventListener('input', checkBookingFormValidity);
-        });
-        // Initial check
-        checkBookingFormValidity();
     </script>
     
-    <!-- Custom cursor scripts -->
-    <script src="scripts/custom-cursor.js"></script>
-    <script src="assets/audio/camera-shutter.js"></script>
 </body>
 </html> 
 
