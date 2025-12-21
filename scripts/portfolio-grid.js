@@ -5,7 +5,7 @@ const photoCategories = {
     'Product': {
         files: [
             'Product-(5).jpg', 'Product-(21)---Copy---Copy.jpg', 'Product-(16).jpg',
-            'Product-(15).jpg', 'Product-(13)---Copy---Copy.jpg'
+            'Product-(13)---Copy---Copy.jpg', '17  Products.jpg', '20  Products.jpg'
         ],
         title: 'Product Photography',
         description: 'Professional product photography showcasing commercial goods with precision and style.',
@@ -14,7 +14,7 @@ const photoCategories = {
     'Portrait': {
         files: [
             'Port-(9).jpg', 'Port-(8).jpg', 'Port-(7).jpg', 'Port-(6).jpg', 'Port-(56).jpg',
-            'Port-(45)-.jpg', 'Port-(31).jpg', 'Port-(3).jpg', 'Port-(24).jpg', 'Port-(14).jpg',
+            'Port-(45)-.jpg', 'Port-(31).jpg', 'Port-(24).jpg', 'Port-(14).jpg',
             'Port-(14)-copy.jpg'
         ],
         title: 'Portrait Photography',
@@ -23,7 +23,7 @@ const photoCategories = {
     },
     'Architecture': {
         files: [
-            'Architecture.jpg', 'Architecture-(7).jpg', 'Architecture-(4).jpg', 'Architecture-(3).jpg',
+            'Architecture.jpg', 'Architecture-(7).jpg', 'Architecture-(3).jpg',
             'Architecture-(12).jpg', 'Architecture-(10).jpg'
         ],
         title: 'Architecture Photography',
@@ -31,7 +31,7 @@ const photoCategories = {
         highlights: ['Interior and exterior shots', 'Perspective correction', 'Natural and artificial lighting']
     },
     'Corporate': {
-        files: ['CM-(17).jpg', 'CM-(14).jpg'],
+        files: ['CM-(17).jpg'],
         title: 'Corporate Photography',
         description: 'Professional corporate photography for events, teams, and brand documentation.',
         highlights: ['Event coverage', 'Team photography', 'Brand documentation']
@@ -45,25 +45,29 @@ const photoCategories = {
         highlights: ['Space composition', 'Lighting design', 'Atmospheric storytelling']
     },
     'People': {
-        files: ['People-(28).jpg'],
+        files: [
+            'People-(28).jpg', '16  People.jpg', '19  People.jpg', '20  People.jpg',
+            '27  People.jpg', '38  People.jpg', '43  People.jpg', '44  People.jpg',
+            '59  People.jpg', '62  People.jpg', '78  People.jpg', '84  People.jpg', '85  People.jpg'
+        ],
         title: 'People Photography',
         description: 'Documenting people in their natural environments and moments.',
         highlights: ['Candid moments', 'Environmental portraits', 'Lifestyle photography']
     },
     'Mythriya': {
-        files: ['Mythriya-(52).jpg', 'Mythriya-(15).jpg', 'Mythriya-(14).jpg'],
+        files: ['Mythriya-(52).jpg'],
         title: 'Mythriya Collection',
         description: 'A curated collection showcasing artistic vision and creative expression.',
         highlights: ['Artistic composition', 'Creative storytelling', 'Visual narrative']
     },
     'Final': {
-        files: ['Final-(3).jpg', 'Final-(1).jpg'],
+        files: ['Final-(3).jpg'],
         title: 'Final Collection',
         description: 'Polished and refined photography work ready for presentation.',
         highlights: ['Professional finish', 'Color grading', 'Post-production excellence']
     },
     'Other': {
-        files: ['_MG_7184.jpg', '_MG_1937.jpg', 'A-(9).jpg', '3--Roopa.jpg'],
+        files: ['_MG_7184.jpg', '_MG_1937.jpg', 'A-(9).jpg', 'Midori-08.jpg'],
         title: 'Photography',
         description: 'Diverse photography work showcasing various styles and techniques.',
         highlights: ['Versatile portfolio', 'Multiple styles', 'Creative vision']
@@ -151,6 +155,8 @@ function layoutMasonry(container) {
         columns = 1;
     } else if (window.innerWidth <= 1024) {
         columns = 2;
+    } else if (window.innerWidth > 1400) {
+        columns = 4; // Use 4 columns on very large screens for better space utilization
     }
     
     const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;

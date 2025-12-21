@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     description: 'High-end photo finishing'
                 },
                 {
-                    src: 'assets/photos/Mythriya-(15).jpg',
+                    src: 'assets/photos/Mythriya-(52).jpg',
                     alt: 'Colour grading for film project',
                     title: 'Film Colour Treatment',
                     description: 'Cinematic colour grading'
